@@ -15,9 +15,6 @@ public class CreadorMapas {
     private static final int SPAWN = 4;
     private static final int ESPACIO = 6;
 
-    private static final int ESTACIONES_CANTIDAD = 6;
-    private static final int SECTORES_DE_COMBATE_CANTIDAD = 6;
-    private static final int UNO = 1;
     private static final int CERO = 0;
 
     private int[][] mapa = new int[25][25];
@@ -41,7 +38,7 @@ public class CreadorMapas {
         mapa = posicionAlAzara(mapa, CENTRO_POKEMON, true, CERO);
 
         cantiadMaximaHiervaAlta = randomizador(1, 6);
-        mapa = posicionAlAzara(mapa, CENTRO_POKEMON, true, cantiadMaximaHiervaAlta);
+        mapa = posicionAlAzara(mapa, HIERVA_ALTA, true, cantiadMaximaHiervaAlta);
 
         return objetosMapa.creadorCasillasObjetos(mapa);
 
@@ -71,10 +68,6 @@ public class CreadorMapas {
 
     private int randomizador(int inicial, int fin) {
         return rand.ints(inicial, fin).findFirst().getAsInt();
-    }
-
-    public int getCantidadEstrellas() {
-        return cantidadEstrellas;
     }
 
     public int[] getJugador() {
