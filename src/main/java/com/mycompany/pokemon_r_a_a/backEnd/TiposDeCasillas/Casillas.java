@@ -4,10 +4,23 @@
  */
 package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas;
 
+
 /**
  *
  * @author ricardocastillo
  */
-public class Casillas {
-    
+public abstract class Casillas {
+
+    public abstract void imprimir();
+
+    public abstract boolean estadoCasilla(Boolean jugador);
+
+    public abstract int tipoCasilla();
+
+    public abstract Boolean subMenu();
+
+    public abstract void setMapa();
+
+    public abstract boolean getEstadoDeGruppo();
+
 }
