@@ -56,15 +56,5 @@ public class ConfiguracionesDeEstetica {
         System.out.flush();
     }
 
-    public void pantallaDeError() {
-        delayThread();
-        System.out.print("\033[38;5;208m");
-        limpiadorDeLineas();
-        separadorInicio();
-        System.out.println(formatear("Error: Opción inválida"));
-        System.out.println(formatear("Por favor, seleccione una opción válida"));
-        separadorFinal();
-        System.out.print("\033[0m");
-    }
 
 }
