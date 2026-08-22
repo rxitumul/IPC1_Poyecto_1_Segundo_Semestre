@@ -37,7 +37,7 @@ public class InicioProfesor {
             "Si prefieres conservar su nombre original, también puedes hacerlo.",
             "¿Quieres ponerle un apodo a tu nuevo compañero?" };
     private String mensajeProfesor4[] = {
-            "Muy bien, [APODO]. ¡Ese será su nombre a partir de ahora!",
+            "Muy bien, " + nombrePokemonLocal + ". ¡Ese será su nombre a partir de ahora!",
             "Ahora que ya tienes a tu primer Pokémon, permíteme darte algunos consejos antes de que partas.",
             "Durante tu aventura encontrarás muchos Pokémon. Algunos serán fáciles de encontrar, mientras que otros serán mucho más difíciles.",
             "Podrás enfrentarte a ellos, capturarlos y formar tu propio equipo.",
@@ -67,6 +67,11 @@ public class InicioProfesor {
 
     public void cadenaDeMensajesInicial(int mensaje) {
         confi.separadorInicio();
+        if (mensaje != 0) {
+            confi.separadorMedios();
+            System.out.println(confi.formatear("Profesor Oak"));
+            confi.separadorMedios();
+        }
         System.out.println(confi.formatear(MENSAJES_PROFESOR_INICIO[mensaje]));
         confi.separadorMedios();
         if (mensaje == 4) {
@@ -102,6 +107,12 @@ public class InicioProfesor {
     public void mensajeProfesorCambioDeNombre(int mensaje) {
         confi.separadorInicio();
         System.out.println(confi.formatear(mensajeProfesor3[mensaje]));
+        confi.separadorFinal();
+    }
+
+    public void mensajeProfesorFinal(int mensaje) {
+        confi.separadorInicio();
+        System.out.println(confi.formatear(mensajeProfesor4[mensaje]));
         confi.separadorFinal();
     }
 
