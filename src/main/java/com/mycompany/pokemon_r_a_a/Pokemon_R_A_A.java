@@ -4,6 +4,8 @@
 
 package com.mycompany.pokemon_r_a_a;
 
+import com.mycompany.pokemon_r_a_a.backEnd.Inicio.InicioGame;
+
 /**
  *
  * @author ricardocastillo
@@ -11,6 +13,7 @@ package com.mycompany.pokemon_r_a_a;
 public class Pokemon_R_A_A {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        InicioGame inicio = new InicioGame();
+        inicio.inicio();
     }
 }

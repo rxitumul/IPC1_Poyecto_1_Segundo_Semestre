@@ -37,7 +37,7 @@ public class InicioProfesor {
             "Si prefieres conservar su nombre original, también puedes hacerlo.",
             "¿Quieres ponerle un apodo a tu nuevo compañero?" };
     private String mensajeProfesor4[] = {
-            "Muy bien, [APODO]. ¡Ese será su nombre a partir de ahora!",
+            "Muy bien, "+nombrePokemonLocal+". ¡Ese será su nombre a partir de ahora!",
             "Ahora que ya tienes a tu primer Pokémon, permíteme darte algunos consejos antes de que partas.",
             "Durante tu aventura encontrarás muchos Pokémon. Algunos serán fáciles de encontrar, mientras que otros serán mucho más difíciles.",
             "Podrás enfrentarte a ellos, capturarlos y formar tu propio equipo.",
@@ -54,13 +54,13 @@ public class InicioProfesor {
             "Poción: 1",
             "Pokémonedas: ₽1000",
             "No es mucho para comenzar, pero será suficiente para dar tus primeros pasos.",
-            "Y algo muy importante, [NOMBRE]...",
+            "Y algo muy importante, "+nombreLocal+"...",
             "No tengas miedo de explorar.",
             "El mundo Pokémon está lleno de lugares por descubrir y personas por conocer.",
             "Cada decisión que tomes formará parte de tu propia historia.",
             "Creo que ya estás preparado.",
             "Tienes a tu primer Pokémon, tienes tus herramientas y tienes todo un mundo esperando por ti.",
-            "Ahora sí, [NOMBRE]...",
+            "Ahora sí, "+nombreLocal+"...",
             "¡Tu aventura comienza ahora!",
             "¡Buena suerte, entrenador!"
     };
@@ -95,13 +95,32 @@ public class InicioProfesor {
 
     public void mensajeDeRenombre() {
         confi.separadorInicio();
-        System.out.println(confi.formatear("Escribe S si desea cambiar el nombre de lo contrario precione enter"));
+        System.out.println(confi.formatear(confi.formatear("Escribe S si desea cambiar el nombre de lo contrario precione enter")));
         confi.separadorFinal();
     }
 
     public void mensajeProfesorCambioDeNombre(int mensaje) {
         confi.separadorInicio();
         System.out.println(confi.formatear(mensajeProfesor3[mensaje]));
+        confi.separadorFinal();
+    }
+
+     public void mensajeProfesorFinal(int mensaje) {
+        confi.separadorInicio();
+        System.out.println(confi.formatear(mensajeProfesor4[mensaje]));
+        confi.separadorFinal();
+    }
+
+    public void nombreAEleguir(){
+        confi.separadorInicio();
+        System.out.println(confi.formatear("Porfavor ingrese el nuevo nombre del pokemon"));
+        confi.separadorFinal();
+        
+    }
+
+    public void nombreDelPokemon(){
+        confi.separadorInicio();
+        System.out.println(confi.formatear("El nombre del pokemon es"+nombrePokemonLocal));
         confi.separadorFinal();
     }
 

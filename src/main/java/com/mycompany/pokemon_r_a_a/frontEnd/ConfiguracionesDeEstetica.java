@@ -47,6 +47,10 @@ public class ConfiguracionesDeEstetica {
         return MARCO_VERTICAL + String.format("%-" + interior + "s", texto) + MARCO_VERTICAL;
     }
 
+    public String getMarcoVertical() {
+        return MARCO_VERTICAL;
+    }
+
     public void delayThread() {
         try {
             Thread.sleep(TIEMPO);
@@ -55,6 +59,5 @@ public class ConfiguracionesDeEstetica {
 
         System.out.flush();
     }
-
 
 }
