@@ -6,7 +6,7 @@ public class Jugador extends Casillas {
 
     @Override
     public void imprimir() {
-        System.out.print("\u001B[36m  ► \u001B[0m");
+        System.out.print(AZUL+" ► "+RESET);
     }
 
     @Override
@@ -32,8 +32,9 @@ public class Jugador extends Casillas {
     }
 
     @Override
-    public boolean getEstadoFlota() {
-        return true;
+    public boolean getEstadoDeGruppo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getEstadoDeGruppo'");
     }
 
 }

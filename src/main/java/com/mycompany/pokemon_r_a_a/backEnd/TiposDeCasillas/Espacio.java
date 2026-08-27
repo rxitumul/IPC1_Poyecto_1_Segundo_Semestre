@@ -5,7 +5,7 @@ public class Espacio extends Casillas {
 
     @Override
     public void imprimir() {
-        System.out.print("    ");
+        System.out.print("   ");
     }
 
     @Override

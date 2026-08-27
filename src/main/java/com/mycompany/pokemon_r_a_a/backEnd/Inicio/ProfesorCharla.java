@@ -22,20 +22,22 @@ public class ProfesorCharla {
 
     public void charlaInicial() {
         int contadorMensajes = 0;
-        while (contadorMensajes == 4) {
+        while (contadorMensajes != 5) {
             profesor.cadenaDeMensajesInicial(contadorMensajes);
             contadorMensajes++;
-            if (contadorMensajes == 4) {
-                profesor.setNombre(scanner.nextLine());
+            if (contadorMensajes == 5) {
+                String nombre = scanner.nextLine();
+                profesor.setNombre(nombre);
             } else {
                 scanner.nextLine();
             }
         }
         contadorMensajes = 0;
-        while (contadorMensajes == 5) {
+        while (contadorMensajes != 10) {
             profesor.mensajeDespuesDenombre(contadorMensajes);
             contadorMensajes++;
-            if (contadorMensajes != 5) {
+            contadorMensajes++;
+            if (contadorMensajes != 10) {
                 scanner.nextLine();
             }
         }
@@ -56,32 +58,42 @@ public class ProfesorCharla {
 
         profesor.setPokemonSelecionado(pokemonInicial.getNombre());
         contadorMensajes = 0;
-        while (contadorMensajes == 5) {
+        while (contadorMensajes != 6) {
             profesor.mensajeProfesorCambioDeNombre(contadorMensajes);
             contadorMensajes++;
+            scanner.nextLine();
         }
         profesor.mensajeDeRenombre();
         if (scanner.nextLine().equalsIgnoreCase("s")) {
             profesor.nombreAEleguir();
-            pokemonInicial.setNombre(scanner.nextLine());
+            String nombrePokemon = scanner.nextLine();
+            pokemonInicial.setNombre(nombrePokemon);
+            profesor.setPokemonSelecionado(nombrePokemon);
         }
         profesor.nombreDelPokemon();
         contadorMensajes = 0;
-        while (contadorMensajes == 12) {
+        while (contadorMensajes != 13) {
             profesor.mensajeProfesorFinal(contadorMensajes);
             contadorMensajes++;
+            scanner.nextLine();
         }
         profesor.mensajeProfesorFinal(contadorMensajes);
         contadorMensajes++;
+        scanner.nextLine();
         profesor.mensajeProfesorFinal(contadorMensajes);
         contadorMensajes++;
+        scanner.nextLine();
         profesor.mensajeProfesorFinal(contadorMensajes);
         contadorMensajes++;
+        scanner.nextLine();
         profesor.mensajeProfesorFinal(contadorMensajes);
         contadorMensajes++;
-        while (contadorMensajes == 26) {
+        scanner.nextLine();
+        while (contadorMensajes != 26) {
+
             profesor.mensajeProfesorFinal(contadorMensajes);
             contadorMensajes++;
+            scanner.nextLine();
         }
     }
 }

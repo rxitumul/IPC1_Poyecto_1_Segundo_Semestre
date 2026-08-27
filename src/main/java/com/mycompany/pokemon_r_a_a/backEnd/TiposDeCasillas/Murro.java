@@ -1,10 +1,10 @@
 package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas;
 
-public class HiervaAlta extends Casillas{
-  @Override
-    public void imprimir() {
-                System.out.print(VERDE+" ♧ "+RESET);
+public class Murro extends Casillas{
 
+    @Override
+    public void imprimir() {
+               System.out.print(" ■ ");
     }
 
     @Override

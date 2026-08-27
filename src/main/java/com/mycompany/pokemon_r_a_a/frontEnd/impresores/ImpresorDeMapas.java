@@ -1,33 +1,28 @@
 
 package com.mycompany.pokemon_r_a_a.frontEnd.impresores;
 
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Mochila;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Pokedex;
 import com.mycompany.pokemon_r_a_a.backEnd.ListaDeBuff.Objetos;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Jugador;
 import com.mycompany.pokemon_r_a_a.frontEnd.ConfiguracionesDeEstetica;
 
-/**
- *
- * @author estebancastillo
- */
 public class ImpresorDeMapas {
 
-    private int cr;
-    private int pt;
-    private int estrellasNoLiberadas;
-    private int estrellasLiberadas;
-    private int bases;
-    private ConfiguracionesDeEstetica confi;
+    private Pokemons[] equiposLocaal = new Pokemons[5];
+    private Pokedex pokedexLocal = new Pokedex();
+    private JugadorPokemonPartida jugadorLocal = new JugadorPokemonPartida();
+    private Mochila mochilaLocal = new Mochila();
 
-    public void setValores(int estrellas, int crE, int ptE, ConfiguracionesDeEstetica confiE) {
-        cr = crE;
-        pt = ptE;
-        estrellasNoLiberadas = estrellas;
-        confi = confiE;
-    }
+    private ConfiguracionesDeEstetica confi = new ConfiguracionesDeEstetica();
 
-    public void getLimpiadorDeley() {
-        confi.delayThread();
+    public void setValores(Pokedex pokedex, JugadorPokemonPartida jugador, Mochila mochila) {
+        pokedexLocal = pokedex;
+        jugadorLocal = jugador;
+        mochilaLocal = mochila;
     }
 
     public void limpiadorPantalla() {
@@ -36,58 +31,16 @@ public class ImpresorDeMapas {
     }
 
     public void imprimirMapaObjetos(Casillas[][] mapa, Pokemons[] pokemonE, Objetos[] objetos) {
+        confi.separadorInicioMapa();
 
-        confi.separadorInicio();
-
-        System.out.printf("|%-20s%-20s%-20s%36s|%n", "CR " + cr, "PT " + pt,
-                "Estrellas Libreradas " + estrellasLiberadas + "/" + estrellasNoLiberadas,
-                "Bases derotadas " + bases);
-        confi.separadorMedios();
         for (Casillas[] casillas : mapa) {
             System.out.print(confi.getMarcoVertical());
             for (Casillas casillas2 : casillas) {
                 casillas2.imprimir();
             }
-            System.out.println();
+            System.out.println(confi.getMarcoVertical());
         }
-        confi.separadorMedios();
-        System.out.printf("|%-21s%-26s|%-52s|%n", "Flota", "Pilotos", "Objetos");
-        /* 
-        for (int i = 0; i < 3; i++) {
-            try {
-                if (objetos[i] instanceof VentaCompraPrecios objeto1) {
-                    objetoNombreUno = objeto1.getNombre();
-                }
-                objetoCantidadUno = objetos[i].getCantidadUsos();
-                if (objetos[i + 3] instanceof VentaCompraPrecios objeto2) {
-                    objetoNombreDos = objeto2.getNombre();
-                }
-                objetoCantidadDos = objetos[i + 3].getCantidadUsos();
-                nombreNave = naveE[i].getNombre();
-                try {
-                    piloto = naveE[i].getPiloto();
-                    nombrePiloto = piloto.getNombre();
-                } catch (ReturnNullExepcion e) {
-                    nombrePiloto = "";
-                }
-            } catch (NullPointerException|ReturnNullExepcion e) {
-                nombreNave = " ";
-                nombrePiloto = " ";
-            }
-            System.out.printf("| %-21s%-25s| %-28s%23s|%n", nombreNave, nombrePiloto,
-                    objetoNombreUno + ": " + objetoCantidadUno,
-                    objetoNombreDos + ": " + objetoCantidadDos);
-        }
-        */
-        confi.separadorFinal();
-    }
 
-    public void setEstrellasLiberadas(int estrellas) {
-        estrellasLiberadas = estrellas;
+        confi.separadorFinalMapa();
     }
-
-    public void setBasesEnemigasDerrotadas(int basesEnemigas) {
-        bases = basesEnemigas;
-    }
-
 }

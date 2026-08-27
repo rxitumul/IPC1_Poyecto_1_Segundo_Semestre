@@ -6,6 +6,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Espacio;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.GimnasioPokemon;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.HiervaAlta;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Jugador;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Murro;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.TiendaPokemon;
 
 public class CreadorDeMapaDeObjetos {
@@ -30,6 +31,9 @@ public class CreadorDeMapaDeObjetos {
                         break;
                     case 4:
                         mapaO[i][j] = new Jugador();
+                        break;
+                        case 5:
+                        mapaO[i][j] = new Murro();
                         break;
                     default:
                         mapaO[i][j] = new Espacio();

@@ -13,7 +13,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.Inicio.InicioGame;
 public class Pokemon_R_A_A {
 
     public static void main(String[] args) {
-        InicioGame inicio = new InicioGame();
-        inicio.inicio();
+        InicioGame game = new InicioGame();
+        game.inicio();
     }
 }

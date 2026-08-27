@@ -34,7 +34,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimie
 
 public class BibliotecaPokemon {
     private Random random = new Random();
-    private final String[] NOMBRE = { "Bulbasaur", " Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard",
+    private final String[] NOMBRE = { " Bulbasaur", " Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard",
             "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill",
             "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu" };
     private final Movimiento[][] MOVIMIENTOS = { { new Placaje(), new Grunido(), new HojaAfilada() },
