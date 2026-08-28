@@ -3,9 +3,8 @@ package com.mycompany.pokemon_r_a_a.frontEnd.InformacionProfesor;
 import com.mycompany.pokemon_r_a_a.frontEnd.ConfiguracionesDeEstetica;
 import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
 
-public class InicioProfesor {
-
-    private ConfiguracionesDeEstetica confi = new ConfiguracionesDeEstetica();
+public class InicioProfesorOak {
+private ConfiguracionesDeEstetica confi = new ConfiguracionesDeEstetica();
     private MensajesDeInformacion info = new MensajesDeInformacion();
     private String nombreLocal;
     private String nombrePokemonLocal;

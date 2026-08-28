@@ -62,7 +62,11 @@ public class ImpresorDeSelecion {
         System.out.println(confi.formatearMapa("6) Restaura todo" + mochila.getRestauraTodo()));
         confi.separadorMediosMapa();
         System.out.println(confi.formatearMapa("Selecione uno a utilizar"));
-        confi.separadorFinal();
+        confi.separadorFinalMapa();
+    }
+
+    private void impresorDePokedex() {
+
     }
 
     public void impresorDeNombre(String nombre) {

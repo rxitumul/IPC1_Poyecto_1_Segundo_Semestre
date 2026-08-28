@@ -2,17 +2,16 @@ package com.mycompany.pokemon_r_a_a.backEnd.Inicio;
 
 import java.util.Scanner;
 
-import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
-import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.BibliotecaPokemon;
+import com.mycompany.pokemon_r_a_a.backEnd.BancoDeDatos.DatosPokemon;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
-import com.mycompany.pokemon_r_a_a.frontEnd.InformacionProfesor.InicioProfesor;
+import com.mycompany.pokemon_r_a_a.frontEnd.InformacionProfesor.InicioProfesorOak;
 
 public class ProfesorCharla {
-    private BibliotecaPokemon pokemonCreador = new BibliotecaPokemon();
+    private DatosPokemon pokemonCreador = new DatosPokemon();
     private MensajesDeInformacion info = new MensajesDeInformacion();
     private Pokemons pokemonInicial;
-    private InicioProfesor profesor = new InicioProfesor();
+    private InicioProfesorOak profesor = new InicioProfesorOak();
     private int pokemnSelecionado;
     private Scanner scanner;
 
