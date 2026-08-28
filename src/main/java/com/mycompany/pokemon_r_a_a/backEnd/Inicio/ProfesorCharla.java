@@ -2,6 +2,7 @@ package com.mycompany.pokemon_r_a_a.backEnd.Inicio;
 
 import java.util.Scanner;
 
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.BibliotecaPokemon;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
@@ -11,14 +12,18 @@ public class ProfesorCharla {
     private BibliotecaPokemon pokemonCreador = new BibliotecaPokemon();
     private MensajesDeInformacion info = new MensajesDeInformacion();
     private Pokemons pokemonInicial;
+    private InicioProfesor profesor = new InicioProfesor();
+    private int pokemnSelecionado;
+    private Scanner scanner;
 
-    public ProfesorCharla() {
-
+    public ProfesorCharla(Scanner scanner) {
+        this.scanner = scanner;
     }
 
-    private InicioProfesor profesor = new InicioProfesor();
-    Scanner scanner = new Scanner(System.in);
-    int pokemnSelecionado;
+    
+    public void regaloProfesor(JugadorPokemonPartida jugador){
+        jugador.setNombre(profesor.getNombreLocal());
+    }
 
     public void charlaInicial() {
         int contadorMensajes = 0;

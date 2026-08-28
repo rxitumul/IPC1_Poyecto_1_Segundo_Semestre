@@ -1,13 +1,16 @@
 package com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas;
 
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
-import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CentroPokemon;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Espacio;
-import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.GimnasioPokemon;
-import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.HiervaAlta;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Jugador;
-import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Murro;
-import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.TiendaPokemon;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.CentroPokemon;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.GimnasioPokemon;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.HiervaAlta;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.TiendaPokemon;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Obstaculos.Agua;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Obstaculos.Arbol;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Obstaculos.Casa;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Obstaculos.Murro;
 
 public class CreadorDeMapaDeObjetos {
 
@@ -32,8 +35,17 @@ public class CreadorDeMapaDeObjetos {
                     case 4:
                         mapaO[i][j] = new Jugador();
                         break;
-                        case 5:
+                    case 5:
                         mapaO[i][j] = new Murro();
+                        break;
+                    case 7:
+                        mapaO[i][j] = new Arbol();
+                        break;
+                    case 8:
+                        mapaO[i][j] = new Agua();
+                        break;
+                    case 9:
+                        mapaO[i][j] = new Casa();
                         break;
                     default:
                         mapaO[i][j] = new Espacio();

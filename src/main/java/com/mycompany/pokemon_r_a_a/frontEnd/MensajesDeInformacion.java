@@ -8,16 +8,25 @@ public class MensajesDeInformacion {
         System.out.print("\033[38;5;208m");
         confi.limpiadorDeLineas();
         confi.separadorInicio();
-        System.out.println(confi.formatear("Error: Opción inválida"));
-        System.out.println(confi.formatear("Por favor, seleccione una opción válida"));
+        System.out.println(confi.formatearCentrado("Error: Opción inválida"));
+        System.out.println(confi.formatearCentrado("Por favor, seleccione una opción válida"));
         confi.separadorFinal();
         System.out.print("\033[0m");
     }
 
-    public void mensajeInformativoDecontinuar(){
-        System.out.println(confi.formatear("Presione enter para continuar....."));
+    public void mensajeInformativo(String mensaje) {
+        confi.delayThread();
+        confi.limpiadorDeLineas();
+        confi.separadorInicioMapa();
+        System.out.println(confi.formatearMapaCentrado(mensaje));
+        confi.separadorFinalMapa();
     }
-    public void mensajeDeIngresoDeNombre(){
-        System.out.println(confi.formatear("Ingrese el nombre a utilizar"));
+
+    public void mensajeInformativoDecontinuar() {
+        System.out.println(confi.formatearCentrado("Presione enter para continuar....."));
+    }
+
+    public void mensajeDeIngresoDeNombre() {
+        System.out.println(confi.formatearCentrado("Ingrese el nombre a utilizar"));
     }
 }

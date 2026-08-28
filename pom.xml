@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.release>16</maven.compiler.release>
         <exec.mainClass>com.mycompany.pokemon_r_a_a.Pokemon_R_A_A</exec.mainClass>
     </properties>
     <build>
@@ -17,7 +17,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <release>11</release>
+                    <release>16</release>
                 </configuration>
             </plugin>
             <plugin>

@@ -22,6 +22,9 @@ public class InicioProfesor {
     private String[] mensajeProfesor3;
     private String[] mensajeProfesor4;
 
+    public String getNombreLocal() {
+        return nombreLocal;
+    }
     public void cadenaDeMensajesInicial(int mensaje) {
         confi.limpiadorDeLineas();
         confi.separadorInicio();
