@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
 import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
-import com.mycompany.pokemon_r_a_a.frontEnd.impresores.ImpresorDeSelecion;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
 
 public class Mapas {
     private MensajesDeInformacion mensaje = new MensajesDeInformacion();

@@ -23,11 +23,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
                 <configuration>
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.mycompany.bilbioteca_de_juegos_ipc1_segunda_ves.Bilbioteca_de_juegos_ipc1_segunda_ves</mainClass>
+                            <mainClass>com.mycompany.pokemon_r_a_a.Pokemon_R_A_A</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

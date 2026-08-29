@@ -1,10 +1,9 @@
 package com.mycompany.pokemon_r_a_a.frontEnd.InformacionProfesor;
 
-import com.mycompany.pokemon_r_a_a.frontEnd.ConfiguracionesDeEstetica;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
 
-public class InicioProfesorOak {
-private ConfiguracionesDeEstetica confi = new ConfiguracionesDeEstetica();
+public class InicioProfesorOak extends ImpresoresGlobal {
     private MensajesDeInformacion info = new MensajesDeInformacion();
     private String nombreLocal;
     private String nombrePokemonLocal;
@@ -25,84 +24,83 @@ private ConfiguracionesDeEstetica confi = new ConfiguracionesDeEstetica();
         return nombreLocal;
     }
     public void cadenaDeMensajesInicial(int mensaje) {
-        confi.limpiadorDeLineas();
-        confi.separadorInicio();
+        limpiadorDeLineas();
+        separadorInicio();
         if (mensaje != 0) {
-            System.out.println(confi.formatear("Profesor Oak"));
-            confi.separadorMedios();
+            System.out.println(formatear("Profesor Oak"));
+            separadorMedios();
         }
-        System.out.println(confi.formatear(MENSAJES_PROFESOR_INICIO[mensaje]));
-        confi.separadorMedios();
+        System.out.println(formatear(MENSAJES_PROFESOR_INICIO[mensaje]));
+        separadorMedios();
         if (mensaje == 4) {
             info.mensajeDeIngresoDeNombre();
         } else {
             info.mensajeInformativoDecontinuar();
         }
-        confi.separadorFinal();
+        separadorFinal();
     }
 
     public void mensajeDespuesDenombre(int mensaje) {
-        confi.limpiadorDeLineas();
-        confi.separadorInicio();
-        System.out.println(confi.formatear("Profesor Oak"));
-        confi.separadorMedios();
-        System.out.println(confi.formatear(mensajeProfesor2[mensaje]));
-        System.out.println(confi.formatear(mensajeProfesor2[mensaje + 1]));
-        confi.separadorMedios();
+        limpiadorDeLineas();
+        separadorInicio();
+        System.out.println(formatear("Profesor Oak"));
+        separadorMedios();
+        System.out.println(formatear(mensajeProfesor2[mensaje]));
+        System.out.println(formatear(mensajeProfesor2[mensaje + 1]));
+        separadorMedios();
         info.mensajeInformativoDecontinuar();
-        confi.separadorFinal();
+        separadorFinal();
     }
 
     public void mensajeProfesorCambioDeNombre(int mensaje) {
-        confi.limpiadorDeLineas();
-        confi.separadorInicio();
-        System.out.println(confi.formatear("Profesor Oak"));
-        confi.separadorMedios();
-        System.out.println(confi.formatear(mensajeProfesor3[mensaje]));
-        confi.separadorMedios();
+        limpiadorDeLineas();
+        separadorInicio();
+        System.out.println(formatear("Profesor Oak"));
+        separadorMedios();
+        System.out.println(formatear(mensajeProfesor3[mensaje]));
+        separadorMedios();
         info.mensajeInformativoDecontinuar();
-        confi.separadorFinal();
+        separadorFinal();
     }
 
     public void mensajeProfesorFinal(int mensaje) {
-        confi.limpiadorDeLineas();
-        confi.separadorInicio();
-        System.out.println(confi.formatear("Profesor Oak"));
-        confi.separadorMedios();
-        System.out.println(confi.formatear(mensajeProfesor4[mensaje]));
-        confi.separadorMedios();
+        limpiadorDeLineas();
+        separadorInicio();
+        System.out.println(formatear("Profesor Oak"));
+        separadorMedios();
+        System.out.println(formatear(mensajeProfesor4[mensaje]));
+        separadorMedios();
         info.mensajeInformativoDecontinuar();
-        confi.separadorFinal();
+        separadorFinal();
     }
 
     public void mensajeDeElecionDePokemon() {
-        confi.separadorInicio();
-        System.out.println(confi.formatear("(1) Bulbasaur"));
-        System.out.println(confi.formatear("(2) Squirtle"));
-        System.out.println(confi.formatear("(3) Charmander"));
-        confi.separadorMedios();
-        System.out.println(confi.formatear("Porfavor escoje un pokemon"));
-        confi.separadorFinal();
+        separadorInicio();
+        System.out.println(formatear("(1) Bulbasaur"));
+        System.out.println(formatear("(2) Squirtle"));
+        System.out.println(formatear("(3) Charmander"));
+        separadorMedios();
+        System.out.println(formatear("Porfavor escoje un pokemon"));
+        separadorFinal();
     }
 
     public void mensajeDeRenombre() {
-        confi.separadorInicio();
-        System.out.println(confi
-                .formatear(confi.formatear("Escribe S si desea cambiar el nombre de lo contrario precione enter")));
-        confi.separadorFinal();
+        separadorInicio();
+        System.out.println(formatear(formatear("Escribe S si desea cambiar el nombre de lo contrario precione enter")));
+        separadorFinal();
     }
 
     public void nombreAEleguir() {
-        confi.separadorInicio();
-        System.out.println(confi.formatear("Porfavor ingrese el nuevo nombre del pokemon"));
-        confi.separadorFinal();
+        separadorInicio();
+        System.out.println(formatear("Porfavor ingrese el nuevo nombre del pokemon"));
+        separadorFinal();
 
     }
 
     public void nombreDelPokemon() {
-        confi.separadorInicio();
-        System.out.println(confi.formatear("El nombre del pokemon es" + nombrePokemonLocal));
-        confi.separadorFinal();
+        separadorInicio();
+        System.out.println(formatear("El nombre del pokemon es" + nombrePokemonLocal));
+        separadorFinal();
     }
 
     public void setNombre(String nombre) {

@@ -1,31 +1,31 @@
 package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon;
 
-import com.mycompany.pokemon_r_a_a.frontEnd.ConfiguracionesDeEstetica;
+import java.util.Scanner;
+
+import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
 
 public class Pokedex {
-    private String[] nombrePokemon;
-    private ConfiguracionesDeEstetica confi = new ConfiguracionesDeEstetica();
+    private Pokemons[] pokemon;
+    private ImpresorDeSelecion impresor = new ImpresorDeSelecion();
+    private Scanner scanner = new Scanner(System.in);
 
-    public String[] getNombrePokemon() {
-        return nombrePokemon;
+    public Pokedex(Pokemons[] pokemon, Scanner scanner) {
+        this.pokemon = pokemon;
+        this.scanner = scanner;
     }
 
-    public void impresorDeNombres() {
-        confi.inicioDeTabla();
-        System.out.println(confi.formatoTabla("Nombre", "ID"));
-        confi.mediosDeTabla();
-        for (int i = 0; i < nombrePokemon.length; i++) {
-            System.out.println(confi.formatoTabla(nombrePokemon[i], String.valueOf(i + 1)));
-        }
-        confi.finDeTabla();
-    }
-
-    public void impresorPokemon(int numero) {
-        confi.separadorInicioMapa();
-
-        confi.separadorMediosMapa();
-
-        confi.separadorFinalMapa();
+    public void pokedexMenu() {
+        do {
+            try {
+                impresor.impresorDePokedex(pokemon);
+                int selecionDeJugador = Integer.parseInt(scanner.nextLine());
+                impresor.impresorDePokemon(pokemon, selecionDeJugador);
+                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                break;
+            }
+        } while (true);
     }
 
 }

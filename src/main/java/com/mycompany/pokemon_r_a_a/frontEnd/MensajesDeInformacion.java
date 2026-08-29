@@ -1,32 +1,32 @@
 package com.mycompany.pokemon_r_a_a.frontEnd;
 
-public class MensajesDeInformacion {
-    private ConfiguracionesDeEstetica confi = new ConfiguracionesDeEstetica();
+public class MensajesDeInformacion extends ImpresoresGlobal {
+
 
     public void pantallaDeError() {
-        confi.delayThread();
-        System.out.print("\033[38;5;208m");
-        confi.limpiadorDeLineas();
-        confi.separadorInicio();
-        System.out.println(confi.formatearCentrado("Error: Opción inválida"));
-        System.out.println(confi.formatearCentrado("Por favor, seleccione una opción válida"));
-        confi.separadorFinal();
-        System.out.print("\033[0m");
+        delayThread();
+        System.out.print(NARANJA);
+        limpiadorDeLineas();
+        separadorInicio();
+        System.out.println(formatearCentrado("Error: Opción inválida"));
+        System.out.println(formatearCentrado("Por favor, seleccione una opción válida"));
+        separadorFinal();
+        System.out.print(RESET);
     }
 
     public void mensajeInformativo(String mensaje) {
-        confi.delayThread();
-        confi.limpiadorDeLineas();
-        confi.separadorInicioMapa();
-        System.out.println(confi.formatearMapaCentrado(mensaje));
-        confi.separadorFinalMapa();
+        delayThread();
+        limpiadorDeLineas();
+        separadorInicioMapa();
+        System.out.println(formatearMapaCentrado(mensaje));
+        separadorFinalMapa();
     }
 
     public void mensajeInformativoDecontinuar() {
-        System.out.println(confi.formatearCentrado("Presione enter para continuar....."));
+        System.out.println(formatearCentrado("Presione enter para continuar....."));
     }
 
     public void mensajeDeIngresoDeNombre() {
-        System.out.println(confi.formatearCentrado("Ingrese el nombre a utilizar"));
+        System.out.println(formatearCentrado("Ingrese el nombre a utilizar"));
     }
 }

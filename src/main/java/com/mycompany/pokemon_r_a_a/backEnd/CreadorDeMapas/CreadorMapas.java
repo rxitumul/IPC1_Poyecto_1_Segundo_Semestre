@@ -35,7 +35,7 @@ public class CreadorMapas {
                 mapa[i][j] = ESPACIO;
             }
         }
-        int repetir = rand.ints(0, 5).findFirst().getAsInt();
+        int repetir = rand.nextInt(5) + 1;
         mapa = posicionAlAzara(mapa, HIERVA_ALTA, true, true, repetir);
 
         mapa = posicionAlAzara(mapa, SPAWN, false, false, 0);
@@ -88,7 +88,7 @@ public class CreadorMapas {
             if (hiervaAlta) {
                 grupoDehiervaAlta(mapaPokemonM, posicionX, posicionY);
             }
-            if (repetirDatos == contador) {
+            if (contador >= repetirDatos) {
                 break;
             }
         } while (repetir);

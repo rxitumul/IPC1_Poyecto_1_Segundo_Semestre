@@ -10,8 +10,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Pokedex;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador;
-import com.mycompany.pokemon_r_a_a.frontEnd.impresores.ImpresorDeMapas;
-import com.mycompany.pokemon_r_a_a.frontEnd.impresores.ImpresorDeSelecion;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeMapas;
 
 public class Game {
 
@@ -22,7 +21,6 @@ public class Game {
     private JugadorPokemonPartida jugadorLocal;
     private Mochila mochilaLocal;
     private ImpresorDeMapas impresor = new ImpresorDeMapas();
-    private ImpresorDeSelecion impresorSelecion = new ImpresorDeSelecion();
 
     private int[] jugadorPosicion;
     private MapaCiudad[] mapaCiudadesLocal;
@@ -54,7 +52,7 @@ public class Game {
                 jugadorPosicion = movimiento.getSpawn();
 
             } else if (movi.equalsIgnoreCase("M")) {
-                impresorSelecion.impresorMochila(mochilaLocal);
+                mochilaLocal.menuInicialMochila();
             } else if (movi.equalsIgnoreCase("N")) {
 
                 mapa.setJugador(jugadorPosicion);
@@ -65,13 +63,12 @@ public class Game {
             } else if (movi.equalsIgnoreCase("P")) {
                 System.out.println("Pokemons");
             } else if (movi.equalsIgnoreCase("T")) {
-                System.out.println("Pokedex");
+                pokedexLocal.pokedexMenu();
             } else if (movi.equalsIgnoreCase("X")) {
                 System.out.println("Salir Y guardar");
                 break;
             } else if (movi.equalsIgnoreCase("F")) {
-                impresorSelecion.impresorDeEstadoJugador(jugadorLocal, mapaCiudadesLocal);
-                scanner.nextLine();
+                jugadorLocal.perfil(mapaCiudadesLocal);
             } else {
                 System.out.println("hola");
             }

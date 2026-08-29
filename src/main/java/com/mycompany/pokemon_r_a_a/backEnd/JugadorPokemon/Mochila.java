@@ -1,6 +1,12 @@
 package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon;
 
+import java.util.Scanner;
+
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
+
 public class Mochila {
+    private ImpresorDeSelecion impresorDeSelecion = new ImpresorDeSelecion();
+    private Scanner scanner;
     private int pokebola;
     private int pocion;
     private int superPocion;
@@ -8,7 +14,8 @@ public class Mochila {
     private int antiParalisis;
     private int restauraTodo;
 
-    public Mochila() {
+    public Mochila(Scanner scanner) {
+        this.scanner = scanner;
         restauraTodo = 0;
         antiParalisis = 0;
         antidoto = 0;
@@ -63,6 +70,18 @@ public class Mochila {
 
     public void setSuperPocion(int superPocion) {
         this.superPocion = superPocion;
+    }
+
+    public void menuInicialMochila() {
+        do {
+            try {
+                impresorDeSelecion.impresorMochila(this);
+                int selecion = Integer.parseInt(scanner.nextLine());
+                System.out.println(selecion);
+            } catch (NumberFormatException e) {
+                // TODO: handle exception
+            }
+        } while (true);
     }
 
 }

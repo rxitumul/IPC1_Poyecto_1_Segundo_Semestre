@@ -7,8 +7,9 @@ public class ConfiguracionesDeEstetica {
     private static final int CUATRO = 4;
     private static final int CATORCE = 14;
 
-    private final static int TIEMPO = 1100;
+    private final static int TIEMPO_DE_ESPERA = 200;
     private final static String LIMPIADOR_DE_PANTALLA = "\033[H\033[2J";
+    private final static String LIMPIADOR_DECOLORES = "\u001B\\[[;\\d]*m";
 
     private final static String MARCO_HORIZONTAL = "═";
     private final static String MARCO_VERTICAL = "║";
@@ -21,6 +22,11 @@ public class ConfiguracionesDeEstetica {
     private final static String MARCO_HORIZONTAL_INTERCECION_HACIA_ARRIBA = "╩";
     private final static String MARCO_HORIZONTAL_INTERCECION_HACIA_ABAJO = "╦";
     private final static String MARCO_INTERCECION_CUATRUPLE = "╬";
+
+    public void limpiadorPantalla() {
+        System.out.print(LIMPIADOR_DE_PANTALLA);
+        System.out.flush();
+    }
 
     public void separadorInicio() {
         System.out.println(MARCO_ESQUINA_IZQUIERDA_SUPERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES)
@@ -68,7 +74,7 @@ public class ConfiguracionesDeEstetica {
 
     public String formatearCentrado(String texto) {
         int interior = SEPARACION_DE_BORDES;
-        String textoLimpio = texto.replaceAll("\u001B\\[[;\\d]*m", "");
+        String textoLimpio = texto.replaceAll(LIMPIADOR_DECOLORES, "");
         int visibleLength = textoLimpio.length();
 
         if (visibleLength > interior) {
@@ -95,7 +101,7 @@ public class ConfiguracionesDeEstetica {
 
     public String formatearMapaCentrado(String texto) {
         int interior = SEPARACION_DE_BORDES_MAPA;
-        String textoLimpio = texto.replaceAll("\u001B\\[[;\\d]*m", "");
+        String textoLimpio = texto.replaceAll(LIMPIADOR_DECOLORES, "");
         int visibleLength = textoLimpio.length();
 
         if (visibleLength > interior) {
@@ -136,24 +142,22 @@ public class ConfiguracionesDeEstetica {
 
     }
 
-
-
     public String getMarcoVertical() {
         return MARCO_VERTICAL;
     }
 
     public void delayThread() {
         try {
-            Thread.sleep(TIEMPO);
+            Thread.sleep(TIEMPO_DE_ESPERA);
         } catch (InterruptedException ex) {
         }
 
         System.out.flush();
     }
-    
-        private String formatearCentradoTablaDinamico(String texto, int ancho) {
+
+    private String formatearCentradoTablaDinamico(String texto, int ancho) {
         int interior = ancho;
-        String textoLimpio = texto.replaceAll("\u001B\\[[;\\d]*m", "");
+        String textoLimpio = texto.replaceAll(LIMPIADOR_DECOLORES, "");
         int visibleLength = textoLimpio.length();
 
         if (visibleLength > interior) {

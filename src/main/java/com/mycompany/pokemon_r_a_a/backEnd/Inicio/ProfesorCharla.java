@@ -3,6 +3,7 @@ package com.mycompany.pokemon_r_a_a.backEnd.Inicio;
 import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.BancoDeDatos.DatosPokemon;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
 import com.mycompany.pokemon_r_a_a.frontEnd.InformacionProfesor.InicioProfesorOak;

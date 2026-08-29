@@ -2,6 +2,7 @@ package com.mycompany.pokemon_r_a_a.backEnd.Inicio;
 
 import java.util.Scanner;
 
+import com.mycompany.pokemon_r_a_a.backEnd.BancoDeDatos.DatosPokemon;
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.CreadorMapas;
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
@@ -13,15 +14,16 @@ public class InicioGame {
     private Scanner scanner = new Scanner(System.in);
     private CreadorMapas creador = new CreadorMapas();
     private ProfesorCharla profe = new ProfesorCharla(scanner);
-    private Pokedex pokedex = new Pokedex();
     private Pokemons[] equipos = new Pokemons[5];
-    private JugadorPokemonPartida jugador = new JugadorPokemonPartida();
-    private Mochila mochila = new Mochila();
+    private JugadorPokemonPartida jugador = new JugadorPokemonPartida(scanner);
+    private Mochila mochila = new Mochila(scanner);
+    private Pokemons[] pokedexLista = new Pokemons[25];
     private MenuPrincipal menuPrincipal = new MenuPrincipal(scanner);
+    private DatosPokemon datos = new DatosPokemon();
     /*
      * "Pokédex liberada: ✓",
-
-
+     * 
+     * 
      */
 
     public void inicio() {
@@ -30,8 +32,10 @@ public class InicioGame {
             int opcion = menuPrincipal.menuInicial();
             switch (opcion) {
                 case 1:
-                    //profe.charlaInicial();
+                    // profe.charlaInicial();
                     profe.regaloProfesor(jugador);
+                    pokedexLista = datos.creadorPokedesData();
+                    Pokedex pokedex = new Pokedex(pokedexLista, scanner);
                     MapaCiudad[] mapas = new MapaCiudad[3];
                     for (int i = 0; i < mapas.length; i++) {
                         mapas[i] = creador.mapaCreador(mapas);
@@ -43,9 +47,6 @@ public class InicioGame {
                     System.out.println("Cargando partida guardada...");
                     break;
                 case 3:
-                    System.out.println("Registro estratégico / Estadísticas...");
-                    break;
-                case 4:
                     System.out.println("¡Gracias por jugar Pokémon R_A_A!");
                     salir = true;
                     break;
