@@ -2,6 +2,8 @@ package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimi
 
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Estado;
 
-public class Proteccion extends Estado{
-
+public class Proteccion extends Estado {
+    public Proteccion() {
+        nombre = "Proteccion";
+    }
 }

@@ -2,6 +2,8 @@ package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimi
 
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Fisico;
 
-public class Placaje extends Fisico{
-
+public class Placaje extends Fisico {
+    public Placaje() {
+        nombre = "Placaje";
+    }
 }

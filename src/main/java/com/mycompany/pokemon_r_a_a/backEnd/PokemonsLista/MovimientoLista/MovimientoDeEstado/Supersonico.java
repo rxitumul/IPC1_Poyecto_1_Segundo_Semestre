@@ -2,6 +2,8 @@ package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimi
 
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Estado;
 
-public class Supersonico extends Estado{
-
+public class Supersonico extends Estado {
+    public Supersonico() {
+        nombre = "Supersonico";
+    }
 }

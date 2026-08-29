@@ -4,4 +4,8 @@ import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Estado;
 
 public class Descanso extends Estado {
 
+    public Descanso(){
+        nombre="Descanso";
+    }
+
 }

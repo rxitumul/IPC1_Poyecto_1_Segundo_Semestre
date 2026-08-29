@@ -79,7 +79,7 @@ public class Mochila {
                 int selecion = Integer.parseInt(scanner.nextLine());
                 System.out.println(selecion);
             } catch (NumberFormatException e) {
-                // TODO: handle exception
+                break;
             }
         } while (true);
     }

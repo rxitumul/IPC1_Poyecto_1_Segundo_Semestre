@@ -2,6 +2,8 @@ package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimi
 
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Fisico;
 
-public class Atactrueno extends Fisico{
-
+public class Atactrueno extends Fisico {
+    public Atactrueno() {
+        nombre = "Atactrueno";
+    }
 }

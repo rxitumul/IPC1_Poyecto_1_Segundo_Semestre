@@ -4,4 +4,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Estado;
 
 public class DisparoDemora extends Estado{
 
+    public DisparoDemora(){
+        nombre="DisparoDemora";
+    }
 }

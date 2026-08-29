@@ -3,5 +3,7 @@ package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimi
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Fisico;
 
 public class RayoSolar extends Fisico{
-
+public RayoSolar() {
+nombre="RayoSolar";
+}
 }

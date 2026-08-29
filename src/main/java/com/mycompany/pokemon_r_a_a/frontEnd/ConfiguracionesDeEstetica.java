@@ -91,6 +91,7 @@ public class ConfiguracionesDeEstetica {
 
     public String formatearMapa(String texto) {
         int interior = SEPARACION_DE_BORDES_MAPA;
+        
 
         if (texto.length() > interior) {
             texto = texto.substring(0, interior);

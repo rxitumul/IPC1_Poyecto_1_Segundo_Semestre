@@ -3,5 +3,7 @@ package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimi
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Fisico;
 
 public class AtaqueFuria extends Fisico{
-
+public AtaqueFuria() {
+    nombre= "AtaqueFuria";
+}
 }

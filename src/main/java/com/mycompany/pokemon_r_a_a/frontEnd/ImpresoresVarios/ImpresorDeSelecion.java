@@ -30,16 +30,11 @@ public class ImpresorDeSelecion extends ImpresoresGlobal {
         int[] medallas = jugador.getMedallasObtenidas();
         for (int i = 0; i < mapas.length; i++) {
             if (medallas[i] == 0) {
-                System.out.print(ROJO);
-                System.out.println(formatearMapa(
-                        mapas[i].getNombre() + " Sin derrotar " + medallas[i] + " medallas"));
-                System.out.print(RESET);
+                System.out.println(formatearMapaCentrado(ROJO +
+                        mapas[i].getNombre() + " Sin derrotar " + medallas[i] + " medallas" + RESET));
             } else {
-                System.out.print(VERDE);
-                System.out.println(formatearMapa(
-                        mapas[i].getNombre() + " Derrotado " + medallas[i] + " medallas"));
-                System.out.print(RESET);
-
+                System.out.println(formatearMapaCentrado(VERDE +
+                        mapas[i].getNombre() + " Derrotado " + medallas[i] + " medallas" + RESET));
             }
         }
         separadorMediosMapa();
