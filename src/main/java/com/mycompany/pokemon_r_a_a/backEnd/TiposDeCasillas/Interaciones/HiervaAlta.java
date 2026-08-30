@@ -1,11 +1,15 @@
 package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones;
 
+import com.mycompany.pokemon_r_a_a.backEnd.BancoDeDatos.DatosPokemon;
+import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 
-public class HiervaAlta extends Casillas{
-  @Override
+public class HiervaAlta extends Casillas {
+    private DatosPokemon datos = new DatosPokemon();
+
+    @Override
     public void imprimir() {
-                System.out.print(VERDE+" ♧ "+RESET);
+        System.out.print(VERDE + " ♧ " + RESET);
 
     }
 
@@ -31,6 +35,15 @@ public class HiervaAlta extends Casillas{
     @Override
     public boolean getEstadoDeGruppo() {
         return false;
+    }
+
+    @Override
+    public Pokemons accionCasilla() {
+        double prob = random.nextDouble();
+        if (prob > 0.15) {
+            return datos.pokemonRandom();
+        }
+        return null;
     }
 
 }

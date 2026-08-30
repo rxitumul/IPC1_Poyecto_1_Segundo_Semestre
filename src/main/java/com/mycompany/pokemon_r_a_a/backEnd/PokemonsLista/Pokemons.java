@@ -3,15 +3,21 @@ package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimiento;
 
 public class Pokemons {
-    private String nombreLocal;
     private Movimiento[] movimientosPokemonLocal;
+    private String nombreLocal;
+    private String apodo;
     private int vida;
     private int defensa;
     private int ataque;
     private int velocidad;
+    private int id;
 
     public void setNombre(String nombre) {
         nombreLocal = nombre;
+    }
+
+    public void setApodo(String apodo) {
+        this.apodo = apodo;
     }
 
     public void setMovimientos(Movimiento[] movimientosPokemon) {
@@ -34,17 +40,12 @@ public class Pokemons {
         this.vida = vida;
     }
 
-    public void setStatus(int[] status) {
-        if (status != null && status.length >= 4) {
-            this.vida = status[0];
-            this.ataque = status[1];
-            this.defensa = status[2];
-            this.velocidad = status[3];
-        }
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int[] getStatus() {
-        return new int[]{ vida, ataque, defensa, velocidad };
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {
@@ -69,6 +70,10 @@ public class Pokemons {
 
     public int getVida() {
         return vida;
+    }
+
+    public String getApodo() {
+        return apodo;
     }
 
 }

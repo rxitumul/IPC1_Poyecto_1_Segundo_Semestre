@@ -4,12 +4,15 @@
  */
 package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas;
 
+import java.util.Random;
+
 /**
  *
  * @author ricardocastillo
  */
 public abstract class Casillas {
 
+    protected Random random= new Random();
     protected final static String ROJO = "\u001B[31m";
     protected final static String VERDE = "\u001B[32m";
     protected final static String AMARILLO = "\u001B[33m";
@@ -29,5 +32,9 @@ public abstract class Casillas {
     public abstract void setMapa();
 
     public abstract boolean getEstadoDeGruppo();
+
+    public <T> T accionCasilla() {
+        return null;
+    }
 
 }

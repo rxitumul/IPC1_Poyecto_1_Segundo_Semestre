@@ -117,7 +117,7 @@ public class DatosPokemon {
             60
     };
 
-    public Pokemons pokemon() {
+    public Pokemons pokemonRandom() {
         Pokemons pokemon = new Pokemons();
         int numeroSeleccionado = random.nextInt(nombrePokemon.length);
         pokemon.setNombre(nombrePokemon[numeroSeleccionado]);
