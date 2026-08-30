@@ -41,7 +41,7 @@ public class HiervaAlta extends Casillas {
     public Pokemons accionCasilla() {
         double prob = random.nextDouble();
         if (prob > 0.15) {
-            return datos.pokemonRandom();
+            return datos.pokemonRandom(0,1);
         }
         return null;
     }

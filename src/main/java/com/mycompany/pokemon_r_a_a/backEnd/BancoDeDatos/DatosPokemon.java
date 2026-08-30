@@ -117,15 +117,16 @@ public class DatosPokemon {
             60
     };
 
-    public Pokemons pokemonRandom() {
+    public Pokemons pokemonRandom(int totalNiveles,int cantidadDePokemones) {
         Pokemons pokemon = new Pokemons();
         int numeroSeleccionado = random.nextInt(nombrePokemon.length);
         pokemon.setNombre(nombrePokemon[numeroSeleccionado]);
         pokemon.setMovimientos(movimientosPokemon[numeroSeleccionado]);
-        pokemon.setVida(saludPokemon[numeroSeleccionado]);
-        pokemon.setAtaque(ataquePokemon[numeroSeleccionado]);
-        pokemon.setDefensa(defensaPokemon[numeroSeleccionado]);
-        pokemon.setVelocidad(velocidadPokemon[numeroSeleccionado]);
+        pokemon.setVidaInicial(saludPokemon[numeroSeleccionado]);
+        pokemon.setAtaqueInicial(ataquePokemon[numeroSeleccionado]);
+        pokemon.setDefensaInicial(defensaPokemon[numeroSeleccionado]);
+        pokemon.setVelocidadInicial(velocidadPokemon[numeroSeleccionado]);
+        pokemon.setNivel((int)((totalNiveles*0.4)/cantidadDePokemones));
         return pokemon;
     }
 
@@ -145,10 +146,10 @@ public class DatosPokemon {
         }
         pokemon.setNombre(nombrePokemon[indice]);
         pokemon.setMovimientos(movimientosPokemon[indice]);
-        pokemon.setVida(saludPokemon[indice]);
-        pokemon.setAtaque(ataquePokemon[indice]);
-        pokemon.setDefensa(defensaPokemon[indice]);
-        pokemon.setVelocidad(velocidadPokemon[indice]);
+        pokemon.setVidaInicial(saludPokemon[indice]);
+        pokemon.setAtaqueInicial(ataquePokemon[indice]);
+        pokemon.setDefensaInicial(defensaPokemon[indice]);
+        pokemon.setVelocidadInicial(velocidadPokemon[indice]);
         return pokemon;
     }
 
@@ -157,10 +158,10 @@ public class DatosPokemon {
         for (int i = 0; i < nombrePokemon.length; i++) {
             pokedex[i] = new Pokemons();
             pokedex[i].setNombre(nombrePokemon[i]);
-            pokedex[i].setVida(saludPokemon[i]);
-            pokedex[i].setAtaque(ataquePokemon[i]);
-            pokedex[i].setDefensa(defensaPokemon[i]);
-            pokedex[i].setVelocidad(velocidadPokemon[i]);
+            pokedex[i].setVidaInicial(saludPokemon[i]);
+            pokedex[i].setAtaqueInicial(ataquePokemon[i]);
+            pokedex[i].setDefensaInicial(defensaPokemon[i]);
+            pokedex[i].setVelocidadInicial(velocidadPokemon[i]);
             pokedex[i].setMovimientos(movimientosPokemon[i]);
         }
         return pokedex;

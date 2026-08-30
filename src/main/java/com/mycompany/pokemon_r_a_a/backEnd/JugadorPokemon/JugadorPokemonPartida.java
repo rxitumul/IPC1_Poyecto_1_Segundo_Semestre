@@ -3,6 +3,7 @@ package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon;
 import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
+import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
 
 public class JugadorPokemonPartida {
@@ -10,11 +11,12 @@ public class JugadorPokemonPartida {
     private int pokemonedas;
     private int[] medallasObtenidas = { 0, 0, 0 };
     private Scanner scanner;
-    private ImpresorDeSelecion impresorDeSelecion= new ImpresorDeSelecion();
+    private Pokemons[] pokemosEquipo;
+    private ImpresorDeSelecion impresorDeSelecion = new ImpresorDeSelecion();
 
     public JugadorPokemonPartida(Scanner scanner) {
         pokemonedas = 1000;
-        this.scanner=scanner;
+        this.scanner = scanner;
     }
 
     public int[] getMedallasObtenidas() {
@@ -27,6 +29,12 @@ public class JugadorPokemonPartida {
 
     public int getPokemonedas() {
         return pokemonedas;
+    }
+    public Pokemons[] getPokemosEquipo() {
+        return pokemosEquipo;
+    }
+    public void setPokemosEquipo(Pokemons[] pokemosEquipo) {
+        this.pokemosEquipo = pokemosEquipo;
     }
 
     public void setMedallasObtenidas(int[] medallasObtenidas) {

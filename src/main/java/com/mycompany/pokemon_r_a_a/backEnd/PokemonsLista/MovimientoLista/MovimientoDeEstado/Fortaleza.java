@@ -7,4 +7,13 @@ public class Fortaleza extends Estado {
     public Fortaleza() {
         nombre = "Fortaleza";
     }
+
+    @Override
+    protected void estadosAlterados() {
+      System.out.println(confi.formatearMapa("El pokemon a utlizado Fortaleza"));
+        int defensa = pokemonUsuario.getDefensaPokemon();
+        int aumento = (int) (defensa * 0.5);
+        pokemonUsuario.setDefensaPokemon(defensa += aumento);
+        confi.separadorFinalMapa();
+    }
 }

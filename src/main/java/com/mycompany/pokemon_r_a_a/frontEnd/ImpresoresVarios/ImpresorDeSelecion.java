@@ -82,9 +82,9 @@ public class ImpresorDeSelecion extends ImpresoresGlobal {
         System.out.println(formatearMapaCentrado("Estadisticas "));
         separadorMediosMapa();
         System.out.println(formatearMapaCentrado(
-                "Vida inicial: " + pokemon[numero].getVida() + "  Defensa Inicial: " + pokemon[numero].getDefensa()));
-        System.out.println(formatearMapaCentrado("Ataque inicial: " + pokemon[numero].getAtaque()
-                + "  Velocidad Inicial: " + pokemon[numero].getVelocidad()));
+                "Vida inicial: " + pokemon[numero].getVidaInicial() + "  Defensa Inicial: " + pokemon[numero].getDefensaInicial()));
+        System.out.println(formatearMapaCentrado("Ataque inicial: " + pokemon[numero].getAtaqueInicial()
+                + "  Velocidad Inicial: " + pokemon[numero].getVelocidadInicial()));
         separadorMediosMapa();
         System.out.println(formatearMapaCentrado("Movimientos "));
         separadorMediosMapa();
