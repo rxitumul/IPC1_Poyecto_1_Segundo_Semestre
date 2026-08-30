@@ -39,8 +39,8 @@ public class Pokemons {
     private int xp;
     private boolean prioritario;
 
-    private Listas<Estados> estadosAlterados;
-    private Listas<Estados> estadosAlteradosPermanete;
+    private Listas<Estados> estadosAlterados = new Listas<Estados>();
+    private Listas<Estados> estadosAlteradosPermanete = new Listas<Estados>();
     private Random rand = new Random();
 
     private boolean activoBloqueo = false;
