@@ -2,14 +2,15 @@ package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista;
 
 import java.util.Random;
 
+import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.ListaEnlazadaException;
 import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.Listas;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Estados;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimiento;
 
 public class Pokemons {
 
-    private static final int IV_INICIO = 0;
-    private static final int IV_FIN = 16;
+    private static final int VARIACION_INICIO = 0;
+    private static final int VARIACION_FIN = 31;
     private Movimiento[] movimientosPokemonLocal;
     private String nombreLocal;
     private String apodo;
@@ -19,20 +20,20 @@ public class Pokemons {
     private int ataquePokemon;
     private int velocidadPokemon;
 
+    private int vidaBase;
+    private int defensaBase;
+    private int ataqueBase;
+    private int velocidadBase;
+
     private int vidaInicial;
     private int defensaInicial;
     private int ataqueInicial;
     private int velocidadInicial;
 
-    private int vidaIv;
-    private int defensaIv;
-    private int ataqueIv;
-    private int velocidadIv;
-
-    private int xpVida;
-    private int xpAtaque;
-    private int xpDefensa;
-    private int xpVelocidad;
+    private int vidaVariacion;
+    private int defensaVariacion;
+    private int ataqueVariacion;
+    private int velocidadVariacion;
 
     private int id;
     private int nivel;
@@ -45,12 +46,18 @@ public class Pokemons {
 
     private boolean activoBloqueo = false;
 
-    public Pokemons() {
-        vidaIv = rand.ints(IV_INICIO, IV_FIN).findFirst().getAsInt();
-        defensaIv = rand.ints(IV_INICIO, IV_FIN).findFirst().getAsInt();
-        ataqueIv = rand.ints(IV_INICIO, IV_FIN).findFirst().getAsInt();
-        velocidadIv = rand.ints(IV_INICIO, IV_FIN).findFirst().getAsInt();
+    public void eliminarElefecto(Estados estado) throws ListaEnlazadaException {
+        int index = estadosAlterados.obtenerIndex(estado);
+        if (index != -1) {
+            estadosAlterados.eliminar(index);
+        }
+    }
 
+    public void restauradorArtibutos() {
+        vidaPokemon = vidaInicial;
+        defensaPokemon = defensaInicial;
+        velocidadPokemon = velocidadInicial;
+        ataquePokemon = ataqueInicial;
     }
 
     public boolean bolqueador() {
@@ -59,6 +66,16 @@ public class Pokemons {
             return rand.nextDouble() > 0.7;
         }
         return false;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+        int xpSubirDeNivel = (nivel + 1) ^ 2;
+        if (xpSubirDeNivel < xp || xpSubirDeNivel == xp) {
+            nivel++;
+            setNivel(nivel);
+            System.out.println("pokemon " + apodo + "subio de nivel a nivel " + nivel);
+        }
     }
 
     public void setActivoBloqueo(boolean activoBloqueo) {
@@ -83,14 +100,26 @@ public class Pokemons {
 
     public void setAtaqueInicial(int ataqueInicial) {
         this.ataqueInicial = ataqueInicial;
+        ataqueBase = ataqueInicial;
     }
 
-    public void setAtaquePokemon(int ataquePokemon) {
-        this.ataquePokemon = ataquePokemon;
+    public void setVelocidadInicial(int velocidadInicial) {
+        this.velocidadInicial = velocidadInicial;
+        velocidadBase = velocidadInicial;
+    }
+
+    public void setVidaInicial(int vidaInicial) {
+        this.vidaInicial = vidaInicial;
+        vidaBase = vidaInicial;
     }
 
     public void setDefensaInicial(int defensaInicial) {
         this.defensaInicial = defensaInicial;
+        defensaBase = defensaInicial;
+    }
+
+    public void setAtaquePokemon(int ataquePokemon) {
+        this.ataquePokemon = ataquePokemon;
     }
 
     public void setDefensaPokemon(int defensaPokemon) {
@@ -98,27 +127,25 @@ public class Pokemons {
     }
 
     public void setNivel(int nivel) {
+        if (nivel == 1) {
+            restauradorArtibutos();
+        } else {
 
-        vidaInicial = (int) ((((vidaInicial * vidaIv) * 2 + ((raizCuadrada(xpVida) / 4) * nivel)) / 100) + nivel + 10);
-        defensaInicial = (int) ((((defensaInicial * defensaIv) * 2 + ((raizCuadrada(xpDefensa) / 4) * nivel)) / 100)
-                + 5);
-        ataqueInicial = (int) ((((ataqueInicial * ataqueIv) * 2 + ((raizCuadrada(xpAtaque) / 4) * nivel)) / 100) + 5);
-        velocidadInicial = (int) ((((velocidadInicial * velocidadIv) * 2 + ((raizCuadrada(xpVelocidad) / 4) * nivel))
-                / 100) + 5);
+            vidaVariacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
+            defensaVariacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
+            ataqueVariacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
+            velocidadVariacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
 
-        this.nivel = nivel;
-    }
-
-    public void setVelocidadInicial(int velocidadInicial) {
-        this.velocidadInicial = velocidadInicial;
+            vidaInicial = (int) ((((vidaBase * vidaVariacion) * 2 * nivel) / 100) + nivel + 10);
+            defensaInicial = (int) (((((defensaBase * defensaVariacion) * 2 * nivel)) / 100) + 5);
+            ataqueInicial = (int) (((((ataqueBase * ataqueVariacion) * 2 * nivel)) / 100) + 5);
+            velocidadInicial = (int) (((((velocidadBase * velocidadVariacion) * 2 * nivel)) / 100) + 5);
+            this.nivel = nivel;
+        }
     }
 
     public void setVelocidadPokemon(int velocidadPokemon) {
         this.velocidadPokemon = velocidadPokemon;
-    }
-
-    public void setVidaInicial(int vidaInicial) {
-        this.vidaInicial = vidaInicial;
     }
 
     public void setVidaPokemon(int vidaPokemon) {
@@ -130,12 +157,15 @@ public class Pokemons {
     }
 
     public void setApodo(String apodo) {
-
         this.apodo = apodo;
     }
 
     public void setMovimientos(Movimiento[] movimientosPokemon) {
+
         movimientosPokemonLocal = movimientosPokemon;
+        for (Movimiento movimiento : movimientosPokemon) {
+            movimiento.setPokemonUsuario(this);
+        }
     }
 
     public void setId(int id) {
@@ -198,29 +228,7 @@ public class Pokemons {
         return prioritario;
     }
 
-    private double raizCuadrada(double numero) {
-        if (numero < 0) {
-            return 0;
-        }
-        if (numero == 0 || numero == 1) {
-            return numero;
-        }
-
-        double estimacion = numero;
-        double precision = 0.00001;
-        double diferencia = 1;
-
-        while (diferencia > precision) {
-            double siguienteEstimacion = 0.5 * (estimacion + (numero / estimacion));
-
-            diferencia = estimacion - siguienteEstimacion;
-            if (diferencia < 0) {
-                diferencia = -diferencia;
-            }
-
-            estimacion = siguienteEstimacion;
-        }
-
-        return estimacion;
+    public int getXp() {
+        return xp;
     }
 }

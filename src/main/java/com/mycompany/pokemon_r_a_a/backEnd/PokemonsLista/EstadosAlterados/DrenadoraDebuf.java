@@ -16,7 +16,7 @@ public class DrenadoraDebuf extends Estados {
         int vida = lanzador.getVidaPokemon();
         int vidaResividor = resividor.getVidaPokemon();
 
-        if (vida < 0 && vidaResividor < 0) {
+        if (vida > 0 && vidaResividor > 0) {
             int vidaResividorTotal = resividor.getVidaInicial();
             int sumador = (int) (vidaResividorTotal * 0.07);
             lanzador.setVidaPokemon(vida += sumador);

@@ -34,9 +34,9 @@ public abstract class Movimiento {
     }
 
     public void ataque(){
-       
+       resultadoAcion(false);
     }
-    protected abstract int resultadoAcion();
+    protected abstract int resultadoAcion(Boolean recursivo);
 
     protected abstract void estadosAlterados();
 

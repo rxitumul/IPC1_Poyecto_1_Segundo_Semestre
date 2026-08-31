@@ -2,8 +2,6 @@ package com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas;
 
 import java.util.Random;
 
-import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
-
 public class CreadorMapas {
     private static final int TAMANO_MAPA_POKEMON_FIN = 25;
     private static final int TAMANO_MAPA_POKEMON_INICIO = 0;
@@ -97,8 +95,9 @@ public class CreadorMapas {
     }
 
     private int[][] grupoDehiervaAlta(int[][] mapaPokemonM, int startX, int startY) {
-        int originX = Math.min(startX, TAMANO_MAPA_POKEMON_FIN - 5);
-        int originY = Math.min(startY, TAMANO_MAPA_POKEMON_FIN - 5);
+        int maxLim = TAMANO_MAPA_POKEMON_FIN - 5;
+        int originX = (startX < maxLim) ? startX : maxLim;
+        int originY = (startY < maxLim) ? startY : maxLim;
         if (originX < 0)
             originX = 0;
         if (originY < 0)

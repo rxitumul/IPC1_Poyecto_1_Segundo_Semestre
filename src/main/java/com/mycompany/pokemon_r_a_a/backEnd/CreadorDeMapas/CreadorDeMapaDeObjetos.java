@@ -7,6 +7,11 @@ import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.CentroPo
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.GimnasioPokemon;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.HiervaAlta;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.TiendaPokemon;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.CasillaDeEntrenador;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.CasillaDeLiderGimnacio;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.NpcDeLaTienda;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.NpcEnfermeria;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.NpcTelevision;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Obstaculos.Agua;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Obstaculos.Arbol;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Obstaculos.Casa;
@@ -46,6 +51,21 @@ public class CreadorDeMapaDeObjetos {
                         break;
                     case 9:
                         mapaO[i][j] = new Casa();
+                        break;case 10:
+                        mapaO[i][j] = new CasillaDeEntrenador();
+
+                        break;case 11:
+                        mapaO[i][j] = new CasillaDeLiderGimnacio();
+
+                        break;case 12:
+                        mapaO[i][j] = new NpcDeLaTienda();
+
+                        break;case 13:
+                        mapaO[i][j] = new NpcEnfermeria();
+
+                        break;case 14:
+                        mapaO[i][j] = new NpcTelevision();
+ 
                         break;
                     default:
                         mapaO[i][j] = new Espacio();

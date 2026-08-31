@@ -4,21 +4,11 @@ import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Mochila;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
-import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimiento;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 
 public class ImpresorDeSelecion extends ImpresoresGlobal {
 
-    public <T> void impresorDelistas(String nombreDeLista, T[] listaAImprimir) {
-        System.out.println(nombreDeLista);
-        for (int i = 0; i < listaAImprimir.length; i++) {
-            separadorInicioMapa();
-            if (listaAImprimir[i] instanceof MapaCiudad mapa) {
-                System.out.println(formatearMapa(i + 1 + ") " + mapa.getNombre()));
-            }
-            separadorFinalMapa();
-        }
-    }
+
 
     public void impresorDeEstadoJugador(JugadorPokemonPartida jugador, MapaCiudad[] mapas) {
         separadorInicioMapa();
@@ -73,37 +63,6 @@ public class ImpresorDeSelecion extends ImpresoresGlobal {
         separadorFinalMapa();
     }
 
-    public void impresorDePokemon(Pokemons[] pokemon, int numero) {
-        Movimiento[] movimientoPokemon = pokemon[numero].getMovimientos();
-
-        separadorInicioMapa();
-        System.out.println(formatearMapaCentrado(pokemon[numero].getNombre()));
-        separadorMediosMapa();
-        System.out.println(formatearMapaCentrado("Estadisticas "));
-        separadorMediosMapa();
-        System.out.println(formatearMapaCentrado(
-                "Vida inicial: " + pokemon[numero].getVidaInicial() + "  Defensa Inicial: " + pokemon[numero].getDefensaInicial()));
-        System.out.println(formatearMapaCentrado("Ataque inicial: " + pokemon[numero].getAtaqueInicial()
-                + "  Velocidad Inicial: " + pokemon[numero].getVelocidadInicial()));
-        separadorMediosMapa();
-        System.out.println(formatearMapaCentrado("Movimientos "));
-        separadorMediosMapa();
-        if (movimientoPokemon.length == 2) {
-            System.out.println(
-                    formatearMapaCentrado(movimientoPokemon[0].getNombre() + "  " + movimientoPokemon[1].getNombre()));
-        } else if (movimientoPokemon.length == 1) {
-            System.out.println(
-                    formatearMapaCentrado(movimientoPokemon[0].getNombre()));
-        } else {
-            System.out.println(
-                    formatearMapaCentrado(movimientoPokemon[0].getNombre() + "  " + movimientoPokemon[1].getNombre()
-                            + "  " + movimientoPokemon[2].getNombre()));
-        }
-        separadorFinalMapa();
-        separadorInicioMapa();
-        System.out.println(formatearMapa("Presione enter para regresar al menu de pokemons"));
-        separadorFinalMapa();
-    }
 
     public void impresorDeNombre(String nombre) {
         separadorInicioMapa();

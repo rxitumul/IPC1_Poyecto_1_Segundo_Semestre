@@ -3,11 +3,11 @@ package com.mycompany.pokemon_r_a_a.backEnd.Inicio;
 import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.EstadoPokemonEquipo;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Mapas;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Mochila;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Pokedex;
-import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeMapas;
@@ -17,22 +17,22 @@ public class Game {
     private Scanner scanner;
     private MovimientoJugador movimiento = new MovimientoJugador();
     private Pokedex pokedexLocal;
-    private Pokemons[] equiposLocal;
     private JugadorPokemonPartida jugadorLocal;
     private Mochila mochilaLocal;
     private ImpresorDeMapas impresor = new ImpresorDeMapas();
+    private EstadoPokemonEquipo equipoEstado;
 
     private int[] jugadorPosicion;
     private MapaCiudad[] mapaCiudadesLocal;
 
-    public Game(Scanner scanner, MapaCiudad[] mapaCiudades, Pokedex pokedex, Pokemons[] equipos,
-            JugadorPokemonPartida jugador, Mochila mochila) {
+    public Game(Scanner scanner, MapaCiudad[] mapaCiudades,
+            JugadorPokemonPartida jugador) {
         this.scanner = scanner;
-        pokedexLocal = pokedex;
-        equiposLocal = equipos;
+        pokedexLocal = jugador.getPokedexJugador();
         jugadorLocal = jugador;
-        mochilaLocal = mochila;
+        mochilaLocal = jugador.getMochilaJugador();
         mapaCiudadesLocal = mapaCiudades;
+        equipoEstado = new EstadoPokemonEquipo(scanner, jugadorLocal);
 
     }
 
@@ -48,7 +48,7 @@ public class Game {
             movi = scanner.nextLine();
             if (movi.equalsIgnoreCase("W") || movi.equalsIgnoreCase("S") || movi.equalsIgnoreCase("A")
                     || movi.equalsIgnoreCase("D")) {
-                mapaLocal = movimiento.movimiento(jugadorPosicion, mapaLocal, movi);
+                mapaLocal = movimiento.movimiento(jugadorPosicion, mapaLocal, movi, jugadorLocal);
                 jugadorPosicion = movimiento.getSpawn();
 
             } else if (movi.equalsIgnoreCase("M")) {
@@ -61,7 +61,8 @@ public class Game {
                 jugadorPosicion = mapa.getJugador();
 
             } else if (movi.equalsIgnoreCase("P")) {
-                System.out.println("Pokemons");
+                equipoEstado.menuInicial();
+
             } else if (movi.equalsIgnoreCase("T")) {
                 pokedexLocal.pokedexMenu();
             } else if (movi.equalsIgnoreCase("X")) {

@@ -33,6 +33,8 @@ public class InicioGame {
             switch (opcion) {
                 case 1:
                     // profe.charlaInicial();
+                    jugador.setPokemosEquipo(equipos);
+                    jugador.setMochilaJugador(mochila);
                     profe.regaloProfesor(jugador);
                     pokedexLista = datos.creadorPokedesData();
                     Pokedex pokedex = new Pokedex(pokedexLista, scanner);
@@ -40,7 +42,8 @@ public class InicioGame {
                     for (int i = 0; i < mapas.length; i++) {
                         mapas[i] = creador.mapaCreador(mapas);
                     }
-                    Game game = new Game(scanner, mapas, pokedex, equipos, jugador, mochila);
+                    jugador.setPokedexJugador(pokedex);
+                    Game game = new Game(scanner, mapas, jugador);
                     game.gameInicio(0);
                     break;
                 case 2:

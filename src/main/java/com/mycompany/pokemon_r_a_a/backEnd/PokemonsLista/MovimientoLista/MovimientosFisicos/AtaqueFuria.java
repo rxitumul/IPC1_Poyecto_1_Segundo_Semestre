@@ -10,16 +10,16 @@ public class AtaqueFuria extends Fisico {
 
     @Override
     protected void estadosAlterados() {
-        int repeticiones = rand.ints(2, 5).findFirst().getAsInt();
+        int repeticiones = rand.ints(2, 6).findFirst().getAsInt();
 
-        System.out.println(confi.formatearMapa("El pokemon pocoteado a el pokemon" + pokemonAtacado.getApodo()
-                + " un total de " + repeticiones + " veces"));
-        int vidaPokemon = pokemonAtacado.getVidaPokemon();
+        System.out.println(confi.formatearMapa("¡" + pokemonUsuario.getNombre() + " atacó en ráfaga un total de "
+                + repeticiones + " veces!"));
         for (int i = 0; i < repeticiones - 1; i++) {
-            int daño = resultadoAcion();
-            vidaPokemon -= daño;
+            if (pokemonAtacado.getVidaPokemon() <= 0) {
+                break;
+            }
+            resultadoAcion(true);
         }
-        pokemonAtacado.setVidaPokemon(vidaPokemon);
         confi.separadorFinalMapa();
     }
 }

@@ -97,9 +97,9 @@ public class InicioProfesorOak extends ImpresoresGlobal {
 
     }
 
-    public void nombreDelPokemon() {
+    public void nombreDelPokemon(String apodo) {
         separadorInicio();
-        System.out.println(formatear("El nombre del pokemon es" + nombrePokemonLocal));
+        System.out.println(formatear("El apodo del pokemon es" + apodo));
         separadorFinal();
     }
 

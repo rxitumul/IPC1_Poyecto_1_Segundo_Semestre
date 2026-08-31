@@ -20,9 +20,20 @@ public class ProfesorCharla {
         this.scanner = scanner;
     }
 
-    
-    public void regaloProfesor(JugadorPokemonPartida jugador){
+    public void regaloProfesor(JugadorPokemonPartida jugador) {
         jugador.setNombre(profesor.getNombreLocal());
+        Pokemons[] pokemonEquipo = jugador.getPokemosEquipo();
+        
+        pokemonInicial = pokemonCreador.pokemonIniciales(2);
+        pokemonInicial.setApodo(pokemonInicial.getNombre());
+        pokemonEquipo[1] = pokemonInicial;
+        pokemonInicial = pokemonCreador.pokemonIniciales(1);
+        pokemonInicial.setApodo(pokemonInicial.getNombre());
+        pokemonEquipo[2] = pokemonInicial;
+        pokemonInicial = pokemonCreador.pokemonIniciales(3);
+        pokemonInicial.setApodo(pokemonInicial.getNombre());
+
+        pokemonEquipo[0] = pokemonInicial;
     }
 
     public void charlaInicial() {
@@ -72,10 +83,12 @@ public class ProfesorCharla {
         if (scanner.nextLine().equalsIgnoreCase("s")) {
             profesor.nombreAEleguir();
             String nombrePokemon = scanner.nextLine();
-            pokemonInicial.setNombre(nombrePokemon);
+            pokemonInicial.setApodo(nombrePokemon);
             profesor.setPokemonSelecionado(nombrePokemon);
+        } else {
+            pokemonInicial.setApodo(pokemonInicial.getNombre());
         }
-        profesor.nombreDelPokemon();
+        profesor.nombreDelPokemon(pokemonInicial.getApodo());
         contadorMensajes = 0;
         while (contadorMensajes != 13) {
             profesor.mensajeProfesorFinal(contadorMensajes);

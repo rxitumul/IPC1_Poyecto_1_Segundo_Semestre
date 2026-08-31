@@ -37,36 +37,37 @@ public class DatosPokemon {
 
     private Random random = new Random();
 
-    private final String[] nombrePokemon = { "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard",
+    private final String[] nombrePokemon = { "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon",
+            "Charizard",
             "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill",
             "Pidgey", "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu" };
 
-    private final Movimiento[][] movimientosPokemon = { 
+    private final Movimiento[][] movimientosPokemon = {
             { new Placaje(), new Grunido(), new HojaAfilada() },
             { new Descanso(), new Drenadoras(), new HojaAfilada() },
-            { new Drenadoras(), new HojaAfilada(), new RayoSolar() }, 
+            { new Drenadoras(), new HojaAfilada(), new RayoSolar() },
             { new Placaje(), new Grunido(), new GiroFuego() },
             { new DobleFilo(), new GiroFuego(), new Lanzallamas() },
             { new GorroFuego(), new Lanzallamas(), new AnilloIgneo() },
-            { new Placaje(), new Latigo(), new RayoBurbuja() }, 
+            { new Placaje(), new Latigo(), new RayoBurbuja() },
             { new Mordisco(), new Proteccion(), new RayoBurbuja() },
-            { new Mordisco(), new RayoBurbuja(), new Hidrocanon() }, 
+            { new Mordisco(), new RayoBurbuja(), new Hidrocanon() },
             { new Placaje(), new DisparoDemora() },
-            { new Fortaleza() }, 
-            { new DisparoDemora(), new Fortaleza(), new Supersonico() },
-            { new PicotazoVenenoso(), new DisparoDemora() }, 
             { new Fortaleza() },
-            { new AtaqueFuria(), new Fortaleza(), new Picotazo() }, 
+            { new DisparoDemora(), new Fortaleza(), new Supersonico() },
+            { new PicotazoVenenoso(), new DisparoDemora() },
+            { new Fortaleza() },
+            { new AtaqueFuria(), new Fortaleza(), new Picotazo() },
             { new Placaje(), new Grunido() },
-            { new Placaje(), new Grunido(), new AtaqueAla() }, 
+            { new Placaje(), new Grunido(), new AtaqueAla() },
             { new Vuelo(), new AtaqueAla(), new DobleFilo() },
-            { new Placaje(), new AtaqueRápido(), new Latigo() }, 
+            { new Placaje(), new AtaqueRápido(), new Latigo() },
             { new Mordisco(), new Descanso() },
-            { new Placaje(), new Grunido(), new AtaqueFuria() }, 
+            { new Placaje(), new Grunido(), new AtaqueFuria() },
             { new AtaqueAla(), new Picotazo(), new DobleFilo() },
-            { new Placaje(), new PicotazoVenenoso(), new Mordisco() }, 
+            { new Placaje(), new PicotazoVenenoso(), new Mordisco() },
             { new PicotazoVenenoso(), new Mordisco() },
-            { new Impactrueno(), new Atactrueno(), new Rayo() } 
+            { new Impactrueno(), new Atactrueno(), new Rayo() }
     };
 
     private final int[] saludPokemon = {
@@ -117,7 +118,7 @@ public class DatosPokemon {
             60
     };
 
-    public Pokemons pokemonRandom(int totalNiveles,int cantidadDePokemones) {
+    public Pokemons pokemonRandom(int totalNiveles, int cantidadDePokemones) {
         Pokemons pokemon = new Pokemons();
         int numeroSeleccionado = random.nextInt(nombrePokemon.length);
         pokemon.setNombre(nombrePokemon[numeroSeleccionado]);
@@ -126,7 +127,8 @@ public class DatosPokemon {
         pokemon.setAtaqueInicial(ataquePokemon[numeroSeleccionado]);
         pokemon.setDefensaInicial(defensaPokemon[numeroSeleccionado]);
         pokemon.setVelocidadInicial(velocidadPokemon[numeroSeleccionado]);
-        pokemon.setNivel((int)((totalNiveles*0.4)/cantidadDePokemones));
+        pokemon.setNivel((int) ((totalNiveles * 0.4) / cantidadDePokemones));
+        pokemon.restauradorArtibutos();
         return pokemon;
     }
 
@@ -150,6 +152,8 @@ public class DatosPokemon {
         pokemon.setAtaqueInicial(ataquePokemon[indice]);
         pokemon.setDefensaInicial(defensaPokemon[indice]);
         pokemon.setVelocidadInicial(velocidadPokemon[indice]);
+        pokemon.setNivel(0);
+        pokemon.restauradorArtibutos();
         return pokemon;
     }
 
@@ -163,6 +167,8 @@ public class DatosPokemon {
             pokedex[i].setDefensaInicial(defensaPokemon[i]);
             pokedex[i].setVelocidadInicial(velocidadPokemon[i]);
             pokedex[i].setMovimientos(movimientosPokemon[i]);
+            pokedex[i].restauradorArtibutos();
+
         }
         return pokedex;
     }

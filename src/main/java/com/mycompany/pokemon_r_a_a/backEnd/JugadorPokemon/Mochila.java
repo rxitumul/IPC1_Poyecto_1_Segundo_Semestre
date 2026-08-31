@@ -2,17 +2,71 @@ package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon;
 
 import java.util.Scanner;
 
+import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.ListaEnlazadaException;
+import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
+import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Envenenado;
+import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Paralizado;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
 
 public class Mochila {
     private ImpresorDeSelecion impresorDeSelecion = new ImpresorDeSelecion();
     private Scanner scanner;
+
     private int pokebola;
     private int pocion;
     private int superPocion;
     private int antidoto;
     private int antiParalisis;
     private int restauraTodo;
+
+    public void aplicacionObjetos(Pokemons aplicacion, int tipo) {
+        Envenenado envenenado = new Envenenado(null);
+        Paralizado paralizado = new Paralizado();
+        switch (tipo) {
+            case 1:
+                if (antiParalisis > 0) {
+                    try {
+                        aplicacion.eliminarElefecto(paralizado);
+                        antiParalisis--;
+                        impresorDeSelecion.mensajeInformativo("¡Parálisis curada!");
+                    } catch (ListaEnlazadaException e) {
+                        impresorDeSelecion.pantallaDeError();
+                    }
+                }
+                break;
+            case 2:
+                if (antidoto > 0) {
+                    try {
+                        aplicacion.eliminarElefecto(envenenado);
+                        antidoto--;
+                        impresorDeSelecion.mensajeInformativo("¡Veneno curado!");
+                    } catch (ListaEnlazadaException e) {
+                        impresorDeSelecion.pantallaDeError();
+                    }
+                }
+                break;
+            case 3:
+                if (pocion > 0) {
+                    restaurarVidaPociones(aplicacion, 20);
+                    pocion--;
+                }
+                break;
+            case 5:
+                if (restauraTodo > 0) {
+                    aplicacion.lipiarEstadosTodos();
+                    aplicacion.restauradorArtibutos();
+                    restauraTodo--;
+                    impresorDeSelecion.mensajeInformativo("¡Pokémon completamente restaurado!");
+                }
+                break;
+            case 6:
+                if (superPocion > 0) {
+                    restaurarVidaPociones(aplicacion, 50);
+                    superPocion--;
+                }
+                break;
+        }
+    }
 
     public Mochila(Scanner scanner) {
         this.scanner = scanner;
@@ -22,6 +76,18 @@ public class Mochila {
         superPocion = 0;
         pocion = 1;
         pokebola = 5;
+    }
+
+    private void restaurarVidaPociones(Pokemons aplicacion, int curacion) {
+        int vida = aplicacion.getVidaPokemon();
+        int vidaMaxima = aplicacion.getVidaInicial();
+        vida += curacion;
+        if (vida > vidaMaxima) {
+            aplicacion.setVidaPokemon(vidaMaxima);
+        } else {
+            aplicacion.setVidaPokemon(vida);
+        }
+        impresorDeSelecion.mensajeInformativo("¡Salud restaurada! HP: " + aplicacion.getVidaPokemon() + "/" + vidaMaxima);
     }
 
     public int getAntiParalisis() {
@@ -77,7 +143,9 @@ public class Mochila {
             try {
                 impresorDeSelecion.impresorMochila(this);
                 int selecion = Integer.parseInt(scanner.nextLine());
-                System.out.println(selecion);
+                if (selecion == 0) {
+                    break;
+                }
             } catch (NumberFormatException e) {
                 break;
             }

@@ -1,5 +1,6 @@
 package com.mycompany.pokemon_r_a_a.backEnd.movimiento;
 
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Jugador;
 import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
@@ -14,7 +15,11 @@ public class AccionDeMovimiento {
         casillaAnteriorLocal = casillaAnterior;
     }
 
-    public Casillas[][] movEstado(Casillas[][] mapa, int y, int x, boolean posicionXOY) {
+    public Casillas getCasillaAnterior() {
+        return casillaAnteriorLocal;
+    }
+
+    public Casillas[][] movEstado(Casillas[][] mapa, int y, int x, boolean posicionXOY, JugadorPokemonPartida jugador) {
         Casillas casilla = mapa[y][x];
         switch (casilla.tipoCasilla()) {
             case 0:
@@ -38,6 +43,7 @@ public class AccionDeMovimiento {
                 casilla.subMenu();
                 mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
                 casillaAnteriorLocal = casilla;
+                mapa[y][x].accionCasilla(jugador);
                 mapa[y][x] = new Jugador();
                 if (posicionXOY) {
                     spawnLocal[1] = x;

@@ -86,15 +86,20 @@ public class Listas<T> {
 
     }
 
-    public boolean contiene(T contenido) {
+    public int obtenerIndex(T contenido) {
         Nodo<T> actual = inicio;
+        int contador=0;
+        if(contenido==null){
+            return-1;
+        }
         while (actual != null) {
-            if (actual.getContenido() != null && actual.getContenido().equals(contenido)) {
-                return true;
+            if (actual.getContenido() != null && actual.getContenido().getClass()==contenido.getClass()) {
+                return contador;
             }
+            contador++;
             actual = actual.getSiguiente();
         }
-        return false;
+        return -1;
     }
 
     public void limpiar() {
