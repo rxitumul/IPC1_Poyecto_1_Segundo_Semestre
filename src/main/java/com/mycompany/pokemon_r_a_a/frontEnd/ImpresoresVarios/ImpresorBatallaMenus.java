@@ -96,7 +96,7 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
         System.out.println(formatearMapaCentrado("5) RestauraTodo x" + mochila.getRestauraTodo()
                 + "          6) SuperPocion x" + mochila.getSuperPocion()));
         separadorMediosMapa();
-        System.out.println(formatearCentrado("0) Volver"));
+        System.out.println(formatearMapaCentrado("0) Volver"));
         separadorFinalMapa();
     }
 

@@ -1,9 +1,16 @@
-package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas;
+package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Interacion;
 
+import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 
-public class Espacio extends Casillas {
+public abstract class InteracionCasillas<T> extends Casillas <T>  {
 
-    @Override
+  public InteracionCasillas(HallDeLaFama hall) {
+        super(hall);
+        //TODO Auto-generated constructor stub
+    }
+
+  @Override
     public void imprimir() {
         System.out.print("   ");
     }
@@ -14,11 +21,6 @@ public class Espacio extends Casillas {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public int tipoCasilla() {
-        return 6;
     }
 
     @Override
@@ -34,5 +36,6 @@ public class Espacio extends Casillas {
     public boolean getEstadoDeGruppo() {
         return false;
     }
+
 
 }

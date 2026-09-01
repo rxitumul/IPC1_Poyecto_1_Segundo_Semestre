@@ -1,8 +1,8 @@
 package com.mycompany.pokemon_r_a_a.backEnd.movimiento;
 
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
-import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Jugador;
 import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
 
 public class AccionDeMovimiento {
@@ -44,7 +44,7 @@ public class AccionDeMovimiento {
                 mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
                 casillaAnteriorLocal = casilla;
                 mapa[y][x].accionCasilla(jugador);
-                mapa[y][x] = new Jugador();
+                mapa[y][x] = new CasillaGenerica(Casillas.AMARILLO + " ☻ " + Casillas.RESET, true, 4, false, null);
                 if (posicionXOY) {
                     spawnLocal[1] = x;
                 } else {
@@ -67,10 +67,14 @@ public class AccionDeMovimiento {
                 // Casa
                 mensaje.mensajeInformativo("No puedes pasar, hay una casa.");
                 break;
+            case 18:
+                mensaje.mensajeInformativo("Mirando la Televisión...");
+                casilla.subMenu();
+                break;
             default:
                 mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
                 casillaAnteriorLocal = casilla;
-                mapa[y][x] = new Jugador();
+                mapa[y][x] = new CasillaGenerica(Casillas.AMARILLO + " ☻ " + Casillas.RESET, true, 4, false, null);
                 if (posicionXOY) {
                     spawnLocal[1] = x;
                 } else {

@@ -40,6 +40,8 @@ public class Pokemons {
     private int xp;
     private boolean prioritario;
 
+    private int enemigosDebilitados = 0;
+
     private Listas<Estados> estadosAlterados = new Listas<Estados>();
     private Listas<Estados> estadosAlteradosPermanete = new Listas<Estados>();
     private Random rand = new Random();
@@ -230,5 +232,13 @@ public class Pokemons {
 
     public int getXp() {
         return xp;
+    }
+
+    public int getEnemigosDebilitados() {
+        return enemigosDebilitados;
+    }
+
+    public void incrementarEnemigosDebilitados() {
+        this.enemigosDebilitados++;
     }
 }

@@ -9,10 +9,12 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Mochila;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Pokedex;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
+import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 
 public class InicioGame {
     private Scanner scanner = new Scanner(System.in);
-    private CreadorMapas creador = new CreadorMapas();
+    private HallDeLaFama hall = new HallDeLaFama();
+    private CreadorMapas creador = new CreadorMapas(hall);
     private ProfesorCharla profe = new ProfesorCharla(scanner);
     private Pokemons[] equipos = new Pokemons[5];
     private JugadorPokemonPartida jugador = new JugadorPokemonPartida(scanner);

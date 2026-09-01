@@ -3,20 +3,25 @@ package com.mycompany.pokemon_r_a_a.backEnd.Batallas;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Entrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Entrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
+import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 
 public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
 
-    public BatallasPokemon(Scanner scaner) {
+    private HallDeLaFama hallDeLaFama;
+
+    public BatallasPokemon(Scanner scaner, HallDeLaFama hallDeLaFama) {
         this.scaner = scaner;
+        this.hallDeLaFama = hallDeLaFama;
     }
 
     Pokemons pokemonJugador;
     Pokemons pokemonRival;
 
     public void pokemonPeleaHierva(JugadorPokemonPartida jugador, Pokemons pokemonSalvaje) {
+        jugador.incrementarBatallasSalvajes();
         Pokemons[] pokemonsJugador = jugador.getPokemosEquipo();
         pokemonRival = pokemonSalvaje;
 
@@ -49,10 +54,10 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
         }
     }
 
-
     public void pokemonsPelea(JugadorPokemonPartida jugador, Entrenador enemigo) {
+        jugador.incrementarBatallasEntrenador();
         Pokemons[] pokemonsJugador = jugador.getPokemosEquipo();
-        Pokemons[] pokemonsEnemigo = enemigo.getPokemosEquipo();
+        Pokemons[] pokemonsEnemigo = enemigo.getLista();
 
         jugadorPokemonIndice = jugador.getPrimerPokemonVivoIndice();
         if (jugadorPokemonIndice == -1) {
@@ -86,7 +91,7 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
                 impresorMenus.pantallaVictoriaEntrenador(enemigo.getNombre(), recompensa);
                 return;
             }
-            if (condicionDeVictoria(jugador, enemigo, pokemonsEnemigo, true)){
+            if (condicionDeVictoria(jugador, enemigo, pokemonsEnemigo, true)) {
                 return;
             }
 
@@ -120,6 +125,7 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
         if (pokemonRival.getVidaPokemon() <= 0 && combateGimnacio) {
             int xpPokemon = ((pokemonRival.getNivel()) ^ 2) / 2;
             pokemonJugador.setXp(pokemonJugador.getXp() + xpPokemon);
+            pokemonJugador.incrementarEnemigosDebilitados(); // MVP Tracker
             impresorMenus.mensajePokemonDebilitado(pokemonRival.getNombre());
             enemigoPokemonIndice = aiEnemigo.seleccionarPokemonCambio(pokemonsEnemigo);
             if (enemigoPokemonIndice == -1) {
@@ -131,6 +137,7 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
         } else if (pokemonRival.getVidaPokemon() <= 0) {
             int xpPokemon = ((pokemonRival.getNivel()) ^ 2) / 2;
             pokemonJugador.setXp(pokemonJugador.getXp() + xpPokemon);
+            pokemonJugador.incrementarEnemigosDebilitados(); // MVP Tracker
             impresorMenus.pantallaVictoriaSalvaje(pokemonRival.getNombre(), pokemonJugador.getNombre(), xpPokemon);
             return true;
 
@@ -155,10 +162,20 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
         pokemonedasGanadas = pokemonedasGanadas + pokemonedasActual;
         jugador.setPokemonedas(pokemonedasGanadas);
         impresorMenus.pantallaVictoriaEntrenador(entrenador.getNombre(), pokemonedasGanadas);
-        if (entrenador.getEsLider()) {
+        if (entrenador.getbBleanoActivo()) {
             int ciudadIndice = entrenador.getCiudad();
             int[] medallas = jugador.getMedallasObtenidas();
-            medallas[ciudadIndice] = 1;
+            if (medallas[ciudadIndice] == 0) {
+                medallas[ciudadIndice] = 1;
+                int contador = 0;
+                for (int m : medallas) {
+                    if (m > 0)
+                        contador++;
+                }
+                if (contador >= 3) {
+                    hallDeLaFama.registrarVictoria(jugador);
+                }
+            }
         }
 
     }

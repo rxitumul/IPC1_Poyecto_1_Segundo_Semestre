@@ -9,24 +9,35 @@ import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.Batallas.BatallasPokemon;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
+import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 
 /**
  *
  * @author ricardocastillo
  */
-public abstract class Casillas {
+public abstract class Casillas<T> {
 
     protected Random random = new Random();
+    protected T dialogo;
     protected JugadorPokemonPartida jugador;
     protected Scanner scanner = new Scanner(System.in);
-    protected BatallasPokemon batalla = new BatallasPokemon(scanner);
+    protected BatallasPokemon batalla;
     protected final static String ROJO = "\u001B[31m";
     protected final static String VERDE = "\u001B[32m";
     protected final static String AMARILLO = "\u001B[33m";
-    protected final static String CAFE = "\u001B[33m";
+
+    protected final static String VERDE_CLARO = "\u001B[38;5;118m";
     protected final static String AZUL = "\u001B[34m";
     protected final static String MAGENTA = "\u001B[35m";
     protected final static String RESET = "\u001B[0m";
+
+    public Casillas() {
+
+    }
+
+    public Casillas(HallDeLaFama hall) {
+        batalla = new BatallasPokemon(scanner, hall);
+    }
 
     public abstract void imprimir();
 
@@ -40,11 +51,15 @@ public abstract class Casillas {
 
     public abstract boolean getEstadoDeGruppo();
 
+    public void setNpc(T dialogo) {
+
+    }
+
     public void setjugador(JugadorPokemonPartida jugador) {
         this.jugador = jugador;
     }
 
-    public <T> T accionCasilla(JugadorPokemonPartida jugador) {
+    public T accionCasilla(JugadorPokemonPartida jugador) {
         return null;
     }
 

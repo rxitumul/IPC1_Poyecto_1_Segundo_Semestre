@@ -47,6 +47,7 @@ public abstract class Fisico extends Movimiento {
                 + "/" + pokemonAtacado.getVidaInicial() + ")"));
 
         if (!recursivo) {
+            confi.separadorInicioMapa();
             estadosAlterados();
         }
         return daño;

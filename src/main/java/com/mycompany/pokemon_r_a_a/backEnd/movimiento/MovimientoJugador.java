@@ -1,12 +1,12 @@
 package com.mycompany.pokemon_r_a_a.backEnd.movimiento;
 
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
-import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Espacio;
 
 public class MovimientoJugador {
     private int[] spawn;
-    private Casillas casillaAnterior = new Espacio();
+    private Casillas casillaAnterior = new CasillaGenerica("   ", true, 6, false, null);
 
     public Casillas[][] movimiento(int[] spawnE, Casillas[][] mapa, String movimiento, JugadorPokemonPartida jugador) {
         spawn = spawnE;

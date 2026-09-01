@@ -2,6 +2,9 @@ package com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas;
 
 import java.util.Random;
 
+import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
+
 public class CreadorMapas {
     private static final int TAMANO_MAPA_POKEMON_FIN = 25;
     private static final int TAMANO_MAPA_POKEMON_INICIO = 0;
@@ -17,17 +20,74 @@ public class CreadorMapas {
     private static final int CASA = 9;
     private static final int ESPACIO = 6;
 
+    private int[][] mapaCentroPokemon = {
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 16, 16, 16, 0, 0, 0, 0 },
+            { 0, 0, 16, 19, 19, 19, 16, 0, 0, 0 },
+            { 0, 0, 16, 13, 13, 19, 16, 0, 0, 0 },
+            { 0, 0, 16, 19, 19, 19, 16, 0, 0, 0 },
+            { 0, 0, 0, 0, 16, 16, 16, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 18 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 18, 14 },
+            { 0, 0, 0, 0, 20, 0, 0, 0, 0, 18 }
+    };
+
+    private int[][] mapaTiendaPokemon = {
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 17, 17, 17, 0, 0, 0, 0 },
+            { 0, 0, 17, 19, 19, 19, 17, 0, 0, 0 },
+            { 0, 0, 17, 19, 12, 19, 17, 0, 0, 0 },
+            { 0, 0, 17, 19, 19, 19, 17, 0, 0, 0 },
+            { 0, 0, 0, 17, 17, 17, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 20, 0, 0, 0, 0, 0 }
+    };
+    private int[][] mapaGimnasio = {
+            { 0, 0, 0, 0, 15, 11, 15, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 15, 10, 15, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 15, 10, 15, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0 },
+            { 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0 }
+    };
+
     private String[] nombres = { "Pallet Town",
             "Viridian City", "Pewter City", "Cerulean City", "Vermilion City", "Saffron City", "Celadon City",
             "Lavender Town", "Fuchsia City", "Cinnabar Island" };
     private int[][] mapa = new int[25][25];
     private int[] jugador;
     private Random rand = new Random();
+    private CreadorDeMapaDeObjetos objetosMapa;
+
+    public CreadorMapas(HallDeLaFama hall) {
+        objetosMapa = new CreadorDeMapaDeObjetos(hall);
+    }
+
+    public Casillas[][] getMapaCentroPokemon() {
+        return objetosMapa.creadorCasillasObjetos(mapaCentroPokemon);
+    }
+
+    public Casillas[][] getMapaGimnasio() {
+        return objetosMapa.creadorCasillasObjetos(mapaGimnasio);
+    }
+
+    public Casillas[][] getMapaTiendaPokemon() {
+        return objetosMapa.creadorCasillasObjetos(mapaTiendaPokemon);
+    }
 
     public MapaCiudad mapaCreador(MapaCiudad[] mapasCreados) {
         jugador = new int[2];
         String nombre = "";
-        CreadorDeMapaDeObjetos objetosMapa = new CreadorDeMapaDeObjetos();
+
         for (int i = 0; i < TAMANO_MAPA_POKEMON_FIN; i++) {
             for (int j = 0; j < TAMANO_MAPA_POKEMON_FIN; j++) {
                 mapa[i][j] = ESPACIO;

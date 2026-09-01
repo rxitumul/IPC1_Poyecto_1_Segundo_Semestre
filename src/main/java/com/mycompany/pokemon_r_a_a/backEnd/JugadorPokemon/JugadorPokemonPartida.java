@@ -20,6 +20,11 @@ public class JugadorPokemonPartida {
     private CapturaPokemon captura = new CapturaPokemon();
     private boolean capturaExitosa;
 
+    private int batallasJugadasSalvajes = 0;
+    private int batallasJugadasEntrenador = 0;
+    private int pokebolasLanzadas = 0;
+    private int pokemonCapturados = 0;
+
     public void acionJugador(int opcion, int pokemonJugando, int selecion, Pokemons enemigo) {
         switch (opcion) {
             case 1:
@@ -37,7 +42,11 @@ public class JugadorPokemonPartida {
                 if (selecion == 4) {
                     int pokembola = mochilaJugador.getPokebola();
                     if (pokembola > 0) {
+                        pokebolasLanzadas++;
                         capturaExitosa = captura.captura(enemigo, this);
+                        if (capturaExitosa) {
+                            pokemonCapturados++;
+                        }
                         mochilaJugador.setPokebola(pokembola - 1);
                     }
                 } else {
@@ -135,6 +144,30 @@ public class JugadorPokemonPartida {
     public void perfil(MapaCiudad[] mapaCiudadesLocal) {
         impresorDeSelecion.impresorDeEstadoJugador(this, mapaCiudadesLocal);
         scanner.nextLine();
+    }
+
+    public int getBatallasJugadasSalvajes() {
+        return batallasJugadasSalvajes;
+    }
+
+    public void incrementarBatallasSalvajes() {
+        this.batallasJugadasSalvajes++;
+    }
+
+    public int getBatallasJugadasEntrenador() {
+        return batallasJugadasEntrenador;
+    }
+
+    public void incrementarBatallasEntrenador() {
+        this.batallasJugadasEntrenador++;
+    }
+
+    public int getPokebolasLanzadas() {
+        return pokebolasLanzadas;
+    }
+
+    public int getPokemonCapturados() {
+        return pokemonCapturados;
     }
 
 }

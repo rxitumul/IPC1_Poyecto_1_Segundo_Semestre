@@ -31,7 +31,7 @@ public class ImpresorDeMapas extends ImpresoresGlobal  {
         separadorMediosMapa();
         System.out.println(formatearMapa("OBJETOS DEL MAPA"));
         separadorMediosMapa();
-        System.out.println(formatearMapa("■ Murro   ✚ Centro Pokémon   G Gimnasio   $ Tienda   ⌂ Casa"));
+        System.out.println(formatearMapa("■ Murro   ⚕ Centro Pokémon   G Gimnasio   $ Tienda   ⌂ Casa"));
         System.out.println(formatearMapa("♣ Hierba  ☻ NPC              ♠ Árbol      ≈ Agua"));
         separadorMediosMapa();
         System.out.println(formatearMapa("Porfavor selecione una opcion"));

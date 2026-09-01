@@ -112,4 +112,7 @@ public class Listas<T> {
         return capacidad;
     }
 
+    public boolean estaVacia(){
+        return inicio==null;
+    }
 }
