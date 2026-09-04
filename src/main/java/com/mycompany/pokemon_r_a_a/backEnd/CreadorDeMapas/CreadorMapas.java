@@ -9,7 +9,7 @@ public class CreadorMapas {
     private static final int TAMANO_MAPA_POKEMON_FIN = 25;
     private static final int TAMANO_MAPA_POKEMON_INICIO = 0;
 
-    private static final int CENTRO_POKEMON = 0;
+    private static final int CENTRO_POKEMON = 6;
     private static final int GIMNACIO_POKEMON = 1;
     private static final int TIENDA_POKEMON = 2;
     private static final int HIERVA_ALTA = 3;
@@ -18,46 +18,69 @@ public class CreadorMapas {
     private static final int ARBOL = 7;
     private static final int AGUA = 8;
     private static final int CASA = 9;
-    private static final int ESPACIO = 6;
+    private static final int ESPACIO = 0;
+    private static final int INTERACION_CON_NPC_DE_ENEMIGO = 15;
+    private static final int INTERACION_CON_NPC_DE_ENFERMERA = 16;
+    private static final int INTERACION_CON_NPC_DE_TELEVICION = 18;
+    private static final int INTERACION_CON_NPC_DE_TIENDA = 17;
+    private static final int SALIDA = 20;
+    private static final int MOSTRADOR = 19;
+
 
     private int[][] mapaCentroPokemon = {
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 16, 16, 16, 0, 0, 0, 0 },
-            { 0, 0, 16, 19, 19, 19, 16, 0, 0, 0 },
-            { 0, 0, 16, 13, 13, 19, 16, 0, 0, 0 },
-            { 0, 0, 16, 19, 19, 19, 16, 0, 0, 0 },
-            { 0, 0, 0, 0, 16, 16, 16, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 18 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 18, 14 },
-            { 0, 0, 0, 0, 20, 0, 0, 0, 0, 18 }
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, INTERACION_CON_NPC_DE_ENFERMERA,INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, MOSTRADOR, MOSTRADOR, MOSTRADOR,INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, MOSTRADOR, 13, MOSTRADOR,INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, MOSTRADOR, MOSTRADOR, MOSTRADOR,INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, INTERACION_CON_NPC_DE_ENFERMERA,INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,INTERACION_CON_NPC_DE_TELEVICION },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SPAWN, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_TELEVICION, 14 },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SALIDA, ESPACIO, ESPACIO, ESPACIO, ESPACIO,INTERACION_CON_NPC_DE_TELEVICION }
     };
 
     private int[][] mapaTiendaPokemon = {
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 17, 17, 17, 0, 0, 0, 0 },
-            { 0, 0, 17, 19, 19, 19, 17, 0, 0, 0 },
-            { 0, 0, 17, 19, 12, 19, 17, 0, 0, 0 },
-            { 0, 0, 17, 19, 19, 19, 17, 0, 0, 0 },
-            { 0, 0, 0, 17, 17, 17, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 20, 0, 0, 0, 0, 0 }
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_TIENDA, INTERACION_CON_NPC_DE_TIENDA,
+                    INTERACION_CON_NPC_DE_TIENDA, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_TIENDA, MOSTRADOR, MOSTRADOR, MOSTRADOR,
+                    INTERACION_CON_NPC_DE_TIENDA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_TIENDA, MOSTRADOR, 12, MOSTRADOR, INTERACION_CON_NPC_DE_TIENDA,
+                    ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_TIENDA, MOSTRADOR, MOSTRADOR, MOSTRADOR,
+                    INTERACION_CON_NPC_DE_TIENDA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_TIENDA, INTERACION_CON_NPC_DE_TIENDA,
+                    INTERACION_CON_NPC_DE_TIENDA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SPAWN, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, 20, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO }
     };
     private int[][] mapaGimnasio = {
-            { 0, 0, 0, 0, 15, 11, 15, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 15, 10, 15, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 15, 10, 15, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0 },
-            { 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0 }
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, 11, INTERACION_CON_NPC_DE_ENEMIGO,
+                    ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, 10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, 10,
+                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, SPAWN, ESPACIO, ESPACIO, ESPACIO,
+                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, SALIDA, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO }
     };
 
     private String[] nombres = { "Pallet Town",

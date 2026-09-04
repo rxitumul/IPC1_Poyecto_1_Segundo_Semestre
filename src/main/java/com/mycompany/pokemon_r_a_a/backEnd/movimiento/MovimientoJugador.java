@@ -7,6 +7,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 public class MovimientoJugador {
     private int[] spawn;
     private Casillas casillaAnterior = new CasillaGenerica("   ", true, 6, false, null);
+    private AccionDeMovimiento acion = new AccionDeMovimiento();
 
     public Casillas[][] movimiento(int[] spawnE, Casillas[][] mapa, String movimiento, JugadorPokemonPartida jugador) {
         spawn = spawnE;
@@ -33,17 +34,17 @@ public class MovimientoJugador {
     private Casillas[][] cambioJugador(Casillas[][] mapa, String mov, int movI, JugadorPokemonPartida jugador) {
         int movimientoX = spawn[1] + movI;
         int movimientoY = spawn[0] + movI;
-        AccionDeMovimiento acion = new AccionDeMovimiento(spawn, casillaAnterior);
-
+        acion.setCasillaAnterior(casillaAnterior);
+        acion.setSpawn(spawn);
         if (mov.equals("x")) {
-            if (movimientoX < 25 && movimientoX > -1) {
+            if (movimientoX < mapa[0].length && movimientoX > -1) {
                 mapa = acion.movEstado(mapa, spawn[0], movimientoX, true, jugador);
                 casillaAnterior = acion.getCasillaAnterior();
             } else {
                 System.out.println("llego al fin del mapa");
             }
         } else {
-            if (movimientoY < 25 && movimientoY > -1) {
+            if (movimientoY < mapa.length && movimientoY > -1) {
                 mapa = acion.movEstado(mapa, movimientoY, spawn[1], false, jugador);
                 casillaAnterior = acion.getCasillaAnterior();
             } else {
@@ -51,6 +52,10 @@ public class MovimientoJugador {
             }
         }
         return mapa;
+    }
+
+    public boolean getCondicionSalida() {
+        return acion.getCondicionSalida();
     }
 
     public int[] getSpawn() {

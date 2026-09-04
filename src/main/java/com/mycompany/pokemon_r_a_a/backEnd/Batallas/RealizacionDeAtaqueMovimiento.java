@@ -61,7 +61,7 @@ public class RealizacionDeAtaqueMovimiento {
         }
     }
 
-    protected void selecionador(int opcion, JugadorPokemonPartida jugador, String nombreEnemigo, Pokemons pokemonRival,
+    protected boolean selecionador(int opcion, JugadorPokemonPartida jugador, String nombreEnemigo, Pokemons pokemonRival,
             Pokemons pokemonJugador, Pokemons[] pokemonsJugador, boolean capturaPokemonhierva) {
         switch (opcion) {
             case 1:
@@ -73,7 +73,7 @@ public class RealizacionDeAtaqueMovimiento {
                 try {
                     movSeleccionado = Integer.parseInt(scaner.nextLine());
                 } catch (NumberFormatException e) {
-                    return;
+                    return false;
                 }
                 if (movSeleccionado == 0) {
                     break;
@@ -93,7 +93,8 @@ public class RealizacionDeAtaqueMovimiento {
                 try {
                     itemSeleccionado = Integer.parseInt(scaner.nextLine());
                 } catch (NumberFormatException e) {
-                    return;
+                    return false;
+
                 }
                 if (itemSeleccionado == 0) {
                     break;
@@ -103,7 +104,7 @@ public class RealizacionDeAtaqueMovimiento {
                         jugador.acionJugador(2, jugadorPokemonIndice, 4, pokemonRival);
                         if (jugador.getCaptura()) {
                             impresorMenus.pantallaCapturaExitosa(pokemonRival.getNombre());
-                            return;
+                            return true;
                         } else {
                             impresorMenus.pantallaCapturaFallida();
                             int movEnemigo = aiEnemigo.selecionadorDeAtaque(pokemonRival.getMovimientos());
@@ -129,7 +130,7 @@ public class RealizacionDeAtaqueMovimiento {
                 try {
                     cambioIndex = Integer.parseInt(scaner.nextLine());
                 } catch (NumberFormatException e) {
-                    return;
+                    return false;
                 }
                 if (cambioIndex >= 0 && cambioIndex < pokemonsJugador.length
                         && pokemonsJugador[cambioIndex] != null) {
@@ -145,14 +146,13 @@ public class RealizacionDeAtaqueMovimiento {
                 }
                 break;
             case 4:
-                if (capturaPokemonhierva) {
-                    impresorMenus.mensajeHuidaExitosa();
-                }
-                return;
+               
+                return capturaPokemonhierva;
 
             default:
-                break;
+                return false;
         }
+        return false;
     }
 
 }

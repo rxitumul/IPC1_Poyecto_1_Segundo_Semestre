@@ -45,7 +45,7 @@ public class HiervaAlta extends Casillas<Pokemons> {
     }
 
     @Override
-    public boolean estadoCasilla(Boolean jugador) {
+    public boolean caminable() {
         return caminable;
     }
 

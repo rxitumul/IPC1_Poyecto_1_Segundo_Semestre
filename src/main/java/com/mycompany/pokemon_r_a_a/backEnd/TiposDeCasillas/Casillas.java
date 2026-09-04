@@ -22,7 +22,7 @@ public abstract class Casillas<T> {
     protected JugadorPokemonPartida jugador;
     protected Scanner scanner = new Scanner(System.in);
     protected BatallasPokemon batalla;
-    
+
     protected String simbolo;
     protected boolean caminable;
     protected int tipo;
@@ -38,7 +38,11 @@ public abstract class Casillas<T> {
 
     public abstract void imprimir();
 
-    public abstract boolean estadoCasilla(Boolean jugador);
+    public boolean estadoCasilla(Boolean jugador) {
+        return true;
+    }
+
+    public abstract boolean caminable();
 
     public abstract int tipoCasilla();
 

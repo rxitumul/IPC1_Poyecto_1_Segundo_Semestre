@@ -6,12 +6,32 @@ public class EnfermeriaNpc extends Npc<Pokemons> {
 
     private Pokemons[] pokemosEquipo;
 
+     @Override
     public void accion() {
         if (boleanoActivo){
             for (Pokemons pokemons : pokemosEquipo) {
                 pokemons.restauradorArtibutos();
                 pokemons.lipiarEstadosTodos();
             }
+        }
+    }
+
+     @Override
+    public String[] getDialojo(int tipo) {
+        // TODO Auto-generated method stub
+        switch (tipo) {
+            case 0:
+                return new String[] {
+                        "¡Hola! Bienvenido al Centro Pokémon.",
+                        "¿Quieres que revise a tus Pokémon?" };
+            case 1:
+                return new String[] {
+                        "¡Perfecto! Dame un momento...",
+                        "¡Listo! Tus Pokémon están completamente recuperados.","¡Cuídalos mucho y buena suerte en tu aventura!" };
+            default:
+                return new String[] {
+                        "Tus Pokémon están en perfecto estado.",
+                        "¡Puedes continuar tu aventura!" };
         }
     }
 

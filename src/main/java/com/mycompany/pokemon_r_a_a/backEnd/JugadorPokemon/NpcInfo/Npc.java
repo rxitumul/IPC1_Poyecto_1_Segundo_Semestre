@@ -5,6 +5,7 @@ public abstract class Npc<T> {
     protected String nombre;
     protected boolean boleanoActivo;
     protected int ciudad;
+    protected String[] dialojo;
 
     public String getNombre() {
         return nombre;
@@ -22,8 +23,9 @@ public abstract class Npc<T> {
         return ciudad;
     }
 
-    public void accion() {
-    }
+    public abstract void accion();
+
+    public abstract String[] getDialojo(int tipo);
 
     public abstract void setBoleanoActivo(boolean boleanoActivo);
 

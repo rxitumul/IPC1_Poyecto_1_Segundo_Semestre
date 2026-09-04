@@ -9,11 +9,17 @@ public class AccionDeMovimiento {
     private MensajesDeInformacion mensaje = new MensajesDeInformacion();
     private int[] spawnLocal;
     private Casillas casillaAnteriorLocal;
-    protected final static String AMARILLO = "\u001B[33m";
+    private boolean salida = false;
+    private final static String AMARILLO_BRILLANTE = "\u001B[93m";
+
+    private final static String MAGENTA = "\u001B[35m";
     protected final static String RESET = "\u001B[0m";
 
-    public AccionDeMovimiento(int[] spawn, Casillas casillaAnterior) {
+    public void setSpawn(int[] spawn) {
         spawnLocal = spawn;
+    }
+
+    public void setCasillaAnterior(Casillas casillaAnterior) {
         casillaAnteriorLocal = casillaAnterior;
     }
 
@@ -23,67 +29,108 @@ public class AccionDeMovimiento {
 
     public Casillas[][] movEstado(Casillas[][] mapa, int y, int x, boolean posicionXOY, JugadorPokemonPartida jugador) {
         Casillas casilla = mapa[y][x];
-        switch (casilla.tipoCasilla()) {
-            case 0:
-                // Centro Pokemon
-                mensaje.mensajeInformativo("Ingresando al Centro Pokémon...");
-                casilla.subMenu();
-                break;
-            case 1:
-                // Gimnasio Pokemon
-                mensaje.mensajeInformativo("Ingresando al Gimnasio Pokémon...");
-                casilla.subMenu();
-                break;
-            case 2:
-                // Tienda Pokemon
-                mensaje.mensajeInformativo("Ingresando a la Tienda Pokémon...");
-                casilla.subMenu();
-                break;
-            case 3:
-                // Hierba Alta
-                mensaje.mensajeInformativo("Caminando por la Hierba Alta...");
-                casilla.subMenu();
-                mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
-                casillaAnteriorLocal = casilla;
-                mapa[y][x].accionCasilla(jugador);
-                mapa[y][x] = new CasillaGenerica(AMARILLO + " > " + RESET, true, 4, false, null);
-                if (posicionXOY) {
-                    spawnLocal[1] = x;
-                } else {
-                    spawnLocal[0] = y;
-                }
-                break;
-            case 5:
-                // Muro
-                mensaje.mensajeInformativo("No puedes pasar, hay un muro.");
-                break;
-            case 7:
-                // Arbol
-                mensaje.mensajeInformativo("No puedes pasar, hay un árbol.");
-                break;
-            case 8:
-                // Agua
-                mensaje.mensajeInformativo("No puedes pasar, hay agua.");
-                break;
-            case 9:
-                // Casa
-                mensaje.mensajeInformativo("No puedes pasar, hay una casa.");
-                break;
-            case 18:
-                mensaje.mensajeInformativo("Mirando la Televisión...");
-                casilla.subMenu();
-                break;
-            default:
-                mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
-                casillaAnteriorLocal = casilla;
-                mapa[y][x] = new CasillaGenerica(AMARILLO + " > " + RESET, true, 4, false, null);
-                if (posicionXOY) {
-                    spawnLocal[1] = x;
-                } else {
-                    spawnLocal[0] = y;
-                }
-                break;
+        if (casilla.caminable()) {
+
+            switch (casilla.tipoCasilla()) {
+                case 3:
+                    // Hierba Alta
+                    mensaje.mensajeInformativo("Caminando por la Hierba Alta...");
+                    casilla.subMenu();
+                    mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
+                    casillaAnteriorLocal = casilla;
+                    mapa[y][x].accionCasilla(jugador);
+                    mapa[y][x] = new CasillaGenerica(AMARILLO_BRILLANTE + " > " + RESET, true, 4, false, null);
+                    if (posicionXOY) {
+                        spawnLocal[1] = x;
+                    } else {
+                        spawnLocal[0] = y;
+                    }
+                    break;
+                case 5:
+                    // Muro
+                    mensaje.mensajeInformativo("No puedes pasar, hay un muro.");
+                    break;
+                case 7:
+                    // Arbol
+                    mensaje.mensajeInformativo("No puedes pasar, hay un árbol.");
+                    break;
+                case 8:
+                    // Agua
+                    mensaje.mensajeInformativo("No puedes pasar, hay agua.");
+                    break;
+                case 9:
+                    // Casa
+                    mensaje.mensajeInformativo("No puedes pasar, hay una casa.");
+                    break;
+                case 18:
+                    mensaje.mensajeInformativo("Mirando la Televisión...");
+                    casilla.subMenu();
+                    break;
+                case 20:
+                    mensaje.mensajeInformativo("Regresando al exterior...");
+                    salida = true;
+                    break;
+
+                default:
+                    mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
+                    casillaAnteriorLocal = casilla;
+                    mapa[y][x] = new CasillaGenerica(MAGENTA + " > " + RESET, true, 4, false, null);
+                    if (posicionXOY) {
+                        spawnLocal[1] = x;
+                    } else {
+                        spawnLocal[0] = y;
+                    }
+                    break;
+            }
+        } else {
+            switch (casilla.tipoCasilla()) {
+                case 6:
+                    // Centro Pokemon
+                    mensaje.mensajeInformativo("Ingresando al Centro Pokémon...");
+                    casilla.setMapa();
+                    casilla.setjugador(jugador);
+                    casilla.subMenu();
+                    break;
+                case 1:
+                    // Gimnasio Pokemon
+                    mensaje.mensajeInformativo("Ingresando al Gimnasio Pokémon...");
+                    casilla.setMapa();
+                    casilla.setjugador(jugador);
+                    casilla.subMenu();
+                    break;
+                case 2:
+                    // Tienda Pokemon
+                    mensaje.mensajeInformativo("Ingresando a la Tienda Pokémon...");
+                    casilla.setMapa();
+                    casilla.setjugador(jugador);
+                    casilla.subMenu();
+                    break;
+                case 5:
+                    // Muro
+                    mensaje.mensajeInformativo("No puedes pasar, hay un muro.");
+                    break;
+                case 7:
+                    // Arbol
+                    mensaje.mensajeInformativo("No puedes pasar, hay un árbol.");
+                    break;
+                case 8:
+                    // Agua
+                    mensaje.mensajeInformativo("No puedes pasar, hay agua.");
+                    break;
+                case 9:
+                    // Casa
+                    mensaje.mensajeInformativo("No puedes pasar, hay una casa.");
+                    break;
+                case 19:
+                    mensaje.mensajeInformativo("No puedes pasar, hay una mostrador.");
+                    break;
+            }
+
         }
         return mapa;
+    }
+
+    public boolean getCondicionSalida() {
+        return salida;
     }
 }

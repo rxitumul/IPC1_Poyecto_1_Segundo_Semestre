@@ -11,6 +11,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
 
     private HallDeLaFama hallDeLaFama;
+    private boolean batallaEnCurso;
 
     public BatallasPokemon(Scanner scaner, HallDeLaFama hallDeLaFama) {
         this.scaner = scaner;
@@ -31,9 +32,9 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
             return;
         }
 
-        boolean batallaEnCurso = true;
+        batallaEnCurso = false;
 
-        while (batallaEnCurso) {
+        while (!batallaEnCurso) {
             pokemonJugador = pokemonsJugador[jugadorPokemonIndice];
 
             if (condicionDeVictoria(jugador, null, pokemonsJugador, false)) {
@@ -50,7 +51,8 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
                 continue;
             }
 
-            selecionador(opcion, jugador, "Pokémon Salvaje", pokemonRival, pokemonJugador, pokemonsJugador, true);
+            batallaEnCurso = selecionador(opcion, jugador, "Pokémon Salvaje", pokemonRival, pokemonJugador,
+                    pokemonsJugador, true);
         }
     }
 

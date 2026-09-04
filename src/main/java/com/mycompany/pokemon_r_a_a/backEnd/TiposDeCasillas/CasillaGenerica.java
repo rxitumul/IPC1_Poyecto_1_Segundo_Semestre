@@ -19,7 +19,7 @@ public class CasillaGenerica extends Casillas {
     }
 
     @Override
-    public boolean estadoCasilla(Boolean jugador) {
+    public boolean caminable() {
         return caminable;
     }
 

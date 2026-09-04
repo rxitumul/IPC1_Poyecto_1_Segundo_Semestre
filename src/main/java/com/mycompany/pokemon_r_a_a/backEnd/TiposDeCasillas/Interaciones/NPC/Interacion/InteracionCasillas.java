@@ -3,16 +3,21 @@ package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Int
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 
-public abstract class InteracionCasillas<T> extends Casillas <T>  {
+public abstract class InteracionCasillas<T> extends Casillas<T> {
 
-  public InteracionCasillas(HallDeLaFama hall) {
+    public InteracionCasillas(HallDeLaFama hall) {
         super(hall);
-        //TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub
     }
 
-  @Override
+    @Override
     public void imprimir() {
         System.out.print("   ");
+    }
+
+    @Override
+    public boolean caminable() {
+        return true;
     }
 
     @Override
@@ -36,6 +41,5 @@ public abstract class InteracionCasillas<T> extends Casillas <T>  {
     public boolean getEstadoDeGruppo() {
         return false;
     }
-
 
 }
