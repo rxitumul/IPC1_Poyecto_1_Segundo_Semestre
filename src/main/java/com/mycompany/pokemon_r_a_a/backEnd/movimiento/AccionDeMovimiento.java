@@ -9,6 +9,8 @@ public class AccionDeMovimiento {
     private MensajesDeInformacion mensaje = new MensajesDeInformacion();
     private int[] spawnLocal;
     private Casillas casillaAnteriorLocal;
+    protected final static String AMARILLO = "\u001B[33m";
+    protected final static String RESET = "\u001B[0m";
 
     public AccionDeMovimiento(int[] spawn, Casillas casillaAnterior) {
         spawnLocal = spawn;
@@ -44,7 +46,7 @@ public class AccionDeMovimiento {
                 mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
                 casillaAnteriorLocal = casilla;
                 mapa[y][x].accionCasilla(jugador);
-                mapa[y][x] = new CasillaGenerica(Casillas.AMARILLO + " ☻ " + Casillas.RESET, true, 4, false, null);
+                mapa[y][x] = new CasillaGenerica(AMARILLO + " > " + RESET, true, 4, false, null);
                 if (posicionXOY) {
                     spawnLocal[1] = x;
                 } else {
@@ -74,7 +76,7 @@ public class AccionDeMovimiento {
             default:
                 mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
                 casillaAnteriorLocal = casilla;
-                mapa[y][x] = new CasillaGenerica(Casillas.AMARILLO + " ☻ " + Casillas.RESET, true, 4, false, null);
+                mapa[y][x] = new CasillaGenerica(AMARILLO + " > " + RESET, true, 4, false, null);
                 if (posicionXOY) {
                     spawnLocal[1] = x;
                 } else {

@@ -2,12 +2,8 @@ package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas;
 
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 
-public class CasillaGenerica extends Casillas<Object> {
+public class CasillaGenerica extends Casillas {
 
-    private String simbolo;
-    private boolean caminable;
-    private int tipo;
-    private boolean tieneSubMenu;
 
     public CasillaGenerica(String simbolo, boolean caminable, int tipo, boolean tieneSubMenu, HallDeLaFama hall) {
         super(hall);

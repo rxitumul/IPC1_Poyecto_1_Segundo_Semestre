@@ -34,7 +34,7 @@ public class InicioGame {
             int opcion = menuPrincipal.menuInicial();
             switch (opcion) {
                 case 1:
-                    // profe.charlaInicial();
+                    //profe.charlaInicial();
                     jugador.setPokemosEquipo(equipos);
                     jugador.setMochilaJugador(mochila);
                     profe.regaloProfesor(jugador);

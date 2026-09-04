@@ -3,6 +3,7 @@ package com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas;
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.HiervaAlta;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Interacion.InteracionEntrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Interacion.InteracionFarmacia;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Interacion.InteracionTienda;
@@ -11,6 +12,16 @@ import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Inte
 public class CreadorDeMapaDeObjetos {
 
     private HallDeLaFama hall;
+    private final static String ROJO = "\u001B[31m";
+    private final static String VERDE = "\u001B[32m";
+    private final static String AMARILLO = "\u001B[33m";
+    private final static String AMARILLO_BRILLANTE = "\u001B[93m";
+
+    private final static String VERDE_CLARO = "\u001B[38;5;118m";
+    private final static String AZUL = "\u001B[34m";
+    private final static String AZUL_BRILLANTE = "\u001B[94m";
+    private final static String MAGENTA = "\u001B[35m";
+    private final static String RESET = "\u001B[0m";
 
     public CreadorDeMapaDeObjetos(HallDeLaFama hall) {
         this.hall = hall;
@@ -31,36 +42,37 @@ public class CreadorDeMapaDeObjetos {
     private Casillas crearCasilla(int tipo) {
         switch (tipo) {
             // ── Edificios del mapa principal ──────────────────────────────
-            case 0:  // Centro Pokémon (acceso desde el mapa)
-                return new CasillaGenerica(Casillas.VERDE_CLARO + " ⚕ " + Casillas.RESET, true, 6, true, hall);
-            case 1:  // Gimnasio
-                return new CasillaGenerica(Casillas.AZUL + " ⊞ " + Casillas.RESET, true, 1, true, hall);
-            case 2:  // Tienda
-                return new CasillaGenerica(Casillas.AMARILLO + " ⊡ " + Casillas.RESET, true, 2, true, hall);
-            case 3:  // Hierva Alta
-                return new CasillaGenerica(Casillas.VERDE + " ≋ " + Casillas.RESET, true, 3, true, hall);
-            case 4:  // Jugador (spawn)
-                return new CasillaGenerica(Casillas.AMARILLO + " ☻ " + Casillas.RESET, true, 4, false, hall);
-            case 5:  // Muro
-                return new CasillaGenerica(Casillas.ROJO + " █ " + Casillas.RESET, false, 5, false, hall);
-            case 7:  // Árbol
-                return new CasillaGenerica(Casillas.VERDE + " ♠ " + Casillas.RESET, false, 7, false, hall);
-            case 8:  // Agua
-                return new CasillaGenerica(Casillas.AZUL + " ≈ " + Casillas.RESET, false, 8, false, hall);
-            case 9:  // Casa
-                return new CasillaGenerica(Casillas.AMARILLO + " ⌂ " + Casillas.RESET, false, 9, false, hall);
+            case 0: // Centro Pokémon (acceso desde el mapa)
+                return new CasillaGenerica(VERDE_CLARO + " ⚕ " + RESET, true, 6, true, hall);
+            case 1: // Gimnasio
+                return new CasillaGenerica(AZUL_BRILLANTE + " ⊞ " +RESET, true, 1, true, hall);
+            case 2: // Tienda
+                return new CasillaGenerica(AMARILLO + " ⊡ " +RESET, true, 2, true, hall);
+            case 3: // Hierva Alta
+                return new HiervaAlta(VERDE + " ≋ " +RESET, true, 3, true, hall);
+
+            case 4: // Jugador (spawn)
+                return new CasillaGenerica(MAGENTA + " > " +RESET, true, 4, false, hall);
+            case 5: // Muro
+                return new CasillaGenerica(ROJO + " █ " +RESET, false, 5, false, hall);
+            case 7: // Árbol
+                return new CasillaGenerica(VERDE + " ♠ " +RESET, false, 7, false, hall);
+            case 8: // Agua
+                return new CasillaGenerica(AZUL + " ≈ " +RESET, false, 8, false, hall);
+            case 9: // Casa
+                return new CasillaGenerica(AMARILLO + " ⌂ " +RESET, false, 9, false, hall);
 
             // ── Casillas de NPC (interiores) ─────────────────────────────
             case 10: // Entrenador (casilla NPC walkable)
-                return new CasillaGenerica(Casillas.AZUL + " ♜ " + Casillas.RESET, true, 10, true, hall);
+                return new CasillaGenerica(AZUL + " ♜ " +RESET, true, 10, true, hall);
             case 11: // Líder de Gimnasio
-                return new CasillaGenerica(Casillas.AZUL + " ♛ " + Casillas.RESET, true, 11, true, hall);
+                return new CasillaGenerica(AZUL + " ♛ " +RESET, true, 11, true, hall);
             case 12: // Empleado Tienda
-                return new CasillaGenerica(Casillas.AZUL + " ♙ " + Casillas.RESET, true, 12, true, hall);
+                return new CasillaGenerica(AZUL + " ♙ " +RESET, true, 12, true, hall);
             case 13: // Enfermera
-                return new CasillaGenerica(Casillas.AZUL + " ♥ " + Casillas.RESET, true, 13, true, hall);
+                return new CasillaGenerica(AZUL + " ♥ " +RESET, true, 13, true, hall);
             case 14: // Televisión (NPC base visual)
-                return new CasillaGenerica(Casillas.AZUL + " ▣ " + Casillas.RESET, true, 14, true, hall);
+                return new CasillaGenerica(AZUL + " ▣ " +RESET, true, 14, true, hall);
 
             // ── Casillas de interacción (con lógica real) ─────────────────
             case 15: // Zona de interacción - Entrenador
@@ -76,7 +88,7 @@ public class CreadorDeMapaDeObjetos {
             case 19: // Mostrador
                 return new CasillaGenerica("   ", false, 19, false, hall);
             case 20: // Salida
-                return new CasillaGenerica(Casillas.ROJO + " ⇩ " + Casillas.RESET, true, 20, true, hall);
+                return new CasillaGenerica(ROJO + " ⇩ " +RESET, true, 20, true, hall);
 
             default:
                 return new CasillaGenerica("   ", true, 6, false, hall);
