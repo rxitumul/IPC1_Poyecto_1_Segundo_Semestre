@@ -11,6 +11,6 @@ public class Lanzallamas extends Fisico {
     @Override
     protected void estadosAlterados() {
         System.out.println(confi.formatearMapa("El pokemon a lanzado una rafaga de fuego"));
-        confi.separadorFinalMapa();
+
     }
 }

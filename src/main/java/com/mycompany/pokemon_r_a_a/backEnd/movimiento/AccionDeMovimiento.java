@@ -62,6 +62,42 @@ public class AccionDeMovimiento {
                     // Casa
                     mensaje.mensajeInformativo("No puedes pasar, hay una casa.");
                     break;
+                case 15:
+                    // Zona de interacción - Entrenador / Líder
+                    casilla.setjugador(jugador);
+                    mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
+                    casillaAnteriorLocal = casilla;
+                    mapa[y][x] = new CasillaGenerica(MAGENTA + " > " + RESET, true, 4, false, null);
+                    if (posicionXOY) {
+                        spawnLocal[1] = x;
+                    } else {
+                        spawnLocal[0] = y;
+                    }
+                    break;
+                case 16:
+                    // Zona de interacción - Farmacia
+                    casilla.setjugador(jugador);
+                    mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
+                    casillaAnteriorLocal = casilla;
+                    mapa[y][x] = new CasillaGenerica(MAGENTA + " > " + RESET, true, 4, false, null);
+                    if (posicionXOY) {
+                        spawnLocal[1] = x;
+                    } else {
+                        spawnLocal[0] = y;
+                    }
+                    break;
+                case 17:
+                    // Zona de interacción - Tienda
+                    casilla.setjugador(jugador);
+                    mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
+                    casillaAnteriorLocal = casilla;
+                    mapa[y][x] = new CasillaGenerica(MAGENTA + " > " + RESET, true, 4, false, null);
+                    if (posicionXOY) {
+                        spawnLocal[1] = x;
+                    } else {
+                        spawnLocal[0] = y;
+                    }
+                    break;
                 case 18:
                     mensaje.mensajeInformativo("Mirando la Televisión...");
                     casilla.subMenu();
@@ -133,4 +169,6 @@ public class AccionDeMovimiento {
     public boolean getCondicionSalida() {
         return salida;
     }
+
+
 }

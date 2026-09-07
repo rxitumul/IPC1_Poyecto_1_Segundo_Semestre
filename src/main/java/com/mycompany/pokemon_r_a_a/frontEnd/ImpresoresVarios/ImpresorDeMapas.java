@@ -36,10 +36,12 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         separadorFinalMapa();
     }
 
-    public void imprimidorDeMapaConInteracionGimnacio(Casillas[][] mapa, String nombre,Entrenador[] entrenadors,Npc LiderDeGimnacio,boolean activoDialogo) {
+    public void imprimidorDeMapaConInteracionGimnacio(Casillas[][] mapa, String nombre, Entrenador[] entrenadors,
+            Npc LiderDeGimnacio, boolean activoDialogo) {
         separadorInicioMapa();
-        System.out.println(formatearMapa("Ciudad " + nombre));
-        separadorMediosMapa();
+        System.out.println(formatearMapa(nombre));
+        separadorFinalMapa();
+        separadorInicialMapaSubMapa();
         for (Casillas[] casillas : mapa) {
             System.out.print(getMarcoVertical());
             for (Casillas casillas2 : casillas) {
@@ -47,7 +49,8 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
             }
             System.out.println(getMarcoVertical());
         }
-        separadorMediosMapa();
+        separadorFinalMapaSubMapa();
+        separadorInicioMapa();
         System.out.println(formatearMapa("OBJETOS DEL MAPA"));
         separadorMediosMapa();
         System.out.println(formatearMapa("♜ Entrenador   ♛ Líder de Gimnasio   ⇩ Salida   "));
@@ -68,15 +71,20 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
                 System.out.println(formatearMapa(linea));
             }
             separadorMediosMapa();
+            System.out.println(
+                    formatearMapaCentrado("si quiere continuar hablando con el entrenador ingrese → C"));
+            separadorMediosMapa();
         }
         System.out.println(formatearMapa("Porfavor selecione una opcion"));
         separadorFinalMapa();
     }
 
-    public void imprimidorDeMapaConInteracionTienda(Casillas[][] mapa, String nombre,Npc vendedor,boolean activoDialogo) {
+    public void imprimidorDeMapaConInteracionTienda(Casillas[][] mapa, String nombre, Npc vendedor,
+            boolean activoDialogo) {
         separadorInicioMapa();
-        System.out.println(formatearMapa("Ciudad " + nombre));
-        separadorMediosMapa();
+        System.out.println(formatearMapa(nombre));
+        separadorFinalMapa();
+        separadorInicialMapaSubMapa();
         for (Casillas[] casillas : mapa) {
             System.out.print(getMarcoVertical());
             for (Casillas casillas2 : casillas) {
@@ -84,7 +92,8 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
             }
             System.out.println(getMarcoVertical());
         }
-        separadorMediosMapa();
+        separadorFinalMapaSubMapa();
+        separadorInicioMapa();
         System.out.println(formatearMapa("OBJETOS DEL MAPA"));
         separadorMediosMapa();
         System.out.println(formatearMapa("♙ Tienda   ⇩ Salida   "));
@@ -104,16 +113,20 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
             for (String linea : dialogo) {
                 System.out.println(formatearMapa(linea));
             }
+            System.out.println(
+                    formatearMapaCentrado("si quiere continuar hablando con el de la tienda  ingrese → C"));
             separadorMediosMapa();
         }
         System.out.println(formatearMapa("Porfavor selecione una opcion"));
         separadorFinalMapa();
     }
-  
-    public void imprimidorDeMapaConInteracioFarmacia(Casillas[][] mapa, String nombre,Npc enfermera,boolean activoDialogo) {
+
+    public void imprimidorDeMapaConInteracioFarmacia(Casillas[][] mapa, String nombre, Npc enfermera,
+            boolean activoDialogo, boolean enfermeraOTelevison) {
         separadorInicioMapa();
-        System.out.println(formatearMapa("Ciudad " + nombre));
-        separadorMediosMapa();
+        System.out.println(formatearMapa(nombre));
+        separadorFinalMapa();
+        separadorInicialMapaSubMapa();
         for (Casillas[] casillas : mapa) {
             System.out.print(getMarcoVertical());
             for (Casillas casillas2 : casillas) {
@@ -121,7 +134,9 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
             }
             System.out.println(getMarcoVertical());
         }
-        separadorMediosMapa();
+        separadorFinalMapaSubMapa();
+        separadorInicioMapa();
+
         System.out.println(formatearMapa("OBJETOS DEL MAPA"));
         separadorMediosMapa();
         System.out.println(formatearMapa("♥ Farmacia   ▣ Television⇩ Salida   "));
@@ -134,13 +149,22 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       F → Perfil"));
         System.out.println(formatearMapa("└───┴───┴───┘"));
         separadorMediosMapa();
-        if (activoDialogo) {
+        if (activoDialogo && enfermeraOTelevison) {
             System.out.println(formatearMapa("DIALOGO"));
             separadorMediosMapa();
             String[] dialogo = enfermera.getDialojo(0);
             for (String linea : dialogo) {
                 System.out.println(formatearMapa(linea));
             }
+            separadorMediosMapa();
+            System.out.println(formatearMapaCentrado("si quiere continuar hablando con la enfermera ingrese → C"));
+            separadorMediosMapa();
+        }
+        if (activoDialogo && !enfermeraOTelevison) {
+            System.out.println(formatearMapa("DIALOGO"));
+            separadorMediosMapa();
+
+            System.out.println(formatearMapaCentrado("Si quieres ver la television ingrese → C"));
             separadorMediosMapa();
         }
         System.out.println(formatearMapa("Porfavor selecione una opcion"));

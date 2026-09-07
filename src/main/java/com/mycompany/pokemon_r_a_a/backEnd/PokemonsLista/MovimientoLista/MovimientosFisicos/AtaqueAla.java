@@ -11,6 +11,6 @@ public class AtaqueAla extends Fisico {
     @Override
     protected void estadosAlterados() {
          System.out.println(confi.formatearMapa("El pokemon a extendido sus alas para golpear al oponete"));
-        confi.separadorFinalMapa();
+
     }
 }

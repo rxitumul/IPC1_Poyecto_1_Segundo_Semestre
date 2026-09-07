@@ -1,5 +1,9 @@
 package com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas;
 
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.EnfermeriaNpc;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Entrenador;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.LiderDeGimnasio;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.TiendaNpc;
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
@@ -29,25 +33,116 @@ public class CreadorDeMapaDeObjetos {
         this.hall = hall;
     }
 
-    public Casillas[][] creadorCasillasObjetos(int[][] mapa) {
+    public Casillas[][] creadorCasillasObjetos(int[][] mapa, String nombreCiudad) {
         int rows = mapa.length;
         int cols = mapa[0].length;
         Casillas[][] mapaO = new Casillas[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                mapaO[i][j] = crearCasilla(mapa[i][j]);
+                mapaO[i][j] = crearCasilla(mapa[i][j],nombreCiudad);
             }
         }
         return mapaO;
     }
 
-    private Casillas crearCasilla(int tipo) {
+    public Casillas[][] creadorCasillasCentroPokemon(int[][] mapa, EnfermeriaNpc enfermera) {
+        Casillas[][] mapeoDeCentroPokemon = creadorCasillasObjetos(mapa,"");
+        for (int i = 0; i < mapeoDeCentroPokemon.length; i++) {
+            for (int j = 0; j < mapeoDeCentroPokemon[0].length; j++) {
+                if (mapeoDeCentroPokemon[i][j] instanceof InteracionFarmacia) {
+                    mapeoDeCentroPokemon[i][j].setNpc(enfermera);
+                }
+            }
+        }
+        return mapeoDeCentroPokemon;
+    }
+
+    public Casillas[][] creadorCasillasTienda(int[][] mapa, TiendaNpc tienda) {
+        Casillas[][] mapeoDeTiendas = creadorCasillasObjetos(mapa,"");
+        for (int i = 0; i < mapeoDeTiendas.length; i++) {
+            for (int j = 0; j < mapeoDeTiendas[0].length; j++) {
+                if (mapeoDeTiendas[i][j] instanceof InteracionTienda) {
+                    mapeoDeTiendas[i][j].setNpc(tienda);
+                }
+            }
+        }
+        return mapeoDeTiendas;
+    }
+
+    public Casillas[][] creadorCasillasGimnasio(int[][] mapa, Entrenador[] entrenadores, String nombreCiudad) {
+        int filas = mapa.length;
+        int columnas = mapa[0].length;
+        Casillas[][] mapaGymCasillas = new Casillas[filas][columnas];
+        Entrenador[][] mapeoDeNpcsGym = new Entrenador[filas][columnas];
+
+        int contadorEntrenadores = 0;
+        Entrenador lider = null;
+
+        if (entrenadores != null) {
+            for (Entrenador liderOEntrenador : entrenadores) {
+                if (liderOEntrenador instanceof LiderDeGimnasio
+                        || (liderOEntrenador != null && liderOEntrenador.getbBleanoActivo())) {
+                    lider = liderOEntrenador;
+                }
+            }
+            if (lider == null && entrenadores.length > 0) {
+                lider = entrenadores[entrenadores.length - 1];
+            }
+        }
+
+        // Primer pase: crear casillas y mapear posición de cada Entrenador (10) y Líder
+        // (11)
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                mapaGymCasillas[i][j] = crearCasilla(mapa[i][j],nombreCiudad);
+                if (mapa[i][j] == 10 && entrenadores != null && contadorEntrenadores < entrenadores.length - 1) {
+                    mapeoDeNpcsGym[i][j] = entrenadores[contadorEntrenadores++];
+                    mapaGymCasillas[i][j].setNpc(mapeoDeNpcsGym[i][j]);
+                } else if (mapa[i][j] == 11) {
+                    mapeoDeNpcsGym[i][j] = lider;
+                    mapaGymCasillas[i][j].setNpc(lider);
+                }
+            }
+        }
+
+        // Segundo pase: conectar casillas de interacción (15) con su Entrenador o Líder
+        // adyacente
+        int[][] casillasAdyasentes = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                if (mapaGymCasillas[i][j] instanceof InteracionEntrenador) {
+                    Entrenador asignado = null;
+                    for (int[] casilla : casillasAdyasentes) {
+                        int fila = i + casilla[0];
+                        int columna = j + casilla[1];
+                        if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas
+                                && mapeoDeNpcsGym[fila][columna] != null) {
+                            asignado = mapeoDeNpcsGym[fila][columna];
+                            break;
+                        }
+                    }
+                    if (asignado == null) {
+                        if (lider != null) {
+                            asignado = lider;
+                        } else if (entrenadores != null && entrenadores.length > 0) {
+                            asignado = entrenadores[0];
+                        }
+                    }
+                    mapaGymCasillas[i][j].setNpc(asignado);
+                }
+            }
+        }
+
+        return mapaGymCasillas;
+    }
+
+    private Casillas crearCasilla(int tipo, String nombreCiudad) {
         switch (tipo) {
             // ── Edificios del mapa principal ──────────────────────────────
             case 6: // Centro Pokémon (acceso desde el mapa)
                 return new Farmacia(VERDE_CLARO + " ⚕ " + RESET, false, 6, false, hall, null);
             case 1: // Gimnasio
-                return new Gimnasio(AZUL_BRILLANTE + " G " + RESET, false, 1, false, hall, null);
+                return new Gimnasio(AZUL_BRILLANTE + " G " + RESET, false, 1, false, hall, null, nombreCiudad);
             case 2: // Tienda
                 return new Tienda(AMARILLO + " $ " + RESET, false, 2, false, hall, null);
             case 3: // Hierva Alta

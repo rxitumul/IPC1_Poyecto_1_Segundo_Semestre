@@ -11,11 +11,14 @@ public class Rayo extends Fisico {
 
     @Override
     protected void estadosAlterados() {
-        System.out.println(confi.formatearMapa("El pokemon a realizado un ataque electrico"));
-        if (rand.nextDouble() > 0.2) {
-            System.out.println(confi.formatearMapa("El pokemon a paralizado al oponete"));
-            pokemonAtacado.agragarEstado(new Paralizado());
+        System.out.println(confi.formatearMapa("¡" + pokemonUsuario.getNombre() + " disparó un poderoso Rayo!"));
+        if (rand.nextDouble() <= 0.20) {
+            String nombreObjetivo = pokemonAtacado.getApodo() != null ? pokemonAtacado.getApodo() : pokemonAtacado.getNombre();
+            System.out.println(confi.formatearMapa("¡" + nombreObjetivo + " ha sido paralizado!"));
+            if (!pokemonAtacado.tieneEstado(Paralizado.class)) {
+                pokemonAtacado.agragarEstado(new Paralizado());
+            }
         }
-        confi.separadorFinalMapa();
     }
+
 }

@@ -11,6 +11,6 @@ public class Placaje extends Fisico {
     @Override
     protected void estadosAlterados() {
         System.out.println(confi.formatearMapa("El pokemon a Embestido al oponenten con todo el cuerpo"));
-        confi.separadorFinalMapa();
+
     }
 }

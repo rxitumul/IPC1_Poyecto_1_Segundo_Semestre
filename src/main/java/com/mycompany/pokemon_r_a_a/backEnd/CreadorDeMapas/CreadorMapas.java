@@ -2,6 +2,9 @@ package com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas;
 
 import java.util.Random;
 
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.EnfermeriaNpc;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Entrenador;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.TiendaNpc;
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 
@@ -25,19 +28,27 @@ public class CreadorMapas {
     private static final int INTERACION_CON_NPC_DE_TIENDA = 17;
     private static final int SALIDA = 20;
     private static final int MOSTRADOR = 19;
-
+    private CreadorNpc npcCreador = new CreadorNpc();
 
     private int[][] mapaCentroPokemon = {
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, INTERACION_CON_NPC_DE_ENFERMERA,INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, MOSTRADOR, MOSTRADOR, MOSTRADOR,INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, MOSTRADOR, 13, MOSTRADOR,INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, MOSTRADOR, MOSTRADOR, MOSTRADOR,INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, INTERACION_CON_NPC_DE_ENFERMERA,INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, INTERACION_CON_NPC_DE_ENFERMERA,
+                    INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, MOSTRADOR, MOSTRADOR, MOSTRADOR,
+                    INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, MOSTRADOR, 13, MOSTRADOR,
+                    INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, MOSTRADOR, MOSTRADOR, MOSTRADOR,
+                    INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, INTERACION_CON_NPC_DE_ENFERMERA,
+                    INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,INTERACION_CON_NPC_DE_TELEVICION },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SPAWN, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_TELEVICION, 14 },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SALIDA, ESPACIO, ESPACIO, ESPACIO, ESPACIO,INTERACION_CON_NPC_DE_TELEVICION }
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    INTERACION_CON_NPC_DE_TELEVICION },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SPAWN, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_TELEVICION,
+                    14 },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SALIDA, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    INTERACION_CON_NPC_DE_TELEVICION }
     };
 
     private int[][] mapaTiendaPokemon = {
@@ -57,28 +68,40 @@ public class CreadorMapas {
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, 20, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO }
     };
     private int[][] mapaGimnasio = {
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, 11, INTERACION_CON_NPC_DE_ENEMIGO,
-                    ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO, ESPACIO, ESPACIO },
+
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
                     ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO },
-            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, 10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+
+            { ESPACIO, ESPACIO, 10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, 10,
                     INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, 10,
+
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO },
+
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, 10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, 10,
                     INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, SPAWN, ESPACIO, ESPACIO, ESPACIO,
-                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
+
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, 11,
+                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO },
+
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO,
+                    ESPACIO, ESPACIO, ESPACIO },
+
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO },
+
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO },
+
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO },
+
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO },
+
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO },
+
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, SALIDA, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
                     ESPACIO }
     };
@@ -95,16 +118,38 @@ public class CreadorMapas {
         objetosMapa = new CreadorDeMapaDeObjetos(hall);
     }
 
-    public Casillas[][] getMapaCentroPokemon() {
-        return objetosMapa.creadorCasillasObjetos(mapaCentroPokemon);
+    public CreadorNpc getNpcCreador() {
+        return npcCreador;
     }
 
-    public Casillas[][] getMapaGimnasio() {
-        return objetosMapa.creadorCasillasObjetos(mapaGimnasio);
+    public Casillas[][] getMapaCentroPokemon(EnfermeriaNpc npc) {
+        if (npc == null) {
+            npc = npcCreador.creadorDeEnfermeria();
+        }
+        return objetosMapa.creadorCasillasCentroPokemon(mapaCentroPokemon, npc);
+    }
+
+    public Casillas[][] getMapaCentroPokemon() {
+        return getMapaCentroPokemon(npcCreador.creadorDeEnfermeria());
+    }
+
+    public Casillas[][] getMapaGimnasio(Entrenador[] entrenadores,String ciudadNombre) {
+        if (entrenadores == null) {
+            entrenadores = npcCreador.creadorDeEntrenadoresYLider(ciudadNombre);
+        }
+        return objetosMapa.creadorCasillasGimnasio(mapaGimnasio, entrenadores,"");
+    }
+
+
+    public Casillas[][] getMapaTiendaPokemon(TiendaNpc tienda) {
+        if (tienda == null) {
+            tienda = npcCreador.creadorDeTienda();
+        }
+        return objetosMapa.creadorCasillasTienda(mapaTiendaPokemon, tienda);
     }
 
     public Casillas[][] getMapaTiendaPokemon() {
-        return objetosMapa.creadorCasillasObjetos(mapaTiendaPokemon);
+        return getMapaTiendaPokemon(npcCreador.creadorDeTienda());
     }
 
     public MapaCiudad mapaCreador(MapaCiudad[] mapasCreados) {
@@ -142,7 +187,7 @@ public class CreadorMapas {
             }
         } while (true);
 
-        return new MapaCiudad(nombre, objetosMapa.creadorCasillasObjetos(mapa), jugador);
+        return new MapaCiudad(nombre, objetosMapa.creadorCasillasObjetos(mapa,nombre), jugador);
 
     }
 

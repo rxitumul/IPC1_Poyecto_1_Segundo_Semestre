@@ -2,8 +2,10 @@ package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Int
 
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.InteracionConLosNpc;
 
 public abstract class InteracionCasillas<T> extends Casillas<T> {
+    protected  InteracionConLosNpc front = new InteracionConLosNpc();
 
     public InteracionCasillas(HallDeLaFama hall) {
         super(hall);

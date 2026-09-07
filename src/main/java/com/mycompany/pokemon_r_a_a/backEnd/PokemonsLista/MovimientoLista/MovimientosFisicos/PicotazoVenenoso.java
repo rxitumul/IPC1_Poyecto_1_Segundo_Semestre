@@ -5,18 +5,20 @@ import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Fisico;
 
 public class PicotazoVenenoso extends Fisico {
     public PicotazoVenenoso() {
-        nombre = "PicotazoVenenoso";
+        nombre = "Picotazo Venenoso";
+        potencia = 20;
     }
 
     @Override
     protected void estadosAlterados() {
-        System.out.println(confi.formatearMapa("Ataqu toxico"));
-        if(rand.nextDouble()>0.15){
-            System.out.println(confi.formatearMapa("Se enveneno al pokemon "+pokemonAtacado.getApodo()));
-            pokemonAtacado.agragarEstado(new Envenenado(pokemonAtacado));
-        }else{
-            System.out.println(confi.formatearMapa("No se enveneno al pokemon "+pokemonAtacado.getApodo()));
+        System.out.println(confi.formatearMapa("¡Ataque con aguijón tóxico!"));
+        if (rand.nextDouble() <= 0.15) {
+            String nombreObjetivo = pokemonAtacado.getApodo() != null ? pokemonAtacado.getApodo() : pokemonAtacado.getNombre();
+            System.out.println(confi.formatearMapa("¡" + nombreObjetivo + " ha sido envenenado!"));
+            if (!pokemonAtacado.tieneEstado(Envenenado.class)) {
+                pokemonAtacado.agragarEstadoPermanete(new Envenenado(pokemonAtacado));
+            }
         }
-        confi.separadorFinalMapa();
     }
 }
+

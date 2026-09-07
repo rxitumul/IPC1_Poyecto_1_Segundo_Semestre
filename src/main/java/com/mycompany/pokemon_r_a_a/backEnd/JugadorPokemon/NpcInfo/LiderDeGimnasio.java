@@ -1,6 +1,10 @@
 package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo;
 
-public class LiderDeGimnasio extends Npc<Entrenador> {
+public class LiderDeGimnasio extends Entrenador {
+
+    public LiderDeGimnasio(String nombreCiudad) {
+        super(nombreCiudad);
+    }
 
     private Entrenador[] entrenadores;
     private String medalla;
@@ -8,11 +12,15 @@ public class LiderDeGimnasio extends Npc<Entrenador> {
     @Override
     public String[] getDialojo(int tipo) {
         // TODO Auto-generated method stub
+        if (nombre == null) {
+            nombre = "Lider";
+        }
         switch (tipo) {
             case 0:
                 return new String[] {
-                        "¡Bienvenido al Gimnasio " + nombre + "!",
-                        "Mi nombre es [Nombre del líder] y soy el líder de este gimnasio.",
+
+                        "¡Bienvenido al Gimnasio Pokémon!",
+                        "Mi nombre es " + nombre + " y soy el líder de este gimnasio.",
                         "Si consigues derrotarme, recibirás la medalla " + medalla + ".",
                         "¿Estás preparado para demostrar que mereces esa medalla?" };
             case 1:
@@ -37,6 +45,18 @@ public class LiderDeGimnasio extends Npc<Entrenador> {
         this.medalla = medalla;
     }
 
+    public String getMedalla() {
+        return medalla;
+    }
+
+    public Entrenador[] getEntrenadores() {
+        return entrenadores;
+    }
+
+    public void setEntrenadores(Entrenador[] entrenadores) {
+        this.entrenadores = entrenadores;
+    }
+
     @Override
     public void setBoleanoActivo(boolean boleanoActivo) {
         this.boleanoActivo = boleanoActivo;
@@ -45,16 +65,6 @@ public class LiderDeGimnasio extends Npc<Entrenador> {
     @Override
     public boolean getbBleanoActivo() {
         return boleanoActivo;
-    }
-
-    @Override
-    public Entrenador[] getLista() {
-        return entrenadores;
-    }
-
-    @Override
-    public void setLista(Entrenador[] entrenadores) {
-        this.entrenadores = entrenadores;
     }
 
     @Override

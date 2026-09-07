@@ -8,15 +8,18 @@ import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 public class Gimnasio extends CasillasConMapas {
 
     private Entrenador[] entrenador;
+    private String nombreCiudad;
 
     public Gimnasio(String simbolo, boolean caminable, int tipo, boolean tieneSubMenu, HallDeLaFama hall,
-            Casillas[][] mapaGimnasio) {
+            Casillas[][] mapaGimnasio,String nombreCiudad) {
         super(hall, mapaGimnasio);
         this.simbolo = simbolo;
         entrenador = new Entrenador[2];
-        entrenador[0] = new Entrenador();
-        entrenador[1] = new Entrenador();
-        npc = new LiderDeGimnasio();
+        this.nombreCiudad=nombreCiudad;
+        nombre = "Gimnasio de "+nombreCiudad;
+        entrenador[0] = new Entrenador(nombreCiudad);
+        entrenador[1] = new Entrenador(nombreCiudad);
+        npc = new LiderDeGimnasio(nombreCiudad);
         this.caminable = caminable;
         this.tipo = tipo;
         this.tieneSubMenu = tieneSubMenu;
@@ -28,8 +31,6 @@ public class Gimnasio extends CasillasConMapas {
         System.out.print(" G ");
     }
 
-
-
     @Override
     public Boolean subMenu() {
         boolean salida = false;
@@ -37,11 +38,22 @@ public class Gimnasio extends CasillasConMapas {
         impresor.limpiadorPantalla();
 
         do {
-            impresor.imprimidorDeMapaConInteracionGimnacio(mapa, nombre, entrenador, npc, false);
+
+            Casillas casillaAnterior = mov.getCasillaAnterior();
+            if (casillaAnterior.tipoCasilla() == 15||casillaAnterior.tipoCasilla() == 15) {
+                impresor.imprimidorDeMapaConInteracionGimnacio(mapa, nombre, entrenador, npc, true);
+
+            } else {
+                impresor.imprimidorDeMapaConInteracionGimnacio(mapa, nombre, entrenador, npc, false);
+            }
             movimientoJugador = scan.nextLine();
-            mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador);
-            jugadorPosicion = mov.getSpawn();
-            salida = mov.getCondicionSalida();
+            if (casillaAnterior.tipoCasilla() == 15 && movimientoJugador.trim().equalsIgnoreCase("C")) {
+                casillaAnterior.subMenu();
+            } else {
+                mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador);
+                jugadorPosicion = mov.getSpawn();
+                salida = mov.getCondicionSalida();
+            }
             impresor.limpiadorPantalla();
 
         } while (!salida);
@@ -52,7 +64,14 @@ public class Gimnasio extends CasillasConMapas {
     @Override
     public void setMapa() {
         if (mapa == null) {
-            mapa = mapaCreador.getMapaGimnasio();
+            Entrenador[] lista = mapaCreador.getNpcCreador().creadorDeEntrenadoresYLider(nombreCiudad);
+            this.entrenador = new Entrenador[4];
+            for (int i = 0; i < 4; i++) {
+                this.entrenador[i] = lista[i];
+                // this.entrenador[i].setBoleanoActivo(true);
+            }
+            this.npc = lista[4];
+            mapa = mapaCreador.getMapaGimnasio(lista,nombreCiudad);
         }
         jugadorPosicion = new int[] { 10, 5 };
     }

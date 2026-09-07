@@ -20,6 +20,6 @@ public class AtaqueFuria extends Fisico {
             }
             resultadoAcion(true);
         }
-        confi.separadorFinalMapa();
+
     }
 }

@@ -13,6 +13,5 @@ public class Latigo extends Estado {
         int defensa = pokemonAtacado.getDefensaPokemon();
         int reducion = (int) (defensa * 0.2);
         pokemonAtacado.setDefensaPokemon(defensa -= reducion);
-        confi.separadorFinalMapa();
     }
 }

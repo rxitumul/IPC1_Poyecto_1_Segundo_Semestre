@@ -11,6 +11,6 @@ public HojaAfilada() {
 @Override
 protected void estadosAlterados() {
  System.out.println(confi.formatearMapa("El pokemon a utilizado hojas afiladas para cortar al oponete"));
-        confi.separadorFinalMapa();
+
 }
 }

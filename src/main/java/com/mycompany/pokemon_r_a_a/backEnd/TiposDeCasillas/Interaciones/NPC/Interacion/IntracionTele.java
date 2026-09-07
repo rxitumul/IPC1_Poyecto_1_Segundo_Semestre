@@ -6,7 +6,7 @@ public class IntracionTele extends InteracionCasillas<HallDeLaFama> {
 
     public IntracionTele(HallDeLaFama hall) {
         super(hall);
-        this.dialogo = hall;
+        this.npcT = hall;
     }
 
     @Override
@@ -16,12 +16,12 @@ public class IntracionTele extends InteracionCasillas<HallDeLaFama> {
 
     @Override
     public void setNpc(HallDeLaFama hallDeLaFama) {
-        this.dialogo = hallDeLaFama;
+        this.npcT = hallDeLaFama;
     }
 
     @Override
     public Boolean subMenu() {
-        dialogo.mostrarHallDeLaFama();
+        npcT.mostrarHallDeLaFama();
         return true;
     }
 }

@@ -20,19 +20,28 @@ public abstract class Fisico extends Movimiento {
         nivelPokemon = pokemonUsuario.getNivel();
         variacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
 
+        // Verificar si el objetivo está en el aire (por Vuelo)
+        if (pokemonAtacado.isEnElAire()) {
+            System.out.println(confi.formatearMapa("¡El ataque falló porque " + pokemonAtacado.getNombre() + " está en el aire!"));
+            return 0;
+        }
+
+        // Verificar si el objetivo bloquea el ataque con Protección
+        if (pokemonAtacado.bolqueador()) {
+            System.out.println(confi.formatearMapa("¡" + pokemonAtacado.getNombre() + " se protegió del ataque!"));
+            return 0;
+        }
+
         int def = pokemonAtacado.getDefensaPokemon();
         if (def <= 0) {
             def = 1;
         }
 
         daño = (int) (0.01 * variacion
-                * ((((0.2 * nivelPokemon + 1) * puntosDeAtaque * potencia) / (25 * def))
+                * ((((0.2 * nivelPokemon + 1) * puntosDeAtaque * potencia) / (25.0 * def))
                         + 2));
-
-        // Verificar si el objetivo bloquea el ataque con Protección
-        if (pokemonAtacado.bolqueador()) {
-            System.out.println(confi.formatearMapa("¡" + pokemonAtacado.getNombre() + " se protegió del ataque!"));
-            return 0;
+        if (daño < 1) {
+            daño = 1;
         }
 
         int vidaActual = pokemonAtacado.getVidaPokemon();
@@ -47,7 +56,6 @@ public abstract class Fisico extends Movimiento {
                 + "/" + pokemonAtacado.getVidaInicial() + ")"));
 
         if (!recursivo) {
-            confi.separadorInicioMapa();
             estadosAlterados();
         }
         return daño;

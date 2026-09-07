@@ -10,6 +10,7 @@ public class Farmacia extends CasillasConMapas {
             Casillas[][] mapaFarmacia) {
         super(hall, mapaFarmacia);
         npc = new EnfermeriaNpc();
+        nombre = "Farmacia";
         this.simbolo = simbolo;
         this.caminable = caminable;
         this.tipo = tipo;
@@ -29,11 +30,26 @@ public class Farmacia extends CasillasConMapas {
         impresor.limpiadorPantalla();
 
         do {
-            impresor.imprimidorDeMapaConInteracioFarmacia(mapa, nombre, npc, false);
+            Casillas casillaAnterior = mov.getCasillaAnterior();
+            if (casillaAnterior.tipoCasilla() == 16) {
+                impresor.imprimidorDeMapaConInteracioFarmacia(mapa, nombre, npc, true, true);
+
+            } else if (casillaAnterior.tipoCasilla() == 18) {
+                impresor.imprimidorDeMapaConInteracioFarmacia(mapa, nombre, npc, true, false);
+
+            } else {
+                impresor.imprimidorDeMapaConInteracioFarmacia(mapa, nombre, npc, false, true);
+            }
             movimientoJugador = scan.nextLine();
-            mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador);
-            jugadorPosicion = mov.getSpawn();
-            salida = mov.getCondicionSalida();
+            if (casillaAnterior.tipoCasilla() == 18
+                    || casillaAnterior.tipoCasilla() == 16 && movimientoJugador.trim().equalsIgnoreCase("C")) {
+                casillaAnterior.subMenu();
+            } else {
+                mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador);
+                jugadorPosicion = mov.getSpawn();
+                salida = mov.getCondicionSalida();
+            }
+
             impresor.limpiadorPantalla();
 
         } while (!salida);
@@ -44,7 +60,9 @@ public class Farmacia extends CasillasConMapas {
     @Override
     public void setMapa() {
         if (mapa == null) {
-            mapa= mapaCreador.getMapaCentroPokemon();
+            EnfermeriaNpc enfermera = mapaCreador.getNpcCreador().creadorDeEnfermeria();
+            this.npc = enfermera;
+            mapa = mapaCreador.getMapaCentroPokemon(enfermera);
         }
         jugadorPosicion = new int[] { 8, 4 };
     }

@@ -18,7 +18,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 public abstract class Casillas<T> {
 
     protected Random random = new Random();
-    protected T dialogo;
+    protected T npcT;
     protected JugadorPokemonPartida jugador;
     protected Scanner scanner = new Scanner(System.in);
     protected BatallasPokemon batalla;

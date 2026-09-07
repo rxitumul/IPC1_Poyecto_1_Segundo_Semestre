@@ -11,7 +11,5 @@ public class Proteccion extends Estado {
     protected void estadosAlterados() {
         System.out.println(confi.formatearMapa("El pokemon a utlizado Protecion "));
         pokemonUsuario.setActivoBloqueo(true);
-
-        confi.separadorFinalMapa();
     }
 }

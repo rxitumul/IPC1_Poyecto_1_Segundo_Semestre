@@ -15,8 +15,6 @@ public class ImpresoresGlobal extends ConfiguracionesDeEstetica {
     protected final static String BARRAS_DE_VIDA_75 = "███████████████░░░░░";
     protected final static String BARRAS_DE_VIDA_100 = "████████████████████";
 
-
-
     public void pantallaDeError() {
         delayThread();
         System.out.print(NARANJA);
@@ -36,10 +34,19 @@ public class ImpresoresGlobal extends ConfiguracionesDeEstetica {
         separadorFinalMapa();
     }
 
+    public void mensajeEncadenado(String[] mensaje) {
+        separadorInicioMapa();
+        for (String linea : mensaje) {
+            System.out.println(formatearMapaCentrado(linea));
+        }
+        separadorFinalMapa();
+    }
+
     public void mensajeInformativoDecontinuar() {
         System.out.println(formatearCentrado("Presione enter para continuar....."));
     }
-     public void mensajeInformativoSelecion() {
+
+    public void mensajeInformativoSelecion() {
         System.out.println(formatearMapaCentrado("Selecione una opcion"));
     }
 

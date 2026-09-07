@@ -4,6 +4,7 @@ public class ConfiguracionesDeEstetica {
 
     private static final int SEPARACION_DE_BORDES = 124;
     private static final int SEPARACION_DE_BORDES_MAPA = 75;
+    private static final int SEPARACION_DE_BORDES_MAPA_SUB_MAPA = 30;
     private static final int CUATRO = 4;
     private static final int CATORCE = 14;
 
@@ -43,23 +44,33 @@ public class ConfiguracionesDeEstetica {
                 + MARCO_ESQUINA_DERECHA_INFERIOR);
     }
 
-    public void separadorInicioMapa() {
+    public void limpiadorDeLineas() {
+        System.out.print(LIMPIADOR_DE_PANTALLA);
+    }
+
+    protected void separadorInicialMapaSubMapa() {
+        System.out.println(MARCO_ESQUINA_IZQUIERDA_SUPERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA_SUB_MAPA)
+                + MARCO_ESQUINA_DERECHA_SUPERIOR);
+    }
+
+    protected void separadorFinalMapaSubMapa() {
+        System.out.println(MARCO_ESQUINA_IZQUIERDA_INFERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA_SUB_MAPA)
+                + MARCO_ESQUINA_DERECHA_INFERIOR);
+    }
+
+    protected void separadorInicioMapa() {
         System.out.println(MARCO_ESQUINA_IZQUIERDA_SUPERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA)
                 + MARCO_ESQUINA_DERECHA_SUPERIOR);
     }
 
-    public void separadorMediosMapa() {
+    protected void separadorMediosMapa() {
         System.out.println(MARCO_VERTICAL_INTERCECION_IZQUIERDA + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA)
                 + MARCO_VERTICAL_INTERCECION_DERECHA);
     }
 
-    public void separadorFinalMapa() {
+    protected void separadorFinalMapa() {
         System.out.println(MARCO_ESQUINA_IZQUIERDA_INFERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA)
                 + MARCO_ESQUINA_DERECHA_INFERIOR);
-    }
-
-    public void limpiadorDeLineas() {
-        System.out.print(LIMPIADOR_DE_PANTALLA);
     }
 
     public String formatear(String texto) {
@@ -72,7 +83,7 @@ public class ConfiguracionesDeEstetica {
         return MARCO_VERTICAL + String.format("%-" + interior + "s", texto) + MARCO_VERTICAL;
     }
 
-    public String formatearCentrado(String texto) {
+    protected String formatearCentrado(String texto) {
         int interior = SEPARACION_DE_BORDES;
         String textoLimpio = texto.replaceAll(LIMPIADOR_DECOLORES, "");
         int visibleLength = textoLimpio.length();
@@ -91,7 +102,6 @@ public class ConfiguracionesDeEstetica {
 
     public String formatearMapa(String texto) {
         int interior = SEPARACION_DE_BORDES_MAPA;
-        
 
         if (texto.length() > interior) {
             texto = texto.substring(0, interior);
@@ -100,7 +110,7 @@ public class ConfiguracionesDeEstetica {
         return MARCO_VERTICAL + String.format("%-" + interior + "s", texto) + MARCO_VERTICAL;
     }
 
-    public String formatearMapaCentrado(String texto) {
+    protected String formatearMapaCentrado(String texto) {
         int interior = SEPARACION_DE_BORDES_MAPA;
         String textoLimpio = texto.replaceAll(LIMPIADOR_DECOLORES, "");
         int visibleLength = textoLimpio.length();
@@ -117,33 +127,33 @@ public class ConfiguracionesDeEstetica {
         return MARCO_VERTICAL + " ".repeat(paddingIzquierda) + texto + " ".repeat(paddingDerecha) + MARCO_VERTICAL;
     }
 
-    public void inicioDeTabla() {
+    protected void inicioDeTabla() {
         System.out.println(
                 MARCO_ESQUINA_IZQUIERDA_SUPERIOR + MARCO_HORIZONTAL.repeat(CUATRO)
                         + MARCO_HORIZONTAL_INTERCECION_HACIA_ABAJO
                         + MARCO_HORIZONTAL.repeat(CATORCE) + MARCO_ESQUINA_DERECHA_SUPERIOR);
     }
 
-    public void finDeTabla() {
+    protected void finDeTabla() {
         System.out.println(
                 MARCO_ESQUINA_IZQUIERDA_INFERIOR + MARCO_HORIZONTAL.repeat(CUATRO)
                         + MARCO_HORIZONTAL_INTERCECION_HACIA_ARRIBA
                         + MARCO_HORIZONTAL.repeat(CATORCE) + MARCO_ESQUINA_DERECHA_INFERIOR);
     }
 
-    public void mediosDeTabla() {
+    protected void mediosDeTabla() {
         System.out.println(
                 MARCO_VERTICAL_INTERCECION_IZQUIERDA + MARCO_HORIZONTAL.repeat(CUATRO) + MARCO_INTERCECION_CUATRUPLE
                         + MARCO_HORIZONTAL.repeat(CATORCE) + MARCO_VERTICAL_INTERCECION_DERECHA);
     }
 
-    public String formatoTabla(String nombre, String id) {
+    protected String formatoTabla(String nombre, String id) {
         return MARCO_VERTICAL + formatearCentradoTablaDinamico(id, CUATRO) + MARCO_VERTICAL
                 + formatearCentradoTablaDinamico(nombre, CATORCE) + MARCO_VERTICAL;
 
     }
 
-    public String getMarcoVertical() {
+    protected String getMarcoVertical() {
         return MARCO_VERTICAL;
     }
 

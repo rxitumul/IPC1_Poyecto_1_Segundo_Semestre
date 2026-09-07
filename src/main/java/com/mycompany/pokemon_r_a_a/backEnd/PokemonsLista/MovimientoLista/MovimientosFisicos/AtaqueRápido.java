@@ -12,6 +12,6 @@ public class AtaqueRápido extends Fisico {
     protected void estadosAlterados() {
         System.out.println(confi.formatearMapa("Ataque a alta velocidad "));
         pokemonUsuario.setPrioritario(true);
-        confi.separadorFinalMapa();
+
     }
 }

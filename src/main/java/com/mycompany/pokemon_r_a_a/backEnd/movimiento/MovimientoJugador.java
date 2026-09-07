@@ -61,4 +61,7 @@ public class MovimientoJugador {
     public int[] getSpawn() {
         return spawn;
     }
+    public Casillas getCasillaAnterior() {
+        return casillaAnterior;
+    }
 }

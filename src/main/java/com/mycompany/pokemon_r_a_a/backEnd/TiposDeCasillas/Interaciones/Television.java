@@ -3,26 +3,17 @@ package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.TiendaNpc;
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
-import com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador;
 
-public class Tienda extends CasillasConMapas {
+public class Television extends CasillasConMapas {
 
-    public Tienda(String simbolo, boolean caminable, int tipo, boolean tieneSubMenu, HallDeLaFama hall,
-            Casillas[][] mapaTienda) {
-        super(hall, mapaTienda);
-        npc = new TiendaNpc();
-        nombre = "Tienda";
-        mov = new MovimientoJugador();
-        this.simbolo = simbolo;
-        this.caminable = caminable;
-        this.tipo = tipo;
-        this.tieneSubMenu = tieneSubMenu;
-        this.jugadorPosicion = new int[] { 7, 4 };
+    public Television(HallDeLaFama hall, Casillas[][] mapa) {
+        super(hall, mapa);
+
     }
 
     @Override
     public void imprimir() {
-        System.out.print(" $ ");
+        System.out.print(" ▣ ");
     }
 
     @Override
@@ -32,22 +23,22 @@ public class Tienda extends CasillasConMapas {
         impresor.limpiadorPantalla();
 
         do {
-
             Casillas casillaAnterior = mov.getCasillaAnterior();
-            if (casillaAnterior.tipoCasilla() == 17) {
-                impresor.imprimidorDeMapaConInteracionTienda(mapa, nombre, npc, true);
+            if (casillaAnterior.tipoCasilla() == 14) {
+                impresor.imprimidorDeMapaConInteracioFarmacia(mapa, nombre, npc, true, false);
 
             } else {
-                impresor.imprimidorDeMapaConInteracionTienda(mapa, nombre, npc, false);
+                impresor.imprimidorDeMapaConInteracioFarmacia(mapa, nombre, npc, false, false);
             }
             movimientoJugador = scan.nextLine();
-            if (casillaAnterior.tipoCasilla() == 17 && movimientoJugador.trim().equalsIgnoreCase("C")) {
+            if (casillaAnterior.tipoCasilla() == 14 && movimientoJugador.trim().equalsIgnoreCase("C")) {
                 casillaAnterior.subMenu();
             } else {
                 mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador);
                 jugadorPosicion = mov.getSpawn();
                 salida = mov.getCondicionSalida();
             }
+
             impresor.limpiadorPantalla();
 
         } while (!salida);
@@ -68,5 +59,4 @@ public class Tienda extends CasillasConMapas {
     public void setJugadorPosicion(int[] jugadorPosicion) {
         this.jugadorPosicion = jugadorPosicion;
     }
-
 }

@@ -10,10 +10,14 @@ public class DisparoDemora extends Estado {
 
     @Override
     protected void estadosAlterados() {
-        System.out.println(confi.formatearMapa("El pokemon a utlizado Demorrado"));
+        System.out.println(confi.formatearMapa("¡" + pokemonUsuario.getNombre() + " usó Disparo Demora!"));
         int velocidad = pokemonAtacado.getVelocidadPokemon();
-        int reducion = (int) (velocidad * 0.2);
-        pokemonAtacado.setVelocidadPokemon(velocidad -= reducion);
-        confi.separadorFinalMapa();
+        int reduccion = (int) (velocidad * 0.25);
+        if (reduccion < 1) {
+            reduccion = 1;
+        }
+        int nuevaVelocidad = Math.max(1, velocidad - reduccion);
+        pokemonAtacado.setVelocidadPokemon(nuevaVelocidad);
+        System.out.println(confi.formatearMapa("¡La velocidad de " + pokemonAtacado.getNombre() + " se redujo en 25%! (" + velocidad + " -> " + nuevaVelocidad + ")"));
     }
 }

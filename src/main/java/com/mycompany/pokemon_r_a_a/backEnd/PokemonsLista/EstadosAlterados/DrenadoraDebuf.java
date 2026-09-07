@@ -12,15 +12,37 @@ public class DrenadoraDebuf extends Estados {
         this.resividor = resividor;
     }
 
-    public void verificador() {
-        int vida = lanzador.getVidaPokemon();
-        int vidaResividor = resividor.getVidaPokemon();
+    public Pokemons getLanzador() {
+        return lanzador;
+    }
 
-        if (vida > 0 && vidaResividor > 0) {
-            int vidaResividorTotal = resividor.getVidaInicial();
-            int sumador = (int) (vidaResividorTotal * 0.07);
-            lanzador.setVidaPokemon(vida += sumador);
+    public Pokemons getResividor() {
+        return resividor;
+    }
+
+    public int ejecutarDrenado() {
+        if (lanzador == null || resividor == null) {
+            return 0;
         }
+        if (lanzador.getVidaPokemon() <= 0 || resividor.getVidaPokemon() <= 0) {
+            return 0;
+        }
+        int vidaResividorTotal = resividor.getVidaInicial();
+        int cantidad = (int) (vidaResividorTotal * 0.07);
+        if (cantidad < 1) {
+            cantidad = 1;
+        }
+        int vidaResividor = Math.max(0, resividor.getVidaPokemon() - cantidad);
+        resividor.setVidaPokemon(vidaResividor);
+
+        int vidaLanzador = Math.min(lanzador.getVidaInicial(), lanzador.getVidaPokemon() + cantidad);
+        lanzador.setVidaPokemon(vidaLanzador);
+        return cantidad;
+    }
+
+    public void verificador() {
+        ejecutarDrenado();
     }
 
 }
+

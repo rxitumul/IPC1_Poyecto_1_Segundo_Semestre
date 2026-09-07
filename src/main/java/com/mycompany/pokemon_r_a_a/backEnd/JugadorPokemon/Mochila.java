@@ -25,24 +25,16 @@ public class Mochila {
         switch (tipo) {
             case 1:
                 if (antiParalisis > 0) {
-                    try {
-                        aplicacion.eliminarElefecto(paralizado);
-                        antiParalisis--;
-                        impresorDeSelecion.mensajeInformativo("¡Parálisis curada!");
-                    } catch (ListaEnlazadaException e) {
-                        impresorDeSelecion.pantallaDeError();
-                    }
+                    aplicacion.eliminarEstadoPorClase(Paralizado.class);
+                    antiParalisis--;
+                    impresorDeSelecion.mensajeInformativo("¡Parálisis curada!");
                 }
                 break;
             case 2:
                 if (antidoto > 0) {
-                    try {
-                        aplicacion.eliminarElefecto(envenenado);
-                        antidoto--;
-                        impresorDeSelecion.mensajeInformativo("¡Veneno curado!");
-                    } catch (ListaEnlazadaException e) {
-                        impresorDeSelecion.pantallaDeError();
-                    }
+                    aplicacion.eliminarEstadoPorClase(Envenenado.class);
+                    antidoto--;
+                    impresorDeSelecion.mensajeInformativo("¡Veneno curado!");
                 }
                 break;
             case 3:

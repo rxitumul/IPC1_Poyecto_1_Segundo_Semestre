@@ -11,7 +11,7 @@ public class Atactrueno extends Fisico {
     @Override
     protected void estadosAlterados() {
  System.out.println(confi.formatearMapa("El pokemon hiso un ataque electrico"));
-        confi.separadorFinalMapa();
+
     }
     
 }

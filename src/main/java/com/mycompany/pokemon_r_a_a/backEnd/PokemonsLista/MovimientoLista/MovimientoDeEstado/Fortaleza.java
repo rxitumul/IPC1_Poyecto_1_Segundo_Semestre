@@ -14,6 +14,6 @@ public class Fortaleza extends Estado {
         int defensa = pokemonUsuario.getDefensaPokemon();
         int aumento = (int) (defensa * 0.5);
         pokemonUsuario.setDefensaPokemon(defensa += aumento);
-        confi.separadorFinalMapa();
+
     }
 }

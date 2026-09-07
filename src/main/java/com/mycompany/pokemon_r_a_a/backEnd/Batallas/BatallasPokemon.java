@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Entrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
+import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Cansado;
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 
 public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
@@ -39,6 +40,18 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
 
             if (condicionDeVictoria(jugador, null, pokemonsJugador, false)) {
                 return;
+            }
+
+            // ─── Cansado: bloquear menú completo ───
+            if (pokemonJugador.tieneEstado(Cansado.class)) {
+                System.out.println(impresorMenus.formatearMapa(
+                        "¡" + pokemonJugador.getNombre() + " está exhausto y necesita descansar este turno! No puede realizar ninguna acción."));
+                pokemonJugador.eliminarEstadoPorClase(Cansado.class);
+                // El rival sí ataca
+                int movEnemigo = aiEnemigo.selecionadorDeAtaque(pokemonRival.getMovimientos());
+                ejecutarAccionAtaque(pokemonRival, pokemonJugador, pokemonRival.getMovimientos()[movEnemigo]);
+                procesarFinDeTurno(pokemonJugador, pokemonRival);
+                continue;
             }
 
             impresorMenus.impresorDePrincipal(jugador.getNombre(), "Pokémon Salvaje", pokemonRival, pokemonJugador);
@@ -77,9 +90,9 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
             }
         }
 
-        boolean batallaEnCurso = true;
+        boolean batallaEnCursoLocal = true;
 
-        while (batallaEnCurso) {
+        while (batallaEnCursoLocal) {
             pokemonJugador = pokemonsJugador[jugadorPokemonIndice];
             if (pokemonsEnemigo != null && enemigoPokemonIndice < pokemonsEnemigo.length) {
                 pokemonRival = pokemonsEnemigo[enemigoPokemonIndice];
@@ -95,6 +108,17 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
             }
             if (condicionDeVictoria(jugador, enemigo, pokemonsEnemigo, true)) {
                 return;
+            }
+
+            // ─── Cansado: bloquear menú completo ───
+            if (pokemonJugador.tieneEstado(Cansado.class)) {
+                System.out.println(impresorMenus.formatearMapa(
+                        "¡" + pokemonJugador.getNombre() + " está exhausto y necesita descansar este turno! No puede realizar ninguna acción."));
+                pokemonJugador.eliminarEstadoPorClase(Cansado.class);
+                int movEnemigo = aiEnemigo.selecionadorDeAtaque(pokemonRival.getMovimientos());
+                ejecutarAccionAtaque(pokemonRival, pokemonJugador, pokemonRival.getMovimientos()[movEnemigo]);
+                procesarFinDeTurno(pokemonJugador, pokemonRival);
+                continue;
             }
 
             impresorMenus.impresorDePrincipal(jugador.getNombre(), enemigo.getNombre(), pokemonRival, pokemonJugador);
@@ -127,7 +151,7 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
         if (pokemonRival.getVidaPokemon() <= 0 && combateGimnacio) {
             int xpPokemon = ((pokemonRival.getNivel()) ^ 2) / 2;
             pokemonJugador.setXp(pokemonJugador.getXp() + xpPokemon);
-            pokemonJugador.incrementarEnemigosDebilitados(); // MVP Tracker
+            pokemonJugador.incrementarEnemigosDebilitados();
             impresorMenus.mensajePokemonDebilitado(pokemonRival.getNombre());
             enemigoPokemonIndice = aiEnemigo.seleccionarPokemonCambio(pokemonsEnemigo);
             if (enemigoPokemonIndice == -1) {
@@ -139,7 +163,7 @@ public class BatallasPokemon extends RealizacionDeAtaqueMovimiento {
         } else if (pokemonRival.getVidaPokemon() <= 0) {
             int xpPokemon = ((pokemonRival.getNivel()) ^ 2) / 2;
             pokemonJugador.setXp(pokemonJugador.getXp() + xpPokemon);
-            pokemonJugador.incrementarEnemigosDebilitados(); // MVP Tracker
+            pokemonJugador.incrementarEnemigosDebilitados();
             impresorMenus.pantallaVictoriaSalvaje(pokemonRival.getNombre(), pokemonJugador.getNombre(), xpPokemon);
             return true;
 

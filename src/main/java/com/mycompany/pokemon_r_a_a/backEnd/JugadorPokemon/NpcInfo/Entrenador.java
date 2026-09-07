@@ -5,6 +5,19 @@ import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 public class Entrenador extends Npc<Pokemons> {
 
     private Pokemons[] pokemosEquipo;
+    private String ciudadNombre="";
+    private boolean derrotado = false;
+
+    public Entrenador(String nombreCiudad){
+        ciudadNombre=nombreCiudad;
+    }
+    public boolean isDerrotado() {
+        return derrotado;
+    }
+
+    public void setDerrotado(boolean derrotado) {
+        this.derrotado = derrotado;
+    }
 
     @Override
     public Pokemons[] getLista() {
@@ -39,8 +52,8 @@ public class Entrenador extends Npc<Pokemons> {
             case 0:
                 return new String[] {
                         "¡Alto ahí, entrenador!",
-                        "Este es el gimnasio de [Nombre del gimnasio].",
-                        "Si quieres enfrentarte al líder, primero tendrás que demostrar de qué estás hecho." };
+                        "Este es el gimnasio de "+ciudadNombre+".",
+                        "Veamos que tienes para demostrar de qué estás hecho." };
             case 1:
                 return new String[] {
                         "¡Entonces prepárate!",

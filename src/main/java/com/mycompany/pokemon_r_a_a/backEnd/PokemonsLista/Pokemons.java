@@ -48,6 +48,25 @@ public class Pokemons {
 
     private boolean activoBloqueo = false;
 
+    private boolean enElAire = false;
+    private boolean cargandoRayoSolar = false;
+
+    public boolean isEnElAire() {
+        return enElAire;
+    }
+
+    public void setEnElAire(boolean enElAire) {
+        this.enElAire = enElAire;
+    }
+
+    public boolean isCargandoRayoSolar() {
+        return cargandoRayoSolar;
+    }
+
+    public void setCargandoRayoSolar(boolean cargandoRayoSolar) {
+        this.cargandoRayoSolar = cargandoRayoSolar;
+    }
+
     public void eliminarElefecto(Estados estado) throws ListaEnlazadaException {
         int index = estadosAlterados.obtenerIndex(estado);
         if (index != -1) {
@@ -65,7 +84,7 @@ public class Pokemons {
     public boolean bolqueador() {
         if (activoBloqueo) {
             activoBloqueo = false;
-            return rand.nextDouble() > 0.7;
+            return rand.nextDouble() <= 0.70;
         }
         return false;
     }
@@ -92,8 +111,92 @@ public class Pokemons {
         estadosAlteradosPermanete.agregarAlFinal(estado);
     }
 
+    public Listas<Estados> getEstadosAlterados() {
+        return estadosAlterados;
+    }
+
+    public Listas<Estados> getEstadosAlteradosPermanete() {
+        return estadosAlteradosPermanete;
+    }
+
+    public boolean tieneEstado(Class<? extends Estados> tipo) {
+        for (int i = 0; i < estadosAlterados.getCapacidad(); i++) {
+            try {
+                Estados e = estadosAlterados.obtenerContenido(i);
+                if (e != null && e.getClass() == tipo) {
+                    return true;
+                }
+            } catch (ListaEnlazadaException ex) {
+                break;
+            }
+        }
+        for (int i = 0; i < estadosAlteradosPermanete.getCapacidad(); i++) {
+            try {
+                Estados e = estadosAlteradosPermanete.obtenerContenido(i);
+                if (e != null && e.getClass() == tipo) {
+                    return true;
+                }
+            } catch (ListaEnlazadaException ex) {
+                break;
+            }
+        }
+        return false;
+    }
+
+    public Estados obtenerEstado(Class<? extends Estados> tipo) {
+        for (int i = 0; i < estadosAlterados.getCapacidad(); i++) {
+            try {
+                Estados e = estadosAlterados.obtenerContenido(i);
+                if (e != null && e.getClass() == tipo) {
+                    return e;
+                }
+            } catch (ListaEnlazadaException ex) {
+                break;
+            }
+        }
+        for (int i = 0; i < estadosAlteradosPermanete.getCapacidad(); i++) {
+            try {
+                Estados e = estadosAlteradosPermanete.obtenerContenido(i);
+                if (e != null && e.getClass() == tipo) {
+                    return e;
+                }
+            } catch (ListaEnlazadaException ex) {
+                break;
+            }
+        }
+        return null;
+    }
+
+    public void eliminarEstadoPorClase(Class<? extends Estados> tipo) {
+        for (int i = 0; i < estadosAlterados.getCapacidad(); i++) {
+            try {
+                Estados e = estadosAlterados.obtenerContenido(i);
+                if (e != null && e.getClass() == tipo) {
+                    estadosAlterados.eliminar(i);
+                    i--;
+                }
+            } catch (ListaEnlazadaException ex) {
+                break;
+            }
+        }
+        for (int i = 0; i < estadosAlteradosPermanete.getCapacidad(); i++) {
+            try {
+                Estados e = estadosAlteradosPermanete.obtenerContenido(i);
+                if (e != null && e.getClass() == tipo) {
+                    estadosAlteradosPermanete.eliminar(i);
+                    i--;
+                }
+            } catch (ListaEnlazadaException ex) {
+                break;
+            }
+        }
+    }
+
     public void lipiarEstadosTodos() {
         estadosAlterados.limpiar();
+        estadosAlteradosPermanete.limpiar();
+        enElAire = false;
+        cargandoRayoSolar = false;
     }
 
     public void setPrioritario(boolean prioritario) {

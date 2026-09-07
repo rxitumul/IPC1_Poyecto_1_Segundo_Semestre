@@ -16,6 +16,6 @@ public class GorroFuego extends Fisico {
             System.out.println(confi.formatearMapa("El pokemon a confundido al oponete"));
             pokemonAtacado.agragarEstado(new Confuso());
         }
-        confi.separadorFinalMapa();
+
     }
 }

@@ -13,6 +13,6 @@ public class Grunido extends Estado {
         int ataque = pokemonAtacado.getAtaquePokemon();
         int reducion = (int) (ataque * 0.2);
         pokemonAtacado.setAtaquePokemon(ataque -= reducion);
-        confi.separadorFinalMapa();
+
     }
 }

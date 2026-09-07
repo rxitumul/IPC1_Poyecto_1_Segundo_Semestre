@@ -2,6 +2,7 @@ package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo;
 
 public abstract class Npc<T> {
 
+    protected int id;
     protected String nombre;
     protected boolean boleanoActivo;
     protected int ciudad;
@@ -21,6 +22,14 @@ public abstract class Npc<T> {
 
     public int getCiudad() {
         return ciudad;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public abstract void accion();
