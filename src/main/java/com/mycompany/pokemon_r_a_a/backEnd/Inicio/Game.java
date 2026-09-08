@@ -33,6 +33,7 @@ public class Game {
         mochilaLocal = jugador.getMochilaJugador();
         mapaCiudadesLocal = mapaCiudades;
         equipoEstado = new EstadoPokemonEquipo(scanner, jugadorLocal);
+        
 
     }
 
@@ -43,6 +44,8 @@ public class Game {
         jugadorPosicion = mapa.getJugador();
         Mapas mapas = new Mapas(scanner, mapaCiudadesLocal);
         String movi;
+        jugadorLocal.setMapaCiudadesLocal(mapaCiudadesLocal);
+        jugadorLocal.setEquipoEstado(equipoEstado);
         do {
             impresor.imprimirMapaObjetos(mapaLocal, nombreCiudad);
             movi = scanner.nextLine();

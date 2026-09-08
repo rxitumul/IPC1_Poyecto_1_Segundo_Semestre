@@ -19,11 +19,12 @@ public class JugadorPokemonPartida {
     private ImpresorDeSelecion impresorDeSelecion = new ImpresorDeSelecion();
     private CapturaPokemon captura = new CapturaPokemon();
     private boolean capturaExitosa;
-
+    private MapaCiudad[] mapaCiudadesLocal;
     private int batallasJugadasSalvajes = 0;
     private int batallasJugadasEntrenador = 0;
     private int pokebolasLanzadas = 0;
     private int pokemonCapturados = 0;
+    private EstadoPokemonEquipo equipoEstado;
 
     public void acionJugador(int opcion, int pokemonJugando, int selecion, Pokemons enemigo) {
         switch (opcion) {
@@ -168,6 +169,22 @@ public class JugadorPokemonPartida {
 
     public int getPokemonCapturados() {
         return pokemonCapturados;
+    }
+
+    public MapaCiudad[] getMapaCiudadesLocal() {
+        return mapaCiudadesLocal;
+    }
+
+    public void setMapaCiudadesLocal(MapaCiudad[] mapaCiudadesLocal) {
+        this.mapaCiudadesLocal = mapaCiudadesLocal;
+    }
+
+    public EstadoPokemonEquipo getEquipoEstado() {
+        return equipoEstado;
+    }
+
+    public void setEquipoEstado(EstadoPokemonEquipo equipoEstado) {
+        this.equipoEstado = equipoEstado;
     }
 
 }

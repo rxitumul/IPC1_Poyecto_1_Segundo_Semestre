@@ -58,7 +58,7 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         System.out.println(formatearMapa("CONTROLES"));
         separadorMediosMapa();
         System.out.println(formatearMapa("    ┌───┐      "));
-        System.out.println(formatearMapa("    │ W │      M → Mochila       N → Mapa          X → Salir"));
+        System.out.println(formatearMapa("    │ W │      M → Mochila       N → Mapa         "));
         System.out.println(formatearMapa("┌───┼───┼───┐"));
         System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       F → Perfil"));
         System.out.println(formatearMapa("└───┴───┴───┘"));
@@ -101,7 +101,7 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         System.out.println(formatearMapa("CONTROLES"));
         separadorMediosMapa();
         System.out.println(formatearMapa("    ┌───┐      "));
-        System.out.println(formatearMapa("    │ W │      M → Mochila       N → Mapa          X → Salir"));
+        System.out.println(formatearMapa("    │ W │      M → Mochila       N → Mapa          "));
         System.out.println(formatearMapa("┌───┼───┼───┐"));
         System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       F → Perfil"));
         System.out.println(formatearMapa("└───┴───┴───┘"));
@@ -144,7 +144,7 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         System.out.println(formatearMapa("CONTROLES"));
         separadorMediosMapa();
         System.out.println(formatearMapa("    ┌───┐      "));
-        System.out.println(formatearMapa("    │ W │      M → Mochila       N → Mapa          X → Salir"));
+        System.out.println(formatearMapa("    │ W │      M → Mochila               "));
         System.out.println(formatearMapa("┌───┼───┼───┐"));
         System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       F → Perfil"));
         System.out.println(formatearMapa("└───┴───┴───┘"));

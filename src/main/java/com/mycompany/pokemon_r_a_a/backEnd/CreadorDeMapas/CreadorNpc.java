@@ -64,10 +64,10 @@ public class CreadorNpc {
     }
 
     private Entrenador[] creadorDeEntrenadoresYLider(int ciudad,String ciudadNombre) {
-        Entrenador[] lista = new Entrenador[4];
+        Entrenador[] lista = new Entrenador[5];
 
         // 4 entrenadores de gimnasio
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             Entrenador entrenador = new Entrenador(ciudadNombre);
             String nombre = nombresNpcGimnasioEntrenadores[random.nextInt(nombresNpcGimnasioEntrenadores.length)];
             entrenador.setNombre(nombre);
@@ -104,8 +104,8 @@ public class CreadorNpc {
         }
         lider.setLista(equipoLider);
 
-        Entrenador[] entrenadoresGym = new Entrenador[3];
-        System.arraycopy(lista, 0, entrenadoresGym, 0, 3);
+        Entrenador[] entrenadoresGym = new Entrenador[4];
+        System.arraycopy(lista, 0, entrenadoresGym, 0, 4);
         lider.setEntrenadores(entrenadoresGym);
 
         lista[4] = lider;

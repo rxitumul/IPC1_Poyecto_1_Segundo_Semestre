@@ -29,6 +29,8 @@ public class InicioGame {
      */
 
     public void inicio() {
+
+
         boolean salir = false;
         while (!salir) {
             int opcion = menuPrincipal.menuInicial();
@@ -57,5 +59,6 @@ public class InicioGame {
                     break;
             }
         }
+
     }
 }

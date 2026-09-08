@@ -3,7 +3,11 @@ package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones;
 import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.CreadorMapas;
+import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.EstadoPokemonEquipo;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Mochila;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Pokedex;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Npc;
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
@@ -15,6 +19,10 @@ public abstract class CasillasConMapas extends Casillas<JugadorPokemonPartida> {
     @SuppressWarnings("rawtypes")
     protected Casillas[][] mapa;
     protected String nombre;
+    protected EstadoPokemonEquipo equipoEstado;
+    protected Mochila mochilaLocal;
+    protected Pokedex pokedexLocal;
+    protected MapaCiudad[] mapaCiudadesLocal;
     protected ImpresorDeMapas impresor = new ImpresorDeMapas();
     protected Scanner scan = new Scanner(System.in);
     protected MovimientoJugador mov = new MovimientoJugador();
@@ -28,6 +36,24 @@ public abstract class CasillasConMapas extends Casillas<JugadorPokemonPartida> {
         mapaCreador = new CreadorMapas(hall);
         this.jugadorPosicion = new int[] { 10, 5 };
         this.mapa = mapa;
+        if (jugador != null) {
+            mochilaLocal = jugador.getMochilaJugador();
+            equipoEstado = jugador.getEquipoEstado();
+            pokedexLocal = jugador.getPokedexJugador();
+            mapaCiudadesLocal = jugador.getMapaCiudadesLocal();
+        }
+
+    }
+
+    @Override
+    public void setjugador(JugadorPokemonPartida jugador) {
+        super.setjugador(jugador);
+        if (jugador != null) {
+            this.mochilaLocal = jugador.getMochilaJugador();
+            this.equipoEstado = jugador.getEquipoEstado();
+            this.pokedexLocal = jugador.getPokedexJugador();
+            this.mapaCiudadesLocal = jugador.getMapaCiudadesLocal();
+        }
     }
 
     @Override
