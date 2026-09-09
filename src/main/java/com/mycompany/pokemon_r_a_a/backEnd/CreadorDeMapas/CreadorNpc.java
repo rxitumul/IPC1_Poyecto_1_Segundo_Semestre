@@ -59,15 +59,20 @@ public class CreadorNpc {
         return medallasGeneradas;
     }
 
-    public Entrenador[] creadorDeEntrenadoresYLider(String ciudadNombre) {
-        return creadorDeEntrenadoresYLider(0,ciudadNombre);
+    public Entrenador[] creadorDeEntrenadoresYLider(Pokemons[] equipoJugador, String ciudadNombre) {
+        return creadorDeEntrenadoresYLider(0, ciudadNombre, equipoJugador);
     }
 
-    private Entrenador[] creadorDeEntrenadoresYLider(int ciudad,String ciudadNombre) {
-        Entrenador[] lista = new Entrenador[5];
+    /** Sobrecarga sin equipo del jugador (usa nivel mínimo 1). */
+    public Entrenador[] creadorDeEntrenadoresYLider(String ciudadNombre) {
+        return creadorDeEntrenadoresYLider(0, ciudadNombre, null);
+    }
 
-        // 4 entrenadores de gimnasio
-        for (int i = 0; i < 4; i++) {
+    private Entrenador[] creadorDeEntrenadoresYLider(int ciudad, String ciudadNombre, Pokemons[] equipoJugador) {
+        Entrenador[] lista = new Entrenador[4];
+
+        // 3 entrenadores de gimnasio
+        for (int i = 0; i < 3; i++) {
             Entrenador entrenador = new Entrenador(ciudadNombre);
             String nombre = nombresNpcGimnasioEntrenadores[random.nextInt(nombresNpcGimnasioEntrenadores.length)];
             entrenador.setNombre(nombre);
@@ -78,7 +83,7 @@ public class CreadorNpc {
             int cantPokemon = random.nextInt(2) + 1;
             Pokemons[] equipo = new Pokemons[cantPokemon];
             for (int p = 0; p < cantPokemon; p++) {
-                equipo[p] = datosPokemon.pokemonRandom(15 + (ciudad * 10), cantPokemon);
+                equipo[p] = datosPokemon.pokemonRandom(equipoJugador, "ENTRENADOR");
             }
             entrenador.setLista(equipo);
             lista[i] = entrenador;
@@ -100,15 +105,15 @@ public class CreadorNpc {
         int cantPokemonLider = 2;
         Pokemons[] equipoLider = new Pokemons[cantPokemonLider];
         for (int p = 0; p < cantPokemonLider; p++) {
-            equipoLider[p] = datosPokemon.pokemonRandom(25 + (ciudad * 12), cantPokemonLider);
+            equipoLider[p] = datosPokemon.pokemonRandom(equipoJugador, "LIDER");
         }
         lider.setLista(equipoLider);
 
-        Entrenador[] entrenadoresGym = new Entrenador[4];
-        System.arraycopy(lista, 0, entrenadoresGym, 0, 4);
+        Entrenador[] entrenadoresGym = new Entrenador[3];
+        System.arraycopy(lista, 0, entrenadoresGym, 0, 3);
         lider.setEntrenadores(entrenadoresGym);
 
-        lista[4] = lider;
+        lista[3] = lider;
         return lista;
     }
 

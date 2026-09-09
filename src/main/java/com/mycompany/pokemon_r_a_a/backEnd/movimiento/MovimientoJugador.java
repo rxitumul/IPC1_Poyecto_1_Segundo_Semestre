@@ -9,7 +9,8 @@ public class MovimientoJugador {
     private Casillas casillaAnterior = new CasillaGenerica("   ", true, 6, false, null);
     private AccionDeMovimiento acion = new AccionDeMovimiento();
 
-    public Casillas[][] movimiento(int[] spawnE, Casillas[][] mapa, String movimiento, JugadorPokemonPartida jugador) {
+    public Casillas[][] movimiento(int[] spawnE, Casillas[][] mapa, String movimiento, JugadorPokemonPartida jugador,
+            boolean derrota) {
         spawn = spawnE;
         switch (movimiento.toLowerCase()) {
             case "w":
@@ -25,7 +26,11 @@ public class MovimientoJugador {
                 mapa = cambioJugador(mapa, "x", 1, jugador);
                 break;
             default:
-                System.out.println("ingresa una tecla de movimiento valida (W, A, S, D)");
+                if (derrota) {
+                mapa = cambioJugador(mapa, "x", 0, jugador);
+                } else {
+                    System.out.println("ingresa una tecla de movimiento valida (W, A, S, D)");
+                }
                 break;
         }
         return mapa;
@@ -61,6 +66,7 @@ public class MovimientoJugador {
     public int[] getSpawn() {
         return spawn;
     }
+
     public Casillas getCasillaAnterior() {
         return casillaAnterior;
     }

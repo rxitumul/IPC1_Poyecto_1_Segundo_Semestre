@@ -40,8 +40,8 @@ public class CreadorMapas {
                     INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
             { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, MOSTRADOR, MOSTRADOR, MOSTRADOR,
                     INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, INTERACION_CON_NPC_DE_ENFERMERA,
-                    INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENFERMERA, INTERACION_CON_NPC_DE_ENFERMERA,
+                    INTERACION_CON_NPC_DE_ENFERMERA, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
                     INTERACION_CON_NPC_DE_TELEVICION },
@@ -68,42 +68,16 @@ public class CreadorMapas {
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, 20, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO }
     };
     private int[][] mapaGimnasio = {
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO,      10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
+            { ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO,      10, INTERACION_CON_NPC_DE_ENEMIGO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO,      10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, INTERACION_CON_NPC_DE_ENEMIGO,      11, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SPAWN  , ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SALIDA, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO }
 
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO },
-
-            { ESPACIO, ESPACIO, 10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, 10,
-                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
-
-            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO },
-
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, 10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, 10,
-                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO },
-
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, 11,
-                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO },
-
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO,
-                    ESPACIO, ESPACIO, ESPACIO },
-
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO },
-
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO },
-
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO },
-
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO },
-
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO },
-
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, SALIDA, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
-                    ESPACIO }
     };
 
     private String[] nombres = { "Pallet Town",
@@ -111,6 +85,7 @@ public class CreadorMapas {
             "Lavender Town", "Fuchsia City", "Cinnabar Island" };
     private int[][] mapa = new int[25][25];
     private int[] jugador;
+    private int[] enfermeria;
     private Random rand = new Random();
     private CreadorDeMapaDeObjetos objetosMapa;
 
@@ -133,13 +108,12 @@ public class CreadorMapas {
         return getMapaCentroPokemon(npcCreador.creadorDeEnfermeria());
     }
 
-    public Casillas[][] getMapaGimnasio(Entrenador[] entrenadores,String ciudadNombre) {
+    public Casillas[][] getMapaGimnasio(Entrenador[] entrenadores, String ciudadNombre) {
         if (entrenadores == null) {
             entrenadores = npcCreador.creadorDeEntrenadoresYLider(ciudadNombre);
         }
-        return objetosMapa.creadorCasillasGimnasio(mapaGimnasio, entrenadores,"");
+        return objetosMapa.creadorCasillasGimnasio(mapaGimnasio, entrenadores, ciudadNombre);
     }
-
 
     public Casillas[][] getMapaTiendaPokemon(TiendaNpc tienda) {
         if (tienda == null) {
@@ -154,6 +128,7 @@ public class CreadorMapas {
 
     public MapaCiudad mapaCreador(MapaCiudad[] mapasCreados) {
         jugador = new int[2];
+        enfermeria = new int[2];
         String nombre = "";
 
         for (int i = 0; i < TAMANO_MAPA_POKEMON_FIN; i++) {
@@ -168,6 +143,7 @@ public class CreadorMapas {
         mapa = posicionAlAzara(mapa, TIENDA_POKEMON, false, false, 0);
         mapa = posicionAlAzara(mapa, GIMNACIO_POKEMON, false, false, 0);
         mapa = posicionAlAzara(mapa, CENTRO_POKEMON, false, false, 0);
+
         mapa = posicionAlAzara(mapa, MURRO, false, true, 20);
         mapa = posicionAlAzara(mapa, ARBOL, false, true, 15);
         mapa = posicionAlAzara(mapa, AGUA, false, true, 10);
@@ -187,7 +163,7 @@ public class CreadorMapas {
             }
         } while (true);
 
-        return new MapaCiudad(nombre, objetosMapa.creadorCasillasObjetos(mapa,nombre), jugador);
+        return new MapaCiudad(nombre, objetosMapa.creadorCasillasObjetos(mapa, nombre), jugador, enfermeria);
 
     }
 
@@ -206,6 +182,9 @@ public class CreadorMapas {
                     if (tipoAsignacion == SPAWN) {
                         jugador[0] = posicionY;
                         jugador[1] = posicionX;
+                    } else if (tipoAsignacion == CENTRO_POKEMON) {
+                        enfermeria[0] = posicionY;
+                        enfermeria[1] = posicionX;
                     }
                     break;
                 }
@@ -239,9 +218,5 @@ public class CreadorMapas {
             }
         }
         return mapaPokemonM;
-    }
-
-    public int[] getJugador() {
-        return jugador;
     }
 }

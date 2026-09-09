@@ -117,8 +117,47 @@ public class DatosPokemon {
             60, 50, 50,
             60
     };
+    // ── Multiplicadores de encuentro ──────────────────────────────────────────
+    private static final double M_SALVAJE     = 0.4;
+    private static final double M_ENTRENADOR  = 0.6;
+    private static final double M_LIDER       = 0.75;
 
-    public Pokemons pokemonRandom(int totalNiveles, int cantidadDePokemones) {
+    /**
+     * Calcula el nivel que debe tener un Pokémon rival basándose en el equipo
+     * del jugador y el tipo de encuentro ("SALVAJE", "ENTRENADOR" o "LIDER").
+     *
+     *   nivelGenerado = (Σ niveles del jugador × M) / cantidad de Pokémon
+     */
+    public int calcularNivelGenerado(Pokemons[] equipoJugador, String tipoEncuentro) {
+        if (equipoJugador == null || equipoJugador.length == 0) {
+            return 1;
+        }
+
+        int sumaNiveles = 0;
+        int cantidad = 0;
+        for (Pokemons p : equipoJugador) {
+            if (p != null) {
+                sumaNiveles += p.getNivel();
+                cantidad++;
+            }
+        }
+        if (cantidad == 0) {
+            return 1;
+        }
+
+        double m = M_SALVAJE;
+        if ("ENTRENADOR".equals(tipoEncuentro)) {
+            m = M_ENTRENADOR;
+        } else if ("LIDER".equals(tipoEncuentro)) {
+            m = M_LIDER;
+        }
+
+        int nivelGenerado = (int) ((sumaNiveles * 200) / cantidad);
+        return nivelGenerado < 1 ? 1 : nivelGenerado;
+    }
+
+
+    public Pokemons pokemonRandom(Pokemons[] equipoJugador, String tipoEncuentro) {
         Pokemons pokemon = new Pokemons();
         int numeroSeleccionado = random.nextInt(nombrePokemon.length);
         pokemon.setNombre(nombrePokemon[numeroSeleccionado]);
@@ -127,10 +166,12 @@ public class DatosPokemon {
         pokemon.setAtaqueInicial(ataquePokemon[numeroSeleccionado]);
         pokemon.setDefensaInicial(defensaPokemon[numeroSeleccionado]);
         pokemon.setVelocidadInicial(velocidadPokemon[numeroSeleccionado]);
-        pokemon.setNivel((int) ((totalNiveles * 0.4) / cantidadDePokemones));
+        int nivel = calcularNivelGenerado(equipoJugador, tipoEncuentro);
+        pokemon.setNivel(nivel);
         pokemon.restauradorArtibutos();
         return pokemon;
     }
+
 
     public Pokemons pokemonIniciales(int inicial) {
         Pokemons pokemon = new Pokemons();

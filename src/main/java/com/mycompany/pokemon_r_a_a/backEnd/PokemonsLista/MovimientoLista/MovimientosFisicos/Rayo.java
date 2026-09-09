@@ -15,7 +15,7 @@ public class Rayo extends Fisico {
         if (rand.nextDouble() <= 0.20) {
             String nombreObjetivo = pokemonAtacado.getApodo() != null ? pokemonAtacado.getApodo() : pokemonAtacado.getNombre();
             System.out.println(confi.formatearMapa("¡" + nombreObjetivo + " ha sido paralizado!"));
-            if (!pokemonAtacado.tieneEstado(Paralizado.class)) {
+            if (!pokemonAtacado.tieneEstado("Paralizado")) {
                 pokemonAtacado.agragarEstado(new Paralizado());
             }
         }

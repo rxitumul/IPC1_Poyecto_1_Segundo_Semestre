@@ -19,18 +19,8 @@ public class HiervaAlta extends Casillas<Pokemons> {
     
     public Pokemons accionCasilla(JugadorPokemonPartida jugador) {
         Pokemons[] jugadorGrupo = jugador.getPokemosEquipo();
-        int nivelEquipo = 0;
-        if (random.nextDouble() > 0.15) {
-            for (Pokemons pokemons : jugadorGrupo) {
-                if (pokemons != null) {
-                    int nivelPokemon = pokemons.getNivel();
-                    if (nivelEquipo < nivelPokemon) {
-                        nivelEquipo = nivelPokemon;
-                    }
-
-                }
-            }
-            Pokemons pokemonSalvaje = datos.pokemonRandom(nivelEquipo, 1);
+        if (random.nextDouble() < 0.15) {
+            Pokemons pokemonSalvaje = datos.pokemonRandom(jugadorGrupo, "SALVAJE");
             batalla.pokemonPeleaHierva(jugador, pokemonSalvaje);
 
         }

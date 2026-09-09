@@ -14,7 +14,13 @@ public class ImpresorEstado extends ImpresoresGlobal {
         int contador = 1;
         for (Pokemons pokemons : pokemos) {
             if (pokemons != null) {
-                if (pokemons.getVidaInicial() == pokemons.getVidaPokemon()) {
+                if (pokemons.getVidaPokemon() <= 0) {
+                     System.out.println(formatearMapa(contador + ") " + pokemons.getApodo()
+                            + "   Lvl"
+                            + pokemons.getNivel() + " HP [DEBILITADO]  "
+                            + pokemons.getVidaInicial() + "/"
+                            + pokemons.getVidaPokemon()));
+                } else if (pokemons.getVidaInicial() == pokemons.getVidaPokemon()) {
                     System.out.println(formatearMapa(contador + ") " + pokemons.getApodo()
                             + "   Lvl"
                             + pokemons.getNivel() + " HP " + BARRAS_DE_VIDA_100 + "  "

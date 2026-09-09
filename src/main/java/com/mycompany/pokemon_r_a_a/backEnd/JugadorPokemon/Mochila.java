@@ -25,14 +25,14 @@ public class Mochila {
         switch (tipo) {
             case 1:
                 if (antiParalisis > 0) {
-                    aplicacion.eliminarEstadoPorClase(Paralizado.class);
+                    aplicacion.eliminarEstado("Paralizado");
                     antiParalisis--;
                     impresorDeSelecion.mensajeInformativo("¡Parálisis curada!");
                 }
                 break;
             case 2:
                 if (antidoto > 0) {
-                    aplicacion.eliminarEstadoPorClase(Envenenado.class);
+                    aplicacion.eliminarEstado("Envenenado");
                     antidoto--;
                     impresorDeSelecion.mensajeInformativo("¡Veneno curado!");
                 }
@@ -57,6 +57,25 @@ public class Mochila {
                     superPocion--;
                 }
                 break;
+        }
+    }
+
+    public boolean tieneObjeto(int tipo) {
+        switch (tipo) {
+            case 1:
+                return antiParalisis > 0;
+            case 2:
+                return antidoto > 0;
+            case 3:
+                return pocion > 0;
+            case 4:
+                return pokebola > 0;
+            case 5:
+                return restauraTodo > 0;
+            case 6:
+                return superPocion > 0;
+            default:
+                return false;
         }
     }
 

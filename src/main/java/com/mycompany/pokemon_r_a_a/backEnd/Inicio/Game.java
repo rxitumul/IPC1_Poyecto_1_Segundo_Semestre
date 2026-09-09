@@ -23,6 +23,8 @@ public class Game {
     private EstadoPokemonEquipo equipoEstado;
 
     private int[] jugadorPosicion;
+    private int[] enfermeriaPosicion;
+
     private MapaCiudad[] mapaCiudadesLocal;
 
     public Game(Scanner scanner, MapaCiudad[] mapaCiudades,
@@ -33,7 +35,6 @@ public class Game {
         mochilaLocal = jugador.getMochilaJugador();
         mapaCiudadesLocal = mapaCiudades;
         equipoEstado = new EstadoPokemonEquipo(scanner, jugadorLocal);
-        
 
     }
 
@@ -42,17 +43,20 @@ public class Game {
         Casillas[][] mapaLocal = mapa.getMapa();
         String nombreCiudad = mapa.getNombre();
         jugadorPosicion = mapa.getJugador();
+        enfermeriaPosicion = mapa.getEnfermeria();
         Mapas mapas = new Mapas(scanner, mapaCiudadesLocal);
         String movi;
         jugadorLocal.setMapaCiudadesLocal(mapaCiudadesLocal);
         jugadorLocal.setEquipoEstado(equipoEstado);
+        boolean vencido = false;
         do {
             impresor.imprimirMapaObjetos(mapaLocal, nombreCiudad);
             movi = scanner.nextLine();
             if (movi.equalsIgnoreCase("W") || movi.equalsIgnoreCase("S") || movi.equalsIgnoreCase("A")
                     || movi.equalsIgnoreCase("D")) {
-                mapaLocal = movimiento.movimiento(jugadorPosicion, mapaLocal, movi, jugadorLocal);
+                mapaLocal = movimiento.movimiento(jugadorPosicion, mapaLocal, movi, jugadorLocal, false);
                 jugadorPosicion = movimiento.getSpawn();
+                vencido = jugadorLocal.getVencido();
 
             } else if (movi.equalsIgnoreCase("M")) {
                 mochilaLocal.menuInicialMochila();
@@ -76,6 +80,16 @@ public class Game {
             } else {
                 System.out.println("hola");
             }
+            if (vencido) {
+
+                int[] enfermeriaActual = mapa.getEnfermeria();
+                jugadorPosicion = enfermeriaActual;
+
+                mapaLocal = movimiento.movimiento(jugadorPosicion, mapaLocal, "teleport", jugadorLocal, true);
+                jugadorPosicion = movimiento.getSpawn();
+                jugadorLocal.setVencido(false);
+            }
+
         } while (true);
     }
 

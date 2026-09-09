@@ -22,7 +22,8 @@ public abstract class Fisico extends Movimiento {
 
         // Verificar si el objetivo está en el aire (por Vuelo)
         if (pokemonAtacado.isEnElAire()) {
-            System.out.println(confi.formatearMapa("¡El ataque falló porque " + pokemonAtacado.getNombre() + " está en el aire!"));
+            System.out.println(
+                    confi.formatearMapa("¡El ataque falló porque " + pokemonAtacado.getNombre() + " está en el aire!"));
             return 0;
         }
 
@@ -36,10 +37,12 @@ public abstract class Fisico extends Movimiento {
         if (def <= 0) {
             def = 1;
         }
+        if (nivelPokemon <= 0) {
+            nivelPokemon = 1;
+        }
 
-        daño = (int) (0.01 * variacion
-                * ((((0.2 * nivelPokemon + 1) * puntosDeAtaque * potencia) / (25.0 * def))
-                        + 2));
+        int daño = (int) (0.01 * variacion *
+                ((((0.2 * nivelPokemon + 1) * puntosDeAtaque * potencia) / (25.0 * def)) + 2));
         if (daño < 1) {
             daño = 1;
         }

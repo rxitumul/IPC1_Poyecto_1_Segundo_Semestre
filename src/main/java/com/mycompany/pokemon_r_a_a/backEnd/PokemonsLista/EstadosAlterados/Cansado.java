@@ -4,6 +4,8 @@ public class Cansado extends Estados {
 
     public Cansado() {
         contador = 1;
+        nombre = "Cansado";
+        nombreCorto = "CAN";
     }
 
 }

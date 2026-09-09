@@ -22,6 +22,8 @@ public class IntracionTele extends InteracionCasillas<HallDeLaFama> {
     @Override
     public Boolean subMenu() {
         npcT.mostrarHallDeLaFama();
+        front.mensajeInformativo("Precione Enter para contiduar");
+        scanner.nextLine();
         return true;
     }
 }

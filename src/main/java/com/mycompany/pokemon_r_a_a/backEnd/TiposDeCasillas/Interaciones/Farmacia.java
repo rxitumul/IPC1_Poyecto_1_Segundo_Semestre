@@ -31,42 +31,40 @@ public class Farmacia extends CasillasConMapas {
 
         do {
             Casillas casillaAnterior = mov.getCasillaAnterior();
+
+            // Mostrar diálogo según la casilla en la que está parado el jugador
             if (casillaAnterior.tipoCasilla() == 16) {
+                // Parado sobre casilla de enfermera → mostrar diálogo enfermera
                 impresor.imprimidorDeMapaConInteracioFarmacia(mapa, nombre, npc, true, true);
-
             } else if (casillaAnterior.tipoCasilla() == 18) {
+                // Parado sobre casilla de televisión → mostrar prompt de TV
                 impresor.imprimidorDeMapaConInteracioFarmacia(mapa, nombre, npc, true, false);
-
             } else {
                 impresor.imprimidorDeMapaConInteracioFarmacia(mapa, nombre, npc, false, true);
             }
+
             movimientoJugador = scan.nextLine();
-            if (casillaAnterior.tipoCasilla() == 18
-                    || casillaAnterior.tipoCasilla() == 16 && movimientoJugador.trim().equalsIgnoreCase("C")) {
+
+            // Interacción con NPC (enfermera tipo 16) o TV (tipo 18) → requiere tecla C
+            if (movimientoJugador.trim().equalsIgnoreCase("C")
+                    && (casillaAnterior.tipoCasilla() == 16 || casillaAnterior.tipoCasilla() == 18)) {
                 casillaAnterior.subMenu();
-            } else {
-
-                if (movimientoJugador.equalsIgnoreCase("W") || movimientoJugador.equalsIgnoreCase("S")
-                        || movimientoJugador.equalsIgnoreCase("A")
-                        || movimientoJugador.equalsIgnoreCase("D")) {
-                    mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador);
-                    jugadorPosicion = mov.getSpawn();
-                    salida = mov.getCondicionSalida();
-                } else if (movimientoJugador.equalsIgnoreCase("M")) {
-                    mochilaLocal.menuInicialMochila();
-                } else if (movimientoJugador.equalsIgnoreCase("P")) {
-                    equipoEstado.menuInicial();
-                } else if (movimientoJugador.equalsIgnoreCase("T")) {
-                    pokedexLocal.pokedexMenu();
-                } else if (movimientoJugador.equalsIgnoreCase("F")) {
-                    jugador.perfil(mapaCiudadesLocal);
-                } else {
-                    impresor.pantallaDeError();
-                }
-
-                mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador);
+            } else if (movimientoJugador.equalsIgnoreCase("W") || movimientoJugador.equalsIgnoreCase("S")
+                    || movimientoJugador.equalsIgnoreCase("A")
+                    || movimientoJugador.equalsIgnoreCase("D")) {
+                mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador,false);
                 jugadorPosicion = mov.getSpawn();
                 salida = mov.getCondicionSalida();
+            } else if (movimientoJugador.equalsIgnoreCase("M")) {
+                mochilaLocal.menuInicialMochila();
+            } else if (movimientoJugador.equalsIgnoreCase("P")) {
+                equipoEstado.menuInicial();
+            } else if (movimientoJugador.equalsIgnoreCase("T")) {
+                pokedexLocal.pokedexMenu();
+            } else if (movimientoJugador.equalsIgnoreCase("F")) {
+                jugador.perfil(mapaCiudadesLocal);
+            } else {
+                impresor.pantallaDeError();
             }
 
             impresor.limpiadorPantalla();

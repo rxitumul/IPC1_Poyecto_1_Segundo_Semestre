@@ -9,9 +9,13 @@ public class EnfermeriaNpc extends Npc<Pokemons> {
      @Override
     public void accion() {
         if (boleanoActivo){
-            for (Pokemons pokemons : pokemosEquipo) {
-                pokemons.restauradorArtibutos();
-                pokemons.lipiarEstadosTodos();
+            if (pokemosEquipo != null) {
+                for (Pokemons pokemons : pokemosEquipo) {
+                    if (pokemons != null) {
+                        pokemons.restauradorArtibutos();
+                        pokemons.lipiarEstadosTodos();
+                    }
+                }
             }
         }
     }

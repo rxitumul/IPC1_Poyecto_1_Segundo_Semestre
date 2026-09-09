@@ -99,8 +99,18 @@ public class AccionDeMovimiento {
                     }
                     break;
                 case 18:
-                    mensaje.mensajeInformativo("Mirando la Televisión...");
-                    casilla.subMenu();
+
+                casilla.setjugador(jugador);
+                    mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
+                    casillaAnteriorLocal = casilla;
+                    mapa[y][x] = new CasillaGenerica(MAGENTA + " > " + RESET, true, 4, false, null);
+                    if (posicionXOY) {
+                        spawnLocal[1] = x;
+                    } else {
+                        spawnLocal[0] = y;
+                    }
+                    //1
+                    
                     break;
                 case 20:
                     mensaje.mensajeInformativo("Regresando al exterior...");
@@ -130,8 +140,8 @@ public class AccionDeMovimiento {
                 case 1:
                     // Gimnasio Pokemon
                     mensaje.mensajeInformativo("Ingresando al Gimnasio Pokémon...");
-                    casilla.setMapa();
                     casilla.setjugador(jugador);
+                    casilla.setMapa();
                     casilla.subMenu();
                     break;
                 case 2:

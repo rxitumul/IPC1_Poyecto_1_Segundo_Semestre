@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.ListaEnlazadaException;
 import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.Listas;
+import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.Nodo;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Estados;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimiento;
 
@@ -51,26 +52,133 @@ public class Pokemons {
     private boolean enElAire = false;
     private boolean cargandoRayoSolar = false;
 
-    public boolean isEnElAire() {
-        return enElAire;
-    }
-
-    public void setEnElAire(boolean enElAire) {
-        this.enElAire = enElAire;
-    }
-
-    public boolean isCargandoRayoSolar() {
-        return cargandoRayoSolar;
-    }
-
-    public void setCargandoRayoSolar(boolean cargandoRayoSolar) {
-        this.cargandoRayoSolar = cargandoRayoSolar;
-    }
-
     public void eliminarElefecto(Estados estado) throws ListaEnlazadaException {
         int index = estadosAlterados.obtenerIndex(estado);
         if (index != -1) {
             estadosAlterados.eliminar(index);
+        }
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+        int xpSubirDeNivel = (nivel + 1) * (nivel + 1);
+        while (xp >= xpSubirDeNivel) {
+            nivel++;
+            setNivel(nivel);
+            if (apodo != null && !apodo.isEmpty()) {
+                System.out.println("¡El Pokémon " + apodo + " subió al nivel " + nivel + "!");
+            } else {
+                System.out.println("¡El Pokémon " + nombreLocal + " subió al nivel " + nivel + "!");
+            }
+            xpSubirDeNivel = (nivel + 1) * (nivel + 1);
+        }
+    }
+
+    public String getEstadosActivosString() {
+        String resultado = "";
+
+        Nodo<Estados> actual = estadosAlterados.getInicio();
+        while (actual != null) {
+            Estados e = actual.getContenido();
+            if (e != null) {
+                if (!resultado.isEmpty()) {
+                    resultado += " ";
+                }
+                resultado += "[" + e.getNombreCorto() + "]";
+            }
+            actual = actual.getSiguiente();
+        }
+
+        actual = estadosAlteradosPermanete.getInicio();
+        while (actual != null) {
+            Estados e = actual.getContenido();
+            if (e != null) {
+                if (!resultado.isEmpty()) {
+                    resultado += " ";
+                }
+                resultado += "[" + e.getNombreCorto() + "]";
+            }
+            actual = actual.getSiguiente();
+        }
+
+        return resultado.isEmpty() ? "NINGUNO" : resultado;
+    }
+
+    public boolean tieneEstado(String nombreEstado) {
+        Nodo<Estados> actual = estadosAlterados.getInicio();
+        while (actual != null) {
+            Estados e = actual.getContenido();
+            if (e != null && e.getNombre().equals(nombreEstado)) {
+                return true;
+            }
+            actual = actual.getSiguiente();
+        }
+
+        actual = estadosAlteradosPermanete.getInicio();
+        while (actual != null) {
+            Estados e = actual.getContenido();
+            if (e != null && e.getNombre().equals(nombreEstado)) {
+                return true;
+            }
+            actual = actual.getSiguiente();
+        }
+        return false;
+    }
+
+    public Estados obtenerEstado(String nombreEstado) {
+        Nodo<Estados> actual = estadosAlterados.getInicio();
+        while (actual != null) {
+            Estados e = actual.getContenido();
+            if (e != null && e.getNombre().equals(nombreEstado)) {
+                return e;
+            }
+            actual = actual.getSiguiente();
+        }
+
+        actual = estadosAlteradosPermanete.getInicio();
+        while (actual != null) {
+            Estados e = actual.getContenido();
+            if (e != null && e.getNombre().equals(nombreEstado)) {
+                return e;
+            }
+            actual = actual.getSiguiente();
+        }
+        return null;
+    }
+
+    public void eliminarEstado(String nombreEstado) {
+        int index = 0;
+        Nodo<Estados> actual = estadosAlterados.getInicio();
+        while (actual != null) {
+            Nodo<Estados> siguiente = actual.getSiguiente();
+            Estados e = actual.getContenido();
+            if (e != null && e.getNombre().equals(nombreEstado)) {
+                try {
+                    estadosAlterados.eliminar(index);
+                } catch (ListaEnlazadaException ex) {
+                    break;
+                }
+            } else {
+                index++;
+            }
+            actual = siguiente;
+        }
+
+        index = 0;
+        actual = estadosAlteradosPermanete.getInicio();
+        while (actual != null) {
+            Nodo<Estados> siguiente = actual.getSiguiente();
+            Estados e = actual.getContenido();
+            if (e != null && e.getNombre().equals(nombreEstado)) {
+                try {
+                    estadosAlteradosPermanete.eliminar(index);
+                } catch (ListaEnlazadaException ex) {
+                    break;
+                }
+            } else {
+                index++;
+            }
+            actual = siguiente;
         }
     }
 
@@ -87,16 +195,6 @@ public class Pokemons {
             return rand.nextDouble() <= 0.70;
         }
         return false;
-    }
-
-    public void setXp(int xp) {
-        this.xp = xp;
-        int xpSubirDeNivel = (nivel + 1) ^ 2;
-        if (xpSubirDeNivel < xp || xpSubirDeNivel == xp) {
-            nivel++;
-            setNivel(nivel);
-            System.out.println("pokemon " + apodo + "subio de nivel a nivel " + nivel);
-        }
     }
 
     public void setActivoBloqueo(boolean activoBloqueo) {
@@ -119,77 +217,20 @@ public class Pokemons {
         return estadosAlteradosPermanete;
     }
 
-    public boolean tieneEstado(Class<? extends Estados> tipo) {
-        for (int i = 0; i < estadosAlterados.getCapacidad(); i++) {
-            try {
-                Estados e = estadosAlterados.obtenerContenido(i);
-                if (e != null && e.getClass() == tipo) {
-                    return true;
-                }
-            } catch (ListaEnlazadaException ex) {
-                break;
-            }
-        }
-        for (int i = 0; i < estadosAlteradosPermanete.getCapacidad(); i++) {
-            try {
-                Estados e = estadosAlteradosPermanete.obtenerContenido(i);
-                if (e != null && e.getClass() == tipo) {
-                    return true;
-                }
-            } catch (ListaEnlazadaException ex) {
-                break;
-            }
-        }
-        return false;
+    public boolean isEnElAire() {
+        return enElAire;
     }
 
-    public Estados obtenerEstado(Class<? extends Estados> tipo) {
-        for (int i = 0; i < estadosAlterados.getCapacidad(); i++) {
-            try {
-                Estados e = estadosAlterados.obtenerContenido(i);
-                if (e != null && e.getClass() == tipo) {
-                    return e;
-                }
-            } catch (ListaEnlazadaException ex) {
-                break;
-            }
-        }
-        for (int i = 0; i < estadosAlteradosPermanete.getCapacidad(); i++) {
-            try {
-                Estados e = estadosAlteradosPermanete.obtenerContenido(i);
-                if (e != null && e.getClass() == tipo) {
-                    return e;
-                }
-            } catch (ListaEnlazadaException ex) {
-                break;
-            }
-        }
-        return null;
+    public void setEnElAire(boolean enElAire) {
+        this.enElAire = enElAire;
     }
 
-    public void eliminarEstadoPorClase(Class<? extends Estados> tipo) {
-        for (int i = 0; i < estadosAlterados.getCapacidad(); i++) {
-            try {
-                Estados e = estadosAlterados.obtenerContenido(i);
-                if (e != null && e.getClass() == tipo) {
-                    estadosAlterados.eliminar(i);
-                    i--;
-                }
-            } catch (ListaEnlazadaException ex) {
-                break;
-            }
-        }
-        for (int i = 0; i < estadosAlteradosPermanete.getCapacidad(); i++) {
-            try {
-                Estados e = estadosAlteradosPermanete.obtenerContenido(i);
-                if (e != null && e.getClass() == tipo) {
-                    estadosAlteradosPermanete.eliminar(i);
-                    i--;
-                }
-            } catch (ListaEnlazadaException ex) {
-                break;
-            }
-        }
+    public boolean isCargandoRayoSolar() {
+        return cargandoRayoSolar;
+    }
+
+    public void setCargandoRayoSolar(boolean cargandoRayoSolar) {
+        this.cargandoRayoSolar = cargandoRayoSolar;
     }
 
     public void lipiarEstadosTodos() {
@@ -232,7 +273,8 @@ public class Pokemons {
     }
 
     public void setNivel(int nivel) {
-        if (nivel == 1) {
+        if (nivel <= 1) {
+            this.nivel = 1;
             restauradorArtibutos();
         } else {
 

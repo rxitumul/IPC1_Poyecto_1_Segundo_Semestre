@@ -20,32 +20,40 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
                 formatearMapaCentrado("Especie: " + pokemonJugador.getNombre()
                         + "                      Especie: "
                         + pokemonEnemigo.getNombre()));
+        String apodoJ = (pokemonJugador.getApodo() != null && !pokemonJugador.getApodo().isEmpty())
+                ? pokemonJugador.getApodo() : pokemonJugador.getNombre();
+        String apodoE = (pokemonEnemigo.getApodo() != null && !pokemonEnemigo.getApodo().isEmpty())
+                ? pokemonEnemigo.getApodo() : pokemonEnemigo.getNombre();
         System.out.println(formatearMapaCentrado(
-                "Apodo: " + pokemonJugador.getNombre() + "                      Apodo: "
-                        + pokemonEnemigo.getNombre()));
+                "Apodo: " + apodoJ + "                      Apodo: "
+                        + apodoE));
         System.out.println(formatearMapaCentrado(
                 "NIVEL  " + pokemonJugador.getNivel() + "                       NIVEL  "
                         + pokemonEnemigo.getNivel()));
         System.out.println(
-                formatearMapaCentrado("HP: " + pokemonJugador.getVidaInicial() + "/"
-                        + pokemonJugador.getVidaPokemon()
-                        + "                      HP: " + pokemonEnemigo.getVidaInicial() + "/"
-                        + pokemonEnemigo.getVidaPokemon()));
+                formatearMapaCentrado("HP: " + pokemonJugador.getVidaPokemon() + "/"
+                        + pokemonJugador.getVidaInicial()
+                        + "                      HP: " + pokemonEnemigo.getVidaPokemon() + "/"
+                        + pokemonEnemigo.getVidaInicial()));
+        System.out.println(formatearMapaCentrado(
+                "Estado: " + pokemonJugador.getEstadosActivosString()
+                        + "                      Estado: "
+                        + pokemonEnemigo.getEstadosActivosString()));
         System.out.println(formatearMapaCentrado(""));
         separadorMediosMapa();
-
     }
 
     public void impresorDeBatallaOpcionesPokemonSalvaje() {
         System.out.println(formatearMapaCentrado("¿QUÉ HARÁS?"));
-        System.out.println(formatearMapaCentrado("[1] LUCHAR          [2] MOCHILA"));
-        System.out.println(formatearMapaCentrado("[3] POKÉMON         [4] HUIR"));
+        System.out.println(formatearMapaCentrado("[1] ATACAR          [2] CAMBIAR POKÉMON"));
+        System.out.println(formatearMapaCentrado("[3] USAR OBJETO     [4] HUIR"));
         separadorFinalMapa();
     }
 
     public void impresorDeBatallaOpciones() {
         System.out.println(formatearMapaCentrado("¿QUÉ HARÁS?"));
-        System.out.println(formatearMapaCentrado("[1] LUCHAR     [2] MOCHILA     [3] POKÉMON"));
+        System.out.println(formatearMapaCentrado("[1] ATACAR          [2] CAMBIAR POKÉMON"));
+        System.out.println(formatearMapaCentrado("[3] USAR OBJETO     [4] HUIR"));
         separadorFinalMapa();
     }
 
@@ -101,48 +109,45 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
     }
 
     public void cambioPokemon(Pokemons[] pokemos) {
+        cambioPokemon(pokemos, true);
+    }
+
+    public void cambioPokemon(Pokemons[] pokemos, boolean permitirVolver) {
         separadorInicioMapa();
         System.out.println(formatearMapaCentrado("CAMBIAR POKÉMON"));
         separadorMediosMapa();
-        int contador = 0;
+        int contador = 1;
         for (Pokemons pokemons : pokemos) {
             if (pokemons != null) {
-                if (pokemons.getVidaInicial() == pokemons.getVidaPokemon()) {
-                    System.out.println(formatearMapa(contador + ") " + pokemons.getApodo()
-                            + " Lvl "
-                            + pokemons.getNivel() + " HP " + BARRAS_DE_VIDA_100
-                            + pokemons.getVidaInicial() + "/"
-                            + pokemons.getVidaPokemon()));
-
-                } else if (pokemons.getVidaInicial() < (pokemons.getVidaPokemon() / 2)) {
-                    System.out.println(formatearMapa(
-                            contador + ") " + pokemons.getApodo() + " Lvl "
-                                    + pokemons.getNivel() + " HP "
-                                    + BARRAS_DE_VIDA_75 + pokemons.getVidaInicial()
-                                    + "/" + pokemons.getVidaPokemon()));
-
-                } else if (pokemons.getVidaInicial() < (pokemons.getVidaPokemon() / 2) / 2) {
-                    System.out.println(formatearMapa(
-                            contador + ") " + pokemons.getApodo() + " Lvl "
-                                    + pokemons.getNivel() + " HP "
-                                    + BARRAS_DE_VIDA_50 + pokemons.getVidaInicial()
-                                    + "/" + pokemons.getVidaPokemon()));
-
+                String apodo = (pokemons.getApodo() != null && !pokemons.getApodo().isEmpty())
+                        ? pokemons.getApodo() : pokemons.getNombre();
+                int vidaMax = pokemons.getVidaInicial();
+                int vidaAct = pokemons.getVidaPokemon();
+                String barra;
+                if (vidaAct <= 0) {
+                    barra = "[DEBILITADO] ";
+                } else if (vidaMax > 0 && vidaAct >= vidaMax) {
+                    barra = BARRAS_DE_VIDA_100;
+                } else if (vidaMax > 0 && vidaAct >= (vidaMax * 3) / 4) {
+                    barra = BARRAS_DE_VIDA_75;
+                } else if (vidaMax > 0 && vidaAct >= vidaMax / 2) {
+                    barra = BARRAS_DE_VIDA_50;
                 } else {
-                    System.out.println(formatearMapa(
-                            contador + ") " + pokemons.getApodo() + " Lvl "
-                                    + pokemons.getNivel() + " HP "
-                                    + BARRAS_DE_VIDA_25 + pokemons.getVidaInicial()
-                                    + "/" + pokemons.getVidaPokemon()));
+                    barra = BARRAS_DE_VIDA_25;
                 }
+                System.out.println(formatearMapa(contador + ") " + apodo + " (" + pokemons.getNombre() + ")"
+                        + " Lvl " + pokemons.getNivel() + " HP " + barra
+                        + vidaAct + "/" + vidaMax));
             } else {
-                System.out.println(formatearMapa(contador + ") Sin pokemon "));
+                System.out.println(formatearMapa(contador + ") Sin Pokémon"));
             }
             contador++;
             System.out.println(formatearMapa(""));
         }
         separadorMediosMapa();
-        System.out.println(formatearCentrado("0) Volver"));
+        if (permitirVolver) {
+            System.out.println(formatearCentrado("0) Volver"));
+        }
         separadorFinalMapa();
     }
 

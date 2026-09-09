@@ -4,6 +4,8 @@ public class Paralizado extends Estados {
 
     public Paralizado(){
         contador=2;
+        nombre = "Paralizado";
+        nombreCorto = "PAR";
     }
 }
 

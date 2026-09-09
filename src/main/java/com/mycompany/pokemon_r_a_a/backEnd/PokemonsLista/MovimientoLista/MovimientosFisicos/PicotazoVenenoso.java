@@ -15,7 +15,7 @@ public class PicotazoVenenoso extends Fisico {
         if (rand.nextDouble() <= 0.15) {
             String nombreObjetivo = pokemonAtacado.getApodo() != null ? pokemonAtacado.getApodo() : pokemonAtacado.getNombre();
             System.out.println(confi.formatearMapa("¡" + nombreObjetivo + " ha sido envenenado!"));
-            if (!pokemonAtacado.tieneEstado(Envenenado.class)) {
+            if (!pokemonAtacado.tieneEstado("Envenenado")) {
                 pokemonAtacado.agragarEstadoPermanete(new Envenenado(pokemonAtacado));
             }
         }

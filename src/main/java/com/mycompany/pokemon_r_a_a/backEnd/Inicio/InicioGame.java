@@ -22,30 +22,26 @@ public class InicioGame {
     private Pokemons[] pokedexLista = new Pokemons[25];
     private MenuPrincipal menuPrincipal = new MenuPrincipal(scanner);
     private DatosPokemon datos = new DatosPokemon();
-    /*
-     * "Pokédex liberada: ✓",
-     * 
-     * 
-     */
 
     public void inicio() {
-
 
         boolean salir = false;
         while (!salir) {
             int opcion = menuPrincipal.menuInicial();
+            Pokedex pokedex = new Pokedex(pokedexLista, scanner);
             switch (opcion) {
                 case 1:
-                    //profe.charlaInicial();
+                    
+                    // profe.charlaInicial();
                     jugador.setPokemosEquipo(equipos);
                     jugador.setMochilaJugador(mochila);
                     profe.regaloProfesor(jugador);
                     pokedexLista = datos.creadorPokedesData();
-                    Pokedex pokedex = new Pokedex(pokedexLista, scanner);
                     MapaCiudad[] mapas = new MapaCiudad[3];
                     for (int i = 0; i < mapas.length; i++) {
                         mapas[i] = creador.mapaCreador(mapas);
                     }
+
                     jugador.setPokedexJugador(pokedex);
                     Game game = new Game(scanner, mapas, jugador);
                     game.gameInicio(0);

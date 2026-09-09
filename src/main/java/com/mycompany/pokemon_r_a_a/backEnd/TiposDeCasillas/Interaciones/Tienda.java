@@ -44,9 +44,25 @@ public class Tienda extends CasillasConMapas {
             if (casillaAnterior.tipoCasilla() == 17 && movimientoJugador.trim().equalsIgnoreCase("C")) {
                 casillaAnterior.subMenu();
             } else {
-                mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador);
-                jugadorPosicion = mov.getSpawn();
-                salida = mov.getCondicionSalida();
+
+                 if (movimientoJugador.equalsIgnoreCase("W") || movimientoJugador.equalsIgnoreCase("S")
+                        || movimientoJugador.equalsIgnoreCase("A")
+                        || movimientoJugador.equalsIgnoreCase("D")) {
+                    mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador,false);
+                    jugadorPosicion = mov.getSpawn();
+                    salida = mov.getCondicionSalida();
+                } else if (movimientoJugador.equalsIgnoreCase("M")) {
+                    mochilaLocal.menuInicialMochila();
+                } else if (movimientoJugador.equalsIgnoreCase("P")) {
+                    equipoEstado.menuInicial();
+                } else if (movimientoJugador.equalsIgnoreCase("T")) {
+                    pokedexLocal.pokedexMenu();
+                } else if (movimientoJugador.equalsIgnoreCase("F")) {
+                    jugador.perfil(mapaCiudadesLocal);
+                } else {
+                    impresor.pantallaDeError();
+                }
+            
             }
             impresor.limpiadorPantalla();
 

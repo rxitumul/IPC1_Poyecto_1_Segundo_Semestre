@@ -1,5 +1,6 @@
 package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
@@ -8,7 +9,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimiento;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
 
-public class JugadorPokemonPartida {
+public class JugadorPokemonPartida implements Serializable {
     private String nombre;
     private int pokemonedas;
     private int[] medallasObtenidas = { 0, 0, 0 };
@@ -25,6 +26,7 @@ public class JugadorPokemonPartida {
     private int pokebolasLanzadas = 0;
     private int pokemonCapturados = 0;
     private EstadoPokemonEquipo equipoEstado;
+    private boolean vencido;
 
     public void acionJugador(int opcion, int pokemonJugando, int selecion, Pokemons enemigo) {
         switch (opcion) {
@@ -63,6 +65,7 @@ public class JugadorPokemonPartida {
 
     public JugadorPokemonPartida(Scanner scanner) {
         pokemonedas = 1000;
+        vencido = false;
         this.scanner = scanner;
     }
 
@@ -167,8 +170,29 @@ public class JugadorPokemonPartida {
         return pokebolasLanzadas;
     }
 
+    public void incrementarPokebolasLanzadas() {
+        this.pokebolasLanzadas++;
+    }
+
     public int getPokemonCapturados() {
         return pokemonCapturados;
+    }
+
+    public void incrementarPokemonCapturados() {
+        this.pokemonCapturados++;
+    }
+
+    public int getCantidadPokemonEquipo() {
+        if (pokemosEquipo == null) {
+            return 0;
+        }
+        int count = 0;
+        for (Pokemons p : pokemosEquipo) {
+            if (p != null) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public MapaCiudad[] getMapaCiudadesLocal() {
@@ -185,6 +209,14 @@ public class JugadorPokemonPartida {
 
     public void setEquipoEstado(EstadoPokemonEquipo equipoEstado) {
         this.equipoEstado = equipoEstado;
+    }
+
+    public void setVencido(boolean vencido) {
+        this.vencido = vencido;
+    }
+
+    public boolean getVencido() {
+        return vencido;
     }
 
 }

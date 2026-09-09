@@ -2,6 +2,30 @@ package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados;
 
 public abstract class Estados {
     protected int contador;
+    protected String nombre;
+    protected String nombreCorto;
+
+    public String getNombre() {
+        if (nombre != null) {
+            return nombre;
+        }
+        return getClass().getSimpleName();
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombreCorto() {
+        if (nombreCorto != null) {
+            return nombreCorto;
+        }
+        return getNombre();
+    }
+
+    public void setNombreCorto(String nombreCorto) {
+        this.nombreCorto = nombreCorto;
+    }
 
     public int getContador() {
         return contador;
@@ -27,8 +51,12 @@ public abstract class Estados {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
         return this.getClass() == obj.getClass();
     }
 

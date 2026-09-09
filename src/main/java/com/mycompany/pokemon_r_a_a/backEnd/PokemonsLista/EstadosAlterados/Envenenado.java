@@ -7,9 +7,13 @@ public class Envenenado extends Estados {
     private int resta;
 
     public Envenenado() {
+        nombre = "Envenenado";
+        nombreCorto = "ENV";
     }
 
     public Envenenado(Pokemons afectado) {
+        nombre = "Envenenado";
+        nombreCorto = "ENV";
         setAfectado(afectado);
     }
 

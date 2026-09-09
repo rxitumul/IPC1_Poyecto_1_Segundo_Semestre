@@ -6,6 +6,8 @@ public class Dormido extends Estados{
 
     public Dormido() {
         contador = 2;
+        nombre = "Dormido";
+        nombreCorto = "DOR";
     }
 
 

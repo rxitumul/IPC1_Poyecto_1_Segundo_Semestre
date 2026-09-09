@@ -58,9 +58,9 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         System.out.println(formatearMapa("CONTROLES"));
         separadorMediosMapa();
         System.out.println(formatearMapa("    ┌───┐      "));
-        System.out.println(formatearMapa("    │ W │      M → Mochila       N → Mapa         "));
+        System.out.println(formatearMapa("    │ W │      M → Mochila       F → Perfil          "));
         System.out.println(formatearMapa("┌───┼───┼───┐"));
-        System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       F → Perfil"));
+        System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       "));
         System.out.println(formatearMapa("└───┴───┴───┘"));
         separadorMediosMapa();
         if (activoDialogo) {
@@ -101,9 +101,9 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         System.out.println(formatearMapa("CONTROLES"));
         separadorMediosMapa();
         System.out.println(formatearMapa("    ┌───┐      "));
-        System.out.println(formatearMapa("    │ W │      M → Mochila       N → Mapa          "));
+        System.out.println(formatearMapa("    │ W │      M → Mochila       F → Perfil          "));
         System.out.println(formatearMapa("┌───┼───┼───┐"));
-        System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       F → Perfil"));
+        System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       "));
         System.out.println(formatearMapa("└───┴───┴───┘"));
         separadorMediosMapa();
         if (activoDialogo) {
@@ -144,9 +144,9 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         System.out.println(formatearMapa("CONTROLES"));
         separadorMediosMapa();
         System.out.println(formatearMapa("    ┌───┐      "));
-        System.out.println(formatearMapa("    │ W │      M → Mochila               "));
+        System.out.println(formatearMapa("    │ W │      M → Mochila       F → Perfil          "));
         System.out.println(formatearMapa("┌───┼───┼───┐"));
-        System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       F → Perfil"));
+        System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       "));
         System.out.println(formatearMapa("└───┴───┴───┘"));
         separadorMediosMapa();
         if (activoDialogo && enfermeraOTelevison) {

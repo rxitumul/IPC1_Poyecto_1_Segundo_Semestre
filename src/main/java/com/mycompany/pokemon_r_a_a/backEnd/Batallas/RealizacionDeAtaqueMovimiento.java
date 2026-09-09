@@ -5,18 +5,15 @@ import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.Batallas.enemigos.AiEnemigo;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Entrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
-import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Cansado;
-import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Confuso;
-import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Dormido;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.DrenadoraDebuf;
-import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Envenenado;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Estados;
-import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Paralizado;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimiento;
+import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorBatallaMenus;
 
-public class RealizacionDeAtaqueMovimiento {
+public abstract class RealizacionDeAtaqueMovimiento {
 
     protected static final int DINERO_GANADO_RANGO_A = 150;
     protected static final int DINERO_GANADO_RANGO_B = 500;
@@ -28,6 +25,10 @@ public class RealizacionDeAtaqueMovimiento {
     protected Scanner scaner;
     protected Random rand = new Random();
 
+    protected Pokemons pokemonJugador;
+    protected Pokemons pokemonRival;
+    protected HallDeLaFama hallDeLaFama;
+
     public boolean ejecutarAccionAtaque(Pokemons atacante, Pokemons objetivo, Movimiento mov) {
         if (atacante == null || objetivo == null || mov == null) {
             return false;
@@ -37,57 +38,62 @@ public class RealizacionDeAtaqueMovimiento {
         }
 
         // 1. Cansado
-        Estados cansado = atacante.obtenerEstado(Cansado.class);
+        Estados cansado = atacante.obtenerEstado("Cansado");
         if (cansado != null) {
-            System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " está exhausto y descansa este turno!"));
-            atacante.eliminarEstadoPorClase(Cansado.class);
+            System.out.println(
+                    impresorMenus.formatearMapa("¡" + atacante.getNombre() + " está exhausto y descansa este turno!"));
+            atacante.eliminarEstado("Cansado");
             return false;
         }
 
         // 2. Dormido
-        Estados dormido = atacante.obtenerEstado(Dormido.class);
+        Estados dormido = atacante.obtenerEstado("Dormido");
         if (dormido != null) {
             dormido.decrementarContador();
-            System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " está profundamente dormido y no puede moverse!"));
+            System.out.println(impresorMenus
+                    .formatearMapa("¡" + atacante.getNombre() + " está profundamente dormido y no puede moverse!"));
             if (dormido.esExpirado()) {
                 System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " se ha despertado!"));
-                atacante.eliminarEstadoPorClase(Dormido.class);
+                atacante.eliminarEstado("Dormido");
             }
             return false;
         }
 
         // 3. Paralizado
-        Estados paralizado = atacante.obtenerEstado(Paralizado.class);
+        Estados paralizado = atacante.obtenerEstado("Paralizado");
         if (paralizado != null) {
             paralizado.decrementarContador();
-            System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " está paralizado y no puede moverse!"));
+            System.out.println(
+                    impresorMenus.formatearMapa("¡" + atacante.getNombre() + " está paralizado y no puede moverse!"));
             if (paralizado.esExpirado()) {
                 System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " ya no está paralizado!"));
-                atacante.eliminarEstadoPorClase(Paralizado.class);
+                atacante.eliminarEstado("Paralizado");
             }
             return false;
         }
 
         // 4. Confuso
-        Estados confuso = atacante.obtenerEstado(Confuso.class);
+        Estados confuso = atacante.obtenerEstado("Confuso");
         if (confuso != null) {
             confuso.decrementarContador();
             System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " está confuso!"));
             boolean seDanioASiMismo = (rand.nextDouble() <= 0.30);
             if (seDanioASiMismo) {
-                System.out.println(impresorMenus.formatearMapa("¡Tan confuso está que su ataque se dirigió a sí mismo!"));
+                System.out
+                        .println(impresorMenus.formatearMapa("¡Tan confuso está que su ataque se dirigió a sí mismo!"));
                 mov.setPokemonUsuario(atacante);
                 mov.setpokemonAtacado(atacante);
                 mov.ataque();
                 if (confuso.esExpirado()) {
-                    System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " ya no está confuso!"));
-                    atacante.eliminarEstadoPorClase(Confuso.class);
+                    System.out
+                            .println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " ya no está confuso!"));
+                    atacante.eliminarEstado("Confuso");
                 }
                 return false;
             }
             if (confuso.esExpirado()) {
                 System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " ya no está confuso!"));
-                atacante.eliminarEstadoPorClase(Confuso.class);
+                atacante.eliminarEstado("Confuso");
             }
         }
 
@@ -109,7 +115,7 @@ public class RealizacionDeAtaqueMovimiento {
         }
 
         // Envenenado: resta el 8% de la salud total en cada turno
-        if (p.tieneEstado(Envenenado.class)) {
+        if (p.tieneEstado("Envenenado")) {
             int vidaTotal = p.getVidaInicial();
             int danoVeneno = (int) (vidaTotal * 0.08);
             if (danoVeneno < 1) {
@@ -121,8 +127,9 @@ public class RealizacionDeAtaqueMovimiento {
                     + " de daño por el veneno! (HP restante: " + nuevaVida + "/" + vidaTotal + ")"));
         }
 
-        // Drenadoras: absorbe 7% de la salud total del oponente y las usa para curar al lanzador
-        Estados dren = p.obtenerEstado(DrenadoraDebuf.class);
+        // Drenadoras: absorbe 7% de la salud total del oponente y las usa para curar al
+        // lanzador
+        Estados dren = p.obtenerEstado("DrenadoraDebuf");
         if (dren instanceof DrenadoraDebuf) {
             DrenadoraDebuf debuf = (DrenadoraDebuf) dren;
             if (debuf.getLanzador() != null && debuf.getLanzador().getVidaPokemon() > 0 && p.getVidaPokemon() > 0) {
@@ -130,151 +137,75 @@ public class RealizacionDeAtaqueMovimiento {
                 System.out.println(impresorMenus.formatearMapa("¡Las drenadoras absorben " + drenado + " HP de "
                         + p.getNombre() + " para curar a " + debuf.getLanzador().getNombre() + "!"));
             } else {
-                p.eliminarEstadoPorClase(DrenadoraDebuf.class);
+                p.eliminarEstado("DrenadoraDebuf");
             }
         }
     }
 
-    protected void ejecutarTurnoCombate(JugadorPokemonPartida jugador, int movJugador, Pokemons pokemonJugador,
-            Pokemons pokemonRival) {
-        int movEnemigo = aiEnemigo.selecionadorDeAtaque(pokemonRival.getMovimientos());
+    /**
+     * Compara las prioridades y velocidades de los dos Pokémon según las reglas:
+     * 1. "Ataque rápido" siempre tiene prioridad.
+     * 2. Si ambos usan "Ataque rápido" (o ninguno), depende de las velocidades.
+     * 3. Si las velocidades son iguales, se decide de forma aleatoria (50/50).
+     * Retorna true si el Pokémon del jugador actúa primero, false si el rival actúa
+     * primero.
+     */
+    protected boolean determinaPrioridad(Movimiento movJugador, Movimiento movRival, Pokemons pJugador,
+            Pokemons pRival) {
+        boolean jugadorPrioridad = (movJugador != null && (movJugador.getNombre().equalsIgnoreCase("AtaqueRápido")
+                || movJugador.getNombre().equalsIgnoreCase("AtaqueRapido"))) || pJugador.getPrioritario();
+        boolean rivalPrioridad = (movRival != null && (movRival.getNombre().equalsIgnoreCase("AtaqueRápido")
+                || movRival.getNombre().equalsIgnoreCase("AtaqueRapido"))) || pRival.getPrioritario();
 
-        Movimiento movJ = pokemonJugador.getMovimientos()[movJugador];
-        Movimiento movE = pokemonRival.getMovimientos()[movEnemigo];
-
-        boolean jugadorPrioridad = movJ.getNombre().equalsIgnoreCase("AtaqueRápido")
-                || movJ.getNombre().equalsIgnoreCase("AtaqueRapido") || pokemonJugador.getPrioritario();
-        boolean rivalPrioridad = movE.getNombre().equalsIgnoreCase("AtaqueRápido")
-                || movE.getNombre().equalsIgnoreCase("AtaqueRapido") || pokemonRival.getPrioritario();
-
-        pokemonJugador.setPrioritario(false);
-        pokemonRival.setPrioritario(false);
-
-        boolean jugadorAtacaPrimero;
+        pJugador.setPrioritario(false);
+        pRival.setPrioritario(false);
 
         if (jugadorPrioridad && !rivalPrioridad) {
-            jugadorAtacaPrimero = true;
-        } else if (!jugadorPrioridad && rivalPrioridad) {
-            jugadorAtacaPrimero = false;
-        } else {
-            jugadorAtacaPrimero = pokemonJugador.getVelocidadPokemon() >= pokemonRival.getVelocidadPokemon();
+            return true;
+        }
+        if (!jugadorPrioridad && rivalPrioridad) {
+            return false;
         }
 
-        if (jugadorAtacaPrimero) {
-            // Turno del Jugador
-            ejecutarAccionAtaque(pokemonJugador, pokemonRival, movJ);
-
-            // Si el rival sobrevive, contraataca
-            if (pokemonRival.getVidaPokemon() > 0) {
-                ejecutarAccionAtaque(pokemonRival, pokemonJugador, movE);
-            }
+        if (pJugador.getVelocidadPokemon() > pRival.getVelocidadPokemon()) {
+            return true;
+        } else if (pJugador.getVelocidadPokemon() < pRival.getVelocidadPokemon()) {
+            return false;
         } else {
-            // Turno del Rival
-            ejecutarAccionAtaque(pokemonRival, pokemonJugador, movE);
-
-            // Si el jugador sobrevive, contraataca
-            if (pokemonJugador.getVidaPokemon() > 0) {
-                ejecutarAccionAtaque(pokemonJugador, pokemonRival, movJ);
-            }
+            return rand.nextBoolean();
         }
-
-        // Fin de turno
-        procesarFinDeTurno(pokemonJugador, pokemonRival);
     }
 
-    protected boolean selecionador(int opcion, JugadorPokemonPartida jugador, String nombreEnemigo, Pokemons pokemonRival,
-            Pokemons pokemonJugador, Pokemons[] pokemonsJugador, boolean capturaPokemonhierva) {
-        switch (opcion) {
-            case 1:
-                // LUCHAR
-                impresorMenus.impresorDePrincipal(jugador.getNombre(), nombreEnemigo, pokemonRival,
-                        pokemonJugador);
-                impresorMenus.seleciondeMovimientos(pokemonJugador);
-                int movSeleccionado;
-                try {
-                    movSeleccionado = Integer.parseInt(scaner.nextLine());
-                } catch (NumberFormatException e) {
-                    return false;
-                }
-                if (movSeleccionado == 0) {
-                    break;
-                }
-                int movIndex = movSeleccionado - 1;
-                if (movIndex >= 0 && movIndex < pokemonJugador.getMovimientos().length) {
-                    ejecutarTurnoCombate(jugador, movIndex, pokemonJugador, pokemonRival);
-                }
-                break;
+    protected boolean manejarMuerteRival(JugadorPokemonPartida jugador, Entrenador enemigo, Pokemons[] pokemonsEnemigo,
+            boolean esSalvaje) {
+        int nivelRival = pokemonRival.getNivel();
+        int xpPokemon = (nivelRival * nivelRival) / 2;
+        if (xpPokemon < 1) {
+            xpPokemon = 1;
+        }
+        pokemonJugador.setXp(pokemonJugador.getXp() + xpPokemon);
+        pokemonJugador.incrementarEnemigosDebilitados();
+        impresorMenus.mensajePokemonDebilitado(pokemonRival.getNombre());
 
-            case 2:
-                // MOCHILA
-                impresorMenus.impresorDePrincipal(jugador.getNombre(), nombreEnemigo, pokemonRival,
-                        pokemonJugador);
-                impresorMenus.selecionMochila(jugador.getMochilaJugador());
-                int itemSeleccionado;
-                try {
-                    itemSeleccionado = Integer.parseInt(scaner.nextLine());
-                } catch (NumberFormatException e) {
-                    return false;
-                }
-                if (itemSeleccionado == 0) {
-                    break;
-                }
-                if (itemSeleccionado == 4) {
-                    if (capturaPokemonhierva) {
-                        jugador.acionJugador(2, jugadorPokemonIndice, 4, pokemonRival);
-                        if (jugador.getCaptura()) {
-                            impresorMenus.pantallaCapturaExitosa(pokemonRival.getNombre());
-                            return true;
-                        } else {
-                            impresorMenus.pantallaCapturaFallida();
-                            int movEnemigo = aiEnemigo.selecionadorDeAtaque(pokemonRival.getMovimientos());
-                            ejecutarAccionAtaque(pokemonRival, pokemonJugador, pokemonRival.getMovimientos()[movEnemigo]);
-                            procesarFinDeTurno(pokemonJugador, pokemonRival);
-                        }
-                    } else {
-                        impresorMenus.mensajeNoPuedeCapturarEntrenador();
-                    }
-
-                } else {
-                    jugador.acionJugador(2, jugadorPokemonIndice, itemSeleccionado, pokemonJugador);
-                    int movEnemigo = aiEnemigo.selecionadorDeAtaque(pokemonRival.getMovimientos());
-                    ejecutarAccionAtaque(pokemonRival, pokemonJugador, pokemonRival.getMovimientos()[movEnemigo]);
-                    procesarFinDeTurno(pokemonJugador, pokemonRival);
-                }
-                break;
-
-            case 3:
-                // CAMBIAR POKÉMON
-                impresorMenus.impresorDePrincipal(jugador.getNombre(), nombreEnemigo, pokemonRival,
-                        pokemonJugador);
-                impresorMenus.cambioPokemon(pokemonsJugador);
-                int cambioIndex = 0;
-                try {
-                    cambioIndex = Integer.parseInt(scaner.nextLine());
-                } catch (NumberFormatException e) {
-                    return false;
-                }
-                if (cambioIndex >= 0 && cambioIndex < pokemonsJugador.length
-                        && pokemonsJugador[cambioIndex] != null) {
-                    if (pokemonsJugador[cambioIndex].getVidaPokemon() > 0 && cambioIndex != jugadorPokemonIndice) {
-                        jugadorPokemonIndice = cambioIndex;
-                        pokemonJugador = pokemonsJugador[jugadorPokemonIndice];
-                        impresorMenus.mensajePokemonEntra(pokemonJugador.getNombre());
-                        int movEnemigo = aiEnemigo.selecionadorDeAtaque(pokemonRival.getMovimientos());
-                        ejecutarAccionAtaque(pokemonRival, pokemonJugador, pokemonRival.getMovimientos()[movEnemigo]);
-                        procesarFinDeTurno(pokemonJugador, pokemonRival);
-                    } else if (pokemonsJugador[cambioIndex].getVidaPokemon() <= 0) {
-                        impresorMenus.mensajePokemonSinEnergia();
-                    }
-                }
-                break;
-            case 4:
-                return capturaPokemonhierva;
-
-            default:
+        if (esSalvaje) {
+            impresorMenus.pantallaVictoriaSalvaje(pokemonRival.getNombre(), pokemonJugador.getNombre(), xpPokemon);
+            return true;
+        } else {
+            enemigoPokemonIndice = aiEnemigo.seleccionarPokemonCambio(pokemonsEnemigo);
+            if (enemigoPokemonIndice == -1) {
+                victoria(jugador, enemigo);
+                return true;
+            } else {
+                pokemonRival = pokemonsEnemigo[enemigoPokemonIndice];
+                impresorMenus.mensajeEntrenadorCambiaPokemon(enemigo.getNombre(), pokemonRival.getNombre());
                 return false;
+            }
         }
-        return false;
     }
 
+    protected abstract void victoria(JugadorPokemonPartida jugador, Entrenador entrenador);
+
+    protected abstract boolean ejecutarTurnoCombate(JugadorPokemonPartida jugador, int movJugadorIndex,
+            Pokemons[] pokemonsJugador,
+            Entrenador enemigo, Pokemons[] pokemonsEnemigo, boolean esSalvaje, String nombreEnemigo);
 }

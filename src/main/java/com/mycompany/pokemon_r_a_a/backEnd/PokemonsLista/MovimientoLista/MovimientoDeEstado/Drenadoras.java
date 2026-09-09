@@ -12,7 +12,7 @@ public class Drenadoras extends Estado {
     @Override
     protected void estadosAlterados() {
         System.out.println(confi.formatearMapa("¡" + pokemonUsuario.getNombre() + " plantó Drenadoras en " + pokemonAtacado.getNombre() + "!"));
-        if (!pokemonAtacado.tieneEstado(DrenadoraDebuf.class)) {
+        if (!pokemonAtacado.tieneEstado("DrenadoraDebuf")) {
             pokemonAtacado.agragarEstadoPermanete(new DrenadoraDebuf(pokemonUsuario, pokemonAtacado));
         }
     }

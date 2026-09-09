@@ -115,4 +115,8 @@ public class Listas<T> {
     public boolean estaVacia(){
         return inicio==null;
     }
+
+    public Nodo<T> getInicio() {
+        return inicio;
+    }
 }

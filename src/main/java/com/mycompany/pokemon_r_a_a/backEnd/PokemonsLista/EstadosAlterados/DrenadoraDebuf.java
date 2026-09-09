@@ -10,6 +10,8 @@ public class DrenadoraDebuf extends Estados {
     public DrenadoraDebuf(Pokemons lanzador, Pokemons resividor) {
         this.lanzador = lanzador;
         this.resividor = resividor;
+        this.nombre = "DrenadoraDebuf";
+        this.nombreCorto = "DREN";
     }
 
     public Pokemons getLanzador() {
