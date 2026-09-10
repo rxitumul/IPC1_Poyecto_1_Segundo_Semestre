@@ -5,6 +5,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Npc;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 
+@SuppressWarnings("rawtypes")
 public class ImpresorDeMapas extends ImpresoresGlobal {
 
     public void imprimirMapaObjetos(Casillas[][] mapa, String nombre) {
@@ -75,7 +76,8 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         if (activoDialogo && entrenadorActivo != null) {
             System.out.println(formatearMapa("DIALOGO"));
             separadorMediosMapa();
-            String[] dialogo = entrenadorActivo.isDerrotado() ? entrenadorActivo.getDialojo(3) : entrenadorActivo.getDialojo(0);
+            String[] dialogo = entrenadorActivo.isDerrotado() ? entrenadorActivo.getDialojo(3)
+                    : entrenadorActivo.getDialojo(0);
             if (dialogo != null) {
                 for (String linea : dialogo) {
                     System.out.println(formatearMapa(linea));

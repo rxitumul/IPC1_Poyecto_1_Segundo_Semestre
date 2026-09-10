@@ -4,6 +4,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
+@SuppressWarnings("rawtypes")
 
 public class MovimientoJugador {
     private int[] spawn;

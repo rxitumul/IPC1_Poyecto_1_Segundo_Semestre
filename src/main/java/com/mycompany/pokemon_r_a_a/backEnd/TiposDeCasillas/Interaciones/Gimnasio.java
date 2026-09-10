@@ -7,6 +7,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Interacion.InteracionEntrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador;
+@SuppressWarnings("rawtypes")
 
 public class Gimnasio extends CasillasConMapas {
 

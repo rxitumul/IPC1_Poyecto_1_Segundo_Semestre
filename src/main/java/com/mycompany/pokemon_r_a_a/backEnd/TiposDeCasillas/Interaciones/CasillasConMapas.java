@@ -13,10 +13,11 @@ import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeMapas;
+@SuppressWarnings("rawtypes")
 
 public abstract class CasillasConMapas extends Casillas<JugadorPokemonPartida> {
 
-    @SuppressWarnings("rawtypes")
+    
     protected Casillas[][] mapa;
     protected boolean salida = false;
     protected String nombre;
@@ -31,7 +32,7 @@ public abstract class CasillasConMapas extends Casillas<JugadorPokemonPartida> {
     protected Npc npc;
     protected CreadorMapas mapaCreador;
 
-    @SuppressWarnings("rawtypes")
+    
     public CasillasConMapas(HallDeLaFama hall, Casillas[][] mapa) {
         super(hall);
         mapaCreador = new CreadorMapas(hall);

@@ -1,8 +1,10 @@
 package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas;
 
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
+@SuppressWarnings({"rawtypes","unchecked"})
 
 public class CasillaGenerica extends Casillas {
+
 
 
     public CasillaGenerica(String simbolo, boolean caminable, int tipo, boolean tieneSubMenu, HallDeLaFama hall) {

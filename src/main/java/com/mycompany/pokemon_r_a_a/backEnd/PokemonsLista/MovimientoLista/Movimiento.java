@@ -6,13 +6,11 @@ import java.io.Serializable;
 import java.util.Random;
 
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
-import com.mycompany.pokemon_r_a_a.frontEnd.ConfiguracionesDeEstetica;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 
 public abstract class Movimiento implements Serializable {
     protected String nombre = "nombre Base";
     protected int tipoDeAtaque;
-    
     protected transient Pokemons pokemonUsuario;
     protected transient Pokemons pokemonAtacado;
     protected transient Random rand;

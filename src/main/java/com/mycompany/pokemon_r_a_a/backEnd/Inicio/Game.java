@@ -11,6 +11,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Pokedex;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeMapas;
+@SuppressWarnings("rawtypes")
 
 public class Game {
 
@@ -39,6 +40,7 @@ public class Game {
 
     }
 
+    
     public void gameInicio(int ciudadInicio) {
         MapaCiudad mapa = mapaCiudadesLocal[ciudadInicio];
         Casillas[][] mapaLocal = mapa.getMapa();

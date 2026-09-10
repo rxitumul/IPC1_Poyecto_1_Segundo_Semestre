@@ -16,6 +16,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Inte
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Interacion.InteracionTienda;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Interacion.IntracionTele;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class CreadorDeMapaDeObjetos {
 
     private HallDeLaFama hall;
@@ -39,14 +40,14 @@ public class CreadorDeMapaDeObjetos {
         Casillas[][] mapaO = new Casillas[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                mapaO[i][j] = crearCasilla(mapa[i][j],nombreCiudad);
+                mapaO[i][j] = crearCasilla(mapa[i][j], nombreCiudad);
             }
         }
         return mapaO;
     }
 
     public Casillas[][] creadorCasillasCentroPokemon(int[][] mapa, EnfermeriaNpc enfermera) {
-        Casillas[][] mapeoDeCentroPokemon = creadorCasillasObjetos(mapa,"");
+        Casillas[][] mapeoDeCentroPokemon = creadorCasillasObjetos(mapa, "");
         for (int i = 0; i < mapeoDeCentroPokemon.length; i++) {
             for (int j = 0; j < mapeoDeCentroPokemon[0].length; j++) {
                 if (mapeoDeCentroPokemon[i][j] instanceof InteracionFarmacia) {
@@ -58,7 +59,7 @@ public class CreadorDeMapaDeObjetos {
     }
 
     public Casillas[][] creadorCasillasTienda(int[][] mapa, TiendaNpc tienda) {
-        Casillas[][] mapeoDeTiendas = creadorCasillasObjetos(mapa,"");
+        Casillas[][] mapeoDeTiendas = creadorCasillasObjetos(mapa, "");
         for (int i = 0; i < mapeoDeTiendas.length; i++) {
             for (int j = 0; j < mapeoDeTiendas[0].length; j++) {
                 if (mapeoDeTiendas[i][j] instanceof InteracionTienda) {
@@ -94,7 +95,7 @@ public class CreadorDeMapaDeObjetos {
         // (11)
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                mapaGymCasillas[i][j] = crearCasilla(mapa[i][j],nombreCiudad);
+                mapaGymCasillas[i][j] = crearCasilla(mapa[i][j], nombreCiudad);
                 if (mapa[i][j] == 10 && entrenadores != null && contadorEntrenadores < entrenadores.length - 1) {
                     mapeoDeNpcsGym[i][j] = entrenadores[contadorEntrenadores++];
                     mapaGymCasillas[i][j].setNpc(mapeoDeNpcsGym[i][j]);

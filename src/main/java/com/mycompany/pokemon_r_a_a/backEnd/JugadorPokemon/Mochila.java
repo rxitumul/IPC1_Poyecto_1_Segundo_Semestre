@@ -6,8 +6,6 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
-import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Envenenado;
-import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Paralizado;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
 
 public class Mochila  implements Serializable {
@@ -39,8 +37,7 @@ public class Mochila  implements Serializable {
         this.impresorDeSelecion = new ImpresorDeSelecion();
     }
     public void aplicacionObjetos(Pokemons aplicacion, int tipo) {
-        Envenenado envenenado = new Envenenado(null);
-        Paralizado paralizado = new Paralizado();
+
         switch (tipo) {
             case 1:
                 if (antiParalisis > 0) {

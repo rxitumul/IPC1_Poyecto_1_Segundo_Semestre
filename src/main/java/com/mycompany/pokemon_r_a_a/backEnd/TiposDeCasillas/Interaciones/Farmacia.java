@@ -3,6 +3,7 @@ package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.EnfermeriaNpc;
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
+@SuppressWarnings("rawtypes")
 
 public class Farmacia extends CasillasConMapas {
 

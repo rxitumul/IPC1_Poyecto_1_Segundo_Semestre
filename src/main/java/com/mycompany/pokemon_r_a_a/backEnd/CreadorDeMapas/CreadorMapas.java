@@ -7,6 +7,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Entrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.TiendaNpc;
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
+@SuppressWarnings("rawtypes")
 
 public class CreadorMapas {
     private static final int TAMANO_MAPA_POKEMON_FIN = 25;
@@ -97,6 +98,7 @@ public class CreadorMapas {
         return npcCreador;
     }
 
+    
     public Casillas[][] getMapaCentroPokemon(EnfermeriaNpc npc) {
         if (npc == null) {
             npc = npcCreador.creadorDeEnfermeria();
@@ -104,10 +106,12 @@ public class CreadorMapas {
         return objetosMapa.creadorCasillasCentroPokemon(mapaCentroPokemon, npc);
     }
 
+    
     public Casillas[][] getMapaCentroPokemon() {
         return getMapaCentroPokemon(npcCreador.creadorDeEnfermeria());
     }
 
+    
     public Casillas[][] getMapaGimnasio(Entrenador[] entrenadores, String ciudadNombre) {
         if (entrenadores == null) {
             entrenadores = npcCreador.creadorDeEntrenadoresYLider(ciudadNombre);
@@ -115,6 +119,7 @@ public class CreadorMapas {
         return objetosMapa.creadorCasillasGimnasio(mapaGimnasio, entrenadores, ciudadNombre);
     }
 
+    
     public Casillas[][] getMapaTiendaPokemon(TiendaNpc tienda) {
         if (tienda == null) {
             tienda = npcCreador.creadorDeTienda();
@@ -122,6 +127,7 @@ public class CreadorMapas {
         return objetosMapa.creadorCasillasTienda(mapaTiendaPokemon, tienda);
     }
 
+    
     public Casillas[][] getMapaTiendaPokemon() {
         return getMapaTiendaPokemon(npcCreador.creadorDeTienda());
     }

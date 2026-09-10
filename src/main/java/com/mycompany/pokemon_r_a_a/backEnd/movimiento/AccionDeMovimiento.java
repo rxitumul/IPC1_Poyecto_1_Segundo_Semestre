@@ -4,10 +4,12 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
+@SuppressWarnings("rawtypes")
 
 public class AccionDeMovimiento {
     private ImpresoresGlobal mensaje = new ImpresoresGlobal();
     private int[] spawnLocal;
+    
     private Casillas casillaAnteriorLocal;
     private boolean salida = false;
     private final static String AMARILLO_BRILLANTE = "\u001B[93m";
@@ -19,15 +21,17 @@ public class AccionDeMovimiento {
         spawnLocal = spawn;
     }
 
-    public void setCasillaAnterior(Casillas casillaAnterior) {
+    public void setCasillaAnterior( Casillas casillaAnterior) {
         casillaAnteriorLocal = casillaAnterior;
     }
 
+    
     public Casillas getCasillaAnterior() {
         return casillaAnteriorLocal;
     }
 
-    public Casillas[][] movEstado(Casillas[][] mapa, int y, int x, boolean posicionXOY, JugadorPokemonPartida jugador) {
+    
+    public Casillas[][] movEstado( Casillas[][] mapa, int y, int x, boolean posicionXOY, JugadorPokemonPartida jugador) {
         Casillas casilla = mapa[y][x];
         if (casilla.caminable()) {
 
