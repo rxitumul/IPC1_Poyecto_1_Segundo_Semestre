@@ -41,8 +41,7 @@ public class Entrenador extends Npc<Pokemons> {
 
     @Override
     public void accion() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'accion'");
+
     }
 
     @Override

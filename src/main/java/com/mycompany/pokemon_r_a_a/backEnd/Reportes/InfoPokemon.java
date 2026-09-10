@@ -1,6 +1,8 @@
 package com.mycompany.pokemon_r_a_a.backEnd.Reportes;
 
-public class InfoPokemon {
+import java.io.Serializable;
+
+public class InfoPokemon implements Serializable{
     public String especie;
     public String apodo;
     public int nivel;

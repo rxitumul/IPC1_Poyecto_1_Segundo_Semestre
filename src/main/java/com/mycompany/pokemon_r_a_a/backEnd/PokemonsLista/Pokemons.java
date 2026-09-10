@@ -1,5 +1,8 @@
 package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.Random;
 
 import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.ListaEnlazadaException;
@@ -8,11 +11,11 @@ import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.Nodo;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Estados;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimiento;
 
-public class Pokemons {
+public class Pokemons implements Serializable {
 
     private static final int VARIACION_INICIO = 0;
     private static final int VARIACION_FIN = 31;
-    private Movimiento[] movimientosPokemonLocal;
+
     private String nombreLocal;
     private String apodo;
 
@@ -37,20 +40,36 @@ public class Pokemons {
     private int velocidadVariacion;
 
     private int id;
-    private int nivel;
+    private int tipo;
     private int xp;
-    private boolean prioritario;
-
+    private int nivel;
     private int enemigosDebilitados = 0;
-
-    private Listas<Estados> estadosAlterados = new Listas<Estados>();
-    private Listas<Estados> estadosAlteradosPermanete = new Listas<Estados>();
-    private Random rand = new Random();
-
+    private String idDinamico;
+    private String tipoNombre;
+    private boolean prioritario;
     private boolean activoBloqueo = false;
-
     private boolean enElAire = false;
     private boolean cargandoRayoSolar = false;
+    
+    
+    private transient Random rand;
+    private Listas<Estados> estadosAlterados;
+    private Listas<Estados> estadosAlteradosPermanete;
+    
+    private Movimiento[] movimientosPokemonLocal;
+
+
+    public Pokemons() {
+        estadosAlterados = new Listas<Estados>();
+        estadosAlteradosPermanete = new Listas<Estados>();
+        rand = new Random();
+    }
+
+        private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject(); // Esto carga todo lo normal (vida, medallas, pokemons...)
+        rand = new Random();
+ 
+    }
 
     public void eliminarElefecto(Estados estado) throws ListaEnlazadaException {
         int index = estadosAlterados.obtenerIndex(estado);
@@ -317,10 +336,46 @@ public class Pokemons {
 
     public void setId(int id) {
         this.id = id;
+        if (this.idDinamico == null) {
+            this.idDinamico = String.valueOf(id);
+        }
+    }
+
+    public void setId(String id) {
+        this.idDinamico = id;
+        try {
+            this.id = Integer.parseInt(id.replaceAll("[^0-9]", ""));
+        } catch (Exception e) {
+            this.id = 0;
+        }
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getIdDinamico() {
+        return idDinamico != null ? idDinamico : String.valueOf(id);
+    }
+
+    public void setIdDinamico(String idDinamico) {
+        setId(idDinamico);
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipoNombre() {
+        return tipoNombre;
+    }
+
+    public void setTipoNombre(String tipoNombre) {
+        this.tipoNombre = tipoNombre;
     }
 
     public int getNivel() {

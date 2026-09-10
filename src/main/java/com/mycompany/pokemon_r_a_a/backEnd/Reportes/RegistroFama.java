@@ -1,8 +1,10 @@
 package com.mycompany.pokemon_r_a_a.backEnd.Reportes;
 
+import java.io.Serializable;
+
 import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.Listas;
 
-public class RegistroFama {
+public class RegistroFama implements Serializable {
 
     private String nombreJugador;
     private int balanceFinal;
@@ -12,7 +14,11 @@ public class RegistroFama {
     private int pokebolasLanzadas;
     private int pokemonCapturados;
     private String pokemonMVP;
-    private Listas<InfoPokemon> equipoVictorioso = new Listas<>();
+    private Listas<InfoPokemon> equipoVictorioso;
+
+    public RegistroFama() {
+        equipoVictorioso = new Listas<>();
+    }
 
     public Listas<InfoPokemon> getEquipoVictorioso() {
         return equipoVictorioso;

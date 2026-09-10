@@ -1,6 +1,8 @@
 package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo;
 
-public abstract class Npc<T> {
+import java.io.Serializable;
+
+public abstract class Npc<T> implements Serializable {
 
     protected int id;
     protected String nombre;

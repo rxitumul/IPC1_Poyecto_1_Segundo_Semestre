@@ -1,19 +1,31 @@
 package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorEstado;
 
-public class EstadoPokemonEquipo {
-    private Scanner scanner;
-    private JugadorPokemonPartida jugador;
+public class EstadoPokemonEquipo implements Serializable {
     private Pokemons[] equipo;
-    private ImpresorEstado impresorEstado = new ImpresorEstado();
+    private transient JugadorPokemonPartida jugador;
+    private transient Scanner scanner;
+    private transient ImpresorEstado impresorEstado;
 
     public EstadoPokemonEquipo(Scanner scanner, JugadorPokemonPartida jugador) {
         this.scanner = scanner;
         this.jugador = jugador;
+        impresorEstado = new ImpresorEstado();
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        this.scanner = new Scanner(System.in);
+        impresorEstado = new ImpresorEstado();
+
     }
 
     public void menuInicial() {
@@ -27,15 +39,15 @@ public class EstadoPokemonEquipo {
                         cambioDeOrden();
                         break;
                     case 2:
-                        int contador=0;
+                        int contador = 0;
                         for (Pokemons pokemons : equipo) {
-                            if(pokemons!=null){
+                            if (pokemons != null) {
                                 contador++;
                             }
                         }
-                        if (contador>1){
+                        if (contador > 1) {
                             liberadorPokemon();
-                        }else{
+                        } else {
                             impresorEstado.fallo("no te puedes quedar sin pokemons");
                         }
                         break;
@@ -59,17 +71,17 @@ public class EstadoPokemonEquipo {
         try {
             impresorEstado.cambioDeOrden(equipo, false);
             int pokemonCambio = Integer.parseInt(scanner.nextLine());
-            if (pokemonCambio==0){
+            if (pokemonCambio == 0) {
                 return;
             }
             impresorEstado.cambioDeOrden(equipo, true);
             int lugarCambio = Integer.parseInt(scanner.nextLine());
-             if (lugarCambio==0){
+            if (lugarCambio == 0) {
                 return;
             }
-            Pokemons temporal = equipo[lugarCambio-1];
-            equipo[lugarCambio-1] = equipo[pokemonCambio-1];
-            equipo[pokemonCambio-1] = temporal;
+            Pokemons temporal = equipo[lugarCambio - 1];
+            equipo[lugarCambio - 1] = equipo[pokemonCambio - 1];
+            equipo[pokemonCambio - 1] = temporal;
             impresorEstado.exito("cambio de lugar");
         } catch (NullPointerException e) {
             throw new NumberFormatException();
@@ -82,13 +94,13 @@ public class EstadoPokemonEquipo {
 
             impresorEstado.impresorDeLiberacion(equipo);
             int pokemonLiberar = Integer.parseInt(scanner.nextLine());
-            if (pokemonLiberar==0){
+            if (pokemonLiberar == 0) {
                 return;
             }
-            if (equipo[pokemonLiberar-1] != null) {
+            if (equipo[pokemonLiberar - 1] != null) {
                 impresorEstado.confirmacionLiberacion();
                 if (scanner.nextLine().equalsIgnoreCase("s")) {
-                    equipo[pokemonLiberar-1] = null;
+                    equipo[pokemonLiberar - 1] = null;
                     impresorEstado.exito("liberacion");
                 } else {
                     impresorEstado.exito("cancelada");
@@ -113,6 +125,10 @@ public class EstadoPokemonEquipo {
             throw new NumberFormatException();
         }
 
+    }
+
+    public void setJugador(JugadorPokemonPartida jugador) {
+        this.jugador = jugador;
     }
 
 }

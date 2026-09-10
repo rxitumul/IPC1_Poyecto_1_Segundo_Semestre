@@ -21,6 +21,10 @@ public class InteracionEntrenador extends InteracionCasillas<Entrenador> {
         this.npcT = npcT;
     }
 
+    public Entrenador getNpc() {
+        return npcT;
+    }
+
     @Override
     public Boolean subMenu() {
         boolean esLider = (npcT instanceof LiderDeGimnasio) || npcT.getbBleanoActivo();

@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 
-public class MapaCiudad implements Serializable{
+public class MapaCiudad implements Serializable {
     private String nombre;
-    private Casillas[][] mapa;
     private int[] jugador;
     private int[] enfermeria;
+
+    private Casillas[][] mapa;
 
     public MapaCiudad(String nombre, Casillas[][] mapa, int[] jugador, int[] enfermeria) {
         this.mapa = mapa;

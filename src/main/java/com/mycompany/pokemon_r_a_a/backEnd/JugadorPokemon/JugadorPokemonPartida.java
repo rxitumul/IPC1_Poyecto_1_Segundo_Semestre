@@ -1,5 +1,7 @@
 package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Scanner;
 
@@ -10,23 +12,47 @@ import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimie
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
 
 public class JugadorPokemonPartida implements Serializable {
+    private transient Scanner scanner;
+    private transient ImpresorDeSelecion impresorDeSelecion;
+    private transient CapturaPokemon captura;
+
+    // atributos serializables
     private String nombre;
     private int pokemonedas;
     private int[] medallasObtenidas = { 0, 0, 0 };
-    private Scanner scanner;
-    private Mochila mochilaJugador;
-    private Pokemons[] pokemosEquipo;
-    private Pokedex pokedexJugador;
-    private ImpresorDeSelecion impresorDeSelecion = new ImpresorDeSelecion();
-    private CapturaPokemon captura = new CapturaPokemon();
     private boolean capturaExitosa;
-    private MapaCiudad[] mapaCiudadesLocal;
     private int batallasJugadasSalvajes = 0;
     private int batallasJugadasEntrenador = 0;
     private int pokebolasLanzadas = 0;
     private int pokemonCapturados = 0;
-    private EstadoPokemonEquipo equipoEstado;
     private boolean vencido;
+
+    // Atributos serialisables de clases
+    private Mochila mochilaJugador;
+    private Pokemons[] pokemosEquipo;
+    private Pokedex pokedexJugador;
+    private MapaCiudad[] mapaCiudadesLocal;
+    private EstadoPokemonEquipo equipoEstado;
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        this.scanner = new Scanner(System.in);
+        this.impresorDeSelecion = new ImpresorDeSelecion();
+        this.captura = new CapturaPokemon();
+
+        if (this.equipoEstado != null) {
+            this.equipoEstado.setJugador(this);
+        }
+    }
+
+    public JugadorPokemonPartida(Scanner scanner) {
+        pokemonedas = 1000;
+        vencido = false;
+        this.scanner = scanner;
+        this.impresorDeSelecion = new ImpresorDeSelecion();
+        this.captura = new CapturaPokemon();
+    }
 
     public void acionJugador(int opcion, int pokemonJugando, int selecion, Pokemons enemigo) {
         switch (opcion) {
@@ -61,12 +87,6 @@ public class JugadorPokemonPartida implements Serializable {
                 break;
         }
 
-    }
-
-    public JugadorPokemonPartida(Scanner scanner) {
-        pokemonedas = 1000;
-        vencido = false;
-        this.scanner = scanner;
     }
 
     public boolean tienePokemonVivos() {

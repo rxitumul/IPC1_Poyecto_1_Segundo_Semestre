@@ -1,6 +1,8 @@
 package com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas;
 
-public class Listas<T> {
+import java.io.Serializable;
+
+public class Listas<T> implements Serializable {
 
     private Nodo<T> inicio;
     private Nodo<T> fin;
@@ -14,11 +16,12 @@ public class Listas<T> {
         Nodo<T> nuevo = new Nodo<T>(contenido);
         if (esVacia()) {
             inicio = nuevo;
+            fin = nuevo; // Corrección base: asegurar que fin no quede null al inicio
         } else {
             fin.setSiguiente(nuevo);
             nuevo.setAnterior(fin);
+            fin = nuevo;
         }
-        fin = nuevo;
         capacidad++;
     }
 
@@ -33,7 +36,7 @@ public class Listas<T> {
 
     private Nodo<T> obtenerNodo(int index) throws ListaEnlazadaException {
         if (index < 0 || index >= capacidad) {
-            throw new ListaEnlazadaException("El inidice esta fuera de rango, porfavor intente denuevo");
+            throw new ListaEnlazadaException("El indice esta fuera de rango, por favor intente de nuevo");
         }
         Nodo<T> actual = inicio;
         for (int i = 0; i < index; i++) {
@@ -44,17 +47,17 @@ public class Listas<T> {
 
     public void eliminar(int index) throws ListaEnlazadaException {
         if (index < 0 || index >= capacidad) {
-            throw new ListaEnlazadaException("El inidice esta fuera de rango, porfavor intente denuevo");
+            throw new ListaEnlazadaException("El indice esta fuera de rango, por favor intente de nuevo");
         }
 
         if (index == 0) {
             inicio = inicio.getSiguiente();
-
             if (inicio == null) {
                 fin = null;
+            } else {
+                inicio.setAnterior(null); // ✔️ CORRECCIÓN: Desvincular el nodo viejo hacia atrás
             }
         } else {
-
             Nodo<T> nodoAEliminar = obtenerNodo(index);
             Nodo<T> anterior = nodoAEliminar.getAnterior();
             Nodo<T> siguiente = nodoAEliminar.getSiguiente();
@@ -78,22 +81,22 @@ public class Listas<T> {
             inicio = null;
             fin = null;
         } else {
-            Nodo<T> penultimo = obtenerNodo(capacidad - 2);
-            penultimo.setSiguiente(null);
-            fin = penultimo;
+            // Optimización: Usar el puntero 'fin' directo en vez de recorrer toda la lista con obtenerNodo
+            fin = fin.getAnterior();
+            fin.setSiguiente(null);
         }
         capacidad--;
-
     }
 
     public int obtenerIndex(T contenido) {
         Nodo<T> actual = inicio;
-        int contador=0;
-        if(contenido==null){
-            return-1;
+        int contador = 0;
+        if (contenido == null) {
+            return -1;
         }
         while (actual != null) {
-            if (actual.getContenido() != null && actual.getContenido().getClass()==contenido.getClass()) {
+            // ✔️ CORRECCIÓN: Usar .equals() para comparar el objeto real, no solo su tipo de clase
+            if (actual.getContenido() != null && actual.getContenido().equals(contenido)) {
                 return contador;
             }
             contador++;
@@ -113,7 +116,7 @@ public class Listas<T> {
     }
 
     public boolean estaVacia(){
-        return inicio==null;
+        return inicio == null;
     }
 
     public Nodo<T> getInicio() {

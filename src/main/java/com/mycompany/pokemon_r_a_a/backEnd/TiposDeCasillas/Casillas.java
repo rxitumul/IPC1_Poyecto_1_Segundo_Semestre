@@ -4,6 +4,9 @@
  */
 package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,25 +18,40 @@ import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
  *
  * @author ricardocastillo
  */
-public abstract class Casillas<T> {
 
-    protected Random random = new Random();
+public abstract class Casillas<T> implements Serializable {
+
     protected T npcT;
-    protected JugadorPokemonPartida jugador;
-    protected Scanner scanner = new Scanner(System.in);
-    protected BatallasPokemon batalla;
-
     protected String simbolo;
     protected boolean caminable;
     protected int tipo;
     protected boolean tieneSubMenu;
+    protected HallDeLaFama hall;
+
+    protected transient JugadorPokemonPartida jugador;
+    
+    protected transient Random random;
+    protected transient Scanner scanner;
+    protected transient BatallasPokemon batalla;
 
     public Casillas() {
 
     }
 
     public Casillas(HallDeLaFama hall) {
+        scanner = new Scanner(System.in);
         batalla = new BatallasPokemon(scanner, hall);
+        this.hall = hall;
+        random = new Random();
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        this.scanner = new Scanner(System.in);
+        random = new Random();
+        batalla = new BatallasPokemon(scanner, hall);
+
     }
 
     public abstract void imprimir();

@@ -15,21 +15,22 @@ import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeMapas;
 public class Game {
 
     private Scanner scanner;
-    private MovimientoJugador movimiento = new MovimientoJugador();
+    private MovimientoJugador movimiento;
     private Pokedex pokedexLocal;
     private JugadorPokemonPartida jugadorLocal;
     private Mochila mochilaLocal;
-    private ImpresorDeMapas impresor = new ImpresorDeMapas();
+    private ImpresorDeMapas impresor;
     private EstadoPokemonEquipo equipoEstado;
 
     private int[] jugadorPosicion;
-    private int[] enfermeriaPosicion;
 
     private MapaCiudad[] mapaCiudadesLocal;
 
     public Game(Scanner scanner, MapaCiudad[] mapaCiudades,
             JugadorPokemonPartida jugador) {
         this.scanner = scanner;
+        movimiento = new MovimientoJugador();
+        impresor = new ImpresorDeMapas();
         pokedexLocal = jugador.getPokedexJugador();
         jugadorLocal = jugador;
         mochilaLocal = jugador.getMochilaJugador();
@@ -42,13 +43,13 @@ public class Game {
         MapaCiudad mapa = mapaCiudadesLocal[ciudadInicio];
         Casillas[][] mapaLocal = mapa.getMapa();
         String nombreCiudad = mapa.getNombre();
-        jugadorPosicion = mapa.getJugador();
-        enfermeriaPosicion = mapa.getEnfermeria();
         Mapas mapas = new Mapas(scanner, mapaCiudadesLocal);
         String movi;
+        boolean vencido = false;
+        jugadorPosicion = mapa.getJugador();
+
         jugadorLocal.setMapaCiudadesLocal(mapaCiudadesLocal);
         jugadorLocal.setEquipoEstado(equipoEstado);
-        boolean vencido = false;
         do {
             impresor.imprimirMapaObjetos(mapaLocal, nombreCiudad);
             movi = scanner.nextLine();

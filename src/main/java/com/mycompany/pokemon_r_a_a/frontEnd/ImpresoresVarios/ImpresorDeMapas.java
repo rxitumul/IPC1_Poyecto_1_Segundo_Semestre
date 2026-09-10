@@ -38,6 +38,15 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
 
     public void imprimidorDeMapaConInteracionGimnacio(Casillas[][] mapa, String nombre, Entrenador[] entrenadors,
             Npc LiderDeGimnacio, boolean activoDialogo) {
+        Entrenador activo = null;
+        if (entrenadors != null && entrenadors.length > 0) {
+            activo = entrenadors[0];
+        }
+        imprimidorDeMapaConInteracionGimnacio(mapa, nombre, activo, activoDialogo);
+    }
+
+    public void imprimidorDeMapaConInteracionGimnacio(Casillas[][] mapa, String nombre, Entrenador entrenadorActivo,
+            boolean activoDialogo) {
         separadorInicioMapa();
         System.out.println(formatearMapa(nombre));
         separadorFinalMapa();
@@ -63,12 +72,14 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         System.out.println(formatearMapa("│ A │ S │ D │  P → Pokémon       T → Pokédex       "));
         System.out.println(formatearMapa("└───┴───┴───┘"));
         separadorMediosMapa();
-        if (activoDialogo) {
+        if (activoDialogo && entrenadorActivo != null) {
             System.out.println(formatearMapa("DIALOGO"));
             separadorMediosMapa();
-            String[] dialogo = entrenadors[0].getDialojo(0);
-            for (String linea : dialogo) {
-                System.out.println(formatearMapa(linea));
+            String[] dialogo = entrenadorActivo.isDerrotado() ? entrenadorActivo.getDialojo(3) : entrenadorActivo.getDialojo(0);
+            if (dialogo != null) {
+                for (String linea : dialogo) {
+                    System.out.println(formatearMapa(linea));
+                }
             }
             separadorMediosMapa();
             System.out.println(

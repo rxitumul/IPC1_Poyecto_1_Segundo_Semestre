@@ -6,7 +6,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 
 public class MovimientoJugador {
     private int[] spawn;
-    private Casillas casillaAnterior = new CasillaGenerica("   ", true, 6, false, null);
+    private Casillas casillaAnterior = new CasillaGenerica("   ", true, 0, false, null);
     private AccionDeMovimiento acion = new AccionDeMovimiento();
 
     public Casillas[][] movimiento(int[] spawnE, Casillas[][] mapa, String movimiento, JugadorPokemonPartida jugador,

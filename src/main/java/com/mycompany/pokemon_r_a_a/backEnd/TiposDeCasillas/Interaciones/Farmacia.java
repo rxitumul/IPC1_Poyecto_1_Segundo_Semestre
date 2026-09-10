@@ -25,7 +25,8 @@ public class Farmacia extends CasillasConMapas {
 
     @Override
     public Boolean subMenu() {
-        boolean salida = false;
+        this.salida = false;
+        this.mov = new com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador();
         String movimientoJugador;
         impresor.limpiadorPantalla();
 

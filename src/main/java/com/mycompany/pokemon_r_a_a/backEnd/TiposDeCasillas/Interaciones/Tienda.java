@@ -27,6 +27,8 @@ public class Tienda extends CasillasConMapas {
 
     @Override
     public Boolean subMenu() {
+        this.salida = false;
+        this.mov = new MovimientoJugador();
         String movimientoJugador;
         impresor.limpiadorPantalla();
 

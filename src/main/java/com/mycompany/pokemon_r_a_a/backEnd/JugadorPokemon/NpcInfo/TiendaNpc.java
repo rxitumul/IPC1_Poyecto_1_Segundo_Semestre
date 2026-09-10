@@ -53,8 +53,6 @@ public class TiendaNpc extends Npc<Mochila> {
 
     @Override
     public void accion() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'accion'");
     }
 
 }

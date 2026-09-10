@@ -83,7 +83,7 @@ public class CreadorNpc {
             int cantPokemon = random.nextInt(2) + 1;
             Pokemons[] equipo = new Pokemons[cantPokemon];
             for (int p = 0; p < cantPokemon; p++) {
-                equipo[p] = datosPokemon.pokemonRandom(equipoJugador, "ENTRENADOR");
+                equipo[p] = datosPokemon.pokemonRandom(equipoJugador, "ENTRENADOR", entrenador.getId(), p + 1);
             }
             entrenador.setLista(equipo);
             lista[i] = entrenador;
@@ -105,7 +105,7 @@ public class CreadorNpc {
         int cantPokemonLider = 2;
         Pokemons[] equipoLider = new Pokemons[cantPokemonLider];
         for (int p = 0; p < cantPokemonLider; p++) {
-            equipoLider[p] = datosPokemon.pokemonRandom(equipoJugador, "LIDER");
+            equipoLider[p] = datosPokemon.pokemonRandom(equipoJugador, "LIDER", lider.getId(), p + 1);
         }
         lider.setLista(equipoLider);
 

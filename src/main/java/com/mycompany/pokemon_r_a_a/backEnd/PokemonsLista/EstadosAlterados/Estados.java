@@ -1,6 +1,8 @@
 package com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados;
 
-public abstract class Estados {
+import java.io.Serializable;
+
+public abstract class Estados implements Serializable {
     protected int contador;
     protected String nombre;
     protected String nombreCorto;

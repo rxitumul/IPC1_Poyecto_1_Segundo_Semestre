@@ -1,13 +1,13 @@
 package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo;
 
 public class LiderDeGimnasio extends Entrenador {
+    private Entrenador[] entrenadores;
+    private String medalla;
 
     public LiderDeGimnasio(String nombreCiudad) {
         super(nombreCiudad);
     }
 
-    private Entrenador[] entrenadores;
-    private String medalla;
 
     @Override
     public String[] getDialojo(int tipo) {
@@ -69,8 +69,6 @@ public class LiderDeGimnasio extends Entrenador {
 
     @Override
     public void accion() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'accion'");
     }
 
 }

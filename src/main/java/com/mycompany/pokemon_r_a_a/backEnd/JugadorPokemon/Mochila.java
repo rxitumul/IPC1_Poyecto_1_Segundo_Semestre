@@ -1,16 +1,18 @@
 package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.Scanner;
 
-import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.ListaEnlazadaException;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Envenenado;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Paralizado;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
 
-public class Mochila {
-    private ImpresorDeSelecion impresorDeSelecion = new ImpresorDeSelecion();
-    private Scanner scanner;
+public class Mochila  implements Serializable {
+    private transient ImpresorDeSelecion impresorDeSelecion;
+    private transient Scanner scanner;
 
     private int pokebola;
     private int pocion;
@@ -19,6 +21,23 @@ public class Mochila {
     private int antiParalisis;
     private int restauraTodo;
 
+    public Mochila(Scanner scanner) {
+        this.scanner = scanner;
+        restauraTodo = 0;
+        antiParalisis = 0;
+        antidoto = 0;
+        superPocion = 0;
+        pocion = 1;
+        pokebola = 5;
+        impresorDeSelecion = new ImpresorDeSelecion();
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+         // Esto carga todo lo normal (vida, medallas, pokemons...)
+        this.scanner = new Scanner(System.in);
+        this.impresorDeSelecion = new ImpresorDeSelecion();
+    }
     public void aplicacionObjetos(Pokemons aplicacion, int tipo) {
         Envenenado envenenado = new Envenenado(null);
         Paralizado paralizado = new Paralizado();
@@ -79,15 +98,7 @@ public class Mochila {
         }
     }
 
-    public Mochila(Scanner scanner) {
-        this.scanner = scanner;
-        restauraTodo = 0;
-        antiParalisis = 0;
-        antidoto = 0;
-        superPocion = 0;
-        pocion = 1;
-        pokebola = 5;
-    }
+
 
     private void restaurarVidaPociones(Pokemons aplicacion, int curacion) {
         int vida = aplicacion.getVidaPokemon();
