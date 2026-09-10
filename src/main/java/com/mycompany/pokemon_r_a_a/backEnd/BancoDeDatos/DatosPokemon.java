@@ -227,7 +227,7 @@ public class DatosPokemon {
             m = M_LIDER;
         }
 
-        int nivelGenerado = (int) ((sumaNiveles * 200) / cantidad);
+        int nivelGenerado = (int) ((sumaNiveles * m) / cantidad);
         return nivelGenerado < 1 ? 1 : nivelGenerado;
     }
 
