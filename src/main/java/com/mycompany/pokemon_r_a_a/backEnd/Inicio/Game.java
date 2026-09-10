@@ -74,12 +74,12 @@ public class Game {
             } else if (movi.equalsIgnoreCase("T")) {
                 pokedexLocal.pokedexMenu();
             } else if (movi.equalsIgnoreCase("X")) {
-                System.out.println("Salir Y guardar");
+                impresor.mensajeInformativo("Salir Y guardar");
                 break;
             } else if (movi.equalsIgnoreCase("F")) {
                 jugadorLocal.perfil(mapaCiudadesLocal);
             } else {
-                System.out.println("hola");
+                impresor.pantallaDeError();
             }
             if (vencido) {
 

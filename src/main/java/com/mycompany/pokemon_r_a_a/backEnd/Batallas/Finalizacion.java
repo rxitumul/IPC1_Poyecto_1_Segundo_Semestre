@@ -7,8 +7,6 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.EnfermeriaNpc;
 
 public abstract class Finalizacion extends RealizacionDeAtaqueMovimiento {
 
-
-
     protected boolean manejarMuerteJugador(JugadorPokemonPartida jugador, Pokemons[] pokemonsJugador,
             boolean esEntrenador) {
         impresorMenus.mensajePokemonDebilitado(pokemonJugador.getNombre());
@@ -18,15 +16,15 @@ public abstract class Finalizacion extends RealizacionDeAtaqueMovimiento {
             return true;
         }
 
-        System.out.println(impresorMenus.formatearMapa("¡" + pokemonJugador.getNombre()
-                + " no puede continuar! Debes enviar a otro integrante de tu equipo."));
+        impresorMenus.mensajePokemonenemigo(
+                "¡" + pokemonJugador.getNombre() + " no puede continuar! Debes enviar a otro integrante de tu equipo.");
         while (true) {
             impresorMenus.cambioPokemon(pokemonsJugador, false);
             int opcion;
             try {
                 opcion = Integer.parseInt(scaner.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println(impresorMenus.formatearMapa("Selección inválida. Elige un Pokémon con vida."));
+                impresorMenus.mensajePokemonenemigo("Selección inválida. Elige un Pokémon con vida.");
                 continue;
             }
             int index = opcion - 1;
@@ -40,7 +38,7 @@ public abstract class Finalizacion extends RealizacionDeAtaqueMovimiento {
                     impresorMenus.mensajePokemonSinEnergia();
                 }
             } else {
-                System.out.println(impresorMenus.formatearMapa("Selección inválida. Elige un Pokémon con vida."));
+                impresorMenus.mensajePokemonenemigo("Selección inválida. Elige un Pokémon con vida.");
             }
         }
     }
@@ -56,7 +54,7 @@ public abstract class Finalizacion extends RealizacionDeAtaqueMovimiento {
             if (medallas != null && ciudadIndice >= 0 && ciudadIndice < medallas.length) {
                 if (medallas[ciudadIndice] == 0) {
                     medallas[ciudadIndice] = 1;
-                    System.out.println(impresorMenus.formatearMapa("¡Has ganado la Medalla de la Ciudad!"));
+                    impresorMenus.mensajePokemonenemigo("¡Has ganado la Medalla de la Ciudad!");
                     int contador = 0;
                     for (int m : medallas) {
                         if (m > 0) {
@@ -75,8 +73,7 @@ public abstract class Finalizacion extends RealizacionDeAtaqueMovimiento {
         if (entrenador) {
             int pago = jugador.getPokemonedas() / 2;
             jugador.setPokemonedas(jugador.getPokemonedas() - pago);
-            System.out
-                    .println(impresorMenus.formatearMapa("¡Has pagado $" + pago + " PokéMonedas al entrenador rival!"));
+            impresorMenus.mensajePokemonenemigo("¡Has pagado $" + pago + " PokéMonedas al entrenador rival!");
         }
 
         impresorMenus.pantallaDerrota();
@@ -86,7 +83,7 @@ public abstract class Finalizacion extends RealizacionDeAtaqueMovimiento {
         enfermera.setLista(jugador.getPokemosEquipo());
         enfermera.setBoleanoActivo(true);
         enfermera.accion();
-        System.out.println(impresorMenus.formatearMapa("¡Has sido derrotado! Apareces en el Centro Pokémon más cercano."));
+        impresorMenus.mensajePokemonenemigo("¡Has sido derrotado! Apareces en el Centro Pokémon más cercano.");
     }
 
 }

@@ -5,12 +5,12 @@ import java.util.Scanner;
 import com.mycompany.pokemon_r_a_a.backEnd.BancoDeDatos.DatosPokemon;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
-import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 import com.mycompany.pokemon_r_a_a.frontEnd.InformacionProfesor.InicioProfesorOak;
 
 public class ProfesorCharla {
     private DatosPokemon pokemonCreador = new DatosPokemon();
-    private MensajesDeInformacion info = new MensajesDeInformacion();
+    private ImpresoresGlobal info = new ImpresoresGlobal();
     private Pokemons pokemonInicial;
     private InicioProfesorOak profesor = new InicioProfesorOak();
     private int pokemnSelecionado;

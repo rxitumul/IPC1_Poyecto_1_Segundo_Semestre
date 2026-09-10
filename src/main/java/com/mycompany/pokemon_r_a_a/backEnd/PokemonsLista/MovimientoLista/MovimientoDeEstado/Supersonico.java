@@ -10,7 +10,7 @@ public class Supersonico extends Estado {
 
     @Override
     protected void estadosAlterados() {
-    System.out.println(confi.formatearMapa("El pokemon a utlizado supersonico"));
+    confi.mensajeInformativo("El pokemon a utlizado supersonico");
        pokemonAtacado.agragarEstado(new Confuso());
     }
 }

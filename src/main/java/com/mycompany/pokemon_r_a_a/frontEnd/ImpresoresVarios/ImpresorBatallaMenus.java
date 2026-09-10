@@ -9,6 +9,7 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
 
     public void impresorDePrincipal(String nombreJugador, String nombreEnemigo, Pokemons pokemonEnemigo,
             Pokemons pokemonJugador) {
+        limpiadorPantalla();
         separadorInicioMapa();
         System.out.println(formatearMapaCentrado("BATALLA POKÉMON"));
         separadorMediosMapa();
@@ -21,9 +22,11 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
                         + "                      Especie: "
                         + pokemonEnemigo.getNombre()));
         String apodoJ = (pokemonJugador.getApodo() != null && !pokemonJugador.getApodo().isEmpty())
-                ? pokemonJugador.getApodo() : pokemonJugador.getNombre();
+                ? pokemonJugador.getApodo()
+                : pokemonJugador.getNombre();
         String apodoE = (pokemonEnemigo.getApodo() != null && !pokemonEnemigo.getApodo().isEmpty())
-                ? pokemonEnemigo.getApodo() : pokemonEnemigo.getNombre();
+                ? pokemonEnemigo.getApodo()
+                : pokemonEnemigo.getNombre();
         System.out.println(formatearMapaCentrado(
                 "Apodo: " + apodoJ + "                      Apodo: "
                         + apodoE));
@@ -41,6 +44,7 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
                         + pokemonEnemigo.getEstadosActivosString()));
         System.out.println(formatearMapaCentrado(""));
         separadorMediosMapa();
+        delayThread();
     }
 
     public void impresorDeBatallaOpcionesPokemonSalvaje() {
@@ -85,7 +89,7 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
                             + movimientos[3].getNombre()));
         }
         separadorMediosMapa();
-        System.out.println(formatearCentrado("0) Volver"));
+        System.out.println(formatearMapaCentrado("0) Volver"));
         separadorFinalMapa();
     }
 
@@ -120,7 +124,8 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
         for (Pokemons pokemons : pokemos) {
             if (pokemons != null) {
                 String apodo = (pokemons.getApodo() != null && !pokemons.getApodo().isEmpty())
-                        ? pokemons.getApodo() : pokemons.getNombre();
+                        ? pokemons.getApodo()
+                        : pokemons.getNombre();
                 int vidaMax = pokemons.getVidaInicial();
                 int vidaAct = pokemons.getVidaPokemon();
                 String barra;
@@ -146,7 +151,7 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
         }
         separadorMediosMapa();
         if (permitirVolver) {
-            System.out.println(formatearCentrado("0) Volver"));
+            System.out.println(formatearMapaCentrado("0) Volver"));
         }
         separadorFinalMapa();
     }
@@ -166,7 +171,8 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
 
     public void pantallaVictoriaSalvaje(String nombrePokemonSalvaje, String nombrePokemonJugador, int xp) {
         separadorInicioMapa();
-        System.out.println(formatearMapaCentrado("¡EL POKÉMON SALVAJE " + nombrePokemonSalvaje.toUpperCase() + " FUE DERROTADO!"));
+        System.out.println(
+                formatearMapaCentrado("¡EL POKÉMON SALVAJE " + nombrePokemonSalvaje.toUpperCase() + " FUE DERROTADO!"));
         separadorMediosMapa();
         System.out.println(formatearMapaCentrado(nombrePokemonJugador + " ganó " + xp + " puntos de EXP."));
         separadorFinalMapa();
@@ -205,6 +211,12 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
         separadorFinalMapa();
     }
 
+    public void mensajePokemonenemigo(String mensaje) {
+        separadorInicioMapa();
+        System.out.println(formatearMapaCentrado((mensaje)));
+        separadorFinalMapa();
+    }
+
     public void mensajeHuidaExitosa() {
         separadorInicioMapa();
         System.out.println(formatearMapaCentrado("¡Has escapado con éxito del combate!"));
@@ -235,10 +247,12 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
         separadorFinalMapa();
     }
 
-    public void mensajeAtaqueRealizado(String atacante, String movimiento, int daño, String defensor, int hpRestante, int hpTotal) {
+    public void mensajeAtaqueRealizado(String atacante, String movimiento, int daño, String defensor, int hpRestante,
+            int hpTotal) {
         separadorInicioMapa();
         System.out.println(formatearMapaCentrado("¡" + atacante + " usó " + movimiento + "!"));
-        System.out.println(formatearMapaCentrado("Causó " + daño + " de daño a " + defensor + " (HP: " + hpRestante + "/" + hpTotal + ")"));
+        System.out.println(formatearMapaCentrado(
+                "Causó " + daño + " de daño a " + defensor + " (HP: " + hpRestante + "/" + hpTotal + ")"));
         separadorFinalMapa();
     }
 

@@ -11,7 +11,8 @@ public class Descanso extends Estado {
 
     @Override
     protected void estadosAlterados() {
-        System.out.println(confi.formatearMapa("¡" + pokemonUsuario.getNombre() + " usó Descanso, recuperó toda su salud y se quedó dormido!"));
+        confi.mensajeInformativo(
+                "¡" + pokemonUsuario.getNombre() + " usó Descanso, recuperó toda su salud y se quedó dormido!");
         int vida = pokemonUsuario.getVidaInicial();
         pokemonUsuario.setVidaPokemon(vida);
         pokemonUsuario.lipiarEstadosTodos();

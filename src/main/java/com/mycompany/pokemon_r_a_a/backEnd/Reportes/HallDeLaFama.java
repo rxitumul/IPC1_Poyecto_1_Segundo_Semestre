@@ -80,7 +80,8 @@ public class HallDeLaFama implements Serializable {
     }
 
     public void mostrarHallDeLaFama() {
-
+        
+        imprimir.limpiadorPantalla();
         imprimir.mensaje("HALL DE LA FAMA");
         if (registros.estaVacia()) {
             imprimir.mensaje("Aún no hay entrenadores registrados.");

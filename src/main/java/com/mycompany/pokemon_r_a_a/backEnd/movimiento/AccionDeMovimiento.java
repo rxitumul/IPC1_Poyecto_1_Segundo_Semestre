@@ -3,10 +3,10 @@ package com.mycompany.pokemon_r_a_a.backEnd.movimiento;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
-import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 
 public class AccionDeMovimiento {
-    private MensajesDeInformacion mensaje = new MensajesDeInformacion();
+    private ImpresoresGlobal mensaje = new ImpresoresGlobal();
     private int[] spawnLocal;
     private Casillas casillaAnteriorLocal;
     private boolean salida = false;

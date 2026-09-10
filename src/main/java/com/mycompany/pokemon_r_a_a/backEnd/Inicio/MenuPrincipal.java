@@ -2,14 +2,14 @@ package com.mycompany.pokemon_r_a_a.backEnd.Inicio;
 
 import java.util.Scanner;
 
-import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 import com.mycompany.pokemon_r_a_a.frontEnd.Menus.MenuInicialFront;
 
 public class MenuPrincipal {
 
     private Scanner scanner;
     private MenuInicialFront menu = new MenuInicialFront();
-    private MensajesDeInformacion info = new MensajesDeInformacion();
+    private ImpresoresGlobal info = new ImpresoresGlobal();
 
     public MenuPrincipal(Scanner scanner) {
         this.scanner = scanner;

@@ -9,7 +9,7 @@ public class Proteccion extends Estado {
 
     @Override
     protected void estadosAlterados() {
-        System.out.println(confi.formatearMapa("El pokemon a utlizado Protecion "));
+        confi.mensajeInformativo("El pokemon a utlizado Protecion ");
         pokemonUsuario.setActivoBloqueo(true);
     }
 }

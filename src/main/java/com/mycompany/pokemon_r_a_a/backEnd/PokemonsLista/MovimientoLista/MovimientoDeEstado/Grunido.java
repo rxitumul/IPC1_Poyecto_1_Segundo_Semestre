@@ -9,7 +9,7 @@ public class Grunido extends Estado {
 
     @Override
     protected void estadosAlterados() {
-        System.out.println(confi.formatearMapa("El pokemon a utlizado Gruñido"));
+        confi.mensajeInformativo("El pokemon a utlizado Gruñido");
         int ataque = pokemonAtacado.getAtaquePokemon();
         int reducion = (int) (ataque * 0.2);
         pokemonAtacado.setAtaquePokemon(ataque -= reducion);

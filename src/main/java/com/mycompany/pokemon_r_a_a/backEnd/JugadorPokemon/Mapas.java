@@ -3,11 +3,11 @@ package com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon;
 import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
-import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
 
 public class Mapas {
-    private MensajesDeInformacion mensaje = new MensajesDeInformacion();
+    private ImpresoresGlobal mensaje = new ImpresoresGlobal();
     private MapaCiudad[] mapaCiudadesLocal;
     private ImpresorDeSelecion impresor = new ImpresorDeSelecion();
     private Scanner scanner;

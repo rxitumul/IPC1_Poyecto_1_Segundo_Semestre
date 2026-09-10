@@ -7,9 +7,11 @@ import com.mycompany.pokemon_r_a_a.backEnd.Reportes.RegistroFama;
 
 public class ImprimirReportes extends ImpresoresGlobal {
     public void mensaje(String mensaje) {
+        limpiadorPantalla();
         separadorInicioMapa();
         System.out.println(formatearMapaCentrado(mensaje));
         separadorFinalMapa();
+        delayThread();
     }
 
     public void mensajeregistro(int contador, Listas<RegistroFama> registros) {
@@ -58,5 +60,6 @@ public class ImprimirReportes extends ImpresoresGlobal {
         } catch (ListaEnlazadaException e) {
             mensaje("Error al obtener el registro");
         }
+        delayThread();
     }
 }

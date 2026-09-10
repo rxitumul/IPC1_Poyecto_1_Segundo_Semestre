@@ -102,8 +102,11 @@ public class InicioGame {
                     }
                     break;
                 case 3:
-                    System.out.println("¡Gracias por jugar Pokémon R_A_A!");
+                    impresor.mensajeInformativo("¡Gracias por jugar Pokémon R_A_A!");
                     salir = true;
+                    break;
+                default:
+                    impresor.pantallaDeError();
                     break;
             }
         }

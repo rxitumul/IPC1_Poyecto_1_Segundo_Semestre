@@ -16,19 +16,17 @@ public class ImpresoresGlobal extends ConfiguracionesDeEstetica {
     protected final static String BARRAS_DE_VIDA_100 = "████████████████████";
 
     public void pantallaDeError() {
-        delayThread();
+        limpiadorPantalla();
         System.out.print(NARANJA);
-        limpiadorDeLineas();
         separadorInicio();
         System.out.println(formatearCentrado("Error: Opción inválida"));
         System.out.println(formatearCentrado("Por favor, seleccione una opción válida"));
         separadorFinal();
         System.out.print(RESET);
+        delayThread();
     }
 
     public void mensajeInformativo(String mensaje) {
-        delayThread();
-        limpiadorDeLineas();
         separadorInicioMapa();
         System.out.println(formatearMapaCentrado(mensaje));
         separadorFinalMapa();
@@ -55,6 +53,7 @@ public class ImpresoresGlobal extends ConfiguracionesDeEstetica {
     }
 
     public <T> void impresorDelistas(String nombreDeLista, T[] listaAImprimir) {
+        limpiadorPantalla();
         System.out.println(nombreDeLista);
         for (int i = 0; i < listaAImprimir.length; i++) {
             separadorInicioMapa();
@@ -69,6 +68,7 @@ public class ImpresoresGlobal extends ConfiguracionesDeEstetica {
     }
 
     public void impresorDePokemon(Pokemons[] pokemon, int numero) {
+        limpiadorPantalla();
         Movimiento[] movimientoPokemon = pokemon[numero].getMovimientos();
 
         separadorInicioMapa();

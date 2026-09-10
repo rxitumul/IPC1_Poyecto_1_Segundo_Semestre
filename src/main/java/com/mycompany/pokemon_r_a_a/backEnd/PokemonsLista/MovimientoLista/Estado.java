@@ -6,11 +6,12 @@ public abstract class Estado extends Movimiento {
     protected int resultadoAcion(Boolean recursivo) {
         if (pokemonAtacado != null && pokemonAtacado != pokemonUsuario) {
             if (pokemonAtacado.isEnElAire()) {
-                System.out.println(confi.formatearMapa("¡El movimiento falló porque " + pokemonAtacado.getNombre() + " está en el aire!"));
+                confi.mensajeInformativo(
+                        "¡El movimiento falló porque " + pokemonAtacado.getNombre() + " está en el aire!");
                 return -1;
             }
             if (pokemonAtacado.bolqueador()) {
-                System.out.println(confi.formatearMapa("¡" + pokemonAtacado.getNombre() + " se protegió del ataque!"));
+                confi.mensajeInformativo("¡" + pokemonAtacado.getNombre() + " se protegió del ataque!");
                 return -1;
             }
         }
@@ -19,4 +20,3 @@ public abstract class Estado extends Movimiento {
     }
 
 }
-

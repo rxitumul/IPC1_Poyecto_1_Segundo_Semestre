@@ -3,11 +3,19 @@ package com.mycompany.pokemon_r_a_a.backEnd.movimiento;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 
 public class MovimientoJugador {
     private int[] spawn;
-    private Casillas casillaAnterior = new CasillaGenerica("   ", true, 0, false, null);
-    private AccionDeMovimiento acion = new AccionDeMovimiento();
+    private Casillas casillaAnterior;
+    private AccionDeMovimiento acion;
+    private ImpresoresGlobal impresor;
+
+    public MovimientoJugador() {
+        impresor = new ImpresoresGlobal();
+        acion = new AccionDeMovimiento();
+        casillaAnterior = new CasillaGenerica("   ", true, 0, false, null);
+    }
 
     public Casillas[][] movimiento(int[] spawnE, Casillas[][] mapa, String movimiento, JugadorPokemonPartida jugador,
             boolean derrota) {
@@ -27,9 +35,9 @@ public class MovimientoJugador {
                 break;
             default:
                 if (derrota) {
-                mapa = cambioJugador(mapa, "x", 0, jugador);
+                    mapa = cambioJugador(mapa, "x", 0, jugador);
                 } else {
-                    System.out.println("ingresa una tecla de movimiento valida (W, A, S, D)");
+                    impresor.mensajeInformativo("ingresa una tecla de movimiento valida (W, A, S, D)");
                 }
                 break;
         }
@@ -41,20 +49,20 @@ public class MovimientoJugador {
         int movimientoY = spawn[0] + movI;
         acion.setCasillaAnterior(casillaAnterior);
         acion.setSpawn(spawn);
-        
+
         if (mov.equals("x")) {
             if (movimientoX < mapa[0].length && movimientoX > -1) {
                 mapa = acion.movEstado(mapa, spawn[0], movimientoX, true, jugador);
                 casillaAnterior = acion.getCasillaAnterior();
             } else {
-                System.out.println("llego al fin del mapa");
+                impresor.mensajeInformativo("llego al fin del mapa");
             }
         } else {
             if (movimientoY < mapa.length && movimientoY > -1) {
                 mapa = acion.movEstado(mapa, movimientoY, spawn[1], false, jugador);
                 casillaAnterior = acion.getCasillaAnterior();
             } else {
-                System.out.println("llego al fin del mapa");
+                impresor.mensajeInformativo("llego al fin del mapa");
             }
         }
         return mapa;

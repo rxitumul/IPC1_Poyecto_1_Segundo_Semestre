@@ -10,6 +10,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.Listas;
 import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.Nodo;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.EstadosAlterados.Estados;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimiento;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 
 public class Pokemons implements Serializable {
 
@@ -50,25 +51,26 @@ public class Pokemons implements Serializable {
     private boolean activoBloqueo = false;
     private boolean enElAire = false;
     private boolean cargandoRayoSolar = false;
-    
-    
+
     private transient Random rand;
+    private transient ImpresoresGlobal impresor;
     private Listas<Estados> estadosAlterados;
     private Listas<Estados> estadosAlteradosPermanete;
-    
-    private Movimiento[] movimientosPokemonLocal;
 
+    private Movimiento[] movimientosPokemonLocal;
 
     public Pokemons() {
         estadosAlterados = new Listas<Estados>();
         estadosAlteradosPermanete = new Listas<Estados>();
         rand = new Random();
+        impresor= new ImpresoresGlobal();
     }
-
-        private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject(); // Esto carga todo lo normal (vida, medallas, pokemons...)
         rand = new Random();
- 
+        impresor= new ImpresoresGlobal();
+
     }
 
     public void eliminarElefecto(Estados estado) throws ListaEnlazadaException {
@@ -85,9 +87,9 @@ public class Pokemons implements Serializable {
             nivel++;
             setNivel(nivel);
             if (apodo != null && !apodo.isEmpty()) {
-                System.out.println("¡El Pokémon " + apodo + " subió al nivel " + nivel + "!");
+                impresor.mensajeInformativo("¡El Pokémon " + apodo + " subió al nivel " + nivel + "!");
             } else {
-                System.out.println("¡El Pokémon " + nombreLocal + " subió al nivel " + nivel + "!");
+                impresor.mensajeInformativo("¡El Pokémon " + nombreLocal + " subió al nivel " + nivel + "!");
             }
             xpSubirDeNivel = (nivel + 1) * (nivel + 1);
         }

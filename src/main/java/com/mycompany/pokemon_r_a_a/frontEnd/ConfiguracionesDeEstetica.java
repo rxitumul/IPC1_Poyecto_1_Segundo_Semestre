@@ -44,10 +44,6 @@ public class ConfiguracionesDeEstetica {
                 + MARCO_ESQUINA_DERECHA_INFERIOR);
     }
 
-    public void limpiadorDeLineas() {
-        System.out.print(LIMPIADOR_DE_PANTALLA);
-    }
-
     protected void separadorInicialMapaSubMapa() {
         System.out.println(MARCO_ESQUINA_IZQUIERDA_SUPERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA_SUB_MAPA)
                 + MARCO_ESQUINA_DERECHA_SUPERIOR);

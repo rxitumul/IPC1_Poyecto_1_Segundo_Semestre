@@ -9,7 +9,7 @@ public class Latigo extends Estado {
 
     @Override
     protected void estadosAlterados() {
-        System.out.println(confi.formatearMapa("El pokemon a utlizado Latigo"));
+        confi.mensajeInformativo("El pokemon a utlizado Latigo");
         int defensa = pokemonAtacado.getDefensaPokemon();
         int reducion = (int) (defensa * 0.2);
         pokemonAtacado.setDefensaPokemon(defensa -= reducion);

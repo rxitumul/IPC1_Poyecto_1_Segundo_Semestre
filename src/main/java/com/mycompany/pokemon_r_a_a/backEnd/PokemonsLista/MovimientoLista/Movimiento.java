@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.frontEnd.ConfiguracionesDeEstetica;
+import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 
 public abstract class Movimiento implements Serializable {
     protected String nombre = "nombre Base";
@@ -15,16 +16,16 @@ public abstract class Movimiento implements Serializable {
     protected transient Pokemons pokemonUsuario;
     protected transient Pokemons pokemonAtacado;
     protected transient Random rand;
-    protected transient ConfiguracionesDeEstetica confi;
+    protected transient ImpresoresGlobal confi;
 
     public Movimiento() {
-        confi = new ConfiguracionesDeEstetica();
+        confi = new ImpresoresGlobal();
         rand = new Random();
     }
     
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject(); // Esto carga todo lo normal (vida, medallas, pokemons...)
-        confi = new ConfiguracionesDeEstetica();
+        confi = new ImpresoresGlobal();
         rand = new Random();
 
     }

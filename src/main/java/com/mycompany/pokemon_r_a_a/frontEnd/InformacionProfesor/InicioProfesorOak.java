@@ -1,10 +1,8 @@
 package com.mycompany.pokemon_r_a_a.frontEnd.InformacionProfesor;
 
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
-import com.mycompany.pokemon_r_a_a.frontEnd.MensajesDeInformacion;
 
 public class InicioProfesorOak extends ImpresoresGlobal {
-    private MensajesDeInformacion info = new MensajesDeInformacion();
     private String nombreLocal;
     private String nombrePokemonLocal;
 
@@ -23,8 +21,9 @@ public class InicioProfesorOak extends ImpresoresGlobal {
     public String getNombreLocal() {
         return nombreLocal;
     }
+
     public void cadenaDeMensajesInicial(int mensaje) {
-        limpiadorDeLineas();
+        limpiadorPantalla();
         separadorInicio();
         if (mensaje != 0) {
             System.out.println(formatear("Profesor Oak"));
@@ -33,44 +32,46 @@ public class InicioProfesorOak extends ImpresoresGlobal {
         System.out.println(formatear(MENSAJES_PROFESOR_INICIO[mensaje]));
         separadorMedios();
         if (mensaje == 4) {
-            info.mensajeDeIngresoDeNombre();
+            mensajeDeIngresoDeNombre();
         } else {
-            info.mensajeInformativoDecontinuar();
+            mensajeInformativoDecontinuar();
         }
         separadorFinal();
     }
 
     public void mensajeDespuesDenombre(int mensaje) {
-        limpiadorDeLineas();
+        limpiadorPantalla();
         separadorInicio();
         System.out.println(formatear("Profesor Oak"));
         separadorMedios();
         System.out.println(formatear(mensajeProfesor2[mensaje]));
         System.out.println(formatear(mensajeProfesor2[mensaje + 1]));
         separadorMedios();
-        info.mensajeInformativoDecontinuar();
+        mensajeInformativoDecontinuar();
         separadorFinal();
     }
 
     public void mensajeProfesorCambioDeNombre(int mensaje) {
-        limpiadorDeLineas();
+        limpiadorPantalla();
+
         separadorInicio();
         System.out.println(formatear("Profesor Oak"));
         separadorMedios();
         System.out.println(formatear(mensajeProfesor3[mensaje]));
         separadorMedios();
-        info.mensajeInformativoDecontinuar();
+        mensajeInformativoDecontinuar();
         separadorFinal();
     }
 
     public void mensajeProfesorFinal(int mensaje) {
-        limpiadorDeLineas();
+        limpiadorPantalla();
+
         separadorInicio();
         System.out.println(formatear("Profesor Oak"));
         separadorMedios();
         System.out.println(formatear(mensajeProfesor4[mensaje]));
         separadorMedios();
-        info.mensajeInformativoDecontinuar();
+        mensajeInformativoDecontinuar();
         separadorFinal();
     }
 

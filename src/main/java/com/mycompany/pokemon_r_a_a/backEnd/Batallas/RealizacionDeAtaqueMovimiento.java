@@ -40,8 +40,7 @@ public abstract class RealizacionDeAtaqueMovimiento {
         // 1. Cansado
         Estados cansado = atacante.obtenerEstado("Cansado");
         if (cansado != null) {
-            System.out.println(
-                    impresorMenus.formatearMapa("¡" + atacante.getNombre() + " está exhausto y descansa este turno!"));
+            impresorMenus.mensajePokemonenemigo("¡" + atacante.getNombre() + " está exhausto y descansa este turno!");
             atacante.eliminarEstado("Cansado");
             return false;
         }
@@ -50,10 +49,9 @@ public abstract class RealizacionDeAtaqueMovimiento {
         Estados dormido = atacante.obtenerEstado("Dormido");
         if (dormido != null) {
             dormido.decrementarContador();
-            System.out.println(impresorMenus
-                    .formatearMapa("¡" + atacante.getNombre() + " está profundamente dormido y no puede moverse!"));
+           impresorMenus.mensajePokemonenemigo("¡" + atacante.getNombre() + " está profundamente dormido y no puede moverse!");
             if (dormido.esExpirado()) {
-                System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " se ha despertado!"));
+                impresorMenus.mensajePokemonenemigo("¡" + atacante.getNombre() + " se ha despertado!");
                 atacante.eliminarEstado("Dormido");
             }
             return false;
@@ -63,10 +61,9 @@ public abstract class RealizacionDeAtaqueMovimiento {
         Estados paralizado = atacante.obtenerEstado("Paralizado");
         if (paralizado != null) {
             paralizado.decrementarContador();
-            System.out.println(
-                    impresorMenus.formatearMapa("¡" + atacante.getNombre() + " está paralizado y no puede moverse!"));
+            impresorMenus.mensajePokemonenemigo("¡" + atacante.getNombre() + " está paralizado y no puede moverse!");
             if (paralizado.esExpirado()) {
-                System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " ya no está paralizado!"));
+                impresorMenus.mensajePokemonenemigo("¡" + atacante.getNombre() + " ya no está paralizado!");
                 atacante.eliminarEstado("Paralizado");
             }
             return false;
@@ -76,7 +73,7 @@ public abstract class RealizacionDeAtaqueMovimiento {
         Estados confuso = atacante.obtenerEstado("Confuso");
         if (confuso != null) {
             confuso.decrementarContador();
-            System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " está confuso!"));
+            impresorMenus.mensajePokemonenemigo("¡" + atacante.getNombre() + " está confuso!");
             boolean seDanioASiMismo = (rand.nextDouble() <= 0.30);
             if (seDanioASiMismo) {
                 System.out
@@ -92,7 +89,7 @@ public abstract class RealizacionDeAtaqueMovimiento {
                 return false;
             }
             if (confuso.esExpirado()) {
-                System.out.println(impresorMenus.formatearMapa("¡" + atacante.getNombre() + " ya no está confuso!"));
+                impresorMenus.mensajePokemonenemigo("¡" + atacante.getNombre() + " ya no está confuso!");
                 atacante.eliminarEstado("Confuso");
             }
         }
@@ -123,8 +120,8 @@ public abstract class RealizacionDeAtaqueMovimiento {
             }
             int nuevaVida = Math.max(0, p.getVidaPokemon() - danoVeneno);
             p.setVidaPokemon(nuevaVida);
-            System.out.println(impresorMenus.formatearMapa("¡" + p.getNombre() + " sufre " + danoVeneno
-                    + " de daño por el veneno! (HP restante: " + nuevaVida + "/" + vidaTotal + ")"));
+            impresorMenus.mensajePokemonenemigo("¡" + p.getNombre() + " sufre " + danoVeneno
+                    + " de daño por el veneno! (HP restante: " + nuevaVida + "/" + vidaTotal + ")");
         }
 
         // Drenadoras: absorbe 7% de la salud total del oponente y las usa para curar al
@@ -134,8 +131,8 @@ public abstract class RealizacionDeAtaqueMovimiento {
             DrenadoraDebuf debuf = (DrenadoraDebuf) dren;
             if (debuf.getLanzador() != null && debuf.getLanzador().getVidaPokemon() > 0 && p.getVidaPokemon() > 0) {
                 int drenado = debuf.ejecutarDrenado();
-                System.out.println(impresorMenus.formatearMapa("¡Las drenadoras absorben " + drenado + " HP de "
-                        + p.getNombre() + " para curar a " + debuf.getLanzador().getNombre() + "!"));
+                impresorMenus.mensajePokemonenemigo("¡Las drenadoras absorben " + drenado + " HP de "
+                        + p.getNombre() + " para curar a " + debuf.getLanzador().getNombre() + "!");
             } else {
                 p.eliminarEstado("DrenadoraDebuf");
             }

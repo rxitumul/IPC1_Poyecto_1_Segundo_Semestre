@@ -7,10 +7,6 @@ import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimie
 
 public abstract class TurnosDeJuego extends Finalizacion {
 
-    /**
-     * Ejecuta la resolución de ataques comparando prioridad ("Ataque rápido") y
-     * velocidad.
-     */
     @Override
     protected boolean ejecutarTurnoCombate(JugadorPokemonPartida jugador, int movJugadorIndex,
             Pokemons[] pokemonsJugador,
@@ -82,11 +78,11 @@ public abstract class TurnosDeJuego extends Finalizacion {
 
         int index = seleccion - 1;
         if (index < 0 || index >= pokemonsJugador.length || pokemonsJugador[index] == null) {
-            System.out.println(impresorMenus.formatearMapa("Selección no válida."));
+            impresorMenus.mensajePokemonenemigo("Selección no válida.");
             return false;
         }
         if (index == jugadorPokemonIndice) {
-            System.out.println(impresorMenus.formatearMapa("¡" + pokemonJugador.getNombre() + " ya está en combate!"));
+            impresorMenus.mensajePokemonenemigo("¡" + pokemonJugador.getNombre() + " ya está en combate!");
             return false;
         }
         if (pokemonsJugador[index].getVidaPokemon() <= 0) {
@@ -144,7 +140,7 @@ public abstract class TurnosDeJuego extends Finalizacion {
                 return false;
             }
             if (jugador.getMochilaJugador().getPokebola() <= 0) {
-                System.out.println(impresorMenus.formatearMapa("¡No tienes Pokébolas en tu mochila!"));
+                impresorMenus.mensajePokemonenemigo("¡No tienes Pokébolas en tu mochila!");
                 return false;
             }
             if (jugador.getCantidadPokemonEquipo() >= 6) {
@@ -168,8 +164,8 @@ public abstract class TurnosDeJuego extends Finalizacion {
                     return manejarMuerteJugador(jugador, pokemonsJugador, false);
                 }
             } else {
-                System.out.println(impresorMenus.formatearMapa(
-                        "¡" + pokemonRival.getNombre() + " es más veloz y ataca antes del lanzamiento!"));
+                impresorMenus.mensajePokemonenemigo(
+                        "¡" + pokemonRival.getNombre() + " es más veloz y ataca antes del lanzamiento!");
                 ejecutarAccionAtaque(pokemonRival, pokemonJugador, movE);
                 if (pokemonJugador.getVidaPokemon() <= 0) {
                     return manejarMuerteJugador(jugador, pokemonsJugador, false);
@@ -189,7 +185,7 @@ public abstract class TurnosDeJuego extends Finalizacion {
 
         // Otros objetos curativos
         if (!jugador.getMochilaJugador().tieneObjeto(itemSeleccionado)) {
-            System.out.println(impresorMenus.formatearMapa("¡No tienes ese objeto en tu mochila!"));
+            impresorMenus.mensajePokemonenemigo("¡No tienes ese objeto en tu mochila!");
             return false;
         }
 
@@ -244,8 +240,8 @@ public abstract class TurnosDeJuego extends Finalizacion {
             impresorMenus.mensajeHuidaExitosa();
             return true; // Huida exitosa inmediata
         } else {
-            System.out.println(impresorMenus.formatearMapa(
-                    "¡" + pokemonRival.getNombre() + " es más veloz y te ataca antes de que puedas huir!"));
+            impresorMenus.mensajePokemonenemigo(
+                    "¡" + pokemonRival.getNombre() + " es más veloz y te ataca antes de que puedas huir!");
             ejecutarAccionAtaque(pokemonRival, pokemonJugador, movE);
             procesarFinDeTurno(pokemonJugador, pokemonRival);
             if (pokemonJugador.getVidaPokemon() <= 0) {
@@ -272,8 +268,7 @@ public abstract class TurnosDeJuego extends Finalizacion {
         if (r > currentHp) {
             jugador.incrementarPokemonCapturados();
             impresorMenus.pantallaCapturaExitosa(pokemonSalvaje.getNombre());
-            System.out.println(impresorMenus
-                    .formatearMapa("¿Deseas ponerle un apodo a tu nuevo Pokémon? (Presiona ENTER para omitir):"));
+            impresorMenus.mensajePokemonenemigo("¿Deseas ponerle un apodo a tu nuevo Pokémon? (Presiona ENTER para omitir):");
             String apodo = scaner.nextLine().trim();
             if (!apodo.isEmpty()) {
                 pokemonSalvaje.setApodo(apodo);

@@ -6,6 +6,7 @@ import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 public class InterfasDePartidaGuardada extends ImpresoresGlobal {
 
     public void interfasDeCargadoPartida(String rutaDeGuardado) {
+        limpiadorPantalla();
         String[] nombresPartidasGuardadas;
         DistribuidorDeGuardado lector = new DistribuidorDeGuardado(null, null, rutaDeGuardado);
         separadorInicio();
@@ -36,8 +37,8 @@ public class InterfasDePartidaGuardada extends ImpresoresGlobal {
                     System.out.println(formatear("  (" + (i + 1) + ") " + nombrePartidasGuardadasModificado[i]));
                 }
             }
+            delayThread();
             separadorMedios();
-
             System.out.println(formatearCentrado("SELECIONE UNA PARTIDA GUARDAD O ESCRIBA R PARA REGRESAR "));
             separadorFinal();
         } catch (Exception e) {

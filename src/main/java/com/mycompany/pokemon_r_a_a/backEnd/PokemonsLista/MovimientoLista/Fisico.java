@@ -10,6 +10,8 @@ public abstract class Fisico extends Movimiento {
     protected int daño;
     protected int potencia;
 
+
+
     @Override
     protected int resultadoAcion(Boolean recursivo) {
         if (pokemonUsuario == null || pokemonAtacado == null) {
@@ -22,14 +24,13 @@ public abstract class Fisico extends Movimiento {
 
         // Verificar si el objetivo está en el aire (por Vuelo)
         if (pokemonAtacado.isEnElAire()) {
-            System.out.println(
-                    confi.formatearMapa("¡El ataque falló porque " + pokemonAtacado.getNombre() + " está en el aire!"));
+            confi.mensajeInformativo("¡El ataque falló porque " + pokemonAtacado.getNombre() + " está en el aire!");
             return 0;
         }
 
         // Verificar si el objetivo bloquea el ataque con Protección
         if (pokemonAtacado.bolqueador()) {
-            System.out.println(confi.formatearMapa("¡" + pokemonAtacado.getNombre() + " se protegió del ataque!"));
+            confi.mensajeInformativo("¡" + pokemonAtacado.getNombre() + " se protegió del ataque!");
             return 0;
         }
 
@@ -54,9 +55,9 @@ public abstract class Fisico extends Movimiento {
         }
         pokemonAtacado.setVidaPokemon(nuevaVida);
 
-        System.out.println(confi.formatearMapa("¡" + pokemonUsuario.getNombre() + " usó " + getNombre()
-                + " causando " + daño + " de daño a " + pokemonAtacado.getNombre() + "! (HP restante: " + nuevaVida
-                + "/" + pokemonAtacado.getVidaInicial() + ")"));
+        confi.mensajeInformativo("¡" + pokemonUsuario.getNombre() + " usó " + getNombre() + " causando " + daño
+                + " de daño a " + pokemonAtacado.getNombre() + "! (HP restante: " + nuevaVida + "/"
+                + pokemonAtacado.getVidaInicial() + ")");
 
         if (!recursivo) {
             estadosAlterados();
