@@ -41,6 +41,7 @@ public class MovimientoJugador {
         int movimientoY = spawn[0] + movI;
         acion.setCasillaAnterior(casillaAnterior);
         acion.setSpawn(spawn);
+        
         if (mov.equals("x")) {
             if (movimientoX < mapa[0].length && movimientoX > -1) {
                 mapa = acion.movEstado(mapa, spawn[0], movimientoX, true, jugador);

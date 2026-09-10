@@ -25,7 +25,7 @@ public class Gimnasio extends CasillasConMapas {
         this.caminable = caminable;
         this.tipo = tipo;
         this.tieneSubMenu = tieneSubMenu;
-        this.jugadorPosicion = new int[] { 7, 4 };
+        this.jugadorPosicion = new int[] { 8, 4 };
 
         posicionInicial = jugadorPosicion;
     }
@@ -40,9 +40,9 @@ public class Gimnasio extends CasillasConMapas {
         boolean salida = false;
         String movimientoJugador;
         vencido = false;
-        impresor.limpiadorPantalla();
 
         do {
+            impresor.limpiadorPantalla();
 
             Casillas casillaAnterior = mov.getCasillaAnterior();
             if (casillaAnterior.tipoCasilla() == 15 || casillaAnterior.tipoCasilla() == 15) {
@@ -51,35 +51,19 @@ public class Gimnasio extends CasillasConMapas {
             } else {
                 impresor.imprimidorDeMapaConInteracionGimnacio(mapa, nombre, entrenador, npc, false);
             }
+
             movimientoJugador = scan.nextLine();
+
             if (casillaAnterior.tipoCasilla() == 15 && movimientoJugador.trim().equalsIgnoreCase("C")) {
                 casillaAnterior.subMenu();
             } else {
-
-                if (movimientoJugador.equalsIgnoreCase("W") || movimientoJugador.equalsIgnoreCase("S")
-                        || movimientoJugador.equalsIgnoreCase("A")
-                        || movimientoJugador.equalsIgnoreCase("D")) {
-                    mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador, false);
-                    jugadorPosicion = mov.getSpawn();
-                    salida = mov.getCondicionSalida();
-                    vencido = jugador.getVencido();
-                } else if (movimientoJugador.equalsIgnoreCase("M")) {
-                    mochilaLocal.menuInicialMochila();
-                } else if (movimientoJugador.equalsIgnoreCase("P")) {
-                    equipoEstado.menuInicial();
-                } else if (movimientoJugador.equalsIgnoreCase("T")) {
-                    pokedexLocal.pokedexMenu();
-                } else if (movimientoJugador.equalsIgnoreCase("F")) {
-                    jugador.perfil(mapaCiudadesLocal);
-                } else {
-                    impresor.pantallaDeError();
-                }
+                movimiento(mov, movimientoJugador);
+                vencido = jugador.getVencido();
             }
             if (vencido) {
                 jugadorPosicion = posicionInicial;
                 break;
             }
-            impresor.limpiadorPantalla();
 
         } while (!salida);
 

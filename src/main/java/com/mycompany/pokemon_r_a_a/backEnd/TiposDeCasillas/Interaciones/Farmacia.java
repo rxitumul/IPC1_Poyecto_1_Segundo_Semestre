@@ -49,22 +49,8 @@ public class Farmacia extends CasillasConMapas {
             if (movimientoJugador.trim().equalsIgnoreCase("C")
                     && (casillaAnterior.tipoCasilla() == 16 || casillaAnterior.tipoCasilla() == 18)) {
                 casillaAnterior.subMenu();
-            } else if (movimientoJugador.equalsIgnoreCase("W") || movimientoJugador.equalsIgnoreCase("S")
-                    || movimientoJugador.equalsIgnoreCase("A")
-                    || movimientoJugador.equalsIgnoreCase("D")) {
-                mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador,false);
-                jugadorPosicion = mov.getSpawn();
-                salida = mov.getCondicionSalida();
-            } else if (movimientoJugador.equalsIgnoreCase("M")) {
-                mochilaLocal.menuInicialMochila();
-            } else if (movimientoJugador.equalsIgnoreCase("P")) {
-                equipoEstado.menuInicial();
-            } else if (movimientoJugador.equalsIgnoreCase("T")) {
-                pokedexLocal.pokedexMenu();
-            } else if (movimientoJugador.equalsIgnoreCase("F")) {
-                jugador.perfil(mapaCiudadesLocal);
             } else {
-                impresor.pantallaDeError();
+                movimiento(mov, movimientoJugador);
             }
 
             impresor.limpiadorPantalla();

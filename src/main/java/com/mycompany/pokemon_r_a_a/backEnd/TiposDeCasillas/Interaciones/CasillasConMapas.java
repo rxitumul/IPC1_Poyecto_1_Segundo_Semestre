@@ -18,6 +18,7 @@ public abstract class CasillasConMapas extends Casillas<JugadorPokemonPartida> {
 
     @SuppressWarnings("rawtypes")
     protected Casillas[][] mapa;
+    protected boolean salida = false;
     protected String nombre;
     protected EstadoPokemonEquipo equipoEstado;
     protected Mochila mochilaLocal;
@@ -54,6 +55,27 @@ public abstract class CasillasConMapas extends Casillas<JugadorPokemonPartida> {
             this.pokedexLocal = jugador.getPokedexJugador();
             this.mapaCiudadesLocal = jugador.getMapaCiudadesLocal();
         }
+    }
+
+    protected MovimientoJugador movimiento(MovimientoJugador mov, String movimientoJugador) {
+        if (movimientoJugador.equalsIgnoreCase("W") || movimientoJugador.equalsIgnoreCase("S")
+                || movimientoJugador.equalsIgnoreCase("A")
+                || movimientoJugador.equalsIgnoreCase("D")) {
+            mapa = mov.movimiento(jugadorPosicion, mapa, movimientoJugador, jugador, false);
+            jugadorPosicion = mov.getSpawn();
+            salida = mov.getCondicionSalida();
+        } else if (movimientoJugador.equalsIgnoreCase("M")) {
+            mochilaLocal.menuInicialMochila();
+        } else if (movimientoJugador.equalsIgnoreCase("P")) {
+            equipoEstado.menuInicial();
+        } else if (movimientoJugador.equalsIgnoreCase("T")) {
+            pokedexLocal.pokedexMenu();
+        } else if (movimientoJugador.equalsIgnoreCase("F")) {
+            jugador.perfil(mapaCiudadesLocal);
+        } else {
+            impresor.pantallaDeError();
+        }
+        return mov;
     }
 
     @Override
