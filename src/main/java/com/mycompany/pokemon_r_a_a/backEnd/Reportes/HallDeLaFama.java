@@ -22,7 +22,6 @@ public class HallDeLaFama implements Serializable {
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         imprimir = new ImprimirReportes();
-
     }
 
     public void registrarVictoria(JugadorPokemonPartida jugador) {

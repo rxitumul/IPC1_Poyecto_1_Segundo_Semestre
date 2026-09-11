@@ -4,12 +4,13 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
+
 @SuppressWarnings("rawtypes")
 
 public class AccionDeMovimiento {
-    private ImpresoresGlobal mensaje = new ImpresoresGlobal();
+    private ImpresoresGlobal mensaje;
     private int[] spawnLocal;
-    
+
     private Casillas casillaAnteriorLocal;
     private boolean salida = false;
     private final static String AMARILLO_BRILLANTE = "\u001B[93m";
@@ -17,21 +18,23 @@ public class AccionDeMovimiento {
     private final static String MAGENTA = "\u001B[35m";
     protected final static String RESET = "\u001B[0m";
 
+    public AccionDeMovimiento() {
+        mensaje = new ImpresoresGlobal();
+    }
+
     public void setSpawn(int[] spawn) {
         spawnLocal = spawn;
     }
 
-    public void setCasillaAnterior( Casillas casillaAnterior) {
+    public void setCasillaAnterior(Casillas casillaAnterior) {
         casillaAnteriorLocal = casillaAnterior;
     }
 
-    
     public Casillas getCasillaAnterior() {
         return casillaAnteriorLocal;
     }
 
-    
-    public Casillas[][] movEstado( Casillas[][] mapa, int y, int x, boolean posicionXOY, JugadorPokemonPartida jugador) {
+    public Casillas[][] movEstado(Casillas[][] mapa, int y, int x, boolean posicionXOY, JugadorPokemonPartida jugador) {
         Casillas casilla = mapa[y][x];
         if (casilla.caminable()) {
 
@@ -104,7 +107,7 @@ public class AccionDeMovimiento {
                     break;
                 case 18:
 
-                casilla.setjugador(jugador);
+                    casilla.setjugador(jugador);
                     mapa[spawnLocal[0]][spawnLocal[1]] = casillaAnteriorLocal;
                     casillaAnteriorLocal = casilla;
                     mapa[y][x] = new CasillaGenerica(MAGENTA + " > " + RESET, true, 4, false, null);
@@ -113,8 +116,8 @@ public class AccionDeMovimiento {
                     } else {
                         spawnLocal[0] = y;
                     }
-                    //1
-                    
+                    // 1
+
                     break;
                 case 20:
                     mensaje.mensajeInformativo("Regresando al exterior...");
@@ -183,6 +186,5 @@ public class AccionDeMovimiento {
     public boolean getCondicionSalida() {
         return salida;
     }
-
 
 }

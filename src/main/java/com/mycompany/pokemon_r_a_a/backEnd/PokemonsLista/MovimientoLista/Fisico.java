@@ -5,10 +5,10 @@ public abstract class Fisico extends Movimiento {
     private int variacion;
     private int nivelPokemon;
     private int puntosDeAtaque;
-    private final static int VARIACION_INICIO = 85;
-    private final static int VARIACION_FIN = 101;
     protected int daño;
     protected int potencia;
+    private final static int VARIACION_INICIO = 85;
+    private final static int VARIACION_FIN = 101;
 
 
 

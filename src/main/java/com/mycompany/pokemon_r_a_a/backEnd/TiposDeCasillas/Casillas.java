@@ -19,6 +19,7 @@ import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
  * @author ricardocastillo
  */
 
+@SuppressWarnings("rawtypes")
 public abstract class Casillas<T> implements Serializable {
 
     protected T npcT;
@@ -27,9 +28,9 @@ public abstract class Casillas<T> implements Serializable {
     protected int tipo;
     protected boolean tieneSubMenu;
     protected HallDeLaFama hall;
+    protected Casillas[][] mapa;
 
-    protected transient JugadorPokemonPartida jugador;
-    
+    protected JugadorPokemonPartida jugador;
     protected transient Random random;
     protected transient Scanner scanner;
     protected transient BatallasPokemon batalla;
@@ -71,7 +72,6 @@ public abstract class Casillas<T> implements Serializable {
     public abstract boolean getEstadoDeGruppo();
 
     public void setNpc(T dialogo) {
-
     }
 
     public void setjugador(JugadorPokemonPartida jugador) {
@@ -80,6 +80,18 @@ public abstract class Casillas<T> implements Serializable {
 
     public T accionCasilla(JugadorPokemonPartida jugador) {
         return null;
+    }
+
+    public void setHall(HallDeLaFama hall) {
+        this.hall = hall;
+    }
+
+    public Casillas[][] getMapa() {
+        return mapa;
+    }
+
+    public HallDeLaFama getHall() {
+        return hall;
     }
 
 }

@@ -32,8 +32,13 @@ public class CreadorNpc {
             { "♦", "≈", "♧", "ϟ", "●", "◇", "❄", "☾", "☼", "☽", "★", "✧", "⚙", "☠", "◉", "♢", "◌", "♥", "♛", "☄", "△",
                     "≋", "▲" } };
 
-    private Random random = new Random();
-    private DatosPokemon datosPokemon = new DatosPokemon();
+    private Random random;
+    private DatosPokemon datosPokemon;
+
+    public CreadorNpc() {
+        random = new Random();
+        datosPokemon = new DatosPokemon();
+    }
 
     public String[][] generadorDeMedallas() {
         String[][] medallasGeneradas = new String[2][3];
@@ -57,15 +62,6 @@ public class CreadorNpc {
             }
         }
         return medallasGeneradas;
-    }
-
-    public Entrenador[] creadorDeEntrenadoresYLider(Pokemons[] equipoJugador, String ciudadNombre) {
-        return creadorDeEntrenadoresYLider(0, ciudadNombre, equipoJugador);
-    }
-
-    /** Sobrecarga sin equipo del jugador (usa nivel mínimo 1). */
-    public Entrenador[] creadorDeEntrenadoresYLider(String ciudadNombre) {
-        return creadorDeEntrenadoresYLider(0, ciudadNombre, null);
     }
 
     private Entrenador[] creadorDeEntrenadoresYLider(int ciudad, String ciudadNombre, Pokemons[] equipoJugador) {
@@ -117,10 +113,6 @@ public class CreadorNpc {
         return lista;
     }
 
-    public TiendaNpc creadorDeTienda() {
-        return creadorDeTienda(0);
-    }
-
     public TiendaNpc creadorDeTienda(int ciudad) {
         TiendaNpc tienda = new TiendaNpc();
         int indiceNombre = random.nextInt(nombresNpcTienda.length);
@@ -130,19 +122,15 @@ public class CreadorNpc {
         tienda.setBoleanoActivo(true);
 
         Mochila stock = new Mochila(null);
-        stock.setPokebola(99);
-        stock.setPocion(99);
-        stock.setSuperPocion(99);
-        stock.setAntidoto(99);
-        stock.setAntiParalisis(99);
+        stock.setPokebola(99999);
+        stock.setPocion(99999);
+        stock.setSuperPocion(99999);
+        stock.setAntidoto(99999);
+        stock.setAntiParalisis(9999);
         stock.setRestauraTodo(99);
         tienda.setLista(new Mochila[] { stock });
 
         return tienda;
-    }
-
-    public EnfermeriaNpc creadorDeEnfermeria() {
-        return creadorDeEnfermeria(0);
     }
 
     public EnfermeriaNpc creadorDeEnfermeria(int ciudad) {
@@ -155,5 +143,21 @@ public class CreadorNpc {
 
         return enfermera;
     }
-}
 
+    public EnfermeriaNpc creadorDeEnfermeria() {
+        return creadorDeEnfermeria(0);
+    }
+
+    public TiendaNpc creadorDeTienda() {
+        return creadorDeTienda(0);
+    }
+
+    public Entrenador[] creadorDeEntrenadoresYLider(Pokemons[] equipoJugador, String ciudadNombre) {
+        return creadorDeEntrenadoresYLider(0, ciudadNombre, equipoJugador);
+    }
+
+    public Entrenador[] creadorDeEntrenadoresYLider(String ciudadNombre) {
+        return creadorDeEntrenadoresYLider(0, ciudadNombre, null);
+    }
+
+}

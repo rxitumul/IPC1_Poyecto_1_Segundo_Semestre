@@ -56,10 +56,6 @@ public abstract class TurnosDeJuego extends Finalizacion {
         return false;
     }
 
-    /**
-     * Permite retirar el Pokémon actual y enviar a otro con HP > 0. Consume el
-     * turno.
-     */
     protected boolean ejecutarTurnoCambio(JugadorPokemonPartida jugador, Pokemons[] pokemonsJugador,
             Entrenador enemigo, Pokemons[] pokemonsEnemigo, boolean esSalvaje, String nombreEnemigo) {
         impresorMenus.impresorDePrincipal(jugador.getNombre(), nombreEnemigo, pokemonRival, pokemonJugador);
@@ -113,10 +109,6 @@ public abstract class TurnosDeJuego extends Finalizacion {
         return false;
     }
 
-    /**
-     * Permite usar un objeto de la mochila. Consume el turno.
-     * Si usa Pokébola: solo en salvajes y con menos de 6 Pokémon en equipo.
-     */
     protected boolean ejecutarTurnoObjeto(JugadorPokemonPartida jugador, Pokemons[] pokemonsJugador,
             Entrenador enemigo, Pokemons[] pokemonsEnemigo, boolean esSalvaje, String nombreEnemigo) {
         impresorMenus.impresorDePrincipal(jugador.getNombre(), nombreEnemigo, pokemonRival, pokemonJugador);
@@ -218,13 +210,6 @@ public abstract class TurnosDeJuego extends Finalizacion {
         return false;
     }
 
-    /**
-     * Intenta escapar del combate.
-     * En batallas contra entrenadores esta opción está bloqueada sin gastar el
-     * turno.
-     * En batallas salvajes se comparan velocidades: si el Pokémon es más lento
-     * recibe el ataque antes de huir.
-     */
     protected boolean ejecutarTurnoHuir(JugadorPokemonPartida jugador, Pokemons[] pokemonsJugador,
             Entrenador enemigo, Pokemons[] pokemonsEnemigo, boolean esSalvaje) {
         if (!esSalvaje) {
@@ -251,11 +236,7 @@ public abstract class TurnosDeJuego extends Finalizacion {
             return true;
         }
     }
-
-    /**
-     * Calcula la captura de un Pokémon salvaje.
-     * R aleatorio entre 0 y vidaInicial. Si R > vidaPokemon actual -> capturado.
-     */
+   
     protected boolean intentarCaptura(JugadorPokemonPartida jugador, Pokemons pokemonSalvaje) {
         int pokebola = jugador.getMochilaJugador().getPokebola();
         jugador.getMochilaJugador().setPokebola(pokebola - 1);
@@ -286,7 +267,5 @@ public abstract class TurnosDeJuego extends Finalizacion {
             return false;
         }
     }
-
     
-
 }

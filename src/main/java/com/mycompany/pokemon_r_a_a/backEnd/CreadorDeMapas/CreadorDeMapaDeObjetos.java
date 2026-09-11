@@ -162,17 +162,19 @@ public class CreadorDeMapaDeObjetos {
 
             // ── Casillas de NPC (interiores) ─────────────────────────────
             case 10: // Entrenador
-                return new CasillaGenerica(AZUL + " ♜ " + RESET, true, 10, true, hall);
+                return new CasillaGenerica(AZUL + " ♜ " + RESET, false, 10, true, hall);
             case 11: // Líder de Gimnasio
-                return new CasillaGenerica(AZUL + " ♛ " + RESET, true, 11, true, hall);
+                return new CasillaGenerica(AZUL + " ♛ " + RESET, false, 11, true, hall);
             case 12: // Empleado Tienda
-                return new CasillaGenerica(AZUL + " ♙ " + RESET, true, 12, true, hall);
+                return new CasillaGenerica(AZUL + " ♙ " + RESET, false, 12, true, hall);
             case 13: // Enfermera
-                return new CasillaGenerica(AZUL + " ♥ " + RESET, true, 13, true, hall);
+                return new CasillaGenerica(AZUL + " ♥ " + RESET, false, 13, true, hall);
             case 14: // Televisión
-                return new CasillaGenerica(AZUL + " ▣ " + RESET, true, 14, true, hall);
+                return new CasillaGenerica(AZUL + " ▣ " + RESET, false, 14, true, hall);
 
             // ── Casillas de interacción (con lógica real) ─────────────────
+
+            
             case 15: // Zona de interacción - Entrenador
                 return new InteracionEntrenador(hall);
             case 16: // Zona de interacción - Farmacia

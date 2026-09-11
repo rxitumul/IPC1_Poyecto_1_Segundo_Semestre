@@ -6,7 +6,7 @@ public class InicioProfesorOak extends ImpresoresGlobal {
     private String nombreLocal;
     private String nombrePokemonLocal;
 
-    private static final String[] MENSAJES_PROFESOR_INICIO = {
+    private final String[] MENSAJES_PROFESOR_INICIO = {
             "¡Hola! ¡Bienvenido al maravilloso mundo de los Pokémon!",
             "Mi nombre es Profesor Oak, y desde hace muchos años estudio a estas increíbles criaturas llamadas Pokémon.",
             "Los Pokémon viven junto a nosotros en bosques, montañas, ciudades y muchos otros lugares.",

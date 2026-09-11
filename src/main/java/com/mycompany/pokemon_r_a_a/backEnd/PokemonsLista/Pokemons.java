@@ -14,8 +14,8 @@ import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 
 public class Pokemons implements Serializable {
 
-    private static final int VARIACION_INICIO = 0;
-    private static final int VARIACION_FIN = 31;
+    private final static int VARIACION_INICIO = 0;
+    private final static int VARIACION_FIN = 31;
 
     private String nombreLocal;
     private String apodo;
@@ -63,13 +63,13 @@ public class Pokemons implements Serializable {
         estadosAlterados = new Listas<Estados>();
         estadosAlteradosPermanete = new Listas<Estados>();
         rand = new Random();
-        impresor= new ImpresoresGlobal();
+        impresor = new ImpresoresGlobal();
     }
-    
+
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject(); // Esto carga todo lo normal (vida, medallas, pokemons...)
         rand = new Random();
-        impresor= new ImpresoresGlobal();
+        impresor = new ImpresoresGlobal();
 
     }
 

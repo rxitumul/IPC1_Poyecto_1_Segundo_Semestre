@@ -2,11 +2,11 @@ package com.mycompany.pokemon_r_a_a.frontEnd;
 
 public class ConfiguracionesDeEstetica {
 
-    private static final int SEPARACION_DE_BORDES = 124;
-    private static final int SEPARACION_DE_BORDES_MAPA = 75;
-    private static final int SEPARACION_DE_BORDES_MAPA_SUB_MAPA = 30;
-    private static final int CUATRO = 4;
-    private static final int CATORCE = 14;
+    private final static int SEPARACION_DE_BORDES = 124;
+    private final static int SEPARACION_DE_BORDES_MAPA = 75;
+    private final static int SEPARACION_DE_BORDES_MAPA_SUB_MAPA = 30;
+    private final static int CUATRO = 4;
+    private final static int CATORCE = 14;
 
     private final static int TIEMPO_DE_ESPERA = 200;
     private final static String LIMPIADOR_DE_PANTALLA = "\033[H\033[2J";
@@ -45,13 +45,15 @@ public class ConfiguracionesDeEstetica {
     }
 
     protected void separadorInicialMapaSubMapa() {
-        System.out.println(MARCO_ESQUINA_IZQUIERDA_SUPERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA_SUB_MAPA)
-                + MARCO_ESQUINA_DERECHA_SUPERIOR);
+        System.out
+                .println(MARCO_ESQUINA_IZQUIERDA_SUPERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA_SUB_MAPA)
+                        + MARCO_ESQUINA_DERECHA_SUPERIOR);
     }
 
     protected void separadorFinalMapaSubMapa() {
-        System.out.println(MARCO_ESQUINA_IZQUIERDA_INFERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA_SUB_MAPA)
-                + MARCO_ESQUINA_DERECHA_INFERIOR);
+        System.out
+                .println(MARCO_ESQUINA_IZQUIERDA_INFERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA_SUB_MAPA)
+                        + MARCO_ESQUINA_DERECHA_INFERIOR);
     }
 
     protected void separadorInicioMapa() {

@@ -15,19 +15,25 @@ import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorBatallaMenu
 
 public abstract class RealizacionDeAtaqueMovimiento {
 
-    protected static final int DINERO_GANADO_RANGO_A = 150;
-    protected static final int DINERO_GANADO_RANGO_B = 500;
+    protected final static int DINERO_GANADO_RANGO_A = 150;
+    protected final static int DINERO_GANADO_RANGO_B = 500;
 
-    protected ImpresorBatallaMenus impresorMenus = new ImpresorBatallaMenus();
-    protected AiEnemigo aiEnemigo = new AiEnemigo();
+    protected ImpresorBatallaMenus impresorMenus;
+    protected AiEnemigo aiEnemigo;
     protected int jugadorPokemonIndice;
     protected int enemigoPokemonIndice;
     protected Scanner scaner;
-    protected Random rand = new Random();
+    protected Random rand;
 
     protected Pokemons pokemonJugador;
     protected Pokemons pokemonRival;
     protected HallDeLaFama hallDeLaFama;
+
+    public RealizacionDeAtaqueMovimiento() {
+        impresorMenus = new ImpresorBatallaMenus();
+        aiEnemigo = new AiEnemigo();
+        rand = new Random();
+    }
 
     public boolean ejecutarAccionAtaque(Pokemons atacante, Pokemons objetivo, Movimiento mov) {
         if (atacante == null || objetivo == null || mov == null) {
@@ -49,7 +55,8 @@ public abstract class RealizacionDeAtaqueMovimiento {
         Estados dormido = atacante.obtenerEstado("Dormido");
         if (dormido != null) {
             dormido.decrementarContador();
-           impresorMenus.mensajePokemonenemigo("¡" + atacante.getNombre() + " está profundamente dormido y no puede moverse!");
+            impresorMenus.mensajePokemonenemigo(
+                    "¡" + atacante.getNombre() + " está profundamente dormido y no puede moverse!");
             if (dormido.esExpirado()) {
                 impresorMenus.mensajePokemonenemigo("¡" + atacante.getNombre() + " se ha despertado!");
                 atacante.eliminarEstado("Dormido");
@@ -101,9 +108,9 @@ public abstract class RealizacionDeAtaqueMovimiento {
         return true;
     }
 
-    public void procesarFinDeTurno(Pokemons p1, Pokemons p2) {
-        aplicarEfectosFinDeTurno(p1);
-        aplicarEfectosFinDeTurno(p2);
+    public void procesarFinDeTurno(Pokemons pokemon1, Pokemons pokemon2) {
+        aplicarEfectosFinDeTurno(pokemon1);
+        aplicarEfectosFinDeTurno(pokemon2);
     }
 
     private void aplicarEfectosFinDeTurno(Pokemons p) {
@@ -139,14 +146,6 @@ public abstract class RealizacionDeAtaqueMovimiento {
         }
     }
 
-    /**
-     * Compara las prioridades y velocidades de los dos Pokémon según las reglas:
-     * 1. "Ataque rápido" siempre tiene prioridad.
-     * 2. Si ambos usan "Ataque rápido" (o ninguno), depende de las velocidades.
-     * 3. Si las velocidades son iguales, se decide de forma aleatoria (50/50).
-     * Retorna true si el Pokémon del jugador actúa primero, false si el rival actúa
-     * primero.
-     */
     protected boolean determinaPrioridad(Movimiento movJugador, Movimiento movRival, Pokemons pJugador,
             Pokemons pRival) {
         boolean jugadorPrioridad = (movJugador != null && (movJugador.getNombre().equalsIgnoreCase("AtaqueRápido")

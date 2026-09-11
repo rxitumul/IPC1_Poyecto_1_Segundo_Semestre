@@ -30,11 +30,16 @@ public class InicioGame {
     private MenuPrincipal menuPrincipal;
     private DatosPokemon datos;
     private InterfasDePartidaGuardada guardadas;
+    private DistribuidorDeGuardado guaradadoCarga;
 
     public InicioGame() {
         impresor = new ImpresoresGlobal();
         scanner = new Scanner(System.in);
-        hall = new HallDeLaFama();
+        guaradadoCarga = new DistribuidorDeGuardado(null, null, null);
+        hall = guaradadoCarga.creadDeLaFama();
+        if (hall==null){
+            hall=new HallDeLaFama();
+        }
         creador = new CreadorMapas(hall);
         profe = new ProfesorCharla(scanner);
         equipos = new Pokemons[CANTIDAD_DE_POKEMONES_JUGADOR];
@@ -54,6 +59,9 @@ public class InicioGame {
             int opcion = menuPrincipal.menuInicial();
             switch (opcion) {
                 case 1:
+                    impresor.mensajeEncadenado(new String[] { "Porfavor ingrese el nombre de la partida",
+                            "Este sera usado para guardar la partida en archivos" });
+                    String nombrePartida = scanner.nextLine();
                     // profe.charlaInicial();
                     jugador.setPokemosEquipo(equipos);
                     jugador.setMochilaJugador(mochila);
@@ -68,16 +76,16 @@ public class InicioGame {
                         mapas[i] = creador.mapaCreador(mapas);
                     }
 
-                    game = new Game(scanner, mapas, jugador);
-                    game.gameInicio(0);
+                    game = new Game(scanner, mapas, jugador, hall);
+                    game.gameInicio(0, nombrePartida);
                     break;
 
                 case 2:
-                    DistribuidorDeGuardado guaradadoCarga = new DistribuidorDeGuardado(null, null, "");
                     guardadas.interfasDeCargadoPartida(RUTA_DE_ARCHIVOS_GUARDADOS);
 
                     try {
                         int numeroDePartida = Integer.parseInt(scanner.nextLine());
+                        numeroDePartida--;
                         String[] nombres = guaradadoCarga.lectorDeDatosNombres(RUTA_DE_ARCHIVOS_GUARDADOS);
 
                         if (nombres != null && numeroDePartida >= 0 && numeroDePartida < nombres.length) {
@@ -88,10 +96,10 @@ public class InicioGame {
                                         "Cargando partida guardada: " + nombrePartidaElegida + "...");
 
                                 String rutaCompletaPartida = RUTA_DE_ARCHIVOS_GUARDADOS + nombrePartidaElegida;
-                                game = guaradadoCarga.juegoGuardado(rutaCompletaPartida);
+                                game = guaradadoCarga.juegoGuardado(rutaCompletaPartida,hall,scanner);
 
                                 if (game != null) {
-                                    game.gameInicio(0);
+                                    game.gameInicio(0, nombrePartidaElegida);
                                 }
                             }
                         } else {

@@ -9,4 +9,3 @@ public class Cansado extends Estados {
     }
 
 }
-

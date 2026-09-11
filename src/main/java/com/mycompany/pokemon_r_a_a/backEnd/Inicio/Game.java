@@ -2,15 +2,18 @@ package com.mycompany.pokemon_r_a_a.backEnd.Inicio;
 
 import java.util.Scanner;
 
+import com.mycompany.pokemon_r_a_a.backEnd.CargadorDePartidas.DistribuidorDeGuardado;
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.EstadoPokemonEquipo;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Mapas;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Mochila;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Pokedex;
+import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeMapas;
+
 @SuppressWarnings("rawtypes")
 
 public class Game {
@@ -22,26 +25,29 @@ public class Game {
     private Mochila mochilaLocal;
     private ImpresorDeMapas impresor;
     private EstadoPokemonEquipo equipoEstado;
+    private HallDeLaFama hallGlobal;
 
     private int[] jugadorPosicion;
-
+    private AsignadorDeVariableGobalHall asignar;
     private MapaCiudad[] mapaCiudadesLocal;
 
     public Game(Scanner scanner, MapaCiudad[] mapaCiudades,
-            JugadorPokemonPartida jugador) {
+            JugadorPokemonPartida jugador, HallDeLaFama hallGlobal) {
+        asignar = new AsignadorDeVariableGobalHall(hallGlobal, mapaCiudades);
         this.scanner = scanner;
-        movimiento = new MovimientoJugador();
-        impresor = new ImpresorDeMapas();
+        this.hallGlobal = hallGlobal;
+        mapaCiudadesLocal = mapaCiudades;
         pokedexLocal = jugador.getPokedexJugador();
         jugadorLocal = jugador;
         mochilaLocal = jugador.getMochilaJugador();
-        mapaCiudadesLocal = mapaCiudades;
+        impresor = new ImpresorDeMapas();
+        movimiento = new MovimientoJugador();
         equipoEstado = new EstadoPokemonEquipo(scanner, jugadorLocal);
+        asignar.asignacion();
 
     }
 
-    
-    public void gameInicio(int ciudadInicio) {
+    public void gameInicio(int ciudadInicio, String nomprePartida) {
         MapaCiudad mapa = mapaCiudadesLocal[ciudadInicio];
         Casillas[][] mapaLocal = mapa.getMapa();
         String nombreCiudad = mapa.getNombre();
@@ -76,6 +82,10 @@ public class Game {
             } else if (movi.equalsIgnoreCase("T")) {
                 pokedexLocal.pokedexMenu();
             } else if (movi.equalsIgnoreCase("X")) {
+                DistribuidorDeGuardado guardado = new DistribuidorDeGuardado(mapaCiudadesLocal, jugadorLocal,
+                        nomprePartida);
+                guardado.guardarJuego(mapaCiudadesLocal, jugadorLocal, hallGlobal);
+
                 impresor.mensajeInformativo("Salir Y guardar");
                 break;
             } else if (movi.equalsIgnoreCase("F")) {

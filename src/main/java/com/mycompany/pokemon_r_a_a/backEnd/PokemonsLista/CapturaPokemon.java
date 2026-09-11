@@ -5,7 +5,11 @@ import java.util.Random;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 
 public class CapturaPokemon {
-    private Random rand = new Random();
+    private Random rand;
+
+    public CapturaPokemon() {
+        rand = new Random();
+    }
 
     public boolean captura(Pokemons captura, JugadorPokemonPartida jugador) {
         int atraparProb = rand.ints(0, captura.getVidaInicial() + 1).findFirst().getAsInt();

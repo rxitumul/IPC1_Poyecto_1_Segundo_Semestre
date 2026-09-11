@@ -9,21 +9,24 @@ import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 import com.mycompany.pokemon_r_a_a.frontEnd.InformacionProfesor.InicioProfesorOak;
 
 public class ProfesorCharla {
-    private DatosPokemon pokemonCreador = new DatosPokemon();
-    private ImpresoresGlobal info = new ImpresoresGlobal();
     private Pokemons pokemonInicial;
-    private InicioProfesorOak profesor = new InicioProfesorOak();
     private int pokemnSelecionado;
     private Scanner scanner;
+    private DatosPokemon pokemonCreador;
+    private ImpresoresGlobal info;
+    private InicioProfesorOak profesor;
 
     public ProfesorCharla(Scanner scanner) {
         this.scanner = scanner;
+        pokemonCreador = new DatosPokemon();
+        info = new ImpresoresGlobal();
+        profesor = new InicioProfesorOak();
     }
 
     public void regaloProfesor(JugadorPokemonPartida jugador) {
         jugador.setNombre(profesor.getNombreLocal());
         Pokemons[] pokemonEquipo = jugador.getPokemosEquipo();
-        
+
         pokemonInicial = pokemonCreador.pokemonIniciales(2);
         pokemonInicial.setApodo(pokemonInicial.getNombre());
         pokemonEquipo[1] = pokemonInicial;

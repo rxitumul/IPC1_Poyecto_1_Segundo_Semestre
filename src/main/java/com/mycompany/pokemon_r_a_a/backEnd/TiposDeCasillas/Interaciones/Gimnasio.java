@@ -7,18 +7,20 @@ import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Interacion.InteracionEntrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador;
+
 @SuppressWarnings("rawtypes")
 
 public class Gimnasio extends CasillasConMapas {
 
     private Entrenador[] entrenador;
     private String nombreCiudad;
-    private int[] posicionInicial = new int[2];
+    private int[] posicionInicial;
     private boolean vencido;
 
     public Gimnasio(String simbolo, boolean caminable, int tipo, boolean tieneSubMenu, HallDeLaFama hall,
             Casillas[][] mapaGimnasio, String nombreCiudad) {
         super(hall, mapaGimnasio);
+        posicionInicial = new int[2];
         this.simbolo = simbolo;
         entrenador = new Entrenador[3];
         this.nombreCiudad = nombreCiudad;
@@ -65,7 +67,8 @@ public class Gimnasio extends CasillasConMapas {
 
             movimientoJugador = scan.nextLine();
 
-            if (casillaAnterior != null && casillaAnterior.tipoCasilla() == 15 && movimientoJugador.trim().equalsIgnoreCase("C")) {
+            if (casillaAnterior != null && casillaAnterior.tipoCasilla() == 15
+                    && movimientoJugador.trim().equalsIgnoreCase("C")) {
                 casillaAnterior.subMenu();
                 vencido = jugador != null && jugador.getVencido();
             } else {
@@ -113,4 +116,3 @@ public class Gimnasio extends CasillasConMapas {
     }
 
 }
-

@@ -14,10 +14,8 @@ public class BatallasPokemon extends TurnosDeJuego {
         this.hallDeLaFama = hallDeLaFama;
     }
 
-    /**
-     * Inicia el combate contra un Pokémon salvaje en la hierba alta.
-     */
-    public void pokemonPeleaHierva(JugadorPokemonPartida jugador, Pokemons pokemonSalvaje) {;
+    public void pokemonPeleaHierva(JugadorPokemonPartida jugador, Pokemons pokemonSalvaje) {
+        ;
         jugador.incrementarBatallasSalvajes();
         Pokemons[] pokemonsJugador = jugador.getPokemosEquipo();
         pokemonRival = pokemonSalvaje;
@@ -38,7 +36,8 @@ public class BatallasPokemon extends TurnosDeJuego {
             pokemonJugador = pokemonsJugador[jugadorPokemonIndice];
 
             if (pokemonJugador.tieneEstado("Cansado")) {
-                impresorMenus.mensajePokemonenemigo("¡" + pokemonJugador.getNombre()+ " está exhausto y necesita descansar este turno! No puede realizar ninguna acción.");
+                impresorMenus.mensajePokemonenemigo("¡" + pokemonJugador.getNombre()
+                        + " está exhausto y necesita descansar este turno! No puede realizar ninguna acción.");
                 pokemonJugador.eliminarEstado("Cansado");
 
                 int movEnemigo = aiEnemigo.selecionadorDeAtaque(pokemonRival.getMovimientos());
@@ -72,9 +71,6 @@ public class BatallasPokemon extends TurnosDeJuego {
         }
     }
 
-    /**
-     * Inicia el combate contra un Entrenador o Líder de Gimnasio.
-     */
     public void pokemonsPelea(JugadorPokemonPartida jugador, Entrenador enemigo) {
         jugador.incrementarBatallasEntrenador();
         Pokemons[] pokemonsJugador = jugador.getPokemosEquipo();
@@ -105,7 +101,7 @@ public class BatallasPokemon extends TurnosDeJuego {
         pokemonRival = pokemonsEnemigo[enemigoPokemonIndice];
         pokemonJugador = pokemonsJugador[jugadorPokemonIndice];
 
-       impresorMenus.mensajePokemonenemigo("¡El entrenador " + enemigo.getNombre() + " te desafía a un combate!");
+        impresorMenus.mensajePokemonenemigo("¡El entrenador " + enemigo.getNombre() + " te desafía a un combate!");
         impresorMenus.mensajeEntrenadorCambiaPokemon(enemigo.getNombre(), pokemonRival.getNombre());
         impresorMenus.mensajePokemonEntra(pokemonJugador.getNombre());
 
@@ -116,7 +112,8 @@ public class BatallasPokemon extends TurnosDeJuego {
 
             // ─── Cansado: bloquear menú completo ───
             if (pokemonJugador.tieneEstado("Cansado")) {
-impresorMenus.mensajePokemonenemigo("¡" + pokemonJugador.getNombre()+ " está exhausto y necesita descansar este turno! No puede realizar ninguna acción.");
+                impresorMenus.mensajePokemonenemigo("¡" + pokemonJugador.getNombre()
+                        + " está exhausto y necesita descansar este turno! No puede realizar ninguna acción.");
                 pokemonJugador.eliminarEstado("Cansado");
 
                 int movEnemigo = aiEnemigo.selecionadorDeAtaque(pokemonRival.getMovimientos());
@@ -151,9 +148,6 @@ impresorMenus.mensajePokemonenemigo("¡" + pokemonJugador.getNombre()+ " está e
         }
     }
 
-    /**
-     * Procesa la opción elegida por el jugador en el menú principal.
-     */
     protected boolean selecionador(int opcion, JugadorPokemonPartida jugador, Entrenador enemigo,
             Pokemons[] pokemonsEnemigo, Pokemons[] pokemonsJugador, boolean esSalvaje, String nombreEnemigo) {
         switch (opcion) {
@@ -168,7 +162,7 @@ impresorMenus.mensajePokemonenemigo("¡" + pokemonJugador.getNombre()+ " está e
                     return false;
                 }
                 if (movSeleccionado == 0) {
-                    return false; // Volver al menú sin consumir turno
+                    return false;
                 }
                 int movIndex = movSeleccionado - 1;
                 if (movIndex >= 0 && movIndex < pokemonJugador.getMovimientos().length

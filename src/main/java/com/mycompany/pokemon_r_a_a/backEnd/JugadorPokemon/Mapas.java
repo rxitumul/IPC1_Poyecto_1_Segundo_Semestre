@@ -7,13 +7,15 @@ import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeSelecion;
 
 public class Mapas {
-    private ImpresoresGlobal mensaje = new ImpresoresGlobal();
     private MapaCiudad[] mapaCiudadesLocal;
-    private ImpresorDeSelecion impresor = new ImpresorDeSelecion();
+    private ImpresoresGlobal mensaje;
+    private ImpresorDeSelecion impresor;
     private Scanner scanner;
 
     public Mapas(Scanner scanner, MapaCiudad[] mapaCiudades) {
         this.scanner = scanner;
+        mensaje = new ImpresoresGlobal();
+        impresor = new ImpresorDeSelecion();
         mapaCiudadesLocal = mapaCiudades;
     }
 

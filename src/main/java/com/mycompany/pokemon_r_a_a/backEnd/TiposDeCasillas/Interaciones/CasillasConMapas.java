@@ -1,5 +1,7 @@
 package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.CreadorMapas;
@@ -13,29 +15,27 @@ import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.ImpresorDeMapas;
+
 @SuppressWarnings("rawtypes")
 
 public abstract class CasillasConMapas extends Casillas<JugadorPokemonPartida> {
 
-    
-    protected Casillas[][] mapa;
     protected boolean salida = false;
     protected String nombre;
     protected EstadoPokemonEquipo equipoEstado;
     protected Mochila mochilaLocal;
     protected Pokedex pokedexLocal;
     protected MapaCiudad[] mapaCiudadesLocal;
-    protected ImpresorDeMapas impresor = new ImpresorDeMapas();
-    protected Scanner scan = new Scanner(System.in);
-    protected MovimientoJugador mov = new MovimientoJugador();
     protected int[] jugadorPosicion;
     protected Npc npc;
-    protected CreadorMapas mapaCreador;
 
-    
+    protected transient ImpresorDeMapas impresor;
+    protected transient Scanner scan;
+    protected transient MovimientoJugador mov;
+    protected transient CreadorMapas mapaCreador;
+
     public CasillasConMapas(HallDeLaFama hall, Casillas[][] mapa) {
         super(hall);
-        mapaCreador = new CreadorMapas(hall);
         this.jugadorPosicion = new int[] { 10, 5 };
         this.mapa = mapa;
         if (jugador != null) {
@@ -44,7 +44,20 @@ public abstract class CasillasConMapas extends Casillas<JugadorPokemonPartida> {
             pokedexLocal = jugador.getPokedexJugador();
             mapaCiudadesLocal = jugador.getMapaCiudadesLocal();
         }
+        impresor = new ImpresorDeMapas();
+        mapaCreador = new CreadorMapas(hall);
+        scan = new Scanner(System.in);
+        mov = new MovimientoJugador();
 
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        impresor = new ImpresorDeMapas();
+        mapaCreador = new CreadorMapas(hall);
+        scan = new Scanner(System.in);
+        mov = new MovimientoJugador();
     }
 
     @Override

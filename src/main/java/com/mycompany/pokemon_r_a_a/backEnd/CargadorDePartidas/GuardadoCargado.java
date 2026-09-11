@@ -7,8 +7,9 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.frontEnd.Menus.InterfasDePartidaGuardada;
 
 public class GuardadoCargado {
-    protected static final String RUTA_PARA_GUIA_TAMANO_NOMBRES = "archivos/juego/valores";
-    protected final String RUTA_DE_ARCHIVOS_GUARDADOS = "Archivos/PartidasGuardadas/";
+
+    protected final static String RUTA_DE_ARCHIVOS_GUARDADOS = "Archivos/PartidasGuardadas/";
+    protected final static String RUTA_DE_ARCHIVOS_GUARDADOS_DATOS = "Archivos/Datos/";
 
     protected InterfasDePartidaGuardada impresor;
     protected Scanner scanner;

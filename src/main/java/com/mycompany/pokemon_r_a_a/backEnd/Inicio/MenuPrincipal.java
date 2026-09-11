@@ -8,15 +8,19 @@ import com.mycompany.pokemon_r_a_a.frontEnd.Menus.MenuInicialFront;
 public class MenuPrincipal {
 
     private Scanner scanner;
-    private MenuInicialFront menu = new MenuInicialFront();
-    private ImpresoresGlobal info = new ImpresoresGlobal();
+    private MenuInicialFront menu;
+    private ImpresoresGlobal info;
 
     public MenuPrincipal(Scanner scanner) {
         this.scanner = scanner;
+        menu = new MenuInicialFront();
+        info = new ImpresoresGlobal();
     }
 
     public MenuPrincipal() {
         this.scanner = new Scanner(System.in);
+        info = new ImpresoresGlobal();
+        menu = new MenuInicialFront();
     }
 
     public int menuInicial() {

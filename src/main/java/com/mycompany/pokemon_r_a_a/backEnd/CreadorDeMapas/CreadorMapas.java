@@ -7,29 +7,28 @@ import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Entrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.TiendaNpc;
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
+
 @SuppressWarnings("rawtypes")
 
 public class CreadorMapas {
-    private static final int TAMANO_MAPA_POKEMON_FIN = 25;
-    private static final int TAMANO_MAPA_POKEMON_INICIO = 0;
-
-    private static final int CENTRO_POKEMON = 6;
-    private static final int GIMNACIO_POKEMON = 1;
-    private static final int TIENDA_POKEMON = 2;
-    private static final int HIERVA_ALTA = 3;
-    private static final int SPAWN = 4;
-    private static final int MURRO = 5;
-    private static final int ARBOL = 7;
-    private static final int AGUA = 8;
-    private static final int CASA = 9;
-    private static final int ESPACIO = 0;
-    private static final int INTERACION_CON_NPC_DE_ENEMIGO = 15;
-    private static final int INTERACION_CON_NPC_DE_ENFERMERA = 16;
-    private static final int INTERACION_CON_NPC_DE_TELEVICION = 18;
-    private static final int INTERACION_CON_NPC_DE_TIENDA = 17;
-    private static final int SALIDA = 20;
-    private static final int MOSTRADOR = 19;
-    private CreadorNpc npcCreador = new CreadorNpc();
+    private final static int TAMANO_MAPA_POKEMON_FIN = 25;
+    private final static int TAMANO_MAPA_POKEMON_INICIO = 0;
+    private final static int CENTRO_POKEMON = 6;
+    private final static int GIMNACIO_POKEMON = 1;
+    private final static int TIENDA_POKEMON = 2;
+    private final static int HIERVA_ALTA = 3;
+    private final static int SPAWN = 4;
+    private final static int MURRO = 5;
+    private final static int ARBOL = 7;
+    private final static int AGUA = 8;
+    private final static int CASA = 9;
+    private final static int ESPACIO = 0;
+    private final static int INTERACION_CON_NPC_DE_ENEMIGO = 15;
+    private final static int INTERACION_CON_NPC_DE_ENFERMERA = 16;
+    private final static int INTERACION_CON_NPC_DE_TELEVICION = 18;
+    private final static int INTERACION_CON_NPC_DE_TIENDA = 17;
+    private final static int SALIDA = 20;
+    private final static int MOSTRADOR = 19;
 
     private int[][] mapaCentroPokemon = {
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
@@ -69,14 +68,20 @@ public class CreadorMapas {
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, 20, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO }
     };
     private int[][] mapaGimnasio = {
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO,      10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
-            { ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO,      10, INTERACION_CON_NPC_DE_ENEMIGO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO,      10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO },
-            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, INTERACION_CON_NPC_DE_ENEMIGO,      11, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO,
+                    ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, 10,
+                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO,
+                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
+            { ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, 10, INTERACION_CON_NPC_DE_ENEMIGO, INTERACION_CON_NPC_DE_ENEMIGO,
+                    ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, 10, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO },
+            { ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, INTERACION_CON_NPC_DE_ENEMIGO, 11,
+                    INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, INTERACION_CON_NPC_DE_ENEMIGO, ESPACIO, ESPACIO, ESPACIO, ESPACIO,
+                    ESPACIO },
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
-            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SPAWN  , ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
+            { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SPAWN, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO },
             { ESPACIO, ESPACIO, ESPACIO, ESPACIO, SALIDA, ESPACIO, ESPACIO, ESPACIO, ESPACIO, ESPACIO }
 
     };
@@ -84,13 +89,18 @@ public class CreadorMapas {
     private String[] nombres = { "Pallet Town",
             "Viridian City", "Pewter City", "Cerulean City", "Vermilion City", "Saffron City", "Celadon City",
             "Lavender Town", "Fuchsia City", "Cinnabar Island" };
-    private int[][] mapa = new int[25][25];
+
     private int[] jugador;
     private int[] enfermeria;
-    private Random rand = new Random();
+    private int[][] mapa;
+    private CreadorNpc npcCreador;
+    private Random rand;
     private CreadorDeMapaDeObjetos objetosMapa;
 
     public CreadorMapas(HallDeLaFama hall) {
+        mapa = new int[25][25];
+        npcCreador = new CreadorNpc();
+        rand = new Random();
         objetosMapa = new CreadorDeMapaDeObjetos(hall);
     }
 
@@ -98,7 +108,6 @@ public class CreadorMapas {
         return npcCreador;
     }
 
-    
     public Casillas[][] getMapaCentroPokemon(EnfermeriaNpc npc) {
         if (npc == null) {
             npc = npcCreador.creadorDeEnfermeria();
@@ -106,12 +115,10 @@ public class CreadorMapas {
         return objetosMapa.creadorCasillasCentroPokemon(mapaCentroPokemon, npc);
     }
 
-    
     public Casillas[][] getMapaCentroPokemon() {
         return getMapaCentroPokemon(npcCreador.creadorDeEnfermeria());
     }
 
-    
     public Casillas[][] getMapaGimnasio(Entrenador[] entrenadores, String ciudadNombre) {
         if (entrenadores == null) {
             entrenadores = npcCreador.creadorDeEntrenadoresYLider(ciudadNombre);
@@ -119,7 +126,6 @@ public class CreadorMapas {
         return objetosMapa.creadorCasillasGimnasio(mapaGimnasio, entrenadores, ciudadNombre);
     }
 
-    
     public Casillas[][] getMapaTiendaPokemon(TiendaNpc tienda) {
         if (tienda == null) {
             tienda = npcCreador.creadorDeTienda();
@@ -127,7 +133,6 @@ public class CreadorMapas {
         return objetosMapa.creadorCasillasTienda(mapaTiendaPokemon, tienda);
     }
 
-    
     public Casillas[][] getMapaTiendaPokemon() {
         return getMapaTiendaPokemon(npcCreador.creadorDeTienda());
     }

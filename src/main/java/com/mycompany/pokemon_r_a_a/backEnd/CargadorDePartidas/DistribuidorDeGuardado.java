@@ -1,23 +1,24 @@
 package com.mycompany.pokemon_r_a_a.backEnd.CargadorDePartidas;
 
 import java.io.File;
+import java.util.Scanner;
 
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
 import com.mycompany.pokemon_r_a_a.backEnd.GuardadoDeArchivosYRestauracion.GuardadorBinario;
 import com.mycompany.pokemon_r_a_a.backEnd.Inicio.Game;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
+import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 
 public class DistribuidorDeGuardado extends GuardadoCargado {
 
     private String nombreJuego;
 
-    private final String RUTA_DE_GUARDADO_JUGADOR_CARPETA = "/jugador";
-    private final String RUTA_DE_GUARDADO_MAPAS_CARPETA = "/mapas";
+    private final static String RUTA_DE_GUARDADO_JUGADOR_CARPETA = "/jugador";
+    private final static String RUTA_DE_GUARDADO_MAPAS_CARPETA = "/mapas";
+    private final static String RUTA_DE_GUARDADO_HALL_DE_FAMA = "hall/hallDeLaFama.bin";
     private GuardadorBinario guardador;
 
-    public DistribuidorDeGuardado() {
-        guardador = new GuardadorBinario();
-    }
+
 
     public DistribuidorDeGuardado(MapaCiudad[] mapas, JugadorPokemonPartida jugador, String nombreJuego) {
         super(mapas, jugador);
@@ -25,12 +26,13 @@ public class DistribuidorDeGuardado extends GuardadoCargado {
         this.nombreJuego = nombreJuego;
     }
 
-    public void guardarActionPerformed(MapaCiudad[] mapas, JugadorPokemonPartida jugador) {
+    public void guardarJuego(MapaCiudad[] mapas, JugadorPokemonPartida jugador, HallDeLaFama hallAGuardar) {
         try {
             String rutaBase = RUTA_DE_ARCHIVOS_GUARDADOS + nombreJuego;
 
             crearCarpetaGuardado(rutaBase + RUTA_DE_GUARDADO_JUGADOR_CARPETA);
             crearCarpetaGuardado(rutaBase + RUTA_DE_GUARDADO_MAPAS_CARPETA);
+            crearCarpetaGuardado(RUTA_DE_ARCHIVOS_GUARDADOS_DATOS +"hall");
 
             for (MapaCiudad mapaCiudad : mapas) {
                 if (mapaCiudad != null) {
@@ -41,6 +43,8 @@ public class DistribuidorDeGuardado extends GuardadoCargado {
 
             guardador.escritorDeObjetosMenoria(jugador,
                     rutaBase + RUTA_DE_GUARDADO_JUGADOR_CARPETA + "/" + jugador.getNombre() + ".bin");
+            guardador.escritorDeObjetosMenoria(hallAGuardar,
+                    RUTA_DE_ARCHIVOS_GUARDADOS_DATOS + RUTA_DE_GUARDADO_HALL_DE_FAMA);
             impresor.mensajeInformativo("Guardado Exitoso de la partida " + nombreJuego);
 
         } catch (Exception e) {
@@ -48,9 +52,8 @@ public class DistribuidorDeGuardado extends GuardadoCargado {
         }
     }
 
-    public Game juegoGuardado(String path) {
+    public Game juegoGuardado(String path, HallDeLaFama hall,Scanner sacanerActivado) {
         String[] nombresMapas = lectorDeDatosNombres(path + RUTA_DE_GUARDADO_MAPAS_CARPETA);
-
         String[] nombreJugador = lectorDeDatosNombres(path + RUTA_DE_GUARDADO_JUGADOR_CARPETA);
         if (nombresMapas == null || nombreJugador == null || nombreJugador.length == 0) {
             impresor.mensajeInformativo("Error: No se encontraron archivos de guardado válidos.");
@@ -65,7 +68,14 @@ public class DistribuidorDeGuardado extends GuardadoCargado {
 
         JugadorPokemonPartida jugador = guardador
                 .lectorDeObjetosMemoria(path + RUTA_DE_GUARDADO_JUGADOR_CARPETA + "/" + nombreJugador[0]);
-        return new Game(scanner, mapas, jugador);
+        return new Game(sacanerActivado, mapas, jugador, hall);
+    }
+
+    public HallDeLaFama creadDeLaFama() {
+        String pathHall = RUTA_DE_ARCHIVOS_GUARDADOS + RUTA_DE_GUARDADO_HALL_DE_FAMA;
+        HallDeLaFama hallGuardado = guardador.lectorDeObjetosMemoria(pathHall);
+        return hallGuardado;
+
     }
 
     private void crearCarpetaGuardado(String ruta) {

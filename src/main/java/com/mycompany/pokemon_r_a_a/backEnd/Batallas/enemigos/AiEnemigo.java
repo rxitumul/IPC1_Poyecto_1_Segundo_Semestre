@@ -6,11 +6,12 @@ import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.MovimientoLista.Movimiento;
 
 public class AiEnemigo {
-    private Random random = new Random();
+    private Random random;
 
-    /**
-     * Elige un ataque al azar de los que tenga disponibles su Pokémon en ese momento.
-     */
+    public AiEnemigo() {
+        random = new Random();
+    }
+
     public int selecionadorDeAtaque(Movimiento[] enemigo) {
         if (enemigo == null || enemigo.length == 0) {
             return 0;
@@ -18,9 +19,6 @@ public class AiEnemigo {
         return random.nextInt(enemigo.length);
     }
 
-    /**
-     * Ejecuta el ataque elegido por la IA contra el Pokémon del jugador.
-     */
     public void ataqueEnemigo(Pokemons enemigPokemons, Pokemons jugador, int movimientoEnemigo) {
         if (enemigPokemons == null || jugador == null) {
             return;
@@ -32,9 +30,6 @@ public class AiEnemigo {
         }
     }
 
-    /**
-     * Selecciona el siguiente Pokémon con vida del equipo rival (para entrenadores).
-     */
     public int seleccionarPokemonCambio(Pokemons[] equipoEnemigo) {
         if (equipoEnemigo == null || equipoEnemigo.length == 0) {
             return -1;

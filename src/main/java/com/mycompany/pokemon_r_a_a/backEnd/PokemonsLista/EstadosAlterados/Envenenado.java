@@ -49,4 +49,3 @@ public class Envenenado extends Estados {
         return true;
     }
 }
-

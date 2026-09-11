@@ -25,6 +25,7 @@ public class GuardadorBinario {
             impresor.mensajeInformativo("Se guardo la partida");
         } catch (IOException e) {
             impresor.mensajeInformativo("No se pudo guardar la partida");
+            e.printStackTrace();
         }
     }
 
@@ -46,6 +47,7 @@ public class GuardadorBinario {
 
         } catch (IOException | ClassNotFoundException e) {
             impresor.mensajeInformativo("Error al cargar la partida.");
+            e.printStackTrace();
             return null;
         }
     }

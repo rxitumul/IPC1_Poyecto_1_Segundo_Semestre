@@ -1,16 +1,26 @@
 package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Interacion;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios.InteracionConLosNpc;
 
 public abstract class InteracionCasillas<T> extends Casillas<T> {
-    protected  InteracionConLosNpc front = new InteracionConLosNpc();
+    protected  transient InteracionConLosNpc front;
 
     public InteracionCasillas(HallDeLaFama hall) {
         super(hall);
-        // TODO Auto-generated constructor stub
+         front = new InteracionConLosNpc();
+         // TODO Auto-generated constructor stub
+        }
+        
+        private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+            in.defaultReadObject();
+            front = new InteracionConLosNpc();
     }
+
 
     @Override
     public void imprimir() {
