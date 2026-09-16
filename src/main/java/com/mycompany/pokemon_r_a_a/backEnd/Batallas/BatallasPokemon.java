@@ -138,6 +138,7 @@ public class BatallasPokemon extends TurnosDeJuego {
 
             int opcion;
             try {
+                
                 opcion = Integer.parseInt(scaner.nextLine());
             } catch (NumberFormatException e) {
                 continue;
@@ -187,6 +188,7 @@ public class BatallasPokemon extends TurnosDeJuego {
                 return ejecutarTurnoHuir(jugador, pokemonsJugador, enemigo, pokemonsEnemigo, esSalvaje);
 
             default:
+                impresorMenus.pantallaDeError();
                 return false;
         }
     }

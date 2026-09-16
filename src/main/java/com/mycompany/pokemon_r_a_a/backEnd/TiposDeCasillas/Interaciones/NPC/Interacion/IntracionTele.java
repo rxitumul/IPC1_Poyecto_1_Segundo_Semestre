@@ -22,7 +22,7 @@ public class IntracionTele extends InteracionCasillas<HallDeLaFama> {
     @Override
     public Boolean subMenu() {
         npcT.mostrarHallDeLaFama();
-        front.mensajeInformativo("Precione Enter para contiduar");
+        front.mensajeInformativo("Precione Enter para continuar");
         scanner.nextLine();
         return true;
     }

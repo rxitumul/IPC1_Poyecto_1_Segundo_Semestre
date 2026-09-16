@@ -33,6 +33,7 @@ public class ImpresoresGlobal extends ConfiguracionesDeEstetica {
     }
 
     public void mensajeEncadenado(String[] mensaje) {
+        limpiadorPantalla();
         separadorInicioMapa();
         for (String linea : mensaje) {
             System.out.println(formatearMapaCentrado(linea));
@@ -45,7 +46,9 @@ public class ImpresoresGlobal extends ConfiguracionesDeEstetica {
     }
 
     public void mensajeInformativoSelecion() {
+        separadorInicioMapa();
         System.out.println(formatearMapaCentrado("Selecione una opcion"));
+        separadorFinalMapa();
     }
 
     public void mensajeDeIngresoDeNombre() {
@@ -54,7 +57,9 @@ public class ImpresoresGlobal extends ConfiguracionesDeEstetica {
 
     public <T> void impresorDelistas(String nombreDeLista, T[] listaAImprimir) {
         limpiadorPantalla();
-        System.out.println(nombreDeLista);
+        separadorInicioMapa();
+        System.out.println(formatearMapaCentrado(nombreDeLista));
+        separadorFinalMapa();
         for (int i = 0; i < listaAImprimir.length; i++) {
             separadorInicioMapa();
             if (listaAImprimir[i] instanceof MapaCiudad mapa) {

@@ -32,14 +32,23 @@ public class ProfesorCharla {
     public void charlaInicial() {
         int contadorMensajes = 0;
         while (contadorMensajes != 5) {
-            profesor.cadenaDeMensajesInicial(contadorMensajes);
-            contadorMensajes++;
-            if (contadorMensajes == 5) {
-                String nombre = scanner.nextLine();
-                profesor.setNombre(nombre);
+            if (contadorMensajes == 4) {
+                do {
+                    profesor.cadenaDeMensajesInicial(contadorMensajes);
+
+                    String nombre = scanner.nextLine();
+                    if (nombre != null && !nombre.trim().isEmpty()) {
+                        profesor.setNombre(nombre);
+                        break;
+                    } else {
+                        profesor.pantallaDeError();
+                    }
+                } while (true);
             } else {
+                profesor.cadenaDeMensajesInicial(contadorMensajes);
                 scanner.nextLine();
             }
+            contadorMensajes++;
         }
         contadorMensajes = 0;
         while (contadorMensajes != 10) {

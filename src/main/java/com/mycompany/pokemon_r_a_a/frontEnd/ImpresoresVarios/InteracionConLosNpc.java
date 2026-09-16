@@ -111,7 +111,7 @@ public class InteracionConLosNpc extends ImpresoresGlobal {
         separadorMediosMapa();
         String[] saludo = enfermera.getDialojo(0);
         for (String linea : saludo) {
-            System.out.println(linea);
+            System.out.println(formatearMapa(linea));
         }
         separadorMediosMapa();
         System.out.println(formatearMapa("1) Sí, por favor cura a mis Pokémon"));

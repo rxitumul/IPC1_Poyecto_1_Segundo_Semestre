@@ -37,8 +37,8 @@ public class InicioGame {
         scanner = new Scanner(System.in);
         guaradadoCarga = new DistribuidorDeGuardado(null, null, null);
         hall = guaradadoCarga.creadDeLaFama();
-        if (hall==null){
-            hall=new HallDeLaFama();
+        if (hall == null) {
+            hall = new HallDeLaFama();
         }
         creador = new CreadorMapas(hall);
         profe = new ProfesorCharla(scanner);
@@ -54,14 +54,23 @@ public class InicioGame {
     public void inicio() {
         boolean salir = false;
         Game game;
+        String nombrePartida = "";
 
         while (!salir) {
             int opcion = menuPrincipal.menuInicial();
             switch (opcion) {
                 case 1:
-                    impresor.mensajeEncadenado(new String[] { "Porfavor ingrese el nombre de la partida",
-                            "Este sera usado para guardar la partida en archivos" });
-                    String nombrePartida = scanner.nextLine();
+                    do {
+
+                        impresor.mensajeEncadenado(new String[] { "Porfavor ingrese el nombre de la partida",
+                                "Este sera usado para guardar la partida en archivos" });
+                        nombrePartida = scanner.nextLine();
+                        if (!nombrePartida.trim().isEmpty()) {
+                            break;
+                        } else {
+                            impresor.pantallaDeError();
+                        }
+                    } while (true);
                     profe.charlaInicial();
                     jugador.setPokemosEquipo(equipos);
                     jugador.setMochilaJugador(mochila);
@@ -96,7 +105,7 @@ public class InicioGame {
                                         "Cargando partida guardada: " + nombrePartidaElegida + "...");
 
                                 String rutaCompletaPartida = RUTA_DE_ARCHIVOS_GUARDADOS + nombrePartidaElegida;
-                                game = guaradadoCarga.juegoGuardado(rutaCompletaPartida,hall,scanner);
+                                game = guaradadoCarga.juegoGuardado(rutaCompletaPartida, hall, scanner);
 
                                 if (game != null) {
                                     game.gameInicio(0, nombrePartidaElegida);

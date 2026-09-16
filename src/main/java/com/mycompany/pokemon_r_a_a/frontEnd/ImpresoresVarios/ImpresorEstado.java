@@ -6,6 +6,7 @@ import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 public class ImpresorEstado extends ImpresoresGlobal {
 
     public void impresorEquipo(Pokemons[] pokemos) {
+        limpiadorPantalla();
         separadorInicioMapa();
         System.out.println(formatearMapaCentrado("Equipo pokemon"));
         separadorMediosMapa();

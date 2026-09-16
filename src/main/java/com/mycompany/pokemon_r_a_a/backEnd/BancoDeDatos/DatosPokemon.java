@@ -239,7 +239,7 @@ public class DatosPokemon implements Serializable {
                 break;
         }
         int tipo = tiposPokemon[indice];
-        int nivel = 5;
+        int nivel = 0;
         int especieId = indice + 1;
         String idDinamico = MetodosStatic.generarIdDinamico(tipo, nivel, especieId, 0, 1);
 

@@ -8,8 +8,6 @@ import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 
 public class ImpresorDeSelecion extends ImpresoresGlobal {
 
-
-
     public void impresorDeEstadoJugador(JugadorPokemonPartida jugador, MapaCiudad[] mapas) {
         separadorInicioMapa();
         System.out.println(formatearMapa("Nombre del jugador: " + jugador.getNombre()));
@@ -34,15 +32,16 @@ public class ImpresorDeSelecion extends ImpresoresGlobal {
     }
 
     public void impresorMochila(Mochila mochila) {
+        limpiadorPantalla();
         separadorInicioMapa();
         System.out.println(formatearMapa("Mochila"));
         separadorMediosMapa();
-        System.out.println(formatearMapa("1) Pokebola" + mochila.getPokebola()));
-        System.out.println(formatearMapa("2) Pocion" + mochila.getPocion()));
-        System.out.println(formatearMapa("3) Superpocion" + mochila.getSuperPocion()));
-        System.out.println(formatearMapa("4) Antidoto" + mochila.getAntidoto()));
-        System.out.println(formatearMapa("5) Antiparaliz" + mochila.getAntiParalisis()));
-        System.out.println(formatearMapa("6) Restaura todo" + mochila.getRestauraTodo()));
+        System.out.println(formatearMapa("1) Pokebola = " + mochila.getPokebola()));
+        System.out.println(formatearMapa("2) Pocion = " + mochila.getPocion()));
+        System.out.println(formatearMapa("3) Superpocion = " + mochila.getSuperPocion()));
+        System.out.println(formatearMapa("4) Antidoto = " + mochila.getAntidoto()));
+        System.out.println(formatearMapa("5) Antiparaliz = " + mochila.getAntiParalisis()));
+        System.out.println(formatearMapa("6) Restaura todo = " + mochila.getRestauraTodo()));
         separadorMediosMapa();
         System.out.println(formatearMapa("Selecione uno a utilizar o escriba cualquier otra letra"));
         separadorFinalMapa();
@@ -62,7 +61,6 @@ public class ImpresorDeSelecion extends ImpresoresGlobal {
         System.out.println(formatearMapa("o ingrese 'X' / presione enter para salir "));
         separadorFinalMapa();
     }
-
 
     public void impresorDeNombre(String nombre) {
         separadorInicioMapa();
