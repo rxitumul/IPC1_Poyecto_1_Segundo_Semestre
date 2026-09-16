@@ -62,7 +62,7 @@ public class InicioGame {
                     impresor.mensajeEncadenado(new String[] { "Porfavor ingrese el nombre de la partida",
                             "Este sera usado para guardar la partida en archivos" });
                     String nombrePartida = scanner.nextLine();
-                    // profe.charlaInicial();
+                    profe.charlaInicial();
                     jugador.setPokemosEquipo(equipos);
                     jugador.setMochilaJugador(mochila);
                     profe.regaloProfesor(jugador);

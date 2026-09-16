@@ -76,8 +76,14 @@ public class ImpresorDeMapas extends ImpresoresGlobal {
         if (activoDialogo && entrenadorActivo != null) {
             System.out.println(formatearMapa("DIALOGO"));
             separadorMediosMapa();
-            String[] dialogo = entrenadorActivo.isDerrotado() ? entrenadorActivo.getDialojo(3)
-                    : entrenadorActivo.getDialojo(0);
+            String[] dialogo;
+
+            if (entrenadorActivo.isDerrotado()) {
+                dialogo = entrenadorActivo.getDialojo(3);
+            } else {
+                dialogo = entrenadorActivo.getDialojo(0);
+            }
+
             if (dialogo != null) {
                 for (String linea : dialogo) {
                     System.out.println(formatearMapa(linea));

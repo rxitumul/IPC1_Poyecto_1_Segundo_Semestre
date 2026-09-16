@@ -2,9 +2,10 @@ package com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones;
 
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Entrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.LiderDeGimnasio;
+import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.backEnd.Reportes.HallDeLaFama;
-import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.CasillaGenerica;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
 import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.NPC.Interacion.InteracionEntrenador;
 import com.mycompany.pokemon_r_a_a.backEnd.movimiento.MovimientoJugador;
 
@@ -88,8 +89,17 @@ public class Gimnasio extends CasillasConMapas {
     @Override
     public void setMapa() {
         if (mapa == null) {
-            Entrenador[] lista = mapaCreador.getNpcCreador()
-                    .creadorDeEntrenadoresYLider(jugador != null ? jugador.getPokemosEquipo() : null, nombreCiudad);
+
+            Pokemons[] equipoJugadorTemp; 
+            if (jugador != null) {
+                equipoJugadorTemp = jugador.getPokemosEquipo();
+            } else {
+                equipoJugadorTemp = null;
+            }
+
+            // 3. Pasamos la variable ya resuelta al método
+            Entrenador[] lista = mapaCreador.getNpcCreador().creadorDeEntrenadoresYLider(equipoJugadorTemp, nombreCiudad);
+
             this.entrenador = new Entrenador[3];
             for (int i = 0; i < 3; i++) {
                 this.entrenador[i] = lista[i];

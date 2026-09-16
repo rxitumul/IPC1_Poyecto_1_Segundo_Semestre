@@ -3,10 +3,10 @@ package com.mycompany.pokemon_r_a_a.backEnd.Reportes;
 import java.io.Serializable;
 
 public class InfoPokemon implements Serializable{
-    public String especie;
-    public String apodo;
-    public int nivel;
-    public int vidaMaxima;
+    private String especie;
+    private String apodo;
+    private int nivel;
+    private int vidaMaxima;
 
     public String getEspecie() {
         return especie;

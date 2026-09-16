@@ -29,13 +29,33 @@ public class Pokedex implements Serializable {
 
     public void pokedexMenu() {
         do {
-            try {
-                impresor.impresorDePokedex(pokemon);
-                int selecionDeJugador = Integer.parseInt(scanner.nextLine());
-                impresor.impresorDePokemon(pokemon, selecionDeJugador);
-                scanner.nextLine();
-            } catch (NumberFormatException e) {
+            impresor.impresorDePokedex(pokemon);
+            String entrada = scanner.nextLine().trim();
+            if (entrada.isEmpty() || entrada.equalsIgnoreCase("X") || entrada.equalsIgnoreCase("0") || entrada.equalsIgnoreCase("salir")) {
                 break;
+            }
+
+            int indexEncontrado = -1;
+            try {
+                int num = Integer.parseInt(entrada);
+                if (num >= 1 && num <= pokemon.length) {
+                    indexEncontrado = num - 1;
+                }
+            } catch (NumberFormatException e) {
+                for (int i = 0; i < pokemon.length; i++) {
+                    if (pokemon[i] != null && pokemon[i].getNombre() != null
+                            && pokemon[i].getNombre().equalsIgnoreCase(entrada)) {
+                        indexEncontrado = i;
+                        break;
+                    }
+                }
+            }
+
+            if (indexEncontrado != -1 && pokemon[indexEncontrado] != null) {
+                impresor.impresorDePokemon(pokemon, indexEncontrado);
+                scanner.nextLine();
+            } else {
+                impresor.mensajeInformativo("No se encontró ningún Pokémon con ese número o nombre.");
             }
         } while (true);
     }

@@ -194,7 +194,11 @@ public class DatosPokemon implements Serializable {
         }
 
         int nivelGenerado = (int) ((sumaNiveles * m) / cantidad);
-        return nivelGenerado < 1 ? 1 : nivelGenerado;
+        if (nivelGenerado < 1) {
+            return 1;
+        } else {
+            return nivelGenerado;
+        }
     }
 
     public Pokemons pokemonRandom(Pokemons[] equipoJugador, String tipoEncuentro, int npcId, int correlativo) {
@@ -255,9 +259,26 @@ public class DatosPokemon implements Serializable {
 
     public Pokemons crearPokemonPorIdDinamico(String idDinamico) {
         int[] datos = MetodosStatic.descomponerIdDinamico(idDinamico);
-        int tipo = datos.length > 0 ? datos[0] : 5;
-        int nivel = datos.length > 1 ? datos[1] : 1;
-        int especieId = datos.length > 2 ? datos[2] : 1;
+        int tipo;
+        if (datos.length > 0) {
+            tipo = datos[0];
+        } else {
+            tipo = 5;
+        }
+
+        int nivel;
+        if (datos.length > 1) {
+            nivel = datos[1];
+        } else {
+            nivel = 1;
+        }
+
+        int especieId;
+        if (datos.length > 2) {
+            especieId = datos[2];
+        } else {
+            especieId = 1;
+        }
 
         int indice = Math.max(0, Math.min(especieId - 1, nombrePokemon.length - 1));
 
@@ -268,7 +289,13 @@ public class DatosPokemon implements Serializable {
         pokemon.setAtaqueInicial(ataquePokemon[indice]);
         pokemon.setDefensaInicial(defensaPokemon[indice]);
         pokemon.setVelocidadInicial(velocidadPokemon[indice]);
-        pokemon.setTipo(tipo != 0 ? tipo : tiposPokemon[indice]);
+        int tipoFinal;
+        if (tipo != 0) {
+            tipoFinal = tipo;
+        } else {
+            tipoFinal = tiposPokemon[indice];
+        }
+        pokemon.setTipo(tipoFinal);
         pokemon.setTipoNombre(obtenerNombreTipo(pokemon.getTipo()));
         pokemon.setNivel(nivel);
         pokemon.setIdDinamico(idDinamico);

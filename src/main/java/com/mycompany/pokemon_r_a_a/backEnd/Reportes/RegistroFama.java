@@ -9,6 +9,7 @@ public class RegistroFama implements Serializable {
     private String nombreJugador;
     private int balanceFinal;
     private int[] medallas;
+    private String[] ciudadesMedallas;
     private int totalBatallasSalvajes;
     private int totalBatallasEntrenador;
     private int pokebolasLanzadas;
@@ -34,6 +35,14 @@ public class RegistroFama implements Serializable {
 
     public int[] getMedallas() {
         return medallas;
+    }
+
+    public String[] getCiudadesMedallas() {
+        return ciudadesMedallas;
+    }
+
+    public void setCiudadesMedallas(String[] ciudadesMedallas) {
+        this.ciudadesMedallas = ciudadesMedallas;
     }
 
     public String getNombreJugador() {

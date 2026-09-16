@@ -214,8 +214,19 @@ public class CreadorMapas {
 
     private int[][] grupoDehiervaAlta(int[][] mapaPokemonM, int startX, int startY) {
         int maxLim = TAMANO_MAPA_POKEMON_FIN - 5;
-        int originX = (startX < maxLim) ? startX : maxLim;
-        int originY = (startY < maxLim) ? startY : maxLim;
+        int originX;
+        if (startX < maxLim) {
+            originX = startX;
+        } else {
+            originX = maxLim;
+        }
+
+        int originY;
+        if (startY < maxLim) {
+            originY = startY;
+        } else {
+            originY = maxLim;
+        }
         if (originX < 0)
             originX = 0;
         if (originY < 0)

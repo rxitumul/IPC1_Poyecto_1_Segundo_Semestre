@@ -15,7 +15,8 @@ public class DistribuidorDeGuardado extends GuardadoCargado {
 
     private final static String RUTA_DE_GUARDADO_JUGADOR_CARPETA = "/jugador";
     private final static String RUTA_DE_GUARDADO_MAPAS_CARPETA = "/mapas";
-    private final static String RUTA_DE_GUARDADO_HALL_DE_FAMA = "hall/hallDeLaFama.bin";
+    private final static String RUTA_DE_GUARDADO_HALL_DE_FAMA = "hall/hallDeLaFama.txt";
+    private final static String RUTA_DE_GUARDADO_HALL_DE_FAMA_BIN = "hall/hallDeLaFama.bin";
     private GuardadorBinario guardador;
 
 
@@ -43,8 +44,11 @@ public class DistribuidorDeGuardado extends GuardadoCargado {
 
             guardador.escritorDeObjetosMenoria(jugador,
                     rutaBase + RUTA_DE_GUARDADO_JUGADOR_CARPETA + "/" + jugador.getNombre() + ".bin");
-            guardador.escritorDeObjetosMenoria(hallAGuardar,
-                    RUTA_DE_ARCHIVOS_GUARDADOS_DATOS + RUTA_DE_GUARDADO_HALL_DE_FAMA);
+            if (hallAGuardar != null) {
+                hallAGuardar.guardarEnTexto(RUTA_DE_ARCHIVOS_GUARDADOS_DATOS + RUTA_DE_GUARDADO_HALL_DE_FAMA);
+                guardador.escritorDeObjetosMenoria(hallAGuardar,
+                        RUTA_DE_ARCHIVOS_GUARDADOS_DATOS + RUTA_DE_GUARDADO_HALL_DE_FAMA_BIN);
+            }
             impresor.mensajeInformativo("Guardado Exitoso de la partida " + nombreJuego);
 
         } catch (Exception e) {
@@ -72,10 +76,12 @@ public class DistribuidorDeGuardado extends GuardadoCargado {
     }
 
     public HallDeLaFama creadDeLaFama() {
-        String pathHall = RUTA_DE_ARCHIVOS_GUARDADOS + RUTA_DE_GUARDADO_HALL_DE_FAMA;
+        String pathHall = RUTA_DE_ARCHIVOS_GUARDADOS_DATOS + RUTA_DE_GUARDADO_HALL_DE_FAMA_BIN;
         HallDeLaFama hallGuardado = guardador.lectorDeObjetosMemoria(pathHall);
+        if (hallGuardado == null) {
+            hallGuardado = guardador.lectorDeObjetosMemoria(RUTA_DE_ARCHIVOS_GUARDADOS + RUTA_DE_GUARDADO_HALL_DE_FAMA_BIN);
+        }
         return hallGuardado;
-
     }
 
     private void crearCarpetaGuardado(String ruta) {

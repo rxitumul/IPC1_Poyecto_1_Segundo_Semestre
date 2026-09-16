@@ -165,6 +165,9 @@ public class Mochila  implements Serializable {
                 if (selecion == 0) {
                     break;
                 }
+                if (selecion == 1) {
+                    impresorDeSelecion.mensajeInformativo("¡Las Pokébolas solo pueden usarse durante una batalla con un Pokémon salvaje!");
+                }
             } catch (NumberFormatException e) {
                 break;
             }

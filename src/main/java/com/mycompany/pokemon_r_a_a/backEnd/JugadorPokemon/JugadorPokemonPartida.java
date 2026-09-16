@@ -20,6 +20,7 @@ public class JugadorPokemonPartida implements Serializable {
     private String nombre;
     private int pokemonedas;
     private int[] medallasObtenidas = { 0, 0, 0 };
+    private String[] ciudadesMedallas = new String[3];
     private boolean capturaExitosa;
     private int batallasJugadasSalvajes = 0;
     private int batallasJugadasEntrenador = 0;
@@ -147,6 +148,14 @@ public class JugadorPokemonPartida implements Serializable {
 
     public void setMedallasObtenidas(int[] medallasObtenidas) {
         this.medallasObtenidas = medallasObtenidas;
+    }
+
+    public String[] getCiudadesMedallas() {
+        return ciudadesMedallas;
+    }
+
+    public void setCiudadesMedallas(String[] ciudadesMedallas) {
+        this.ciudadesMedallas = ciudadesMedallas;
     }
 
     public void setNombre(String nombre) {

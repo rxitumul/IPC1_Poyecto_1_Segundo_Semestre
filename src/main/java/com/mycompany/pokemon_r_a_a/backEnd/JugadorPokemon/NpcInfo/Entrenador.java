@@ -11,6 +11,10 @@ public class Entrenador extends Npc<Pokemons> {
     public Entrenador(String nombreCiudad){
         ciudadNombre=nombreCiudad;
     }
+
+    public String getCiudadNombre() {
+        return ciudadNombre;
+    }
     public boolean isDerrotado() {
         return derrotado;
     }

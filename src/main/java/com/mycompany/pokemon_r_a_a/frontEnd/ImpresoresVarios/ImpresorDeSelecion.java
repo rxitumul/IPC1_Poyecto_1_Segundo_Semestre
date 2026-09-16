@@ -58,8 +58,8 @@ public class ImpresorDeSelecion extends ImpresoresGlobal {
         }
         finDeTabla();
         separadorInicioMapa();
-        System.out.println(formatearMapa("Porfavor Ingrese el numero del pokemon para ver informacion,"));
-        System.out.println(formatearMapa("Ingrese cualquier letra para salir "));
+        System.out.println(formatearMapa("Ingrese el número o nombre del Pokémon para ver información,"));
+        System.out.println(formatearMapa("o ingrese 'X' / presione enter para salir "));
         separadorFinalMapa();
     }
 

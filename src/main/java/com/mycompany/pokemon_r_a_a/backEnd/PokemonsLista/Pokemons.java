@@ -15,7 +15,7 @@ import com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresGlobal;
 public class Pokemons implements Serializable {
 
     private final static int VARIACION_INICIO = 0;
-    private final static int VARIACION_FIN = 31;
+    private final static int VARIACION_FIN = 32;
 
     private String nombreLocal;
     private String apodo;
@@ -83,7 +83,8 @@ public class Pokemons implements Serializable {
     public void setXp(int xp) {
         this.xp = xp;
         int xpSubirDeNivel = (nivel + 1) * (nivel + 1);
-        while (xp >= xpSubirDeNivel) {
+        while (this.xp >= xpSubirDeNivel) {
+            this.xp -= xpSubirDeNivel;
             nivel++;
             setNivel(nivel);
             if (apodo != null && !apodo.isEmpty()) {
@@ -122,7 +123,11 @@ public class Pokemons implements Serializable {
             actual = actual.getSiguiente();
         }
 
-        return resultado.isEmpty() ? "NINGUNO" : resultado;
+        if (resultado.isEmpty()) {
+            return "NINGUNO";
+        } else {
+            return resultado;
+        }
     }
 
     public boolean tieneEstado(String nombreEstado) {
@@ -304,10 +309,10 @@ public class Pokemons implements Serializable {
             ataqueVariacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
             velocidadVariacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
 
-            vidaInicial = (int) ((((vidaBase * vidaVariacion) * 2 * nivel) / 100) + nivel + 10);
-            defensaInicial = (int) (((((defensaBase * defensaVariacion) * 2 * nivel)) / 100) + 5);
-            ataqueInicial = (int) (((((ataqueBase * ataqueVariacion) * 2 * nivel)) / 100) + 5);
-            velocidadInicial = (int) (((((velocidadBase * velocidadVariacion) * 2 * nivel)) / 100) + 5);
+            vidaInicial = (int) ((((vidaBase + vidaVariacion) * 2 * nivel) / 100) + nivel + 10);
+            defensaInicial = (int) (((((defensaBase + defensaVariacion) * 2 * nivel)) / 100) + 5);
+            ataqueInicial = (int) (((((ataqueBase + ataqueVariacion) * 2 * nivel)) / 100) + 5);
+            velocidadInicial = (int) (((((velocidadBase + velocidadVariacion) * 2 * nivel)) / 100) + 5);
             this.nivel = nivel;
         }
     }
@@ -357,7 +362,11 @@ public class Pokemons implements Serializable {
     }
 
     public String getIdDinamico() {
-        return idDinamico != null ? idDinamico : String.valueOf(id);
+        if (idDinamico != null) {
+            return idDinamico;
+        } else {
+            return String.valueOf(id);
+        }
     }
 
     public void setIdDinamico(String idDinamico) {

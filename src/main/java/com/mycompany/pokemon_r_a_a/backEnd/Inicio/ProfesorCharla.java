@@ -26,16 +26,6 @@ public class ProfesorCharla {
     public void regaloProfesor(JugadorPokemonPartida jugador) {
         jugador.setNombre(profesor.getNombreLocal());
         Pokemons[] pokemonEquipo = jugador.getPokemosEquipo();
-
-        pokemonInicial = pokemonCreador.pokemonIniciales(2);
-        pokemonInicial.setApodo(pokemonInicial.getNombre());
-        pokemonEquipo[1] = pokemonInicial;
-        pokemonInicial = pokemonCreador.pokemonIniciales(1);
-        pokemonInicial.setApodo(pokemonInicial.getNombre());
-        pokemonEquipo[2] = pokemonInicial;
-        pokemonInicial = pokemonCreador.pokemonIniciales(3);
-        pokemonInicial.setApodo(pokemonInicial.getNombre());
-
         pokemonEquipo[0] = pokemonInicial;
     }
 

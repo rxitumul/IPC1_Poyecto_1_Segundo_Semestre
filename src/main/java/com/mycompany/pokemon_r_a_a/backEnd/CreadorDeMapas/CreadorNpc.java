@@ -64,8 +64,22 @@ public class CreadorNpc {
         return medallasGeneradas;
     }
 
+    private int contarPokemonsEnEquipo(Pokemons[] equipo) {
+        if (equipo == null) {
+            return 0;
+        }
+        int count = 0;
+        for (Pokemons p : equipo) {
+            if (p != null) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     private Entrenador[] creadorDeEntrenadoresYLider(int ciudad, String ciudadNombre, Pokemons[] equipoJugador) {
         Entrenador[] lista = new Entrenador[4];
+        int cantJugador = contarPokemonsEnEquipo(equipoJugador);
 
         // 3 entrenadores de gimnasio
         for (int i = 0; i < 3; i++) {
@@ -76,7 +90,12 @@ public class CreadorNpc {
             entrenador.setCiudad(ciudad);
             entrenador.setBoleanoActivo(false);
 
-            int cantPokemon = random.nextInt(2) + 1;
+            int cantPokemon;
+            if (cantJugador > 0) {
+                cantPokemon = random.nextInt(cantJugador) + 1;
+            } else {
+                cantPokemon = 1;
+            }
             Pokemons[] equipo = new Pokemons[cantPokemon];
             for (int p = 0; p < cantPokemon; p++) {
                 equipo[p] = datosPokemon.pokemonRandom(equipoJugador, "ENTRENADOR", entrenador.getId(), p + 1);
@@ -98,7 +117,12 @@ public class CreadorNpc {
         String medallaNombre = medallas[0][indiceMedalla] + " " + medallas[1][indiceMedalla];
         lider.SetMedalla(medallaNombre);
 
-        int cantPokemonLider = 2;
+        int cantPokemonLider;
+        if (cantJugador > 0) {
+            cantPokemonLider = random.nextInt(cantJugador) + 1;
+        } else {
+            cantPokemonLider = 1;
+        }
         Pokemons[] equipoLider = new Pokemons[cantPokemonLider];
         for (int p = 0; p < cantPokemonLider; p++) {
             equipoLider[p] = datosPokemon.pokemonRandom(equipoJugador, "LIDER", lider.getId(), p + 1);

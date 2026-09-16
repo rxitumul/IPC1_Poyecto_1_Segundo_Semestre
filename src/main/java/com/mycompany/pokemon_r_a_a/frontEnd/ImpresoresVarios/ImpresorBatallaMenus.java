@@ -21,12 +21,19 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
                 formatearMapaCentrado("Especie: " + pokemonJugador.getNombre()
                         + "                      Especie: "
                         + pokemonEnemigo.getNombre()));
-        String apodoJ = (pokemonJugador.getApodo() != null && !pokemonJugador.getApodo().isEmpty())
-                ? pokemonJugador.getApodo()
-                : pokemonJugador.getNombre();
-        String apodoE = (pokemonEnemigo.getApodo() != null && !pokemonEnemigo.getApodo().isEmpty())
-                ? pokemonEnemigo.getApodo()
-                : pokemonEnemigo.getNombre();
+        String apodoJ;
+        if (pokemonJugador.getApodo() != null && !pokemonJugador.getApodo().isEmpty()) {
+            apodoJ = pokemonJugador.getApodo();
+        } else {
+            apodoJ = pokemonJugador.getNombre();
+        }
+        String apodoE;
+        if (pokemonEnemigo.getApodo() != null && !pokemonEnemigo.getApodo().isEmpty()) {
+            apodoE = pokemonEnemigo.getApodo();
+        } else {
+            apodoE = pokemonEnemigo.getNombre();
+        }
+
         System.out.println(formatearMapaCentrado(
                 "Apodo: " + apodoJ + "                      Apodo: "
                         + apodoE));
@@ -123,9 +130,13 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
         int contador = 1;
         for (Pokemons pokemons : pokemos) {
             if (pokemons != null) {
-                String apodo = (pokemons.getApodo() != null && !pokemons.getApodo().isEmpty())
-                        ? pokemons.getApodo()
-                        : pokemons.getNombre();
+                String apodo;
+                if (pokemons.getApodo() != null && !pokemons.getApodo().isEmpty()) {
+                    apodo = pokemons.getApodo();
+                } else {
+                    apodo = pokemons.getNombre();
+                }
+
                 int vidaMax = pokemons.getVidaInicial();
                 int vidaAct = pokemons.getVidaPokemon();
                 String barra;

@@ -54,6 +54,9 @@ public abstract class Finalizacion extends RealizacionDeAtaqueMovimiento {
             if (medallas != null && ciudadIndice >= 0 && ciudadIndice < medallas.length) {
                 if (medallas[ciudadIndice] == 0) {
                     medallas[ciudadIndice] = 1;
+                    if (jugador.getCiudadesMedallas() != null) {
+                        jugador.getCiudadesMedallas()[ciudadIndice] = entrenador.getCiudadNombre();
+                    }
                     impresorMenus.mensajePokemonenemigo("¡Has ganado la Medalla de la Ciudad!");
                     int contador = 0;
                     for (int m : medallas) {

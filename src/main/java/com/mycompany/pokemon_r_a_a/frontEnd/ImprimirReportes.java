@@ -29,6 +29,22 @@ public class ImprimirReportes extends ImpresoresGlobal {
                         contadorMedallas++;
             }
             System.out.println(formatearMapa("   Medallas: " + contadorMedallas + " / 3 obtenidas"));
+            if (registroFama.getCiudadesMedallas() != null && registroFama.getMedallas() != null) {
+                for (int m = 0; m < registroFama.getMedallas().length; m++) {
+                    if (registroFama.getMedallas()[m] > 0) {
+
+                        String cd;
+                        if (m < registroFama.getCiudadesMedallas().length
+                                && registroFama.getCiudadesMedallas()[m] != null) {
+                            cd = registroFama.getCiudadesMedallas()[m];
+                        } else {
+                            cd = "Ciudad #" + (m + 1);
+                        }
+
+                        System.out.println(formatearMapa("     • Medalla de: " + cd));
+                    }
+                }
+            }
 
             System.out.println(formatearMapaCentrado("2. EQUIPO POKÉMON VICTORIOSO"));
             Listas<InfoPokemon> equipo = registroFama.getEquipoVictorioso();

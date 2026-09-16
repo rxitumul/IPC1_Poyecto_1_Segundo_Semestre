@@ -10,7 +10,16 @@ public class Picotazo extends Fisico {
 
     @Override
     protected void estadosAlterados() {
-        String nombreObjetivo = (pokemonAtacado != null && pokemonAtacado.getApodo() != null) ? pokemonAtacado.getApodo() : (pokemonAtacado != null ? pokemonAtacado.getNombre() : "oponente");
+        String nombreObjetivo;
+        if (pokemonAtacado != null) {
+            if (pokemonAtacado.getApodo() != null && !pokemonAtacado.getApodo().isEmpty()) {
+                nombreObjetivo = pokemonAtacado.getApodo();
+            } else {
+                nombreObjetivo = pokemonAtacado.getNombre();
+            }
+        } else {
+            nombreObjetivo = "oponente";
+        }
         System.out.println(confi.formatearMapa("El pokemon ha ensartado al pokemon " + nombreObjetivo + " con su pico punzante"));
     }
 }

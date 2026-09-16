@@ -13,7 +13,12 @@ public class PicotazoVenenoso extends Fisico {
     protected void estadosAlterados() {
         System.out.println(confi.formatearMapa("¡Ataque con aguijón tóxico!"));
         if (rand.nextDouble() <= 0.15) {
-            String nombreObjetivo = pokemonAtacado.getApodo() != null ? pokemonAtacado.getApodo() : pokemonAtacado.getNombre();
+            String nombreObjetivo;
+            if (pokemonAtacado.getApodo() != null) {
+                nombreObjetivo = pokemonAtacado.getApodo();
+            } else {
+                nombreObjetivo = pokemonAtacado.getNombre();
+            }
             System.out.println(confi.formatearMapa("¡" + nombreObjetivo + " ha sido envenenado!"));
             if (!pokemonAtacado.tieneEstado("Envenenado")) {
                 pokemonAtacado.agragarEstadoPermanete(new Envenenado(pokemonAtacado));
