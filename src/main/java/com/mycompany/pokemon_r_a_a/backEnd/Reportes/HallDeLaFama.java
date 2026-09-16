@@ -22,7 +22,7 @@ public class HallDeLaFama implements Serializable {
         registros = new Listas<>();
         imprimir = new ImprimirReportes();
     }
-    
+
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         imprimir = new ImprimirReportes();
@@ -150,7 +150,8 @@ public class HallDeLaFama implements Serializable {
                         } else {
                             ap = "";
                         }
-                        bw.write("   - " + ip.getEspecie() + ap + " (Nivel " + ip.getNivel() + ") | Vida Máxima: " + ip.getVidaMaxima());
+                        bw.write("   - " + ip.getEspecie() + ap + " (Nivel " + ip.getNivel() + ") | Vida Máxima: "
+                                + ip.getVidaMaxima());
                         bw.newLine();
                     }
                     bw.newLine();
@@ -176,7 +177,7 @@ public class HallDeLaFama implements Serializable {
     }
 
     public void mostrarHallDeLaFama() {
-        
+
         imprimir.limpiadorPantalla();
         imprimir.mensaje("HALL DE LA FAMA");
         if (registros.estaVacia()) {
