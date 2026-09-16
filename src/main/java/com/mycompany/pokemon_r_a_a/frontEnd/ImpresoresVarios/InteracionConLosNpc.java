@@ -55,7 +55,7 @@ public class InteracionConLosNpc extends ImpresoresGlobal {
 
         String[] reto = entrenador.getDialojo(0);
         for (String linea : reto) {
-            System.out.println(linea);
+            System.out.println(formatearMapaCentrado(linea));
         }
         separadorMediosMapa();
         System.out.println(formatearMapa("1) ¡Acepto el desafío!"));
@@ -123,7 +123,7 @@ public class InteracionConLosNpc extends ImpresoresGlobal {
 
     public boolean tiendaBienvenida(TiendaNpc tiendaNpc) {
         if (tiendaNpc == null) {
-            System.out.println("No hay dependiente disponible en este momento.");
+            System.out.println(formatearMapa("No hay dependiente disponible en este momento."));
             return true;
         }
         if (tiendaNpc.getNombre() != null) {
@@ -142,7 +142,8 @@ public class InteracionConLosNpc extends ImpresoresGlobal {
 
     public void tablaDeProductos(int dineroActual) {
         separadorInicioMapa();
-        System.out.println(formatearMapaCentrado("--- CATÁLOGO DE PRODUCTOS (Tus Pokémonedas: ₽" + dineroActual + ") ---"));
+        System.out.println(
+                formatearMapaCentrado("--- CATÁLOGO DE PRODUCTOS (Tus Pokémonedas: ₽" + dineroActual + ") ---"));
         System.out.println(formatearMapaCentrado("1) Pokébola        - ₽" + PRECIO_POKEBOLA));
         System.out.println(formatearMapaCentrado("2) Poción          - ₽" + PRECIO_POCION));
         System.out.println(formatearMapaCentrado("3) Súper Poción    - ₽" + PRECIO_SUPER_POCION));
