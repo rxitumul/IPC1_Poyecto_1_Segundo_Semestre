@@ -85,8 +85,7 @@ public class Pokemons implements Serializable {
         int xpSubirDeNivel = (nivel + 1) * (nivel + 1);
         while (this.xp >= xpSubirDeNivel) {
             this.xp -= xpSubirDeNivel;
-            nivel++;
-            setNivel(nivel);
+            setNivel(this.nivel + 1);
             if (apodo != null && !apodo.isEmpty()) {
                 impresor.mensajeInformativo("¡El Pokémon " + apodo + " subió al nivel " + nivel + "!");
             } else {
@@ -302,19 +301,38 @@ public class Pokemons implements Serializable {
         if (nivel <= 1) {
             this.nivel = 1;
             restauradorArtibutos();
-        } else {
+            return;
+        }
 
+        int nivelInicio = this.nivel;
+        if (nivelInicio < 1) {
+            nivelInicio = 1;
+        }
+
+        for (int n = nivelInicio + 1; n <= nivel; n++) {
             vidaVariacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
             defensaVariacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
             ataqueVariacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
             velocidadVariacion = rand.ints(VARIACION_INICIO, VARIACION_FIN).findFirst().getAsInt();
 
-            vidaInicial = (int) ((((vidaBase + vidaVariacion) * 2 * nivel) / 100) + nivel + 10);
-            defensaInicial = (int) (((((defensaBase + defensaVariacion) * 2 * nivel)) / 100) + 5);
-            ataqueInicial = (int) (((((ataqueBase + ataqueVariacion) * 2 * nivel)) / 100) + 5);
-            velocidadInicial = (int) (((((velocidadBase + velocidadVariacion) * 2 * nivel)) / 100) + 5);
-            this.nivel = nivel;
+            int aumentoVida = (int) ((((vidaBase + vidaVariacion) * 2 * n) / 100) + n + 10);
+            int aumentoDefensa = (int) (((((defensaBase + defensaVariacion) * 2 * n)) / 100) + 5);
+            int aumentoAtaque = (int) (((((ataqueBase + ataqueVariacion) * 2 * n)) / 100) + 5);
+            int aumentoVelocidad = (int) (((((velocidadBase + velocidadVariacion) * 2 * n)) / 100) + 5);
+
+            vidaInicial += aumentoVida;
+            defensaInicial += aumentoDefensa;
+            ataqueInicial += aumentoAtaque;
+            velocidadInicial += aumentoVelocidad;
+
+            if (vidaPokemon > 0) {
+                vidaPokemon += aumentoVida;
+            }
+            defensaPokemon += aumentoDefensa;
+            ataquePokemon += aumentoAtaque;
+            velocidadPokemon += aumentoVelocidad;
         }
+        this.nivel = nivel;
     }
 
     public void setVelocidadPokemon(int velocidadPokemon) {
