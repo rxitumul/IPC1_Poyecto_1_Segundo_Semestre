@@ -1,12 +1,15 @@
 package com.mycompany.pokemon_r_a_a.backEnd.Reportes;
 
-import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
 
+import com.mycompany.pokemon_r_a_a.backEnd.GuardadoDeArchivosYRestauracion.GuardadorYCargadorTxt;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.ListaEnlazadaException;
 import com.mycompany.pokemon_r_a_a.backEnd.ListaîlaYColas.Listas;
@@ -17,14 +20,17 @@ public class HallDeLaFama implements Serializable {
 
     private Listas<RegistroFama> registros;
     private transient ImprimirReportes imprimir;
+    private transient GuardadorYCargadorTxt txt;
 
     public HallDeLaFama() {
+        txt = new GuardadorYCargadorTxt();
         registros = new Listas<>();
         imprimir = new ImprimirReportes();
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
+        txt = new GuardadorYCargadorTxt();
         imprimir = new ImprimirReportes();
     }
 
@@ -40,6 +46,9 @@ public class HallDeLaFama implements Serializable {
         }
         if (jugador.getCiudadesMedallas() != null) {
             registro.setCiudadesMedallas(jugador.getCiudadesMedallas().clone());
+        }
+        if (jugador.getNombresMedallas() != null) {
+            registro.setNombresMedallas(jugador.getNombresMedallas().clone());
         }
 
         Pokemons[] equipo = jugador.getPokemosEquipo();
@@ -79,115 +88,28 @@ public class HallDeLaFama implements Serializable {
         } else {
             registro.setPokemonMVP("Ninguno");
         }
-
         registros.agregarAlFinal(registro);
-        guardarEnTexto("Archivos/Datos/hall/hallDeLaFama.txt");
+        txt.registroDeGanador(registro, "Archivos/Datos/hall/hallDeLaFama.txt");
         imprimir.mensaje("¡" + jugador.getNombre() + " ha sido registrado en el Hall de la Fama!");
 
     }
 
     public void guardarEnTexto(String ruta) {
-        File archivo = new File(ruta);
-        File carpeta = archivo.getParentFile();
-        if (carpeta != null && !carpeta.exists()) {
-            carpeta.mkdirs();
+        if (registros == null || registros.estaVacia()) {
+            return;
         }
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, false))) {
-            bw.write("=================================================");
-            bw.newLine();
-            bw.write("               HALL DE LA FAMA                   ");
-            bw.newLine();
-            bw.write("=================================================");
-            bw.newLine();
-            if (registros.estaVacia()) {
-                bw.write("Aún no hay entrenadores registrados.");
-                bw.newLine();
-            } else {
-                for (int i = 0; i < registros.getCapacidad(); i++) {
-                    RegistroFama r = registros.obtenerContenido(i);
-                    bw.newLine();
-                    bw.write("--- REGISTRO #" + (i + 1) + " ---");
-                    bw.newLine();
-                    bw.write("1. FICHA DEL ENTRENADOR");
-                    bw.newLine();
-                    bw.write("   Nombre: " + r.getNombreJugador());
-                    bw.newLine();
-                    bw.write("   Balance final: " + r.getBalanceFinal() + " pokémonedas");
-                    bw.newLine();
-                    int cantMedallas = 0;
-                    if (r.getMedallas() != null) {
-                        for (int m : r.getMedallas()) {
-                            if (m > 0) {
-                                cantMedallas++;
-                            }
-                        }
-                    }
-                    bw.write("   Medallas: " + cantMedallas + " / 3 obtenidas");
-                    bw.newLine();
-                    if (r.getCiudadesMedallas() != null && r.getMedallas() != null) {
-                        for (int m = 0; m < r.getMedallas().length; m++) {
-                            if (r.getMedallas()[m] > 0) {
-                                String cd;
-                                if (m < r.getCiudadesMedallas().length && r.getCiudadesMedallas()[m] != null) {
-                                    cd = r.getCiudadesMedallas()[m];
-                                } else {
-                                    cd = "Ciudad #" + (m + 1);
-                                }
-                                bw.write("     - Medalla de: " + cd);
-                                bw.newLine();
-                            }
-                        }
-                    }
-                    bw.newLine();
-                    bw.write("2. EQUIPO POKÉMON VICTORIOSO");
-                    bw.newLine();
-                    Listas<InfoPokemon> eq = r.getEquipoVictorioso();
-                    for (int j = 0; j < eq.getCapacidad(); j++) {
-                        InfoPokemon ip = eq.obtenerContenido(j);
-                        String ap;
-                        if (ip.getApodo() != null && !ip.getApodo().isEmpty()) {
-                            ap = " '" + ip.getApodo() + "'";
-                        } else {
-                            ap = "";
-                        }
-                        bw.write("   - " + ip.getEspecie() + ap + " (Nivel " + ip.getNivel() + ") | Vida Máxima: "
-                                + ip.getVidaMaxima());
-                        bw.newLine();
-                    }
-                    bw.newLine();
-                    bw.write("3. ESTADÍSTICAS DE LA PARTIDA");
-                    bw.newLine();
-                    bw.write("   Batallas salvajes: " + r.getTotalBatallasSalvajes());
-                    bw.newLine();
-                    bw.write("   Batallas vs entrenadores: " + r.getTotalBatallasEntrenador());
-                    bw.newLine();
-                    bw.write("   Pokébolas lanzadas: " + r.getPokebolasLanzadas());
-                    bw.newLine();
-                    bw.write("   Pokémon capturados: " + r.getPokemonCapturados());
-                    bw.newLine();
-                    bw.write("   MVP: " + r.getPokemonMVP());
-                    bw.newLine();
-                    bw.write("-------------------------------------------------");
-                    bw.newLine();
-                }
+        for (int i = 0; i < registros.getCapacidad(); i++) {
+            try {
+                txt.registroDeGanador(registros.obtenerContenido(i), ruta);
+            } catch (ListaEnlazadaException ignored) {
             }
-        } catch (IOException | ListaEnlazadaException e) {
-            System.err.println("Error al guardar Hall de la Fama en texto: " + e.getMessage());
         }
     }
 
     public void mostrarHallDeLaFama() {
-
+        String phat = "Archivos/Datos/hall/hallDeLaFama.txt";
         imprimir.limpiadorPantalla();
-        imprimir.mensaje("HALL DE LA FAMA");
-        if (registros.estaVacia()) {
-            imprimir.mensaje("Aún no hay entrenadores registrados.");
-            return;
-        }
-
-        for (int i = 0; i < registros.getCapacidad(); i++) {
-            imprimir.mensajeregistro(i + 1, registros);
-        }
+        txt.cargadorDeRegistros(phat);
     }
 
     public Listas<RegistroFama> getRegistros() {

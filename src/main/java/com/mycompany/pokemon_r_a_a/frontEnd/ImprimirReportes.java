@@ -14,6 +14,11 @@ public class ImprimirReportes extends ImpresoresGlobal {
         delayThread();
     }
 
+
+    public void mensajeSinSeparadores(String mensaje) {
+        System.out.println(formatearMapa(mensaje));
+    }
+
     public void mensajeregistro(int contador, Listas<RegistroFama> registros) {
         try {
             RegistroFama registroFama = registros.obtenerContenido(contador - 1);
@@ -41,7 +46,13 @@ public class ImprimirReportes extends ImpresoresGlobal {
                             cd = "Ciudad #" + (m + 1);
                         }
 
-                        System.out.println(formatearMapa("     • Medalla de: " + cd));
+                        String med = "";
+                        if (registroFama.getNombresMedallas() != null && m < registroFama.getNombresMedallas().length
+                                && registroFama.getNombresMedallas()[m] != null
+                                && !registroFama.getNombresMedallas()[m].isEmpty()) {
+                            med = " Medalla " + registroFama.getNombresMedallas()[m];
+                        }
+                        System.out.println(formatearMapa("     • Medalla de: " + cd + med));
                     }
                 }
             }

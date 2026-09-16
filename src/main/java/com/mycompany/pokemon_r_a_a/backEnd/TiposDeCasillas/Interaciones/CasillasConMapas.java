@@ -107,4 +107,8 @@ public abstract class CasillasConMapas extends Casillas<JugadorPokemonPartida> {
         return tipo;
     }
 
+    public Npc getNpc() {
+        return npc;
+    }
+
 }

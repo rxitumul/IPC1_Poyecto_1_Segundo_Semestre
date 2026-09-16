@@ -40,8 +40,13 @@ public class CreadorNpc {
         datosPokemon = new DatosPokemon();
     }
 
+    private static String[][] medallasGeneradas;
+
     public String[][] generadorDeMedallas() {
-        String[][] medallasGeneradas = new String[2][3];
+        if (medallasGeneradas != null) {
+            return medallasGeneradas;
+        }
+        medallasGeneradas = new String[2][3];
         int contador = 0;
         int totalMedallas = nombreMedallasYIconos[0].length;
         while (contador < 3) {
@@ -64,6 +69,12 @@ public class CreadorNpc {
         return medallasGeneradas;
     }
 
+    public String obtenerNombreMedallaCompleto(int ciudad) {
+        String[][] medallas = generadorDeMedallas();
+        int indice = Math.max(0, Math.min(ciudad, medallas[0].length - 1));
+        return medallas[0][indice] + " " + medallas[1][indice];
+    }
+
     private int contarPokemonsEnEquipo(Pokemons[] equipo) {
         if (equipo == null) {
             return 0;
@@ -77,7 +88,7 @@ public class CreadorNpc {
         return count;
     }
 
-    private Entrenador[] creadorDeEntrenadoresYLider(int ciudad, String ciudadNombre, Pokemons[] equipoJugador) {
+    public Entrenador[] creadorDeEntrenadoresYLider(int ciudad, String ciudadNombre, Pokemons[] equipoJugador) {
         Entrenador[] lista = new Entrenador[4];
         int cantJugador = contarPokemonsEnEquipo(equipoJugador);
 

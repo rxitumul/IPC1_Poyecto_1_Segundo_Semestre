@@ -1,4 +1,23 @@
-=================================================
-               HALL DE LA FAMA                   
-=================================================
-Aún no hay entrenadores registrados.
+
+
+--- REGISTRO #1 ---
+1. FICHA DEL ENTRENADOR
+   Nombre: test
+   Balance final: 1362 pokémonedas
+   Medallas: 3 / 3 obtenidas
+     - Medalla de: Saffron City Medalla Dragón ♢
+     - Medalla de: Cerulean City Medalla Estrella ★
+     - Medalla de: Pewter City Medalla Bosque ♧
+
+2. EQUIPO POKÉMON VICTORIOSO
+   - Squirtle 'Squirtle' (Nivel 1) | Vida Máxima: 30
+   - Caterpie (Nivel 1) | Vida Máxima: 30
+
+3. ESTADÍSTICAS DE LA PARTIDA
+   Batallas salvajes: 1
+   Batallas vs entrenadores: 3
+   Pokébolas lanzadas: 2
+   Pokémon capturados: 1
+   MVP: Squirtle (Squirtle)
+-------------------------------------------------
+

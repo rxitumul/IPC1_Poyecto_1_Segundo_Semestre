@@ -31,10 +31,13 @@ public class MenuPrincipal {
             opcionJugador = scanner.nextLine();
             switch (opcionJugador) {
                 case "1":
+                case "01":
                     return 1;
                 case "2":
+                case "02":
                     return 2;
                 case "3":
+                case "03":
                     return 3;
                 default:
                     info.pantallaDeError();

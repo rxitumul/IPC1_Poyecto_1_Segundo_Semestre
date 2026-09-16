@@ -262,8 +262,8 @@ public class ImpresorBatallaMenus extends ImpresoresGlobal {
             int hpTotal) {
         separadorInicioMapa();
         System.out.println(formatearMapaCentrado("¡" + atacante + " usó " + movimiento + "!"));
-        System.out.println(formatearMapaCentrado(
-                "Causó " + daño + " de daño a " + defensor + " (HP: " + hpRestante + "/" + hpTotal + ")"));
+        System.out.println(formatearMapaCentrado("Causó " + daño + " de daño a " + defensor));
+        System.out.println(formatearMapaCentrado(" (HP: " + hpRestante + "/" + hpTotal + ")"));
         separadorFinalMapa();
     }
 

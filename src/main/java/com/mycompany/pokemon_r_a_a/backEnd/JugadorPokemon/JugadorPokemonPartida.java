@@ -21,6 +21,7 @@ public class JugadorPokemonPartida implements Serializable {
     private int pokemonedas;
     private int[] medallasObtenidas = { 0, 0, 0 };
     private String[] ciudadesMedallas = new String[3];
+    private String[] nombresMedallas = new String[3];
     private boolean capturaExitosa;
     private int batallasJugadasSalvajes = 0;
     private int batallasJugadasEntrenador = 0;
@@ -44,6 +45,9 @@ public class JugadorPokemonPartida implements Serializable {
 
         if (this.equipoEstado != null) {
             this.equipoEstado.setJugador(this);
+        }
+        if (this.nombresMedallas == null) {
+            this.nombresMedallas = new String[3];
         }
     }
 
@@ -246,6 +250,17 @@ public class JugadorPokemonPartida implements Serializable {
 
     public boolean getVencido() {
         return vencido;
+    }
+
+    public String[] getNombresMedallas() {
+        if (nombresMedallas == null) {
+            nombresMedallas = new String[3];
+        }
+        return nombresMedallas;
+    }
+
+    public void setNombresMedallas(String[] nombresMedallas) {
+        this.nombresMedallas = nombresMedallas;
     }
 
 }

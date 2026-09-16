@@ -77,7 +77,15 @@ public class MovimientoJugador {
         return spawn;
     }
 
+    public void setSpawn(int[] spawn) {
+        this.spawn = spawn;
+    }
+
     public Casillas getCasillaAnterior() {
         return casillaAnterior;
+    }
+
+    public void setCasillaAnterior(Casillas casillaAnterior) {
+        this.casillaAnterior = casillaAnterior;
     }
 }

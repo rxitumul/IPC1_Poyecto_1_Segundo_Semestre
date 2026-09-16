@@ -2,6 +2,8 @@ package com.mycompany.pokemon_r_a_a.backEnd.Batallas;
 
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.Entrenador;
+import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.LiderDeGimnasio;
+import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.CreadorNpc;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.NpcInfo.EnfermeriaNpc;
 
@@ -57,7 +59,18 @@ public abstract class Finalizacion extends RealizacionDeAtaqueMovimiento {
                     if (jugador.getCiudadesMedallas() != null) {
                         jugador.getCiudadesMedallas()[ciudadIndice] = entrenador.getCiudadNombre();
                     }
-                    impresorMenus.mensajePokemonenemigo("¡Has ganado la Medalla de la Ciudad!");
+                    String nombreMedallaGanada = "";
+                    if (entrenador instanceof LiderDeGimnasio) {
+                        nombreMedallaGanada = ((LiderDeGimnasio) entrenador).getMedalla();
+                    }
+                    if (nombreMedallaGanada == null || nombreMedallaGanada.isEmpty()) {
+                        CreadorNpc npcCreador = new CreadorNpc();
+                        nombreMedallaGanada = npcCreador.obtenerNombreMedallaCompleto(ciudadIndice);
+                    }
+                    if (jugador.getNombresMedallas() != null) {
+                        jugador.getNombresMedallas()[ciudadIndice] = nombreMedallaGanada;
+                    }
+                    impresorMenus.mensajePokemonenemigo("¡Has ganado la Medalla " + nombreMedallaGanada + " de " + entrenador.getCiudadNombre() + "!");
                     int contador = 0;
                     for (int m : medallas) {
                         if (m > 0) {

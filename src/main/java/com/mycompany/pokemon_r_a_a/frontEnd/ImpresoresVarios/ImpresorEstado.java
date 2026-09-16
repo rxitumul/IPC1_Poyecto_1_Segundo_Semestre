@@ -15,36 +15,34 @@ public class ImpresorEstado extends ImpresoresGlobal {
         int contador = 1;
         for (Pokemons pokemons : pokemos) {
             if (pokemons != null) {
+                String apodo = apodoONombre(pokemons);
                 if (pokemons.getVidaPokemon() <= 0) {
-                     System.out.println(formatearMapa(contador + ") " + pokemons.getApodo()
+                    System.out.println(formatearMapa(contador + ") " + apodo
                             + "   Lvl"
                             + pokemons.getNivel() + " HP [DEBILITADO]  "
                             + pokemons.getVidaInicial() + "/"
                             + pokemons.getVidaPokemon()));
                 } else if (pokemons.getVidaInicial() == pokemons.getVidaPokemon()) {
-                    System.out.println(formatearMapa(contador + ") " + pokemons.getApodo()
+                    System.out.println(formatearMapa(contador + ") " + apodo
                             + "   Lvl"
                             + pokemons.getNivel() + " HP " + BARRAS_DE_VIDA_100 + "  "
                             + pokemons.getVidaInicial() + "/"
                             + pokemons.getVidaPokemon()));
-
                 } else if (pokemons.getVidaInicial() < (pokemons.getVidaPokemon() / 2)) {
                     System.out.println(formatearMapa(
-                            contador + ") " + pokemons.getApodo() + "Lvl"
+                            contador + ") " + apodo + " Lvl"
                                     + pokemons.getNivel() + " HP "
                                     + BARRAS_DE_VIDA_75 + "  " + pokemons.getVidaInicial()
                                     + "/" + pokemons.getVidaPokemon()));
-
                 } else if (pokemons.getVidaInicial() < (pokemons.getVidaPokemon() / 2) / 2) {
                     System.out.println(formatearMapa(
-                            contador + ") " + pokemons.getApodo() + "Lvl"
+                            contador + ") " + apodo + " Lvl"
                                     + pokemons.getNivel() + " HP "
                                     + BARRAS_DE_VIDA_50 + "  " + pokemons.getVidaInicial()
                                     + "/" + pokemons.getVidaPokemon()));
-
                 } else {
                     System.out.println(formatearMapa(
-                            contador + ") " + pokemons.getApodo() + "Lvl"
+                            contador + ") " + apodo + " Lvl"
                                     + pokemons.getNivel() + " HP "
                                     + BARRAS_DE_VIDA_25 + "  " + pokemons.getVidaInicial()
                                     + "/" + pokemons.getVidaPokemon()));
@@ -79,7 +77,7 @@ public class ImpresorEstado extends ImpresoresGlobal {
         int contador = 1;
         for (Pokemons pokemons2 : pokemons) {
             if (pokemons2 != null) {
-                System.out.println(formatearMapa(contador + ") " + pokemons2.getApodo()));
+                System.out.println(formatearMapa(contador + ") " + apodoONombre(pokemons2)));
             } else {
                 System.out.println(formatearMapaCentrado(contador + ") Sin pokemon "));
             }
@@ -99,7 +97,7 @@ public class ImpresorEstado extends ImpresoresGlobal {
         int contador = 1;
         for (Pokemons pokemons2 : pokemons) {
             if (pokemons2 != null) {
-                System.out.println(formatearMapa(contador + ") " + pokemons2.getApodo()));
+                System.out.println(formatearMapa(contador + ") " + apodoONombre(pokemons2)));
             } else {
                 System.out.println(formatearMapa(contador + ") Sin pokemon"));
             }
@@ -143,6 +141,14 @@ public class ImpresorEstado extends ImpresoresGlobal {
         System.out.println(formatearMapaCentrado("Porfavor vuelva a intentar"));
         separadorFinalMapa();
         System.out.print(RESET);
+    }
+
+    /** Devuelve el apodo si existe; si no, devuelve el nombre de la especie. */
+    private String apodoONombre(Pokemons p) {
+        if (p.getApodo() != null && !p.getApodo().isEmpty()) {
+            return p.getApodo();
+        }
+        return p.getNombre();
     }
 
 }

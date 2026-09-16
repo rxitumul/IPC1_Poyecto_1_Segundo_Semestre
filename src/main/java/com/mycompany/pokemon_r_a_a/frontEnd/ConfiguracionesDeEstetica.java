@@ -44,29 +44,29 @@ public class ConfiguracionesDeEstetica {
                 + MARCO_ESQUINA_DERECHA_INFERIOR);
     }
 
-    protected void separadorInicialMapaSubMapa() {
+    public void separadorInicialMapaSubMapa() {
         System.out
                 .println(MARCO_ESQUINA_IZQUIERDA_SUPERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA_SUB_MAPA)
                         + MARCO_ESQUINA_DERECHA_SUPERIOR);
     }
 
-    protected void separadorFinalMapaSubMapa() {
+    public void separadorFinalMapaSubMapa() {
         System.out
                 .println(MARCO_ESQUINA_IZQUIERDA_INFERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA_SUB_MAPA)
                         + MARCO_ESQUINA_DERECHA_INFERIOR);
     }
 
-    protected void separadorInicioMapa() {
+    public void separadorInicioMapa() {
         System.out.println(MARCO_ESQUINA_IZQUIERDA_SUPERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA)
                 + MARCO_ESQUINA_DERECHA_SUPERIOR);
     }
 
-    protected void separadorMediosMapa() {
+    public void separadorMediosMapa() {
         System.out.println(MARCO_VERTICAL_INTERCECION_IZQUIERDA + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA)
                 + MARCO_VERTICAL_INTERCECION_DERECHA);
     }
 
-    protected void separadorFinalMapa() {
+    public void separadorFinalMapa() {
         System.out.println(MARCO_ESQUINA_IZQUIERDA_INFERIOR + MARCO_HORIZONTAL.repeat(SEPARACION_DE_BORDES_MAPA)
                 + MARCO_ESQUINA_DERECHA_INFERIOR);
     }

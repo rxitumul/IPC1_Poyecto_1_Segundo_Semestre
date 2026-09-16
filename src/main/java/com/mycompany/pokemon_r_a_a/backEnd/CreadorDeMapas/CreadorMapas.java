@@ -126,6 +126,10 @@ public class CreadorMapas {
         return objetosMapa.creadorCasillasGimnasio(mapaGimnasio, entrenadores, ciudadNombre);
     }
 
+    public int[][] getMapaGimnasioMatriz() {
+        return mapaGimnasio;
+    }
+
     public Casillas[][] getMapaTiendaPokemon(TiendaNpc tienda) {
         if (tienda == null) {
             tienda = npcCreador.creadorDeTienda();
@@ -174,7 +178,15 @@ public class CreadorMapas {
             }
         } while (true);
 
-        return new MapaCiudad(nombre, objetosMapa.creadorCasillasObjetos(mapa, nombre), jugador, enfermeria);
+        int ciudadIndice = 0;
+        if (mapasCreados != null) {
+            for (MapaCiudad mc : mapasCreados) {
+                if (mc != null) {
+                    ciudadIndice++;
+                }
+            }
+        }
+        return new MapaCiudad(nombre, objetosMapa.creadorCasillasObjetos(mapa, nombre, ciudadIndice), jugador, enfermeria);
 
     }
 

@@ -35,12 +35,16 @@ public class CreadorDeMapaDeObjetos {
     }
 
     public Casillas[][] creadorCasillasObjetos(int[][] mapa, String nombreCiudad) {
+        return creadorCasillasObjetos(mapa, nombreCiudad, 0);
+    }
+
+    public Casillas[][] creadorCasillasObjetos(int[][] mapa, String nombreCiudad, int ciudadIndice) {
         int rows = mapa.length;
         int cols = mapa[0].length;
         Casillas[][] mapaO = new Casillas[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                mapaO[i][j] = crearCasilla(mapa[i][j], nombreCiudad);
+                mapaO[i][j] = crearCasilla(mapa[i][j], nombreCiudad, ciudadIndice);
             }
         }
         return mapaO;
@@ -138,12 +142,16 @@ public class CreadorDeMapaDeObjetos {
     }
 
     private Casillas crearCasilla(int tipo, String nombreCiudad) {
+        return crearCasilla(tipo, nombreCiudad, 0);
+    }
+
+    private Casillas crearCasilla(int tipo, String nombreCiudad, int ciudadIndice) {
         switch (tipo) {
             // ── Edificios del mapa principal ──────────────────────────────
             case 6: // Centro Pokémon (acceso desde el mapa)
                 return new Farmacia(VERDE_CLARO + " ⚕ " + RESET, false, 6, false, hall, null);
             case 1: // Gimnasio
-                return new Gimnasio(AZUL_BRILLANTE + " G " + RESET, false, 1, false, hall, null, nombreCiudad);
+                return new Gimnasio(AZUL_BRILLANTE + " G " + RESET, false, 1, false, hall, null, nombreCiudad, ciudadIndice);
             case 2: // Tienda
                 return new Tienda(AMARILLO + " $ " + RESET, false, 2, false, hall, null);
             case 3: // Hierva Alta

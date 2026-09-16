@@ -1,6 +1,9 @@
 package com.mycompany.pokemon_r_a_a.frontEnd.ImpresoresVarios;
 
 import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.MapaCiudad;
+import com.mycompany.pokemon_r_a_a.backEnd.CreadorDeMapas.CreadorNpc;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Casillas;
+import com.mycompany.pokemon_r_a_a.backEnd.TiposDeCasillas.Interaciones.Gimnasio;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.JugadorPokemonPartida;
 import com.mycompany.pokemon_r_a_a.backEnd.JugadorPokemon.Mochila;
 import com.mycompany.pokemon_r_a_a.backEnd.PokemonsLista.Pokemons;
@@ -14,15 +17,44 @@ public class ImpresorDeSelecion extends ImpresoresGlobal {
         separadorMediosMapa();
         System.out.println(formatearMapa("Cantidad de pokemonedas ( ₽ ): " + jugador.getPokemonedas()));
         separadorMediosMapa();
-        System.out.println(formatearMapa("Medallas obtenidas"));
+        System.out.println(formatearMapa("Medallas de Gimnasio"));
         int[] medallas = jugador.getMedallasObtenidas();
+        String[] nombresMedallas = jugador.getNombresMedallas();
+        CreadorNpc creadorNpc = new CreadorNpc();
+
         for (int i = 0; i < mapas.length; i++) {
-            if (medallas[i] == 0) {
-                System.out.println(formatearMapaCentrado(ROJO +
-                        mapas[i].getNombre() + " Sin derrotar " + medallas[i] + " medallas" + RESET));
-            } else {
+            String nombreCiudad = (mapas[i] != null) ? mapas[i].getNombre() : ("Ciudad #" + (i + 1));
+            String medallaInfo = (nombresMedallas != null && i < nombresMedallas.length && nombresMedallas[i] != null && !nombresMedallas[i].trim().isEmpty())
+                    ? nombresMedallas[i]
+                    : null;
+
+            if (medallaInfo == null && mapas[i] != null && mapas[i].getMapa() != null) {
+                for (Casillas[] fila : mapas[i].getMapa()) {
+                    if (fila != null) {
+                        for (Casillas c : fila) {
+                            if (c instanceof Gimnasio) {
+                                String med = ((Gimnasio) c).getMedallaNombre();
+                                if (med != null && !med.trim().isEmpty()) {
+                                    medallaInfo = med;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (medallaInfo != null) break;
+                }
+            }
+
+            if (medallaInfo == null) {
+                medallaInfo = creadorNpc.obtenerNombreMedallaCompleto(i);
+            }
+
+            if (medallas != null && i < medallas.length && medallas[i] > 0) {
                 System.out.println(formatearMapaCentrado(VERDE +
-                        mapas[i].getNombre() + " Derrotado " + medallas[i] + " medallas" + RESET));
+                        nombreCiudad + " | Medalla: " + medallaInfo + " [Obtenida]" + RESET));
+            } else {
+                System.out.println(formatearMapaCentrado(ROJO +
+                        nombreCiudad + " | Medalla: " + medallaInfo + " [Sin derrotar]" + RESET));
             }
         }
         separadorMediosMapa();

@@ -16,7 +16,6 @@ public class DistribuidorDeGuardado extends GuardadoCargado {
     private final static String RUTA_DE_GUARDADO_JUGADOR_CARPETA = "/jugador";
     private final static String RUTA_DE_GUARDADO_MAPAS_CARPETA = "/mapas";
     private final static String RUTA_DE_GUARDADO_HALL_DE_FAMA = "hall/hallDeLaFama.txt";
-    private final static String RUTA_DE_GUARDADO_HALL_DE_FAMA_BIN = "hall/hallDeLaFama.bin";
     private GuardadorBinario guardador;
 
 
@@ -44,10 +43,8 @@ public class DistribuidorDeGuardado extends GuardadoCargado {
 
             guardador.escritorDeObjetosMenoria(jugador,
                     rutaBase + RUTA_DE_GUARDADO_JUGADOR_CARPETA + "/" + jugador.getNombre() + ".bin");
-            if (hallAGuardar != null) {
+            if (hallAGuardar != null && hallAGuardar.getRegistros() != null && !hallAGuardar.getRegistros().estaVacia()) {
                 hallAGuardar.guardarEnTexto(RUTA_DE_ARCHIVOS_GUARDADOS_DATOS + RUTA_DE_GUARDADO_HALL_DE_FAMA);
-                guardador.escritorDeObjetosMenoria(hallAGuardar,
-                        RUTA_DE_ARCHIVOS_GUARDADOS_DATOS + RUTA_DE_GUARDADO_HALL_DE_FAMA_BIN);
             }
             impresor.mensajeInformativo("Guardado Exitoso de la partida " + nombreJuego);
 
@@ -76,12 +73,7 @@ public class DistribuidorDeGuardado extends GuardadoCargado {
     }
 
     public HallDeLaFama creadDeLaFama() {
-        String pathHall = RUTA_DE_ARCHIVOS_GUARDADOS_DATOS + RUTA_DE_GUARDADO_HALL_DE_FAMA_BIN;
-        HallDeLaFama hallGuardado = guardador.lectorDeObjetosMemoria(pathHall);
-        if (hallGuardado == null) {
-            hallGuardado = guardador.lectorDeObjetosMemoria(RUTA_DE_ARCHIVOS_GUARDADOS + RUTA_DE_GUARDADO_HALL_DE_FAMA_BIN);
-        }
-        return hallGuardado;
+        return new HallDeLaFama();
     }
 
     private void crearCarpetaGuardado(String ruta) {
